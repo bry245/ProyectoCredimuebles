@@ -1,0 +1,212 @@
+﻿@{
+    ViewData["Title"] = "ListaClientes";
+
+}
+<div class="text-center">
+    <div class="hero-subMenu">
+        <h1>Clientes <span clsas="d-block">- Usuarios</span></h1>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2>Lista De Clientes</h2>
+
+    <div class="container mt-4">
+        <div class="row justify-content-end">
+            <div class="col-md-6">
+                <form action="#" method="GET" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        </div>
+                        <button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i>  </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover" style="text-align:center">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Telèfono</th>
+                <th>Direcciòn</th>
+                <th>Inactivar</th>
+                <th>Actualizar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>74410784</td>
+                <td>Costa Rica</td>
+                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
+                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+            </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example" style="background-color:aquamarine">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="product-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- Start Column 1 -->
+                <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                    <h2 class="mb-4 section-title">Registrar Cliente</h2>
+                    <i class="fa  fa-circle-info"></i>
+                    <p class="mb-4">
+                        Ingrese los datos solicitados para registrar un nuevo cliente
+                    </p>
+                    <p><a href="shop.html" class="btn">Explore</a></p>
+                </div>
+                <!-- End Column 1 -->
+                <!-- Start Column 2 -->
+              
+                <!-- End Column 2 -->
+                <!-- Start Column 3 -->
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="cart.html">
+                        <img src="~/images/product-2.png" class="img-fluid product-thumbnail">
+                        <h3 class="product-title">Kruzo Aero Chair</h3>
+                        <strong class="product-price">$78.00</strong>
+
+                        <span class="icon-cross">
+                            <img src="~/images/cross.svg" class="img-fluid">
+                        </span>
+                    </a>
+                </div>
+                <!-- End Column 3 -->
+                <!-- Start Column 4 -->
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="cart.html">
+                        <img src="~/images/product-3.png" class="img-fluid product-thumbnail">
+                        <h3 class="product-title">Ergonomic Chair</h3>
+                        <strong class="product-price">$43.00</strong>
+
+                        <span class="icon-cross">
+                            <img src="~/images/cross.svg" class="img-fluid">
+                        </span>
+                    </a>
+                </div>
+                <!-- End Column 4 -->
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--Modal para actualizar informaciòn-->
+    <div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
+                    <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text1" class="col-form-label">Apellidos:</label>
+                            <input class="form-control" id="message-text1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text2" class="col-form-label">Correo:</label>
+                            <input class="form-control" id="message-text2">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text4" class="col-form-label">Telèfono:</label>
+                            <input class="form-control" id="message-text4">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--  <button type="button" style="background-color:red" id="btn-cerrar"class="btn btn-group" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>-->
+                    <button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    // Obtener el modal Para actualizar
+    var modal = document.getElementById("ModalClientes");
+
+    // Obtener el botón que abre el modal
+    var btnsMostrarModal = document.getElementById("btn-Modal");
+
+    // Obtener el span que cierra el modal
+    var span = document.getElementsByClassName("btn-close")[0];
+    var cerrar = document.getElementById("btn-cerrar");
+
+
+    btnsMostrarModal.onclick = function () {
+        // Obtener el ID de la fila de la tabla
+        // var id = this.getAttribute("data-id");
+
+        // Llamar a una función para cargar la información detallada (debes implementarla)
+        // cargarInformacionDetalle(id);
+
+        // Mostrar el modal
+        modal.style.display = "block";
+        document.body.classList.add("modal-open");
+    }
+
+    // Manejar clic en el span para cerrar el modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Cuando el usuario hace clic fuera del modal, ciérralo
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Función para cargar la información detallada (debes implementarla)
+    function cargarInformacionDetalle(id) {
+        // Aquí puedes usar AJAX para cargar la información desde el servidor
+        // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
+        // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
+    }
+</script>
