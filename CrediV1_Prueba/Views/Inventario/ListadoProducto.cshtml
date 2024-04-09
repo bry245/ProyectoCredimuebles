@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "ListadoProducto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="container">
+
+	<div class="container mt-4">
+
+
+
+
+		<a href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
+		<div class="row justify-content-end">
+			<div class="col-md-6">
+				<form action="#" method="GET" class="form-inline">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+						<div class="input-group-append">
+						</div>
+						<button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i> </button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<table<!-- Tabla de productos -->
+<div class="container mt-4">
+	<table class="table table-hover" style="text-align:center">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Precio</th>
+				<th>Categoría</th>
+				<th>Proveedor</th>
+				<th>Inactivar</th>
+				<th>Actualizar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Producto 1</td>
+				<td>Descripción del producto 1</td>
+				<td>$50.00</td>
+				<td>Categoría 1</td>
+				<td>Proveedor 1</td>
+				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
+				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
+			</tr>
+			<tr>
+				<td>Producto 2</td>
+				<td>Descripción del producto 2</td>
+				<td>$40.00</td>
+				<td>Categoría 2</td>
+				<td>Proveedor 2</td>
+				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
+				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
+			</tr>
+			<tr>
+				<td>Producto 3</td>
+				<td>Descripción del producto 3</td>
+				<td>$60.00</td>
+				<td>Categoría 3</td>
+				<td>Proveedor 3</td>
+				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
+				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+	<nav aria-label="Page navigation example" style="background-color:white">
+		<ul class="pagination justify-content-center"  style="background-color:dimgrey">
+			<li class="page-item disabled">
+				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+			</li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item">
+				<a class="page-link" href="#">Siguiente</a>
+			</li>
+		</ul>
+	</nav>
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

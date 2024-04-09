@@ -10,6 +10,7 @@ body {
     overflow-x: hidden;
     position: relative;
 }
+
 .content {
     transition: filter 0.3s ease;
 }
@@ -149,6 +150,7 @@ a {
     background: #071371;
     padding: calc(4rem - 30px) 0 0rem 0;
 }
+
 .hero-subMenu {
     background: #071371;
     padding: calc(2rem - 32px) 0 4rem 0;
@@ -158,9 +160,10 @@ a {
     .hero {
         padding: calc(4rem - 30px) 0 4rem 0;
     }
+
     .hero-subMenu {
         padding: calc(2rem - 32px) 0 0rem 0;
-        color:white;
+        color: white;
     }
 }
 
@@ -431,10 +434,12 @@ a {
         .why-choose-section .img-wrap img {
             border-radius: 20px;
         }
-.login-bg{
+
+.login-bg {
     background: #ffffff;
     border-radius: 20px;
 }
+
 .input-login {
     border-radius: 5px;
     padding: 5px;
@@ -447,9 +452,10 @@ a {
 
     .input-login:hover {
         color: #dc1414;
-        border: 1px solid #dc1414 ;
+        border: 1px solid #dc1414;
     }
-.input-l{
+
+.input-l {
     border: none;
     outline: none;
     box-shadow: none;

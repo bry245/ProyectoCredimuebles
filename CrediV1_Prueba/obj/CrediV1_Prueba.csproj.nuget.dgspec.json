@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vinda\\OneDrive\\Escritorio\\CrediV1_Prueba\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
+    "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vinda\\OneDrive\\Escritorio\\CrediV1_Prueba\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
+    "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CrediV1_Prueba\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "projectUniqueName": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
         "projectName": "CrediV1_Prueba",
-        "projectPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CrediV1_Prueba\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-        "packagesPath": "C:\\Users\\vinda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CrediV1_Prueba\\CrediV1_Prueba\\obj\\",
+        "projectPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "packagesPath": "C:\\Users\\jason\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vinda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -37,12 +37,16 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.16, )"
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -64,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

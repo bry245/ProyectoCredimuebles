@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewData["Title"] = "EditarProducto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+	<div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+		<div class="card-body p-4">
+			<div class="form-outline mb-5 mb-xl-4">
+				<h2>Agregar Producto</h2>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-xl-6">
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="nombreProducto" name="nombreProducto" class="form-control form-control-lg" placeholder="Nombre del Producto" />
+					</div>
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="descripcion" name="descripcion" class="form-control form-control-lg" placeholder="Descripción del Producto" />
+					</div>
+					<div class="form-outline mb-4 mb-xl-4">
+						<input type="text" id="precio" name="precio" class="form-control form-control-lg" placeholder="Precio del Producto" />
+					</div>
+					<div class="form-outline mb-4 mb-xl-4">
+						<input type="text" id="stock" name="stock" class="form-control form-control-lg" placeholder="Cantidad en Stock" />
+					</div>
+
+					<div class="form-outline mb-4 mb-xl-4">
+						<input type="file" id="imagenProducto" name="imagenProducto" class="form-control form-control-lg" placeholder="Imagen del Producto" />
+					</div>
+				</div>
+
+				<div class="col-lg-8 col-xl-6">
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="fabricante" name="fabricante" class="form-control form-control-lg" placeholder="Fabricante" />
+					</div>
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="categoria" name="categoria" class="form-control form-control-lg" placeholder="Categoría del Producto" />
+					</div>
+					<div class="form-outline mb-4 mb-xl-4">
+						<input type="text" id="marca" name="marca" class="form-control form-control-lg" placeholder="Marca del Producto" />
+					</div>
+					<div class="form-outline mb-4 mb-xl-4">
+						<input type="text" id="codigoProducto" name="codigoProducto" class="form-control form-control-lg" placeholder="Código del Producto" />
+					</div>
+					<div class="form-outline mb-4 mb-xl-4">
+						<a href="@Url.Action("Index","Inventario")" class="btn btn-soft" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
+					</div>
+				</div>
+
+				<div class="col-lg-8 col-xl-6">
+					<a href="@Url.Action("AgregarProducto","Inventario")" class="btn btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+<nav aria-label="Page navigation example" style="background-color:aquamarine">
+	<ul class="pagination justify-content-center">
+		<li class="page-item disabled">
+			<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+		</li>
+		<li class="page-item"><a class="page-link" href="#">1</a></li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item">
+			<a class="page-link" href="#">Siguiente</a>
+		</li>
+	</ul>
+</nav>
+
+<div class="product-section">
+	<div class="container">
+		<div class="row">
+
+			<!-- Start Column 1 -->
+			<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+				<h2 class="mb-4 section-title">Registrar Cliente</h2>
+				<i class="fa  fa-circle-info"></i>
+				<p class="mb-4">
+					Ingrese los datos solicitados para registrar un nuevo cliente
+				</p>
+				<p><a href="shop.html" class="btn">Explore</a></p>
+			</div>
+			<!-- End Column 1 -->
+			<!-- Start Column 2 -->
+			<!-- End Column 2 -->
+			<!-- Start Column 3 -->
+			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+				<a class="product-item" href="cart.html">
+					<img src="~/images/product-2.png" class="img-fluid product-thumbnail">
+					<h3 class="product-title">Kruzo Aero Chair</h3>
+					<strong class="product-price">$78.00</strong>
+
+					<span class="icon-cross">
+						<img src="~/images/cross.svg" class="img-fluid">
+					</span>
+				</a>
+			</div>
+			<!-- End Column 3 -->
+			<!-- Start Column 4 -->
+			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+				<a class="product-item" href="cart.html">
+					<img src="~/images/product-3.png" class="img-fluid product-thumbnail">
+					<h3 class="product-title">Ergonomic Chair</h3>
+					<strong class="product-price">$43.00</strong>
+
+					<span class="icon-cross">
+						<img src="~/images/cross.svg" class="img-fluid">
+					</span>
+				</a>
+			</div>
+			<!-- End Column 4 -->
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos{
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+	<link href="~/css/DashAdmin.css" rel="stylesheet" />
+	
+}
+
+
+<div class="container">
+
+
+
+
+	<div class="container mt-4">
+		<div class="text-center">
+			<div class="">
+				<h1>Inventario <span clsas="d-block">- Productos</span></h1>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row ">
+				<div class="col-xl-6 col-lg-6">
+					<a href="@Url.Action("ListadoProducto","Inventario")" class="text-decoration-none">
+						<div class="card l-bg-cherry">
+							<div class="card-statistic-3 p-4">
+								<div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">New Orders</h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8">
+										<h2 class="d-flex align-items-center mb-0">
+											3,243
+										</h2>
+									</div>
+									<div class="col-4 text-right">
+										<span>12.5% <i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-xl-6 col-lg-6">
+					<a href="@Url.Action("ListadoProducto","Inventario")" class="text-decoration-none">
+						<div class="card l-bg-blue-dark">
+							<div class="card-statistic-3 p-4">
+								<div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">Customers</h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8">
+										<h2 class="d-flex align-items-center mb-0">
+											15.07k
+										</h2>
+									</div>
+									<div class="col-4 text-right">
+										<span>9.23% <i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-xl-6 col-lg-6">
+					<a href="@Url.Action("ListadoProducto","Inventario")" class="text-decoration-none">
+						<div class="card l-bg-blue-dark">
+							<div class="card-statistic-3 p-4">
+								<div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">Customers</h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8">
+										<h2 class="d-flex align-items-center mb-0">
+											15.07k
+										</h2>
+									</div>
+									<div class="col-4 text-right">
+										<span>9.23% <i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-xl-6 col-lg-6">
+					<a href="@Url.Action("ListadoProducto","Inventario")" class="text-decoration-none">
+						<div class="card l-bg-blue-dark">
+							<div class="card-statistic-3 p-4">
+								<div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">Customers</h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8">
+										<h2 class="d-flex align-items-center mb-0">
+											15.07k
+										</h2>
+									</div>
+									<div class="col-4 text-right">
+										<span>9.23% <i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+
+
+				<!-- Repite lo mismo para las demás tarjetas -->
+			</div>
+		</div>
+	</div>
+
+
+
+		
+	
+
+	<div class="product-section">
+		<div class="container">
+			<div class="row">
+
+				<!-- Start Column 1 -->
+				<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+					<h2 class="mb-4 section-title">Registrar Cliente</h2>
+					<i class="fa  fa-circle-info"></i>
+					<p class="mb-4">
+						Ingrese los datos solicitados para registrar un nuevo cliente
+					</p>
+					<p><a href="shop.html" class="btn">Explore</a></p>
+				</div>
+				<!-- End Column 1 -->
+				<!-- Start Column 2 -->
+				<!-- End Column 2 -->
+				<!-- Start Column 3 -->
+				<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+					<a class="product-item" href="cart.html">
+						<img src="~/images/product-2.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">Kruzo Aero Chair</h3>
+						<strong class="product-price">$78.00</strong>
+
+						<span class="icon-cross">
+							<img src="~/images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- End Column 3 -->
+				<!-- Start Column 4 -->
+				<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+					<a class="product-item" href="cart.html">
+						<img src="~/images/product-3.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">Ergonomic Chair</h3>
+						<strong class="product-price">$43.00</strong>
+
+						<span class="icon-cross">
+							<img src="~/images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- End Column 4 -->
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!--Modal para actualizar informaciòn-->
+	<div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
+					<button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<form>
+						<div class="mb-3">
+							<label for="recipient-name" class="col-form-label">Nombre:</label>
+							<input type="text" class="form-control" id="recipient-name">
+						</div>
+						<div class="mb-3">
+							<label for="message-text1" class="col-form-label">Apellidos:</label>
+							<input class="form-control" id="message-text1">
+						</div>
+						<div class="mb-3">
+							<label for="message-text2" class="col-form-label">Correo:</label>
+							<input class="form-control" id="message-text2">
+						</div>
+						<div class="mb-3">
+							<label for="message-text4" class="col-form-label">Telèfono:</label>
+							<input class="form-control" id="message-text4">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<!--  <button type="button" style="background-color:red" id="btn-cerrar"class="btn btn-group" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>-->
+					<button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<script>
+    // Obtener el modal Para actualizar
+    var modal = document.getElementById("ModalClientes");
+
+    // Obtener el botón que abre el modal
+    var btnsMostrarModal = document.getElementById("btn-Modal");
+
+    // Obtener el span que cierra el modal
+    var span = document.getElementsByClassName("btn-close")[0];
+    var cerrar = document.getElementById("btn-cerrar");
+
+
+    btnsMostrarModal.onclick = function () {
+        // Obtener el ID de la fila de la tabla
+        // var id = this.getAttribute("data-id");
+
+        // Llamar a una función para cargar la información detallada (debes implementarla)
+        // cargarInformacionDetalle(id);
+
+        // Mostrar el modal
+        modal.style.display = "block";
+        document.body.classList.add("modal-open");
+    }
+
+    // Manejar clic en el span para cerrar el modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Cuando el usuario hace clic fuera del modal, ciérralo
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Función para cargar la información detallada (debes implementarla)
+    function cargarInformacionDetalle(id) {
+        // Aquí puedes usar AJAX para cargar la información desde el servidor
+        // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
+        // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
+    }
+</script>
+
