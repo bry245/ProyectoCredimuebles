@@ -1,6 +1,7 @@
-﻿@{
-	ViewData["Title"] = "AgregarProducto";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+﻿
+@{
+    ViewData["Title"] = "CrearBono";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -9,7 +10,7 @@
 	<div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
 		<div class="card-body p-4">
 			<div class="form-outline mb-5 mb-xl-4">
-				<h2>Agregar Producto</h2>
+				<h2>Crear Abono </h2>
 			</div>
 			<div class="row">
 				<div class="col-lg-8 col-xl-6">
@@ -45,7 +46,7 @@
 						<input type="text" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
-						<a href="@Url.Action("Index","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
+						<a href="@Url.Action("Index","Salidas")" class="btn" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
 					</div>
 
 
@@ -121,3 +122,4 @@
 		</div>
 	</div>
 </div>
+

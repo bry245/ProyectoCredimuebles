@@ -20,11 +20,34 @@ namespace CrediV1_Prueba.Controllers
 			return View();
 		}
 
+
         public IActionResult EditarProducto() { 
         
         
             return View();
-        }   
+        }
+
+
+
+        public IActionResult ListadoProveedor()
+        {
+            return View();
+        }
+
+		public IActionResult AgregarProveedor()
+		{
+			return View();
+		}
+
+
+		public IActionResult EditarProveedor()
+		{
+
+
+			return View();
+		}
+
+
 
 
 

@@ -1,61 +1,63 @@
-﻿@{
-	ViewData["Title"] = "AgregarProducto";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+﻿
+@{
+    ViewData["Title"] = "EditarProveedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
-<<div class="container">
+<div class="container">
 	<div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
 		<div class="card-body p-4">
 			<div class="form-outline mb-5 mb-xl-4">
-				<h2>Agregar Producto</h2>
+				<h2>Editar Proveedor</h2>
 			</div>
 			<div class="row">
 				<div class="col-lg-8 col-xl-6">
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="NombreJuridico" name="NombreJuridico" class="form-control form-control-lg" placeholder="Nombre" />
+						<input type="text" id="nombreProducto" name="nombreProducto" class="form-control form-control-lg" placeholder="Nombre del Producto" />
 					</div>
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="ApellidoJuridico" name="ApellidoJuridico" class="form-control form-control-lg" placeholder="Apellido" />
+						<input type="text" id="descripcion" name="descripcion" class="form-control form-control-lg" placeholder="Descripción del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="direccion" class="form-control form-control-lg" placeholder="Dirección" />
+						<input type="text" id="precio" name="precio" class="form-control form-control-lg" placeholder="Precio del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
+						<input type="text" id="stock" name="stock" class="form-control form-control-lg" placeholder="Cantidad en Stock" />
 					</div>
 
 					<div class="form-outline mb-4 mb-xl-4">
-						<input type="file" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
+						<input type="file" id="imagenProducto" name="imagenProducto" class="form-control form-control-lg" placeholder="Imagen del Producto" />
 					</div>
 				</div>
 
 				<div class="col-lg-8 col-xl-6">
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="NombreJuridico" name="NombreJuridico" class="form-control form-control-lg" placeholder="Nombre" />
+						<input type="text" id="fabricante" name="fabricante" class="form-control form-control-lg" placeholder="Fabricante" />
 					</div>
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="ApellidoJuridico" name="ApellidoJuridico" class="form-control form-control-lg" placeholder="Apellido" />
+						<input type="text" id="categoria" name="categoria" class="form-control form-control-lg" placeholder="Categoría del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="direccion" class="form-control form-control-lg" placeholder="Dirección" />
+						<input type="text" id="marca" name="marca" class="form-control form-control-lg" placeholder="Marca del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
+						<input type="text" id="codigoProducto" name="codigoProducto" class="form-control form-control-lg" placeholder="Código del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
-						<a href="@Url.Action("Index","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
+						<a href="@Url.Action("ListadoProveedor","Inventario")" class="btn btn-soft" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
 					</div>
-
-
 				</div>
 
-				<a href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
+				<div class="col-lg-8 col-xl-6">
+					<a href="@Url.Action("AgregarProducto","Inventario")" class="btn btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 
 
@@ -121,3 +123,6 @@
 		</div>
 	</div>
 </div>
+
+
+

@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "ListadoSalidas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="container mt-4">
+        <a href="@Url.Action("CrearVenta","Salidas")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Salida</i>  </a>
+        <div class="row justify-content-end">
+            <div class="col-md-6">
+                <form action="#" method="GET" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        </div>
+                        <button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Tabla de salidas -->
+    <div class="container mt-4">
+        <table class="table table-hover" style="text-align:center">
+            <thead>
+                <tr>
+                    <th>Número de Factura</th>
+                    <th>Fecha de Salida</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12345</td>
+                    <td>2024-04-10</td>
+                    <td>Producto 1</td>
+                    <td>5</td>
+                    <td>$50.00</td>
+                    <td>$250.00</td>
+                    <td style="text-align:center">
+                        <button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Eliminar</button>
+                        <a href="@Url.Action("EditarVenta","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12346</td>
+                    <td>2024-04-09</td>
+                    <td>Producto 2</td>
+                    <td>3</td>
+                    <td>$40.00</td>
+                    <td>$120.00</td>
+                    <td style="text-align:center">
+                        <button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Eliminar</button>
+                        <a href="@Url.Action("EditarVenta","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12347</td>
+                    <td>2024-04-08</td>
+                    <td>Producto 3</td>
+                    <td>2</td>
+                    <td>$60.00</td>
+                    <td>$120.00</td>
+                    <td style="text-align:center">
+                        <button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Eliminar</button>
+                        <a href="@Url.Action("EditarVenta","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example" style="background-color:white">
+        <ul class="pagination justify-content-center" style="background-color:dimgrey">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
