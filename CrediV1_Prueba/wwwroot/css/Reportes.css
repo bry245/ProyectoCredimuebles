@@ -14,22 +14,22 @@
 
 
 .l-bg-cherry {
-    background: #dc1414 !important;
+    background: linear-gradient(to top, black, 30%, #ff4040);
     color: #fff;
 }
 
 .l-bg-blue-dark {
-    background: #dc1414 !important;
+    background: linear-gradient(to top, black, 30%, #ff4040);
     color: #fff;
 }
 
 .l-bg-green-dark {
-    background: #dc1414 !important;
+    background: rgba(90,97,105,0.12) !important;
     color: #fff;
 }
 
 .l-bg-orange-dark {
-    background: #dc1414 !important;
+    background: rgba(90,97,105,0.12) !important;
     color: #fff;
 }
 
@@ -49,12 +49,8 @@
 }
 
 .l-bg-cyan {
-    background: linear-gradient(
-      217deg,
-      rgba(255, 0, 0, 0.8),
-      rgba(255, 0, 0, 0) 70.71%
-    ), linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
-    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
 }
 
 .l-bg-green {

@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Chart.js/3.7.1": {
+        "type": "package"
+      },
       "Humanizer/2.14.1": {
         "type": "package",
         "dependencies": {
@@ -2303,6 +2306,19 @@
     }
   },
   "libraries": {
+    "Chart.js/3.7.1": {
+      "sha512": "gJunTMEueTNdA5Hp92J9sv363msSemW+GSy1VtbrwjxCaMrp+/mgB20EdVezbP34dbM+h+A8G5XbEuL6tOJoCw==",
+      "type": "package",
+      "path": "chart.js/3.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "chart.js.3.7.1.nupkg.sha512",
+        "chart.js.nuspec",
+        "content/Scripts/chart.js",
+        "content/Scripts/chart.min.js"
+      ]
+    },
     "Humanizer/2.14.1": {
       "sha512": "/FUTD3cEceAAmJSCPN9+J+VhGwmL/C12jvwlyM1DFXShEMsBzvLzLqSrJ2rb+k/W2znKw7JyflZgZpyE+tI7lA==",
       "type": "package",
@@ -6431,24 +6447,25 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Chart.js >= 3.7.1",
       "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter >= 8.0.3",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vinda\\.nuget\\packages\\": {}
+    "C:\\Users\\jason\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "projectUniqueName": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
       "projectName": "CrediV1_Prueba",
-      "projectPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-      "packagesPath": "C:\\Users\\vinda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
+      "projectPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "packagesPath": "C:\\Users\\jason\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vinda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6468,17 +6485,16 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Chart.js": {
+            "target": "Package",
+            "version": "[3.7.1, )"
+          },
           "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": {
             "target": "Package",
             "version": "[8.0.3, )"
@@ -6507,7 +6523,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
