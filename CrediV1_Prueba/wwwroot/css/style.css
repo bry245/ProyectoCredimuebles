@@ -449,7 +449,20 @@ a {
     border: 1px solid #400485;
     color: #db5559;
 }
+.input-form {
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #400485;
+    color: black;
+}
 
+    .input-form:hover {
+        color: rgb(1, 1, 1, 0,20);
+        border: 1px solid #dc1414;
+    }
     .input-login:hover {
         color: #dc1414;
         border: 1px solid #dc1414;

@@ -2,7 +2,7 @@
     ViewData["Title"] = "ListaClientes";
 
 }
-<div class="text-center">
+<div class="text-center ">
     <div class="hero-subMenu">
         <h1>Clientes <span clsas="d-block">- Usuarios</span></h1>
     </div>
@@ -36,6 +36,7 @@
                 <th>Direcciòn</th>
                 <th>Inactivar</th>
                 <th>Actualizar</th>
+                <th>Notificar</th>
 
             </tr>
         </thead>
@@ -46,8 +47,10 @@
                 <td>john@example.com</td>
                 <td>74410784</td>
                 <td>Costa Rica</td>
-                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
+                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
                 <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
+                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+
             </tr>
             <tr>
                 <td>Mary</td>
@@ -79,46 +82,183 @@
         <div class="container">
             <div class="row">
 
-                <!-- Start Column 1 -->
-                <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                <!-- RegistrarCliente -->
+                <div class="col-md-12 col-lg-3 mt-0 mb-lg-0">
                     <h2 class="mb-4 section-title">Registrar Cliente</h2>
                     <i class="fa  fa-circle-info"></i>
-                    <p class="mb-4">
+                    <p class="mb-3">
                         Ingrese los datos solicitados para registrar un nuevo cliente
                     </p>
-                    <p><a href="shop.html" class="btn">Explore</a></p>
+                    <p><a href="shop.html" class="btn">Agregar</a></p>
                 </div>
-                <!-- End Column 1 -->
-                <!-- Start Column 2 -->
-              
-                <!-- End Column 2 -->
-                <!-- Start Column 3 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="~/images/product-2.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Kruzo Aero Chair</h3>
-                        <strong class="product-price">$78.00</strong>
 
-                        <span class="icon-cross">
-                            <img src="~/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
+                <div class="col-12 col-md-4 col-lg mb-5 mb-md-0 ">
+                    <form>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group ">
+                                    <label class="text-black" for="fname">Nombre</label>
+                                    <input type="text" class="form-control input-form" id="fname">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="text-black" for="lname">Apellidos</label>
+                                    <input type="text" class="form-control input-form " id="lname">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="text-black" for="email">Correo</label>
+                                    <input type="email" class="form-control input-form" id="email">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="text-black" for="phone">Telefono</label>
+                                    <input type="number" class="form-control input-form" id="phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-5">
+                            <label class="text-black" for="message">Dirección</label>
+                            <textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
+                        </div>
+
+                    </form>
                 </div>
-                <!-- End Column 3 -->
-                <!-- Start Column 4 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="~/images/product-3.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Ergonomic Chair</h3>
-                        <strong class="product-price">$43.00</strong>
+            </div>
+        </div>
+    </div>
 
-                        <span class="icon-cross">
-                            <img src="~/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
+    <div class="text-center">
+        <div class="hero-subMenu">
+            <h1> <span clsas="d-block">Empleados</span></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-4" style="background-color:white">
+
+                <h3>Registrar Empleado</h3>
+                <form>
+
+                    <div>
+                        <div class="form-group">
+                            <label class="text-black" for="fname">Nombre</label>
+                            <input type="text" class="form-control input-form" id="fname">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label class="text-black" for="lname">Apellidos</label>
+                            <input type="text" class="form-control input-form" id="lname">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="text-black">Rol</label>
+                            <select class="form-group form-control input-form">
+                                <option value="">Seleccionar opción</option>
+                                <option value="opcion1">Administrador</option>
+                                <option value="opcion2">Vendedor</option>
+                                <option value="opcion3">Gerente</option>
+                                <!-- Agrega más opciones según sea necesario -->
+                            </select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-black" for="phone">Teléfono</label>
+                                <input type="num" class="form-control input-form" id="phone">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black" for="email">Correo</label>
+                        <input type="email" class="form-control input-form" id="email">
+                    </div>
+                    <div class="form-group mb-5">
+                        <label class="text-black" for="message">Dirección</label>
+                        <textarea name="message" class="form-control input-form" id="message" cols="30" rows="3"></textarea>
+                    </div>
+                    <p><a href="shop.html" class="btn">Agregar</a></p>
+
+                </form>
+            </div>
+
+            <div class="col-lg-8" style="background-color:white">
+                <div class="container">
+                    <h2>Lista De Empleados</h2>
+
+                    <div class="container mt-4">
+                        <div class="row justify-content-end">
+                            <div class="col-md-6">
+                                <form action="#" method="GET" class="form-inline">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                        </div>
+                                        <button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i>  </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Telèfono</th>
+                                <th>Rol</th>
+                                <th>Actualizar</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John</td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                                <td>74410784</td>
+                                <td>Costa Rica</td>
+                                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
+
+                            </tr>
+                            <tr>
+                                <td>Mary</td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                            </tr>
+                            <tr>
+                                <td>July</td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example" style="background-color:aquamarine">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+
                 </div>
-                <!-- End Column 4 -->
-
             </div>
         </div>
     </div>
@@ -126,10 +266,9 @@
 
 
 
-
     <!--Modal para actualizar informaciòn-->
     <div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
@@ -154,10 +293,13 @@
                             <label for="message-text4" class="col-form-label">Telèfono:</label>
                             <input class="form-control" id="message-text4">
                         </div>
+                        <div class="mb-3">
+                            <label class="text-black" for="message">Dirección</label>
+                            <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <!--  <button type="button" style="background-color:red" id="btn-cerrar"class="btn btn-group" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>-->
                     <button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
                 </div>
             </div>
@@ -167,11 +309,71 @@
 </div>
 
 
+
+
+
+
+<!--MODAL DE INACTIVACIÓN-->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-black">
+                <p>¿Estás seguro de que deseas inactivar este usuario?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" style="background-color:red" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmButton">Inactivar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL DE NOTIFICACION-->
+<div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Enviar Notificación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-black">
+                <p>Usuario:</p>
+                <form>
+
+                    <div class="form-group mb-5">
+                        <label class="text-black" for="message">Mensage</label>
+                        <textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmButton">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 <script>
     // Obtener el modal Para actualizar
     var modal = document.getElementById("ModalClientes");
 
-    // Obtener el botón que abre el modal
+    // Obtener el botón que abre el btn
     var btnsMostrarModal = document.getElementById("btn-Modal");
 
     // Obtener el span que cierra el modal
@@ -209,4 +411,6 @@
         // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
         // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
     }
+
 </script>
+
