@@ -77,6 +77,59 @@
 					</a>
 				</div>
 
+				<div class="col-xl-6 col-lg-6">
+					<a href="@Url.Action("ListadoBono","Salidas")" class="text-decoration-none">
+						<div class="card l-bg-blue-dark">
+							<div class="card-statistic-3 p-4">
+								<div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">Abonar</h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8">
+										<h2 class="d-flex align-items-center mb-0">
+											15.07k
+										</h2>
+									</div>
+									<div class="col-4 text-right">
+										<span>9.23% <i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+
+				<div class="col-xl-6 col-lg-6">
+					<a href="@Url.Action("ListadoBono","Salidas")" class="text-decoration-none">
+						<div class="card l-bg-blue-dark">
+							<div class="card-statistic-3 p-4">
+								<div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">Abonar</h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8">
+										<h2 class="d-flex align-items-center mb-0">
+											15.07k
+										</h2>
+									</div>
+									<div class="col-4 text-right">
+										<span>9.23% <i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
 
 			
 
@@ -91,50 +144,57 @@
 
 
 
-
 	<div class="product-section">
 		<div class="container">
 			<div class="row">
 
-				<!-- Start Column 1 -->
-				<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+				<!-- RegistrarCliente -->
+				<div class="col-md-12 col-lg-3 mt-0 mb-lg-0">
 					<h2 class="mb-4 section-title">Registrar Cliente</h2>
 					<i class="fa  fa-circle-info"></i>
-					<p class="mb-4">
+					<p class="mb-3">
 						Ingrese los datos solicitados para registrar un nuevo cliente
 					</p>
-					<p><a href="shop.html" class="btn">Explore</a></p>
+					<p><a href="shop.html" class="btn">Agregar</a></p>
 				</div>
-				<!-- End Column 1 -->
-				<!-- Start Column 2 -->
-				<!-- End Column 2 -->
-				<!-- Start Column 3 -->
-				<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-					<a class="product-item" href="cart.html">
-						<img src="~/images/product-2.png" class="img-fluid product-thumbnail">
-						<h3 class="product-title">Kruzo Aero Chair</h3>
-						<strong class="product-price">$78.00</strong>
 
-						<span class="icon-cross">
-							<img src="~/images/cross.svg" class="img-fluid">
-						</span>
-					</a>
+				<div class="col-12 col-md-4 col-lg mb-5 mb-md-0 ">
+					<form>
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group ">
+									<label class="text-black" for="fname">Nombre</label>
+									<input type="text" class="form-control input-form" id="fname">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<label class="text-black" for="lname">Apellidos</label>
+									<input type="text" class="form-control input-form " id="lname">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label class="text-black" for="email">Correo</label>
+									<input type="email" class="form-control input-form" id="email">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<label class="text-black" for="phone">Telefono</label>
+									<input type="number" class="form-control input-form" id="phone">
+								</div>
+							</div>
+						</div>
+						<div class="form-group mb-5">
+							<label class="text-black" for="message">Dirección</label>
+							<textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
+						</div>
+
+					</form>
 				</div>
-				<!-- End Column 3 -->
-				<!-- Start Column 4 -->
-				<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-					<a class="product-item" href="cart.html">
-						<img src="~/images/product-3.png" class="img-fluid product-thumbnail">
-						<h3 class="product-title">Ergonomic Chair</h3>
-						<strong class="product-price">$43.00</strong>
-
-						<span class="icon-cross">
-							<img src="~/images/cross.svg" class="img-fluid">
-						</span>
-					</a>
-				</div>
-				<!-- End Column 4 -->
-
 			</div>
 		</div>
 	</div>

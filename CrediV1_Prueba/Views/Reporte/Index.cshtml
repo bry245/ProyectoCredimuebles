@@ -1,0 +1,434 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+	<link href="~/css/Reportes.css" rel="stylesheet" />
+
+	<style>
+		canvas {
+			max-width: 1000px; /* Puedes ajustar este valor según el tamaño que desees */
+			max-height: 600px; /* Puedes ajustar este valor según el tamaño que desees */
+			width: 300px;
+			height: 300px;
+			justify-content:center;
+		}
+	</style>
+
+}
+
+
+
+
+
+
+
+
+<div class="container">
+
+
+
+
+	<div class="container mt-4">
+		<div class="text-center">
+			<div class="">
+				<h1>Inventario <span clsas="d-block">- Salidas</span></h1>
+			</div>
+		</div>
+
+
+		<div class="container">
+			<div class="row ">
+				<div class="col-xl-6 col-lg-6">
+					<div  class="text-decoration-none">
+						<div class="card l-bg-cherry">
+							<div class="card-statistic-5 p-5">
+								<div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">Ventas    </h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8 text-center">
+										<h2 class="d-flex align-items-center mb-0 text''">
+											3,243
+										</h2>
+									</div>
+									<div class="col-4 text-center">
+										<span>24h <i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6">
+					<div class="text-decoration-none">
+						<div class="card l-bg-blue-dark">
+							<div class="card-statistic-5 p-5">
+								<div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+								<div class="mb-4">
+									<h5 class="card-title mb-0">Abonos</h5>
+								</div>
+								<div class="row align-items-center mb-2 d-flex">
+									<div class="col-8">
+										<h2 class="d-flex align-items-center mb-0">
+											15.07k
+										</h2>
+									</div>
+									<div class="col-4 text-right">
+										<span>24h<i class="fa fa-arrow-up"></i></span>
+									</div>
+								</div>
+								<div class="progress mt-1 " data-height="8" style="height: 8px;">
+									<div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<div class="col-xl-6 col-lg-6">
+					<div class="text-decoration-none">
+						<div class="card ">
+
+							<canvas id="GraficoLinealVentasSemana">
+							</canvas>
+
+
+
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+
+				<div class="col-xl-6 col-lg-6">
+					<div class="text-decoration-none">
+						<div class="card ">
+
+							<canvas id="miGraficoRadar">
+							</canvas>
+
+
+
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+
+
+
+				<div class="col-xl-12 col-lg-12">
+					<div class="text-decoration-none">
+						<div class="card ">
+							<div class="card-statistic-5 p-5 d-flex justify-content-center bg-white">
+
+								<canvas id="GraficoBarras"></canvas>
+							</div>
+
+
+							<div>
+								<span class="card title">Excel</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+				<div class="col-xl-12 col-lg-12">
+					<div class="text-decoration-none">
+						<div class="card ">
+							<div class="card-statistic-5 p-5 d-flex justify-content-center bg-white">
+								
+								<canvas id="GraficoPie"></canvas>
+								</div>
+
+
+								<div>
+									<span class="card title">Excel</span>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+<div class="product-section">
+	<div class="container">
+		<div class="row">
+
+			<!-- RegistrarCliente -->
+			<div class="col-md-12 col-lg-3 mt-0 mb-lg-0">
+				<h2 class="mb-4 section-title">Registrar Cliente</h2>
+				<i class="fa  fa-circle-info"></i>
+				<p class="mb-3">
+					Ingrese los datos solicitados para registrar un nuevo cliente
+				</p>
+				<p><a href="shop.html" class="btn">Agregar</a></p>
+			</div>
+
+			<div class="col-12 col-md-4 col-lg mb-5 mb-md-0 ">
+				<form>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group ">
+								<label class="text-black" for="fname">Nombre</label>
+								<input type="text" class="form-control input-form" id="fname">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label class="text-black" for="lname">Apellidos</label>
+								<input type="text" class="form-control input-form " id="lname">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label class="text-black" for="email">Correo</label>
+								<input type="email" class="form-control input-form" id="email">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label class="text-black" for="phone">Telefono</label>
+								<input type="number" class="form-control input-form" id="phone">
+							</div>
+						</div>
+					</div>
+					<div class="form-group mb-5">
+						<label class="text-black" for="message">Dirección</label>
+						<textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+	<!--Modal para actualizar informaciòn-->
+	<div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
+					<button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<form>
+						<div class="mb-3">
+							<label for="recipient-name" class="col-form-label">Nombre:</label>
+							<input type="text" class="form-control" id="recipient-name">
+						</div>
+						<div class="mb-3">
+							<label for="message-text1" class="col-form-label">Apellidos:</label>
+							<input class="form-control" id="message-text1">
+						</div>
+						<div class="mb-3">
+							<label for="message-text2" class="col-form-label">Correo:</label>
+							<input class="form-control" id="message-text2">
+						</div>
+						<div class="mb-3">
+							<label for="message-text4" class="col-form-label">Telèfono:</label>
+							<input class="form-control" id="message-text4">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<!--  <button type="button" style="background-color:red" id="btn-cerrar"class="btn btn-group" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>-->
+					<button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+
+
+
+
+	<script>
+
+		
+		const DATA_COUNT = 5;
+		const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+		
+		var ctx = document.getElementById('GraficoPie').getContext('2d');
+		var barChart = document.getElementById('GraficoBarras').getContext('2d');
+		var LineChart = document.getElementById('GraficoLinealVentasSemana').getContext('2d');
+		var RadarChart = document.getElementById('miGraficoRadar').getContext('2d');
+
+		const data = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+        datasets: [{
+            label: 'Ventas por Mes',
+            data: [300, 50, 100, 40, 120, 60], // Datos de ventas para cada mes
+            backgroundColor: [
+                'rgb(255, 99, 132)',   // Rojo
+                'rgb(54, 162, 235)',   // Azul
+                'rgb(255, 205, 86)',   // Amarillo
+                'rgb(75, 192, 192)',   // Verde
+                'rgb(153, 102, 255)',  // Púrpura
+                'rgb(255, 159, 64)'    // Naranja
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+
+
+		const dataDaily = {
+			labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			datasets: [{
+				label: 'Ventas de la semana',
+				data: [300, 50, 100, 40, 120, 60], // Datos de ventas para cada mes
+				backgroundColor: [
+					'rgb(255, 99, 132)',   // Rojo
+					'rgb(54, 162, 235)',   // Azul
+					'rgb(255, 205, 86)',   // Amarillo
+					'rgb(75, 192, 192)',   // Verde
+					'rgb(153, 102, 255)',  // Púrpura
+					'rgb(255, 159, 64)'    // Naranja
+				],
+				hoverOffset: 4
+			}]
+		};
+
+		const config = {
+			type: 'doughnut',
+			data: data,
+			options: {
+				responsive: true,
+				plugins: {
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Cuentas de Credito'
+					}
+				}
+			}
+		};
+
+
+
+		const configRadar = {
+			type: 'line',
+			data: data,
+			options: {
+				plugins: {
+					filler: {
+						propagate: false
+					},
+					'samples-filler-analyser': {
+						target: 'chart-analyser'
+					}
+				},
+				interaction: {
+					intersect: false
+				}
+			}
+		};
+
+		const configBar = {
+			type: 'bar',
+			data: data,
+			options: {
+				responsive: true,
+				plugins: {
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Chart.js bar Chart'
+					}
+				}
+			}
+		};
+
+		const configLine = {
+			type: 'line',
+			data: dataDaily,
+			options: {
+				responsive: true,
+				plugins: {
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Chart.js bar Chart'
+					}
+				}
+			}
+		};
+
+		// Inicializar y renderizar el gráfico
+		var myChart = new Chart(ctx, config);
+		var myChart = new Chart(barChart, configBar);
+		var myChart = new Chart(LineChart, configLine);
+		var myChart = new Chart(RadarChart, configRadar);
+	</script>
+
+}
+
+}

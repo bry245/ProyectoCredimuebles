@@ -44,7 +44,7 @@
                     <li><a class="nav-link" href="@Url.Action("Index","Inventario")">Inventario</a></li>
                     <li><a class="nav-link" href="@Url.Action("Index","Salidas")">Salidas</a></li>
                     <li><a class="nav-link" href="blog.html">Caja</a></li>
-                    <li><a class="nav-link" href="contact.html">Reportes</a></li>
+                    <li><a class="nav-link" href="@Url.Action("Index","Reporte")">Reportes</a></li>
                 </ul>
 
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -372,13 +372,20 @@
         </div>
     </footer>
 
-    <script src="~/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/tiny-slider.js"></script>
-    <script src="~/js/custom.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="~/js/bootstrap.bundle.min.js" ></script>
+        <script src="~/js/tiny-slider.js"></script>
+        <script src="~/js/custom.js"></script>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            
+
+
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
