@@ -1,0 +1,15 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/CrediV1_Prueba/obj/CrediV1_Prueba.csproj.nuget.dgspec.json
+/CrediV1_Prueba/obj/CrediV1_Prueba.csproj.nuget.g.props
+/CrediV1_Prueba/obj/Debug/net6.0/CrediV1_Prueba.AssemblyInfo.cs
+/CrediV1_Prueba/obj/Debug/net6.0/CrediV1_Prueba.AssemblyInfoInputs.cache
+/CrediV1_Prueba/obj/Debug/net6.0/CrediV1_Prueba.assets.cache
+/CrediV1_Prueba/obj/Debug/net6.0/CrediV1_Prueba.csproj.AssemblyReference.cache
+/CrediV1_Prueba/obj/Debug/net6.0/CrediV1_Prueba.GeneratedMSBuildEditorConfig.editorconfig
+/CrediV1_Prueba/obj/Debug/net6.0/CrediV1_Prueba.RazorAssemblyInfo.cache
+/CrediV1_Prueba/obj/Debug/net6.0/project.razor.vs.bin
+/CrediV1_Prueba/obj/project.assets.json
+/CrediV1_Prueba/obj/project.nuget.cache

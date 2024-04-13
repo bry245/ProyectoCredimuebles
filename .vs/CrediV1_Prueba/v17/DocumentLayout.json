@@ -15,10 +15,6 @@
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\vinda\\onedrive\\escritorio\\credimueblesgithub\\proyectocredimuebles\\crediv1_prueba\\views\\inventario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inventario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\vinda\\onedrive\\escritorio\\credimueblesgithub\\proyectocredimuebles\\crediv1_prueba\\views\\usuario\\listaclientes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\usuario\\listaclientes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
@@ -30,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-12T00:36:13.382Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -42,25 +51,11 @@
               "RelativeToolTip": "CrediV1_Prueba\\wwwroot\\css\\style.css",
               "ViewState": "AQIAAKsBAAAAAAAAAADwv9ABAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-04-12T00:44:19.81Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T00:44:19.81Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\Index.cshtml",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inventario\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\Index.cshtml",
-              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inventario\\Index.cshtml",
-              "ViewState": "AQIAACcAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-12T00:39:44.39Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "ListaClientes.cshtml",
               "DocumentMoniker": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Usuario\\ListaClientes.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Usuario\\ListaClientes.cshtml",
@@ -68,8 +63,7 @@
               "RelativeToolTip": "CrediV1_Prueba\\Views\\Usuario\\ListaClientes.cshtml",
               "ViewState": "AQIAAHwBAAAAAAAAAAAcwKABAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-12T00:38:53.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T00:38:53.191Z"
             },
             {
               "$type": "Document",
@@ -81,21 +75,7 @@
               "RelativeToolTip": "CrediV1_Prueba\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AQIAABsAAAAAAAAAAAAAACwAAABiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-12T00:38:07.297Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "CrediV1_Prueba\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-12T00:36:13.382Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T00:38:07.297Z"
             }
           ]
         }
