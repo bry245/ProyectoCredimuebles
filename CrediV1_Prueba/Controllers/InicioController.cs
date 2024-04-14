@@ -11,9 +11,9 @@ namespace CrediV1_Prueba.Controllers
             return View();
         }
 
-        // GET: InicioController/Details/5
-        public ActionResult Details(int id)
-        {
+		[HttpGet]
+		public ActionResult RecuperarContrasenna()
+		{
             return View();
         }
 

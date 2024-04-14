@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "Gastos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+	<div class="text-center">
+		<div class="">
+			<h1>Gestión de <span clsas="d-block">Gastos</span></h1>
+		</div>
+	</div>
+    <div class="text-center">
+        <div class="hero-subMenu">
+            <h1> <span clsas="d-block">Gastos de la fecha 01/01/1900</span></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-4" style="background-color:white">
+
+                <h3>Nuevo Gasto</h3>
+                <form>
+
+                    <div>
+                        <div class="form-group">
+                            <label class="text-black" for="fname">Monto</label>
+                            <input type="number" class="form-control input-form" id="fname">
+                        </div>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label class="text-black" for="message">Por concepto de:</label>
+                        <textarea name="message" class="form-control input-form" id="message" cols="30" rows="3"></textarea>
+                    </div>
+                    <p><a href="shop.html" class="btn">Agregar</a></p>
+
+                </form>
+            </div>
+
+            <div class="col-lg-8" style="background-color:white">
+                <div class="container">
+                    <h2>Lista De Gastos</h2>
+
+                   
+                    <table class="table table-hover" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Monto</th>
+                                <th>Eliminar</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pago de planillas</td>
+                                <td>₡ 300000</td>
+                                <td><i class="fa fa-trash"></i></td>
+                              
+                            </tr>
+                            <tr>
+                                <td>Pago del alquiler</td>
+                                <td>₡ 1300000</td>
+                                <td><i class="fa fa-trash"></i></td>
+
+                            </tr>
+                            <tr>
+                                <td>Pago de planillas</td>
+                                <td>₡ 300000</td>
+                                <td><i class="fa fa-trash"></i></td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example" style="background-color:white">
+                        <ul class="pagination justify-content-center" style="background-color:#dce5e4">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>

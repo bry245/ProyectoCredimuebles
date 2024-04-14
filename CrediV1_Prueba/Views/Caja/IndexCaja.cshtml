@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "IndexCaja";
+
+}
+<div class="text-center ">
+    <div class="hero-subMenu">
+        <h1>Control <span clsas="d-block"> Caja</span></h1>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2>Cajas Diarias</h2>
+
+    <div class="container mt-4">
+        <div class="row justify-content-end">
+            <div class="col-md-6">
+                <form action="#" method="GET" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        </div>
+                        <button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i>  </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover" style="text-align:center">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Total En Ventas</th>
+                <th>Cantidad Ventas</th>
+                <th>Comisiones</th>
+                <th>Gastos</th>
+                <th>Ganancia Neta</th>
+                <th>Total En Caja</th>
+
+            </tr>
+        </thead>
+        <tbody style="background-color:#90A9BB ">
+            <tr >
+                <td>22/03/23 </td>
+                <td> ₡100000</td>
+                <td>  5 </td>
+                <td> ₡25000</td>
+                <td><a class="btn-table-g icon-container" href="@Url.Action("Gastos","Caja")"> <i class="fas fa-plus"></i> ₡25000</a></td>
+                
+                <td> ₡ 50000</td>
+                <td>₡50000</td>
+
+            </tr>
+            <tr>
+                <td>23/03/23 </td>
+                <td> ₡150000</td>
+                <td>  4 </td>
+                <td> ₡20000</td>
+                <td><a class="btn-table-g icon-container" href="@Url.Action("Gastos","Caja")"> <i class="fas fa-plus"></i> ₡25000</a></td>
+                <td> ₡ 105000</td>
+                <td>₡155000</td>
+
+            </tr>
+            <tr>
+                <td>24/03/23 </td>
+                <td> ₡200000</td>
+                <td>  7 </td>
+                <td> ₡50000</td>
+                <td><a class="btn-table-g icon-container" href="@Url.Action("Gastos","Caja")"> <i class="fas fa-plus"></i> ₡20000</button></td>
+                <td> ₡ 130000</td>
+                <td>₡285000</td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div class="row" style="margin-top:2%">
+        <div class="col-4">
+            <strong style="text-align:center; font-weight:bold; font-size:12pt; line-height:40px">Total en ventas del mes: ₡0.00 </strong>
+
+        </div>
+       
+        <div class="col-10">
+            <strong style="text-align:center; font-weight:bold; font-size:12pt; line-height:40px">Total de gastos: ₡0.00 </strong>
+
+        </div>
+        <div class="col-10">
+            <strong style="text-align:center; font-weight:bold; font-size:12pt; line-height:40px">Total en caja: ₡0.00 </strong>
+
+        </div>
+        <nav aria-label="Page navigation example" style="background-color:white">
+            <ul class="pagination justify-content-center" style="background-color:#dce5e4">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+    <div class="icon-container">
+        <i class="fas fa-star"></i>
+    </div>
+</div>
+
+
+<!--Modal AGREGAR GASTO-->
+<div class="modal fade" id="gastoModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Agregar Gasto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-black">
+                <p>Registrar gasto del día 01/01/1900</p>
+                <form>
+                    <div class="mb-3">
+                        <label  class="col-form-label">Monto:</label>
+                        <input type="number" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-black" for="message">Por concepto de:</label>
+                        <textarea name="" class="form-control" id="message" cols="30" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" style="background-color:red" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmButton">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>

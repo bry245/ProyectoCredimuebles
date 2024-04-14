@@ -6,6 +6,24 @@
 */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
+
+
+.icon-container {
+    display: inline-block;
+    padding: 5px;
+}
+
+    .icon-container i {
+        font-size: 15px;
+        color: #33333319;
+        transition: color 0.3s ease;
+        padding: 2px;
+    }
+
+    /* Cambiar el color del icono en hover */
+    .icon-container:hover i {
+        color: #cabebe;
+    }
 body {
     overflow-x: hidden;
     position: relative;
@@ -35,7 +53,7 @@ a {
     -o-transition: .3s all ease;
     transition: .3s all ease;
     color: #2f2f2f;
-    text-decoration: underline;
+    
 }
 
     a:hover {
@@ -264,6 +282,28 @@ a {
     background: #091979ee;
     border-color: #2f2f2f;
 }
+.btn-table-g {
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 15px;
+    color: #ffff;
+    background: #b92622ff;
+    border-color: #ed0505;
+}
+    .btn-table-g:hover {
+        color: #ffffff;
+        background: #dd0b0b;
+        border-color: #222222;
+    }
+.btn-table-i {
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 15px;
+    color: #ffff;
+    background: #11933cff;
+    border-color: #05ed11;
+}
+
 
     .btn:hover {
         color: #ffffff;

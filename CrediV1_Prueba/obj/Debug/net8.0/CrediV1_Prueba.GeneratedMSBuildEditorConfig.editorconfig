@@ -26,6 +26,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\vinda\OneDrive\Escritorio\CredimueblesGitHub\ProyectoCredimuebles\CrediV1_Prueba
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Caja/Gastos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxHYXN0b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Caja/IndexCaja.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxJbmRleENhamEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -36,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/InicioDeSesion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXEluaWNpb0RlU2VzaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/RecuperarContrasenna.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/AgregarProducto.cshtml]
