@@ -1,7 +1,7 @@
-﻿
+﻿﻿
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Estilos {
@@ -14,7 +14,7 @@
 			max-height: 600px; /* Puedes ajustar este valor según el tamaño que desees */
 			width: 300px;
 			height: 300px;
-			justify-content:center;
+			justify-content: center;
 		}
 	</style>
 
@@ -43,7 +43,7 @@
 		<div class="container">
 			<div class="row ">
 				<div class="col-xl-6 col-lg-6">
-					<div  class="text-decoration-none">
+					<div class="text-decoration-none">
 						<div class="card l-bg-cherry">
 							<div class="card-statistic-5 p-5">
 								<div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
@@ -145,37 +145,37 @@
 
 							<div>
 								<span class="card title">Excel <i class="fa fa-download"></i></span>
-							
+
 							</div>
 
 						</div>
 					</div>
 				</div>
 			</div>
-			
-
-				<div class="col-xl-12 col-lg-12">
-					<div class="text-decoration-none">
-						<div class="card ">
-							<div class="card-statistic-5 p-5 d-flex justify-content-center bg-white">
-								
-								<canvas id="GraficoPie"></canvas>
-								</div>
 
 
-								<div>
-									<span class="card title">Excel <i class="fa fa-download"></i></span>
-								</div>
-								
-							</div>
+			<div class="col-xl-12 col-lg-12">
+				<div class="text-decoration-none">
+					<div class="card ">
+						<div class="card-statistic-5 p-5 d-flex justify-content-center bg-white">
+
+							<canvas id="GraficoPie"></canvas>
 						</div>
+
+
+						<div>
+							<span class="card title">Excel <i class="fa fa-download"></i></span>
+						</div>
+
 					</div>
 				</div>
-				
-
 			</div>
-
 		</div>
+
+
+	</div>
+
+</div>
 	</div>
 
 
@@ -185,42 +185,42 @@
 
 
 
-	<!--Modal para actualizar informaciòn-->
-	<div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
-					<button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
-				</div>
+<!--Modal para actualizar informaciòn-->
+<div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
+				<button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+			</div>
 
-				<div class="modal-body">
-					<form>
-						<div class="mb-3">
-							<label for="recipient-name" class="col-form-label">Nombre:</label>
-							<input type="text" class="form-control" id="recipient-name">
-						</div>
-						<div class="mb-3">
-							<label for="message-text1" class="col-form-label">Apellidos:</label>
-							<input class="form-control" id="message-text1">
-						</div>
-						<div class="mb-3">
-							<label for="message-text2" class="col-form-label">Correo:</label>
-							<input class="form-control" id="message-text2">
-						</div>
-						<div class="mb-3">
-							<label for="message-text4" class="col-form-label">Telèfono:</label>
-							<input class="form-control" id="message-text4">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<!--  <button type="button" style="background-color:red" id="btn-cerrar"class="btn btn-group" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>-->
-					<button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
-				</div>
+			<div class="modal-body">
+				<form>
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Nombre:</label>
+						<input type="text" class="form-control" id="recipient-name">
+					</div>
+					<div class="mb-3">
+						<label for="message-text1" class="col-form-label">Apellidos:</label>
+						<input class="form-control" id="message-text1">
+					</div>
+					<div class="mb-3">
+						<label for="message-text2" class="col-form-label">Correo:</label>
+						<input class="form-control" id="message-text2">
+					</div>
+					<div class="mb-3">
+						<label for="message-text4" class="col-form-label">Telèfono:</label>
+						<input class="form-control" id="message-text4">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<!--  <button type="button" style="background-color:red" id="btn-cerrar"class="btn btn-group" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>-->
+				<button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
 			</div>
 		</div>
 	</div>
+</div>
 
 </div>
 
@@ -251,31 +251,31 @@
 
 	<script>
 
-		
+
 		const DATA_COUNT = 5;
 		const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
-		
+
 		var ctx = document.getElementById('GraficoPie').getContext('2d');
 		var barChart = document.getElementById('GraficoBarras').getContext('2d');
 		var LineChart = document.getElementById('GraficoLinealVentasSemana').getContext('2d');
 		var RadarChart = document.getElementById('miGraficoRadar').getContext('2d');
 
 		const data = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-        datasets: [{
-            label: 'Ventas por Mes',
-            data: [300, 50, 100, 40, 120, 60], // Datos de ventas para cada mes
-            backgroundColor: [
-                'rgb(255, 99, 132)',   // Rojo
-                'rgb(54, 162, 235)',   // Azul
-                'rgb(255, 205, 86)',   // Amarillo
-                'rgb(75, 192, 192)',   // Verde
-                'rgb(153, 102, 255)',  // Púrpura
-                'rgb(255, 159, 64)'    // Naranja
-            ],
-            hoverOffset: 4
-        }]
-    };
+			labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+			datasets: [{
+				label: 'Ventas por Mes',
+				data: [300, 50, 100, 40, 120, 60], // Datos de ventas para cada mes
+				backgroundColor: [
+					'rgb(255, 99, 132)',   // Rojo
+					'rgb(54, 162, 235)',   // Azul
+					'rgb(255, 205, 86)',   // Amarillo
+					'rgb(75, 192, 192)',   // Verde
+					'rgb(153, 102, 255)',  // Púrpura
+					'rgb(255, 159, 64)'    // Naranja
+				],
+				hoverOffset: 4
+			}]
+		};
 
 
 

@@ -2,6 +2,17 @@
     ViewData["Title"] = "ListaClientes";
 
 }
+
+@section Estilos{
+    <style>
+        /* Estilos personalizados para el título */
+        .swal2-title {
+            color: ; /* Cambia el color del título */
+            font-size: 24px; /* Cambia el tamaño del título */
+            /* Otros estilos según necesites */
+        }
+    </style>
+}
 <div class="text-center ">
     <div class="hero-subMenu">
         <h1>Clientes <span clsas="d-block">- Usuarios</span></h1>
@@ -10,7 +21,7 @@
 
 
 <div class="container">
-    <h2>Lista De Clientes</h2>
+  
 
     <div class="container mt-4">
         <div class="row justify-content-end">
@@ -47,9 +58,9 @@
                 <td>john@example.com</td>
                 <td>74410784</td>
                 <td>Costa Rica</td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                <td style="text-align:center"><button class="btn btn-outline-danger" id="confirmButtonInactivar">Inactivar</button></td>
+                <td style="text-align:center"><button class="btn btn-danger" onclick="verDetalles()">Ver Detalles <i class="fa fa-bars"></i></button></td>
+                <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion()"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
 
             </tr>
             <tr>
@@ -58,9 +69,9 @@
                 <td>mary@example.com</td>
                 <td>74410784</td>
                 <td>Costa Rica</td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                <td style="text-align:center"><button class="btn btn-outline-danger" id="confirmButtonInactivar">Inactivar</button></td>
+                <td style="text-align:center"><button class="btn btn-danger" onclick="verDetalles()">Ver Detalles <i class="fa fa-bars"></i></button></td>
+                <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion()"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
 
             </tr>
             <tr>
@@ -69,9 +80,9 @@
                 <td>july@example.com</td>
                 <td>74410784</td>
                 <td>Costa Rica</td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                <td style="text-align:center"><button class="btn btn-outline-danger" id="confirmButtonInactivar">Inactivar</button></td>
+                <td style="text-align:center"><button class="btn btn-danger" onclick="verDetalles()">Ver Detalles <i class="fa fa-bars"></i></button></td>
+                <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion()"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
 
             </tr>
         </tbody>
@@ -211,7 +222,7 @@
 
             <div class="col-lg-8" style="background-color:white">
                 <div class="container">
-                    <h2>Lista De Empleados</h2>
+             
 
                     <div class="container mt-4">
                         <div class="row justify-content-end">
@@ -246,8 +257,7 @@
                                 <td>john@example.com</td>
                                 <td>74410784</td>
                                 <td>Costa Rica</td>
-                                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-
+                                <td style="text-align:center"><button class="btn btn-danger" onclick="verDetalles()">Ver Detalles <i class="fa fa-bars"></i></button></td>
                             </tr>
                             <tr>
                                 <td>Mary</td>
@@ -328,29 +338,25 @@
 
 
 
-
-
-
 <!--MODAL DE INACTIVACIÓN-->
 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content border  border-3">
+            <div class="modal-header text-white" style="background-color:darkblue;">
                 <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close text-white" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-black">
-                <p>¿Estás seguro de que deseas inactivar este usuario?</p>
+            <div class="modal-body text-black bg-light">
+                <h5 >¿Estás seguro de que deseas inactivar este usuario?</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" style="background-color:red" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirmButton">Inactivar</button>
+                <button type="button" class="btn btn-dark" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-dark" id="confirmButton" data-mdb-ripple-init>Confirmar</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <!--MODAL DE NOTIFICACION-->
 <div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -358,23 +364,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="confirmModalLabel">Enviar Notificación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-black">
                 <p>Usuario:</p>
                 <form>
-
                     <div class="form-group mb-5">
-                        <label class="text-black" for="message">Mensage</label>
+                        <label class="text-black" for="message">Mensaje</label>
                         <textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="confirmButton">Enviar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirmButton" data-mdb-ripple-init>Enviar</button>
             </div>
         </div>
     </div>
@@ -383,52 +386,152 @@
 
 
 
+@section Scripts{
+
+    <script>
+        // Obtener el modal Para actualizar
+        var modal = document.getElementById("ModalClientes");
+
+        // Obtener el botón que abre el btn
+        var btnsMostrarModal = document.getElementById("btn-Modal");
+
+        // Obtener el span que cierra el modal
+        var span = document.getElementsByClassName("btn-close")[0];
+        var cerrar = document.getElementById("btn-cerrar");
 
 
 
+        function enviarNotificacion() {
+            // Configuración del SweetAlert para enviar notificaciones
+            Swal.fire({
+                title: 'Enviar Notificación',
+                html: `
+                            <div class="mb-3">
+                                <label class="form-label">Usuario:</label>
+                                <input type="text" class="form-control" id="usuario" readonly value="Usuario Ejemplo">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mensaje:</label>
+                                <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                            </div>
+                        `,
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                focusConfirm: false,
+                preConfirm: () => {
+                    // Aquí puedes agregar la lógica para enviar la notificación
+                    const mensaje = document.getElementById('mensaje').value;
+                    // Aquí puedes enviar el mensaje
+                    console.log('Mensaje enviado:', mensaje);
+                }
+            });
+        }
 
-<script>
-    // Obtener el modal Para actualizar
-    var modal = document.getElementById("ModalClientes");
-
-    // Obtener el botón que abre el btn
-    var btnsMostrarModal = document.getElementById("btn-Modal");
-
-    // Obtener el span que cierra el modal
-    var span = document.getElementsByClassName("btn-close")[0];
-    var cerrar = document.getElementById("btn-cerrar");
 
 
-    btnsMostrarModal.onclick = function () {
-        // Obtener el ID de la fila de la tabla
-        // var id = this.getAttribute("data-id");
+        function verDetalles() {
+            // Configuración del modal de SweetAlert
+            Swal.fire({
+                title: 'Detalles del Usuario',
+                html: `
+                            <form>
+                                <div class="mb-3 row">
+                                    <label for="nombre" class="col-sm-3 col-form-label text-sm-end">Nombre:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="nombre" class="form-control" value="Juan Pérez" readonly style="border: none;">
+                                    </div>
+                                </div>
 
-        // Llamar a una función para cargar la información detallada (debes implementarla)
-        // cargarInformacionDetalle(id);
+                                <div class="mb-3 row">
+                                    <label for="email" class="col-sm-3 col-form-label text-sm-end">Correo Electrónico:</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" id="email" class="form-control" value="juan@example.com" readonly style="border: none;">
+                                    </div>
+                                </div>
 
-        // Mostrar el modal
-        modal.style.display = "block";
-        document.body.classList.add("modal-open");
-    }
+                                <div class="mb-3 row">
+                                    <label for="telefono" class="col-sm-3 col-form-label text-sm-end">Teléfono:</label>
+                                    <div class="col-sm-9">
+                                        <input type="tel" id="telefono" class="form-control" value="123456789" readonly style="border: none;">
+                                    </div>
+                                </div>
 
-    // Manejar clic en el span para cerrar el modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+                                <div class="mb-3 row">
+                                    <label for="direccion" class="col-sm-3 col-form-label text-sm-end">Dirección:</label>
+                                    <div class="col-sm-9">
+                                        <textarea id="direccion" class="form-control" readonly style="border: none;">Calle Principal, Ciudad</textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        `,
+                confirmButtonText: 'Cerrar',
+                showCancelButton: false,
+                focusConfirm: false,
+                width: '40%'
+            });
+        }
 
-    // Cuando el usuario hace clic fuera del modal, ciérralo
-    window.onclick = function (event) {
-        if (event.target == modal) {
+        document.getElementById('confirmButtonInactivar').addEventListener('click', function () {
+            // Muestra una SweetAlert con las opciones de confirmar o cancelar
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#c31e1e',
+                confirmButtonText: 'Sí, inactivar usuario',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                // Si el usuario confirma, puedes ejecutar la acción aquí
+                if (result.isConfirmed) {
+                    // Aquí puedes ejecutar el código para inactivar el usuario
+                    // Por ejemplo, puedes enviar una solicitud AJAX para realizar la acción
+                    // Después de completar la acción, puedes mostrar una alerta de éxito
+                    Swal.fire(
+                        '¡Inactivado!',
+                        'El usuario ha sido inactivado.',
+                        'success'
+                    )
+                }
+            })
+        });
+
+
+
+        btnsMostrarModal.onclick = function () {
+            // Obtener el ID de la fila de la tabla
+            // var id = this.getAttribute("data-id");
+
+            // Llamar a una función para cargar la información detallada (debes implementarla)
+            // cargarInformacionDetalle(id);
+
+            // Mostrar el modal
+            modal.style.display = "block";
+            document.body.classList.add("modal-open");
+        }
+
+        // Manejar clic en el span para cerrar el modal
+        span.onclick = function () {
             modal.style.display = "none";
         }
-    }
 
-    // Función para cargar la información detallada (debes implementarla)
-    function cargarInformacionDetalle(id) {
-        // Aquí puedes usar AJAX para cargar la información desde el servidor
-        // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
-        // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
-    }
+        // Cuando el usuario hace clic fuera del modal, ciérralo
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
-</script>
+        // Función para cargar la información detallada (debes implementarla)
+        function cargarInformacionDetalle(id) {
+            // Aquí puedes usar AJAX para cargar la información desde el servidor
+            // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
+            // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
+        }
 
+    </script>
+
+
+}

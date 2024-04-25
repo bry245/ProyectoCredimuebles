@@ -41,48 +41,60 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Proveedor 1</td>
-					<td>Nombre del Contacto 1</td>
-					<td>Dirección del Proveedor 1</td>
-					<td>correo1@proveedor.com</td>
-					<td>123-456-7890</td>
-					<td>123-456-7890</td>
-					<td style="text-align:center">
-						<button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Usuario</button>
-						<a href="@Url.Action("CrearBono","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Abonar</a>
-					</td>
-					<td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
 
-				</tr>
 				<tr>
-					<td>Proveedor 2</td>
-					<td>Nombre del Contacto 2</td>
-					<td>Dirección del Proveedor 2</td>
-					<td>correo2@proveedor.com</td>
-					<td>123-456-7890</td>
-					<td>123-456-7890</td>
-					<td style="text-align:center">
-						<button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Usuario</button>
-						<a href="@Url.Action("CrearBono","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Abonar</a>
-					</td>
-					<td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+					<td>12345</td>
+					<td>2024-04-10</td>
+					<td>Producto 1</td>
+					<td>5</td>
+					<td>$50.00</td>
+					<td>$250.00</td>
+					
+                    <td style="text-align:center">
+                        <button class="btn btn-danger" id="confirmButtonInactivar">Inactivar</button>
 
-				</tr>
+                        <a href="@Url.Action("EditarVenta","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
+                        
+                    
+                    </td>
+                   
+					</td>
+
+                    <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion()"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+
 				<tr>
-					<td>Proveedor 3</td>
-					<td>Nombre del Contacto 3</td>
-					<td>Dirección del Proveedor 3</td>
-					<td>correo3@proveedor.com</td>
-					<td>123-456-7890</td>
-					<td>123-456-7890</td>
+					<td>12345</td>
+					<td>2024-04-10</td>
+					<td>Producto 1</td>
+					<td>5</td>
+					<td>$50.00</td>
+					<td>$250.00</td>
 					<td style="text-align:center">
-						<button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Usuario</button>
-						<a href="@Url.Action("CrearBono","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Abonar</a>
-					</td>
-					<td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
 
-				</tr>
+                        <button class="btn btn-danger" id="confirmButtonInactivar">Inactivar</button>
+						<a href="@Url.Action("EditarVenta","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
+					</td>
+
+                    <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion()"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                </tr>
+
+
+				<tr>
+					<td>12345</td>
+					<td>2024-04-10</td>
+					<td>Producto 1</td>
+					<td>5</td>
+					<td>$50.00</td>
+					<td>$250.00</td>
+					<td style="text-align:center">
+						<button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Eliminar</button>
+						<a href="@Url.Action("EditarVenta","Salidas")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
+					</td>
+
+                    <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion()"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                </tr>
+			
+			
 
 			</tbody>
 		</table>
@@ -105,3 +117,154 @@
 </div>
 
 
+
+
+@section Scripts {
+
+    <script>
+        // Obtener el modal Para actualizar
+        var modal = document.getElementById("ModalClientes");
+
+        // Obtener el botón que abre el btn
+        var btnsMostrarModal = document.getElementById("btn-Modal");
+
+        // Obtener el span que cierra el modal
+        var span = document.getElementsByClassName("btn-close")[0];
+        var cerrar = document.getElementById("btn-cerrar");
+
+
+
+        function enviarNotificacion() {
+            // Configuración del SweetAlert para enviar notificaciones
+            Swal.fire({
+                title: 'Enviar Notificación',
+                html: `
+                                    <div class="mb-3">
+                                        <label class="form-label">Usuario:</label>
+                                        <input type="text" class="form-control" id="usuario" readonly value="Usuario Ejemplo">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Mensaje:</label>
+                                        <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                                    </div>
+                                `,
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                focusConfirm: false,
+                preConfirm: () => {
+                    // Aquí puedes agregar la lógica para enviar la notificación
+                    const mensaje = document.getElementById('mensaje').value;
+                    // Aquí puedes enviar el mensaje
+                    console.log('Mensaje enviado:', mensaje);
+                }
+            });
+        }
+
+
+
+        function verDetalles() {
+            // Configuración del modal de SweetAlert
+            Swal.fire({
+                title: 'Detalles del Usuario',
+                html: `
+                                    <form>
+                                        <div class="mb-3 row">
+                                            <label for="nombre" class="col-sm-3 col-form-label text-sm-end">Nombre:</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="nombre" class="form-control" value="Juan Pérez" readonly style="border: none;">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="email" class="col-sm-3 col-form-label text-sm-end">Correo Electrónico:</label>
+                                            <div class="col-sm-9">
+                                                <input type="email" id="email" class="form-control" value="juan@example.com" readonly style="border: none;">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="telefono" class="col-sm-3 col-form-label text-sm-end">Teléfono:</label>
+                                            <div class="col-sm-9">
+                                                <input type="tel" id="telefono" class="form-control" value="123456789" readonly style="border: none;">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="direccion" class="col-sm-3 col-form-label text-sm-end">Dirección:</label>
+                                            <div class="col-sm-9">
+                                                <textarea id="direccion" class="form-control" readonly style="border: none;">Calle Principal, Ciudad</textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                `,
+                confirmButtonText: 'Cerrar',
+                showCancelButton: false,
+                focusConfirm: false,
+                width: '40%'
+            });
+        }
+
+        document.getElementById('confirmButtonInactivar').addEventListener('click', function () {
+            // Muestra una SweetAlert con las opciones de confirmar o cancelar
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#c31e1e',
+                confirmButtonText: 'Sí, inactivar usuario',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                // Si el usuario confirma, puedes ejecutar la acción aquí
+                if (result.isConfirmed) {
+                    // Aquí puedes ejecutar el código para inactivar el usuario
+                    // Por ejemplo, puedes enviar una solicitud AJAX para realizar la acción
+                    // Después de completar la acción, puedes mostrar una alerta de éxito
+                    Swal.fire(
+                        '¡Inactivado!',
+                        'El usuario ha sido inactivado.',
+                        'success'
+                    )
+                }
+            })
+        });
+
+
+
+        btnsMostrarModal.onclick = function () {
+            // Obtener el ID de la fila de la tabla
+            // var id = this.getAttribute("data-id");
+
+            // Llamar a una función para cargar la información detallada (debes implementarla)
+            // cargarInformacionDetalle(id);
+
+            // Mostrar el modal
+            modal.style.display = "block";
+            document.body.classList.add("modal-open");
+        }
+
+        // Manejar clic en el span para cerrar el modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // Cuando el usuario hace clic fuera del modal, ciérralo
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Función para cargar la información detallada (debes implementarla)
+        function cargarInformacionDetalle(id) {
+            // Aquí puedes usar AJAX para cargar la información desde el servidor
+            // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
+            // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
+        }
+
+    </script>
+
+
+}
