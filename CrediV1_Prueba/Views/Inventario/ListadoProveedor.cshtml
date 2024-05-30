@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<CrediV1_Prueba.Models.Proveedor>
 @{
     ViewData["Title"] = "ListadoProveedor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,47 +27,26 @@
 			<thead>
 				<tr>
 					<th>Nombre del Proveedor</th>
-					<th>Contacto</th>
+					<th>telefono</th>
 					<th>Dirección</th>
 					<th>Correo Electrónico</th>
-					<th>Teléfono</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Proveedor 1</td>
-					<td>Nombre del Contacto 1</td>
-					<td>Dirección del Proveedor 1</td>
-					<td>correo1@proveedor.com</td>
-					<td>123-456-7890</td>
-					<td style="text-align:center">
-						<button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button>
-						<a href="@Url.Action("EditarProveedor","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
-					</td>
-				</tr>
-				<tr>
-					<td>Proveedor 2</td>
-					<td>Nombre del Contacto 2</td>
-					<td>Dirección del Proveedor 2</td>
-					<td>correo2@proveedor.com</td>
-					<td>123-456-7890</td>
-					<td style="text-align:center">
-						<button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button>
-						<a href="@Url.Action("EditarProveedor","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
-					</td>
-				</tr>
-				<tr>
-					<td>Proveedor 3</td>
-					<td>Nombre del Contacto 3</td>
-					<td>Dirección del Proveedor 3</td>
-					<td>correo3@proveedor.com</td>
-					<td>123-456-7890</td>
-					<td style="text-align:center">
-						<button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button>
-						<a href="@Url.Action("EditarProveedor","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Editar</a>
-					</td>
-				</tr>
+				@foreach (var proveedor in @Model)
+				{
+					<tr>
+						<td>@proveedor.nombre</td>
+						<td>@proveedor.telefono</td>
+						<td>@proveedor.direccion</td>
+						<td>@proveedor.correo</td>
+						<td style="text-align:center">
+							<button class="btn btn-danger" data-toggle="modal" id="confirmButtonInactivar">Inactivar</button>
+							<a class="btn btn-danger" asp-controller="Inventario" asp-action="EditarProveedor" asp-route-Proveedor="@proveedor.idProveedor">Editar</a>
+						</td>
+					</tr>
+				}
 
 			</tbody>
 		</table>
@@ -88,3 +67,58 @@
 
 </div>
 
+<script>
+
+	document.getElementById('confirmButtonInactivar').addEventListener('click', function () {
+
+		const email = document.getElementById('email').value;
+		// Muestra una SweetAlert con las opciones de confirmar o cancelar
+		Swal.fire({
+			title: '¿Estás seguro?',
+			text: "¡No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#0d6efd',
+			cancelButtonColor: '#c31e1e',
+			confirmButtonText: 'Sí, inactivar usuario',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			// Si el usuario confirma, puedes ejecutar la acción aquí
+			if (result.isConfirmed) {
+
+				try {
+					const response = await fetch('@Url.Action("GuardarEditarProveedor", "Inventario")', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(data)
+					});
+
+					if (response.ok) {
+						Swal.fire({
+							icon: 'success',
+							title: 'Proveedor actualizado',
+							text: 'El proveedor ha sido actualizado correctamente.'
+						}).then(() => {
+							window.location.href = '@Url.Action("ListadoProveedor", "Inventario")';
+						});
+					} else {
+						Swal.fire({
+							icon: 'error',
+							title: 'Error',
+							text: 'Hubo un problema al actualizar el proveedor.'
+						});
+					}
+				} catch (error) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: 'Hubo un problema al actualizar el proveedor.'
+					});
+				}``
+			}
+		})
+	});
+
+</script>

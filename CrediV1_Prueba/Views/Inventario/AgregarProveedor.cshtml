@@ -14,44 +14,27 @@
 			<div class="row">
 				<div class="col-lg-8 col-xl-6">
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="NombreJuridico" name="NombreJuridico" class="form-control form-control-lg" placeholder="Nombre" />
+						<input type="text" id="nombre" name="nombre" class="form-control form-control-lg" placeholder="Nombre" />
 					</div>
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="ApellidoJuridico" name="ApellidoJuridico" class="form-control form-control-lg" placeholder="Apellido" />
+						<input type="text" id="telefono" name="telefono" class="form-control form-control-lg" placeholder="Apellido" />
 					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="direccion" class="form-control form-control-lg" placeholder="Dirección" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
-					</div>
-
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="file" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
-					</div>
+				
 				</div>
 
 				<div class="col-lg-8 col-xl-6">
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="NombreJuridico" name="NombreJuridico" class="form-control form-control-lg" placeholder="Nombre" />
+						<input type="text" id="correo" name="correo" class="form-control form-control-lg" placeholder="Nombre" />
 					</div>
 					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="ApellidoJuridico" name="ApellidoJuridico" class="form-control form-control-lg" placeholder="Apellido" />
+						<input type="text" id="direccion" name="direccion" class="form-control form-control-lg" placeholder="Apellido" />
 					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="direccion" class="form-control form-control-lg" placeholder="Dirección" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<a href="@Url.Action("Index","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
-					</div>
+				
 
 
 				</div>
 
-				<a href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
+				<button href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="button" id="guardar"> <i class="">Agregar Producto</i>  </button>
 			</div>
 		</div>
 	</div>
@@ -61,19 +44,6 @@
 
 
 
-<nav aria-label="Page navigation example" style="background-color:aquamarine">
-	<ul class="pagination justify-content-center">
-		<li class="page-item disabled">
-			<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-		</li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item">
-			<a class="page-link" href="#">Siguiente</a>
-		</li>
-	</ul>
-</nav>
 
 <div class="product-section">
 	<div class="container">
@@ -121,3 +91,61 @@
 		</div>
 	</div>
 </div>
+
+
+
+<script>
+	document.getElementById('guardar').addEventListener('click', async () => {
+		const nombre = document.getElementById('nombre').value;
+		const telefono = document.getElementById('telefono').value;
+		const correo = document.getElementById('correo').value;
+		const direccion = document.getElementById('direccion').value;
+
+		const data = {
+			
+			nombre,
+			telefono,
+			correo,
+			direccion
+		};
+
+		try {
+			const response = await fetch('@Url.Action("GuardarProveedor", "Inventario")', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+
+			if (response.ok) {
+				Swal.fire({
+					icon: 'success',
+					title: 'Proveedor Agregado',
+					text: 'El proveedor ha sido actualizado correctamente.'
+				}).then(() => {
+					window.location.href = '@Url.Action("ListadoProveedor", "Inventario")';
+				});
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: 'Error',
+					text: 'Hubo un problema al actualizar el proveedor.'
+				});
+			}
+		} catch (error) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: 'Hubo un problema al actualizar el proveedor.'
+			});
+		}
+	});
+
+
+
+
+
+
+
+</script>

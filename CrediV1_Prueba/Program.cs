@@ -1,7 +1,15 @@
+using CrediV1_Prueba.Context;
+using CrediV1_Prueba.Services.Proveedores;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddScoped<IProveedores, Proveedores>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
 
 var app = builder.Build();
 
