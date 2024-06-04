@@ -1,0 +1,151 @@
+﻿@{
+	ViewData["Title"] = "AgregarProducto";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<<div class="container">
+	<div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+		<div class="card-body p-4">
+			<div class="form-outline mb-5 mb-xl-4">
+				<h2>Agregar Proveedor</h2>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-xl-6">
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="nombre" name="nombre" class="form-control form-control-lg" placeholder="Nombre" />
+					</div>
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="telefono" name="telefono" class="form-control form-control-lg" placeholder="Apellido" />
+					</div>
+
+				</div>
+
+				<div class="col-lg-8 col-xl-6">
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="correo" name="correo" class="form-control form-control-lg" placeholder="Nombre" />
+					</div>
+					<div class="form-outline mb-5 mb-xl-4">
+						<input type="text" id="direccion" name="direccion" class="form-control form-control-lg" placeholder="Apellido" />
+					</div>
+
+
+
+				</div>
+
+				<button href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="button" id="guardar"> <i class="">Agregar Producto</i>  </button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+<div class="product-section">
+	<div class="container">
+		<div class="row">
+
+			<!-- Start Column 1 -->
+			<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+				<h2 class="mb-4 section-title">Registrar Cliente</h2>
+				<i class="fa  fa-circle-info"></i>
+				<p class="mb-4">
+					Ingrese los datos solicitados para registrar un nuevo cliente
+				</p>
+				<p><a href="shop.html" class="btn">Explore</a></p>
+			</div>
+			<!-- End Column 1 -->
+			<!-- Start Column 2 -->
+			<!-- End Column 2 -->
+			<!-- Start Column 3 -->
+			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+				<a class="product-item" href="cart.html">
+					<img src="~/images/product-2.png" class="img-fluid product-thumbnail">
+					<h3 class="product-title">Kruzo Aero Chair</h3>
+					<strong class="product-price">$78.00</strong>
+
+					<span class="icon-cross">
+						<img src="~/images/cross.svg" class="img-fluid">
+					</span>
+				</a>
+			</div>
+			<!-- End Column 3 -->
+			<!-- Start Column 4 -->
+			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+				<a class="product-item" href="cart.html">
+					<img src="~/images/product-3.png" class="img-fluid product-thumbnail">
+					<h3 class="product-title">Ergonomic Chair</h3>
+					<strong class="product-price">$43.00</strong>
+
+					<span class="icon-cross">
+						<img src="~/images/cross.svg" class="img-fluid">
+					</span>
+				</a>
+			</div>
+			<!-- End Column 4 -->
+
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	document.getElementById('guardar').addEventListener('click', async () => {
+		const nombre = document.getElementById('nombre').value;
+		const telefono = document.getElementById('telefono').value;
+		const correo = document.getElementById('correo').value;
+		const direccion = document.getElementById('direccion').value;
+
+		const data = {
+
+			nombre,
+			telefono,
+			correo,
+			direccion
+		};
+
+		try {
+			const response = await fetch('@Url.Action("GuardarProveedor", "Proveedor")', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+
+			if (response.ok) {
+				Swal.fire({
+					icon: 'success',
+					title: 'Proveedor Agregado',
+					text: 'El proveedor ha sido actualizado correctamente.'
+				}).then(() => {
+					window.location.href = '@Url.Action("ListadoProveedor", "Proveedor")';
+				});
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: 'Error',
+					text: 'Hubo un problema al actualizar el proveedor.'
+				});
+			}
+		} catch (error) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: 'Hubo un problema al actualizar el proveedor.'
+			});
+		}
+	});
+
+
+
+
+
+
+
+</script>

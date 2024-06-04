@@ -54,16 +54,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xBZ3JlZ2FyUHJvZHVjdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/AgregarProveedor.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xBZ3JlZ2FyUHJvdmVlZG9yLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/EditarProducto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xFZGl0YXJQcm9kdWN0by5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/EditarProveedor.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xFZGl0YXJQcm92ZWVkb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/Index.cshtml]
@@ -74,8 +66,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xMaXN0YWRvUHJvZHVjdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/ListadoProveedor.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xMaXN0YWRvUHJvdmVlZG9yLmNzaHRtbA==
+[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/AgregarProveedor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yXEFncmVnYXJQcm92ZWVkb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/EditarProveedor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yXEVkaXRhclByb3ZlZWRvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/ListadoProveedor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yXExpc3RhZG9Qcm92ZWVkb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Reporte/Index.cshtml]

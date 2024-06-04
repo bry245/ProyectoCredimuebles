@@ -70,8 +70,20 @@ namespace CrediV1_Prueba.Services.Proveedores
 			}
 		}
 
+		public async Task<IEnumerable<Proveedor>> GetProveedoresNombre(string nombre)
+		{
+			var query = "SELECT * FROM Proveedor WHERE nombre LIKE @nombre + '%'";
+			using (var connection = _context.CreateConnection())
+			{
+				var parameters = new DynamicParameters();
+				parameters.Add("{", nombre, DbType.String);
 
-        public async Task UpdateProveedor(Proveedor proveedor)
+				var proveedor = await connection.QueryAsync<Proveedor>(query, parameters);
+				return proveedor.ToList();
+			} 
+		}
+
+		public async Task UpdateProveedor(Proveedor proveedor)
         {
             var query = "UPDATE Proveedor SET nombre = @nombre, telefono = @telefono, direccion = @direccion, correo = @correo WHERE idProveedor = @idProveedor";
             var parameters = new DynamicParameters();

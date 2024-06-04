@@ -12,7 +12,9 @@ namespace CrediV1_Prueba.Services.Proveedores
 
         public  Task<Proveedor> GetProveedoresID(int idProveedor);
 
-        public Task UpdateProveedor(Proveedor proveedor);
+		public Task<IEnumerable<Proveedor>> GetProveedoresNombre(string nombre);
+
+		public Task UpdateProveedor(Proveedor proveedor);
 
 
 
