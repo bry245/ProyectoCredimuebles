@@ -6453,19 +6453,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jason\\.nuget\\packages\\": {}
+    "C:\\Users\\50688\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "projectUniqueName": "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
       "projectName": "CrediV1_Prueba",
-      "projectPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-      "packagesPath": "C:\\Users\\jason\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
+      "projectPath": "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "packagesPath": "C:\\Users\\50688\\.nuget\\packages\\",
+      "outputPath": "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\50688\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
