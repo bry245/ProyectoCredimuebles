@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CrediV1_Prueba.Entities.UsuarioEnt
+@{
     ViewData["Title"] = "InicioDeSesion";
     Layout = "~/Views/Shared/Layout_login.cshtml";
 }
@@ -8,18 +9,28 @@
             <img src="~/logoc2.PNG" alt="100" width="200px" align="middle" />
             <h2 class="section-title">&nbsp;</h2>
             <h3 class="section-title">Ingrese los datos solicitados</h3>
+            @{
+                var message = TempData["Mensaje"] as string;
+            }
 
+            @if (!string.IsNullOrEmpty(message))
+            {
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <b>@message</b>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
             <div class="row my-5" style="justify-content:center">
                 <div class="col-6 col-md-6">
-                    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                    
+                    @using (Html.BeginForm("IniciarSesion", "Inicio", FormMethod.Post))
                     {
 
                         <div class="row">
                             <div class="form-group py-2">
                                 <div class="input-login">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" class="input-l" id="fname" placeholder="Usuario">
-
+                                    @Html.TextBoxFor(m => m.correo, new { @type = "text", @class = "input-l", @id = "usernameL", @placeholder = "Usuario" })
                                 </div>
                             </div>
                         </div>
@@ -28,12 +39,11 @@
                             <div class="form-group py-2">
                                 <div class="input-login">
                                     <span class="fa fa-lock p-2"></span>
-                                    <input type="password" class="input-l" placeholder="Contraseña" id="contra">
-
+                                    @Html.TextBoxFor(m => m.contrasenna, new { @type = "password", @class = "input-l", @id = "passwordL", @placeholder = "Contraseña" })
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-danger">Ingresar <i class=" fa-solid fa-arrow-right-to-bracket"> </i></button>
+                        <button type="submit" id="submitBtn" class="btn btn-danger" disabled>Ingresar <i class=" fa-solid fa-arrow-right-to-bracket"> </i></button>
 
                     }
                 </div>
@@ -59,7 +69,7 @@
                         <img src="images/TipoCambio.png" alt="Image" class="imf-fluid">
                     </div>
                     <h3>Tipo De Cambio</h3>
-                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                    <p> Fecha: @ViewData["CurrentDate"] ₡ @ViewData["ExchangeRate"]  </p>
                 </div>
             </div>
 
@@ -75,4 +85,6 @@
     </div>
 
 </div>
-</div>
+
+<script src="~/Functions/Functions.js"></script>
+

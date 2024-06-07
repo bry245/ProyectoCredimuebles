@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
+    "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
   },
   "projects": {
-    "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
+    "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "projectUniqueName": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
         "projectName": "CrediV1_Prueba",
-        "projectPath": "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-        "packagesPath": "C:\\Users\\50688\\.nuget\\packages\\",
-        "outputPath": "D:\\Universidad Fidelitas\\2024\\II Cuatrimestre\\Diseño y Desarrollo de sistemas\\ProyectoCREDIMUEBLES\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
+        "projectPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "packagesPath": "C:\\Users\\vinda\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\50688\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\vinda\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -44,6 +49,14 @@
               "target": "Package",
               "version": "[3.7.1, )"
             },
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.35, )"
+            },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": {
               "target": "Package",
               "version": "[8.0.3, )"
@@ -51,6 +64,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.2, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.6, )"
             }
           },
           "imports": [
@@ -72,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
