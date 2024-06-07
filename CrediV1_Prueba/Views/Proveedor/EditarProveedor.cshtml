@@ -21,6 +21,23 @@
                         <div class="form-outline mb-5 mb-xl-4">
                             <input type="text" id="telefono" name="telefono" value="@Model.telefono" class="form-control form-control-lg" placeholder="Teléfono" />
                         </div>
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <select id="Estado" name="Estado" class="form-control form-control-lg">
+                                <option value="@Model.Estado" selected>
+                                    <!-- Aquí puedes agregar lógica para mostrar el estado actual, por ejemplo: -->
+                                    @if (@Model.Estado)
+                                    {
+                                        <text>Activo</text>
+                                    }
+                                    else
+                                    {
+                                        <text>Inactivo</text>
+                                    }
+                                </option>
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-lg-8 col-xl-6">
                         <div class="form-outline mb-5 mb-xl-4">
@@ -29,6 +46,8 @@
                         <div class="form-outline mb-5 mb-xl-4">
                             <input type="text" id="direccion" name="direccion" value="@Model.direccion" class="form-control form-control-lg" placeholder="Dirección" />
                         </div>
+
+                       
                     </div>
                     <div class="col-lg-8 col-xl-6">
                         <button class="btn btn-danger" type="button" id="guardar">Guardar</button>
@@ -84,13 +103,15 @@
         const telefono = document.getElementById('telefono').value;
         const correo = document.getElementById('correo').value;
         const direccion = document.getElementById('direccion').value;
+        const Estado = document.getElementById('Estado').value === "true";
 
         const data = {
             idProveedor,
             nombre,
             telefono,
             correo,
-            direccion
+            direccion,
+            Estado
         };
 
         try {

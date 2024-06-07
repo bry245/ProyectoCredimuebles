@@ -27,9 +27,10 @@
 			<thead>
 				<tr>
 					<th>Nombre del Proveedor</th>
-					<th>telefono</th>
+					<th>Telefono</th>
 					<th>Dirección</th>
 					<th>Correo Electrónico</th>
+					<th>Estado</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -37,17 +38,25 @@
 				@foreach (var proveedor in @Model)
 				{
 					<tr>
+						<input type="hidden" name="idProveedor" id="idProveedor" value="@proveedor.idProveedor" />
 						<td>@proveedor.nombre</td>
 						<td>@proveedor.telefono</td>
 						<td>@proveedor.direccion</td>
 						<td>@proveedor.correo</td>
+						@if (proveedor.Estado)
+						{
+							<td>Activo</td>
+						}
+						else
+						{
+							<td>Inactivo</td>
+						}
 						<td style="text-align:center">
-							<button class="btn btn-danger" data-toggle="modal" id="confirmButtonInactivar">Inactivar</button>
+							<button class="btn btn-danger confirmButtonInactivar" data-id="@proveedor.idProveedor">Inactivar</button>
 							<a class="btn btn-danger" asp-controller="Proveedor" asp-action="EditarProveedor" asp-route-Proveedor="@proveedor.idProveedor">Editar</a>
 						</td>
 					</tr>
 				}
-
 			</tbody>
 		</table>
 	</div>
@@ -67,58 +76,63 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+	document.querySelectorAll('.confirmButtonInactivar').forEach(button => {
+		button.addEventListener('click', async function () {
+			const idProveedor = document.getElementById('idProveedor').value;
+			const Estado = false;
 
-	document.getElementById('confirmButtonInactivar').addEventListener('click', function () {
 
-		const email = document.getElementById('email').value;
-		// Muestra una SweetAlert con las opciones de confirmar o cancelar
-		Swal.fire({
-			title: '¿Estás seguro?',
-			text: "¡No podrás revertir esto!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#0d6efd',
-			cancelButtonColor: '#c31e1e',
-			confirmButtonText: 'Sí, inactivar usuario',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			// Si el usuario confirma, puedes ejecutar la acción aquí
-			if (result.isConfirmed) {
-
-				try {
-					const response = await fetch('@Url.Action("GuardarEditarProveedor", "Proveedor")', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(data)
-					});
-
-					if (response.ok) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Proveedor actualizado',
-							text: 'El proveedor ha sido actualizado correctamente.'
-						}).then(() => {
-							window.location.href = '@Url.Action("ListadoProveedor", "Inventario")';
+			const data = {
+				idProveedor,
+				Estado
+			};
+			Swal.fire({
+				title: '¿Estás seguro?',
+				text: "¡No podrás revertir esto!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#0d6efd',
+				cancelButtonColor: '#c31e1e',
+				confirmButtonText: 'Sí, inactivar proveedor',
+				cancelButtonText: 'Cancelar'
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					try {
+						
+						const response = await fetch('@Url.Action("DesactivarProveedor", "Proveedor")', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({ proveedor: data })
 						});
-					} else {
+
+						if (response.ok) {
+							Swal.fire({
+								icon: 'success',
+								title: 'Proveedor inactivado',
+								text: 'El proveedor ha sido inactivado correctamente.'
+							}).then(() => {
+								window.location.href = '@Url.Action("ListadoProveedor", "Proveedor")';
+							});
+						} else {
+							Swal.fire({
+								icon: 'error',
+								title: 'Error',
+								text: 'Hubo un problema al inactivar el proveedor.'
+							});
+						}
+					} catch (error) {
 						Swal.fire({
 							icon: 'error',
 							title: 'Error',
-							text: 'Hubo un problema al actualizar el proveedor.'
+							text: 'Hubo un problema al inactivar el proveedor.'
 						});
 					}
-				} catch (error) {
-					Swal.fire({
-						icon: 'error',
-						title: 'Error',
-						text: 'Hubo un problema al actualizar el proveedor.'
-					});
-				} ``
-			}
-		})
+				}
+			});
+		});
 	});
-
 </script>

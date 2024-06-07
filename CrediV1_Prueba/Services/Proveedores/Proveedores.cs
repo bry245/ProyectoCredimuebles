@@ -17,13 +17,14 @@ namespace CrediV1_Prueba.Services.Proveedores
         public async Task AddProveedores(Proveedor proveedor)
         {
 
-            var query = "INSERT INTO Proveedor (nombre,telefono,correo,direccion) VALUES(@nombre,@telefono,@correo,@direccion)"
+            var query = "INSERT INTO Proveedor (nombre,telefono,correo,direccion,Estado) VALUES(@nombre,@telefono,@correo,@direccion,@Estado)"
                 + "SELECT CAST(SCOPE_IDENTITY() AS int)";
             var parameters = new DynamicParameters();
             parameters.Add("nombre", proveedor.nombre, DbType.String);
             parameters.Add("telefono", proveedor.telefono, DbType.String);
             parameters.Add("correo", proveedor.correo, DbType.String);
             parameters.Add("direccion", proveedor.direccion, DbType.String);
+            parameters.Add("Estado", true, DbType.Boolean);
             using (var connection = _context.CreateConnection())
             {
 
@@ -35,7 +36,8 @@ namespace CrediV1_Prueba.Services.Proveedores
                     nombre = proveedor.nombre,
                     telefono = proveedor.telefono,
                     correo = proveedor.correo,
-                    direccion = proveedor.direccion
+                    direccion = proveedor.direccion,
+                    Estado = proveedor.Estado
 
 
                 };
@@ -43,9 +45,18 @@ namespace CrediV1_Prueba.Services.Proveedores
             }
 
         }
+		public async Task DesactivarProveedor(int idProveedor)
+		{
+			var query = "UPDATE Proveedor SET Estado = 0 WHERE idProveedor = @idProveedor";
+			var parameters = new DynamicParameters();
+			parameters.Add("idProveedor", idProveedor, DbType.Int32);
 
-
-        public async Task<IEnumerable<Proveedor>> GetProveedores()
+			using (var connection = _context.CreateConnection())
+			{
+				await connection.ExecuteAsync(query, parameters);
+			}
+		}
+		public async Task<IEnumerable<Proveedor>> GetProveedores()
         {
 
             var query = "SELECT * FROM Proveedor";
@@ -83,15 +94,16 @@ namespace CrediV1_Prueba.Services.Proveedores
 			} 
 		}
 
-		public async Task UpdateProveedor(Proveedor proveedor)
+        public async Task UpdateProveedor(Proveedor proveedor)
         {
-            var query = "UPDATE Proveedor SET nombre = @nombre, telefono = @telefono, direccion = @direccion, correo = @correo WHERE idProveedor = @idProveedor";
+            var query = "UPDATE Proveedor SET nombre = @nombre, telefono = @telefono, direccion = @direccion, correo = @correo, Estado = @Estado WHERE idProveedor = @idProveedor";
             var parameters = new DynamicParameters();
             parameters.Add("idProveedor", proveedor.idProveedor, DbType.Int32);
             parameters.Add("nombre", proveedor.nombre, DbType.String);
             parameters.Add("telefono", proveedor.telefono, DbType.String);
             parameters.Add("direccion", proveedor.direccion, DbType.String);
             parameters.Add("correo", proveedor.correo, DbType.String);
+            parameters.Add("Estado", proveedor.Estado, DbType.Boolean); // Asegúrate de que Estado se maneje como booleano
 
             using (var connection = _context.CreateConnection())
             {

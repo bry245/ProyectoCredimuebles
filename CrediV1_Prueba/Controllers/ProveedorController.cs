@@ -93,5 +93,23 @@ namespace CrediV1_Prueba.Controllers
 				return StatusCode(500, "Error interno del servidor.");
 			}
 		}
+
+
+		[HttpPost]
+		public async Task<IActionResult> DesactivarProveedor([FromBody] int idProveedor)
+		{
+			try
+			{
+				await _proveedores.DesactivarProveedor(idProveedor);
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				// Registra el error para fines de depuración
+				Console.WriteLine($"Error al desactivar el proveedor: {ex.Message}");
+				return StatusCode(500, "Error interno del servidor.");
+			}
+		}
+
 	}
 }

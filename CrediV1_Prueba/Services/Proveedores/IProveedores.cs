@@ -16,6 +16,8 @@ namespace CrediV1_Prueba.Services.Proveedores
 
 		public Task UpdateProveedor(Proveedor proveedor);
 
+        public Task DesactivarProveedor(int idProveedor);
+
 
 
 	}

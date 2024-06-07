@@ -10,6 +10,8 @@
 
         public string telefono { get; set; }
 
+        public bool Estado { get; set; }
+
 
     }
 }
