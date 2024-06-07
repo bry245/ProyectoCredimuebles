@@ -1,21 +1,31 @@
-﻿using CrediV1_Prueba.Models;
+﻿using CrediV1_Prueba.Interfaces;
+using CrediV1_Prueba.Models;
 using CrediV1_Prueba.Services.Proveedores;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Controllers
+
 {
-	public class ProveedorController : Controller
+
+    [ResponseCache(NoStore = true, Duration = 0)]
+    public class ProveedorController : Controller
 	{
 
-		private readonly IProveedores _proveedores;
+        private readonly IHttpClientFactory _clientFactory;
+        private readonly IConfiguration _configuration;
+        private string _connection;
+        private readonly IProveedoresModel _proveedorModel;
 
-		public ProveedorController(IProveedores proveedorService)
-		{
-			_proveedores = proveedorService;
-		}
+        public ProveedorController(IHttpClientFactory clientFactory, IConfiguration configuration, IProveedoresModel proveedorModel)
+        {
+            _configuration = configuration;
+            _clientFactory = clientFactory;
+            _connection = _configuration.GetConnectionString("Connection");
+            _proveedorModel = proveedorModel;
+        }
 
 
-		[HttpGet]
+        [HttpGet]
 		public async Task<IActionResult> ListadoProveedor()
 		{
 

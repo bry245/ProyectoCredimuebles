@@ -1,4 +1,5 @@
 ﻿using CrediV1_Prueba.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,11 +14,13 @@ namespace CrediV1_Prueba.Controllers
             _logger = logger;
         }
         [HttpGet]
+        
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
         public IActionResult Privacy()
         {
             return View();

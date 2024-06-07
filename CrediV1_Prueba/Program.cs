@@ -1,13 +1,23 @@
-using CrediV1_Prueba.Context;
-using CrediV1_Prueba.Services.Proveedores;
+
+
+using CrediV1_Prueba.Interfaces;
+using CrediV1_Prueba.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddSingleton<DapperContext>();
-builder.Services.AddScoped<IProveedores, Proveedores>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<IUsuarioModel, UsuarioModel>();
+builder.Services.AddSingleton<IProveedoresModel, ProveedoresModel>();
+
+
+  
 
 
 
@@ -25,11 +35,19 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Inicio}/{action=InicioDeSesion}/{id?}");
+
+
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Inicio}/{action=InicioDeSesion}/{id?}");
+
 
 app.Run();
