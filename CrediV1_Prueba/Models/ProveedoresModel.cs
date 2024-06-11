@@ -7,6 +7,8 @@ using System.Configuration;
 using System.Net.Http;
 using CrediV1_Prueba.Interfaces;
 using CrediV1_Prueba.Entities;
+using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Models
 {
@@ -26,97 +28,92 @@ namespace CrediV1_Prueba.Models
                 _connection = _configuration.GetConnectionString("Connection");
             }
 
-        /*Método de ejemplo*/
-            public int AddProveedor(ProveedorEnt proveedor)
+
+		public async Task<bool> AddProveedor(ProveedorEnt proveedor)
+		{
+			var parameters = new DynamicParameters();
+			parameters.Add("nombre", proveedor.nombre, DbType.String);
+			parameters.Add("telefono", proveedor.telefono, DbType.String);
+			parameters.Add("correo", proveedor.correo, DbType.String);
+			parameters.Add("direccion", proveedor.direccion, DbType.String);
+			parameters.Add("Estado", proveedor.Estado, DbType.Boolean);
+
+			using (var connection = new SqlConnection(_connection))
+			{
+				var filasAfectadas = await connection.ExecuteAsync("AddProveedor", parameters, commandType: CommandType.StoredProcedure);
+
+				// Verificar si se insertó alguna fila
+				if (filasAfectadas > 0)
+				{
+					// Obtener el ID del proveedor insertado (opcional)
+					// var idProveedor = await connection.ExecuteScalarAsync<int>("SELECT CAST(SCOPE_IDENTITY() AS int)");
+
+					return true; // Se insertó correctamente
+				}
+				else
+				{
+					return false; // No se insertó ninguna fila
+				}
+			}
+		}
+
+
+
+
+
+
+		public async Task<IEnumerable<ProveedorEnt>> GetProveedores()
+        {
+            using (var connection = new SqlConnection(_connection))
             {
-                return 1;
+                var proveedores = await connection.QueryAsync<ProveedorEnt>("GetProveedores", commandType: CommandType.StoredProcedure);
+                return proveedores.ToList();
             }
-            /*
-            public async Task AddProveedores(Proveedor proveedor)
-            {
-
-                var query = "INSERT INTO Proveedor (nombre,telefono,correo,direccion) VALUES(@nombre,@telefono,@correo,@direccion)"
-                    + "SELECT CAST(SCOPE_IDENTITY() AS int)";
-                var parameters = new DynamicParameters();
-                parameters.Add("nombre", proveedor.nombre, DbType.String);
-                parameters.Add("telefono", proveedor.telefono, DbType.String);
-                parameters.Add("correo", proveedor.correo, DbType.String);
-                parameters.Add("direccion", proveedor.direccion, DbType.String);
-                using (var connection = _context.CreateConnection())
-                {
-
-                    var id = await connection.QuerySingleAsync<int>(query, parameters);
-
-                    var createdProveedor = new Proveedor
-                    {
-                        idProveedor = id,
-                        nombre = proveedor.nombre,
-                        telefono = proveedor.telefono,
-                        correo = proveedor.correo,
-                        direccion = proveedor.direccion
-
-
-                    };
-
-                }
-
-            }
-
-
-            public async Task<IEnumerable<Proveedor>> GetProveedores()
-            {
-
-                var query = "SELECT * FROM Proveedor";
-                using (var connection = _context.CreateConnection())
-                {
-                    var proveedores = await connection.QueryAsync<Proveedor>(query);
-                    return proveedores.ToList();
-                }
-
-            }
-
-            public async Task<Proveedor> GetProveedoresID(int idProveedor)
-            {
-                var query = "SELECT * FROM Proveedor WHERE idProveedor = @idProveedor";
-                using (var connection = _context.CreateConnection())
-                {
-                    var parameters = new DynamicParameters();
-                    parameters.Add("idProveedor", idProveedor, DbType.Int32);
-
-                    var proveedor = await connection.QuerySingleOrDefaultAsync<Proveedor>(query, parameters);
-                    return proveedor;
-                }
-            }
-
-            public async Task<IEnumerable<Proveedor>> GetProveedoresNombre(string nombre)
-            {
-                var query = "SELECT * FROM Proveedor WHERE nombre LIKE @nombre + '%'";
-                using (var connection = _context.CreateConnection())
-                {
-                    var parameters = new DynamicParameters();
-                    parameters.Add("{", nombre, DbType.String);
-
-                    var proveedor = await connection.QueryAsync<Proveedor>(query, parameters);
-                    return proveedor.ToList();
-                }
-            }
-
-            public async Task UpdateProveedor(Proveedor proveedor)
-            {
-                var query = "UPDATE Proveedor SET nombre = @nombre, telefono = @telefono, direccion = @direccion, correo = @correo WHERE idProveedor = @idProveedor";
-                var parameters = new DynamicParameters();
-                parameters.Add("idProveedor", proveedor.idProveedor, DbType.Int32);
-                parameters.Add("nombre", proveedor.nombre, DbType.String);
-                parameters.Add("telefono", proveedor.telefono, DbType.String);
-                parameters.Add("direccion", proveedor.direccion, DbType.String);
-                parameters.Add("correo", proveedor.correo, DbType.String);
-
-                using (var connection = _context.CreateConnection())
-                {
-                    await connection.ExecuteAsync(query, parameters);
-                }
-            }*/
-
         }
-    }
+
+        public async Task<ProveedorEnt> GetProveedoresID(int idProveedor)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("idProveedor", idProveedor, DbType.Int32);
+
+            using (var connection = new SqlConnection(_connection))
+            {
+                var proveedor = await connection.QuerySingleOrDefaultAsync<ProveedorEnt>("GetProveedorByID", parameters, commandType: CommandType.StoredProcedure);
+                return proveedor;
+            }
+        }
+
+        public async Task UpdateProveedor(ProveedorEnt proveedor)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@idProveedor", proveedor.idProveedor, DbType.Int32);
+            parameters.Add("@nombre", proveedor.nombre, DbType.String);
+            parameters.Add("@telefono", proveedor.telefono, DbType.String);
+            parameters.Add("@correo", proveedor.correo, DbType.String);
+            parameters.Add("@direccion", proveedor.direccion, DbType.String);
+            parameters.Add("@Estado", proveedor.Estado, DbType.Boolean);
+
+            using (var connection = new SqlConnection(_connection))
+            {
+                await connection.ExecuteAsync("UpdateProveedorBD", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+		public async Task DesactivarProveedor(ProveedorEnt proveedor)
+		{
+			var parameters = new DynamicParameters();
+			parameters.Add("idProveedor", proveedor.idProveedor, DbType.Int32);
+
+			using (var connection = new SqlConnection(_connection))
+			{
+				await connection.ExecuteAsync("DesactivarActivarProveedorBD", parameters, commandType: CommandType.StoredProcedure);
+			}
+		}
+
+		public Task SearchProveedorByEmail(ProveedorEnt proveedor)
+		{
+			throw new NotImplementedException();
+		}
+	}
+}
 

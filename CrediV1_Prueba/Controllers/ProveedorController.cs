@@ -1,6 +1,7 @@
-﻿using CrediV1_Prueba.Interfaces;
+﻿using CrediV1_Prueba.Entities;
+using CrediV1_Prueba.Interfaces;
 using CrediV1_Prueba.Models;
-using CrediV1_Prueba.Services.Proveedores;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Controllers
@@ -31,7 +32,7 @@ namespace CrediV1_Prueba.Controllers
 
 			try
 			{
-				var proveedores = await _proveedores.GetProveedores();
+				var proveedores = await _proveedorModel.GetProveedores();
 
 				return View(proveedores);
 
@@ -54,13 +55,22 @@ namespace CrediV1_Prueba.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> GuardarProveedor([FromBody] Proveedor proveedor)
+		public async Task<IActionResult> GuardarProveedor([FromBody] ProveedorEnt proveedor)
 		{
 
 			try
 			{
-				await _proveedores.AddProveedores(proveedor);
-				return Ok();
+				var resultado =await _proveedorModel.AddProveedor(proveedor);
+
+				if (resultado)
+				{
+					return Ok();
+				}
+				else
+				{
+					return BadRequest();
+				}
+				
 
 			}
 			catch (Exception ex)
@@ -77,14 +87,13 @@ namespace CrediV1_Prueba.Controllers
 		[HttpGet]
 		public async Task<IActionResult> EditarProveedor(int Proveedor)
 		{
-			// Asegúrate de que el parámetro 'id' coincide con el nombre del parámetro en tu vista
-			var proveedorEditar = await _proveedores.GetProveedoresID(Proveedor);
+			var proveedorEditar = await _proveedorModel.GetProveedoresID(Proveedor);
 
 			return View(proveedorEditar); // Pasa el proveedor a la vista
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> GuardarEditarProveedor([FromBody] Proveedor proveedor)
+		public async Task<IActionResult> GuardarEditarProveedor([FromBody] ProveedorEnt proveedor)
 		{
 			if (proveedor == null || !ModelState.IsValid)
 			{
@@ -93,7 +102,8 @@ namespace CrediV1_Prueba.Controllers
 
 			try
 			{
-				await _proveedores.UpdateProveedor(proveedor);
+				Console.WriteLine("PROVEE",proveedor.idProveedor);
+				await _proveedorModel.UpdateProveedor(proveedor);
 				return Ok();
 			}
 			catch (Exception ex)
@@ -104,13 +114,12 @@ namespace CrediV1_Prueba.Controllers
 			}
 		}
 
-
 		[HttpPost]
-		public async Task<IActionResult> DesactivarProveedor([FromBody] int idProveedor)
+		public async Task<IActionResult> DesactivarProveedor([FromBody] ProveedorEnt proveedor)
 		{
 			try
 			{
-				await _proveedores.DesactivarProveedor(idProveedor);
+				await _proveedorModel.DesactivarProveedor(proveedor);
 				return Ok();
 			}
 			catch (Exception ex)

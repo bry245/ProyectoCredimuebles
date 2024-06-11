@@ -1,4 +1,4 @@
-﻿@model CrediV1_Prueba.Models.Proveedor
+﻿@model CrediV1_Prueba.Entities.ProveedorEnt
 @{
     ViewData["Title"] = "EditarProveedor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,7 +24,6 @@
                         <div class="form-outline mb-5 mb-xl-4">
                             <select id="Estado" name="Estado" class="form-control form-control-lg">
                                 <option value="@Model.Estado" selected>
-                                    <!-- Aquí puedes agregar lógica para mostrar el estado actual, por ejemplo: -->
                                     @if (@Model.Estado)
                                     {
                                         <text>Activo</text>
@@ -46,8 +45,6 @@
                         <div class="form-outline mb-5 mb-xl-4">
                             <input type="text" id="direccion" name="direccion" value="@Model.direccion" class="form-control form-control-lg" placeholder="Dirección" />
                         </div>
-
-                       
                     </div>
                     <div class="col-lg-8 col-xl-6">
                         <button class="btn btn-danger" type="button" id="guardar">Guardar</button>
@@ -105,7 +102,7 @@
         const direccion = document.getElementById('direccion').value;
         const Estado = document.getElementById('Estado').value === "true";
 
-        const data = {
+        const proveedor = {
             idProveedor,
             nombre,
             telefono,
@@ -120,7 +117,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(proveedor)
             });
 
             if (response.ok) {
@@ -146,11 +143,4 @@
             });
         }
     });
-
-
-
-
-
-
-
 </script>
