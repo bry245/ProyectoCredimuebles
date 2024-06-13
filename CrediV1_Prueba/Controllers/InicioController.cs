@@ -30,15 +30,36 @@ namespace CrediV1_Prueba.Controllers
 
 
 
-        [HttpGet]
-        public async Task<IActionResult> InicioDeSesion()
-        {
-            return View();
-        }
+		[HttpGet]
+		public async Task<IActionResult> InicioDeSesion()
+		{
+			var currentDate = DateTime.Now;
+			ViewData["CurrentDate"] = currentDate.ToString("dd/MM/yyyy");
+
+			string apiKey = "565e57a6f4ee1cdf4a1fb330";
+			string baseCurrency = "USD";
+			string url = $"https://v6.exchangerate-api.com/v6/{apiKey}/latest/{baseCurrency}";
+
+			var client = _clientFactory.CreateClient();
+			var response = await client.GetAsync("https://api.exchangerate-api.com/v4/latest/USD");
+
+			if (response.IsSuccessStatusCode)
+			{
+				var data = await response.Content.ReadAsAsync<ExchangeRateResponse>();
+				var exchangeRate = data.Rates.CRC; // Colones (CRC)
+				ViewData["ExchangeRate"] = exchangeRate;
+				return View();
+			}
+			else
+			{
+				ViewData["ExchangeRate"] = "Error al obtener el tipo de cambio";
+				return View();
+			}
+		}
 
 
-        [HttpPost]
-        
+		        [HttpPost]
+
         public IActionResult IniciarSesion(UsuarioEnt usuario)
         {
             var dato = _usuarioModel.IniciarSesion(usuario);
@@ -52,8 +73,11 @@ namespace CrediV1_Prueba.Controllers
                 return RedirectToAction("InicioDeSesion","Inicio");
             }
 
-           
-        }
+
+        }        [HttpPost]
+
+
+        
 
 
 
