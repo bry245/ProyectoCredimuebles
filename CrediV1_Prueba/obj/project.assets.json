@@ -7024,19 +7024,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jason\\.nuget\\packages\\": {}
+    "C:\\Users\\vinda\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "projectUniqueName": "C:\\Users\\vinda\\OneDrive\\Escritorio\\I Cuatri\\I Cuatri 2024\\Analisis y modelado\\ProyectoCredimuebles\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
       "projectName": "CrediV1_Prueba",
-      "projectPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-      "packagesPath": "C:\\Users\\jason\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
+      "projectPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\I Cuatri\\I Cuatri 2024\\Analisis y modelado\\ProyectoCredimuebles\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "packagesPath": "C:\\Users\\vinda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\I Cuatri\\I Cuatri 2024\\Analisis y modelado\\ProyectoCredimuebles\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vinda\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7056,6 +7056,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -7106,7 +7111,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

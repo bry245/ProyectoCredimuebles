@@ -1,7 +1,6 @@
-﻿using CrediV1_Prueba.Entities;
-using CrediV1_Prueba.Interfaces;
+﻿using CrediV1_Prueba.Interfaces;
 using CrediV1_Prueba.Models;
-
+using CrediV1_Prueba.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Controllers
@@ -29,17 +28,14 @@ namespace CrediV1_Prueba.Controllers
         [HttpGet]
 		public async Task<IActionResult> ListadoProveedor()
 		{
-
 			try
 			{
 				var proveedores = await _proveedorModel.GetProveedores();
 
 				return View(proveedores);
-
 			}
 			catch (Exception ex)
 			{
-
 			}
 			return View();
 		}
@@ -47,32 +43,16 @@ namespace CrediV1_Prueba.Controllers
 		public IActionResult AgregarProveedor()
 		{
 
-
-
 			return View();
-
-
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> GuardarProveedor([FromBody] ProveedorEnt proveedor)
 		{
-
 			try
 			{
-				proveedor.Estado = true;
-				var resultado =await _proveedorModel.AddProveedor(proveedor);
-
-				if (resultado)
-				{
-					return Ok();
-				}
-				else
-				{
-					return BadRequest();
-				}
-				
-
+				await _proveedorModel.AddProveedor(proveedor);
+				return RedirectToAction("ListadoProveedor", "Proveedor");
 			}
 			catch (Exception ex)
 			{
@@ -83,11 +63,10 @@ namespace CrediV1_Prueba.Controllers
 
 		}
 
-
-
 		[HttpGet]
 		public async Task<IActionResult> EditarProveedor(int Proveedor)
 		{
+			
 			var proveedorEditar = await _proveedorModel.GetProveedoresID(Proveedor);
 
 			return View(proveedorEditar); // Pasa el proveedor a la vista
@@ -100,10 +79,9 @@ namespace CrediV1_Prueba.Controllers
 			{
 				return BadRequest("Datos inválidos.");
 			}
-
+		
 			try
 			{
-				Console.WriteLine("PROVEE",proveedor.idProveedor);
 				await _proveedorModel.UpdateProveedor(proveedor);
 				return Ok();
 			}
@@ -115,12 +93,13 @@ namespace CrediV1_Prueba.Controllers
 			}
 		}
 
+
 		[HttpPost]
-		public async Task<IActionResult> DesactivarProveedor([FromBody] ProveedorEnt proveedor)
+		public async Task<IActionResult> DesactivarProveedor([FromBody] ProveedorEnt idProveedor)
 		{
 			try
 			{
-				await _proveedorModel.DesactivarProveedor(proveedor);
+				await _proveedorModel.DesactivarProveedor(idProveedor);
 				return Ok();
 			}
 			catch (Exception ex)

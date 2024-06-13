@@ -1,0 +1,57 @@
+﻿@model CrediV1_Prueba.Entities.UsuarioEnt
+
+@{
+    ViewData["Title"] = "CambiarContrasenna";
+    Layout = "~/Views/Shared/Layout_login.cshtml";
+}
+<div class="why-choose-section" style="padding: 6rm">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-10 login-bg" style="text-align:center">
+                <img src="~/logoc2.PNG" alt="100" width="200px" align="middle" />
+                <h2 class="section-title">&nbsp;</h2>
+                <h3 class="section-title">Recuperar Contraseña</h3>
+
+                <div class="row my-5" style="justify-content:center">
+                    <div class="col-12 col-md-6">
+                        <h4 class="section-title">Ingrese su correo electrónico</h4>
+                        @using (Html.BeginForm("ActualizarContrasenna", "Inicio", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(m => m.idUsuario)
+
+                            <div class="row">
+                                <div class="form-group py-2">
+                                    <div class="input-login">
+                                        <span class="fa fa-envelope p-2"></span>
+                                        @Html.TextBoxFor(m => m.correo, new { @type = "email", @class = "input-l", @placeholder = "Correo" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group py-2">
+                                    <div class="input-login">
+                                        <span class="fa fa-user p-2"></span>
+                                        @Html.TextBoxFor(m => m.Usuario, new { @type = "text", @class = "input-l", @placeholder = "Usuario" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group py-2">
+                                    <div class="input-login">
+                                        <span class="fa fa-envelope p-2"></span>
+                                        @Html.TextBoxFor(m => m.contrasenna, new { @type = "password", @class = "input-l", @placeholder = "Nueva Contraseña" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger">Cambiar Contraseña <i class=" fa-solid fa-arrow-right-to-bracket"> </i></button>
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

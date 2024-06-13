@@ -23,8 +23,8 @@
                         </div>
                         <div class="form-outline mb-5 mb-xl-4">
                             <select id="Estado" name="Estado" class="form-control form-control-lg">
-                                <option value="@Model.Estado" selected>
-                                    @if (@Model.Estado)
+                                <option value="@Model.estado" selected>
+                                    @if (@Model.estado)
                                     {
                                         <text>Activo</text>
                                     }
@@ -59,38 +59,6 @@
 </div>
 
 <hr />
-<div class="product-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-                <h2 class="mb-4 section-title">Registrar Cliente</h2>
-                <i class="fa fa-circle-info"></i>
-                <p class="mb-4">Ingrese los datos solicitados para registrar un nuevo cliente</p>
-                <p><a href="shop.html" class="btn">Explore</a></p>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                <a class="product-item" href="cart.html">
-                    <img src="~/images/product-2.png" class="img-fluid product-thumbnail">
-                    <h3 class="product-title">Kruzo Aero Chair</h3>
-                    <strong class="product-price">$78.00</strong>
-                    <span class="icon-cross">
-                        <img src="~/images/cross.svg" class="img-fluid">
-                    </span>
-                </a>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                <a class="product-item" href="cart.html">
-                    <img src="~/images/product-3.png" class="img-fluid product-thumbnail">
-                    <h3 class="product-title">Ergonomic Chair</h3>
-                    <strong class="product-price">$43.00</strong>
-                    <span class="icon-cross">
-                        <img src="~/images/cross.svg" class="img-fluid">
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -100,7 +68,7 @@
         const telefono = document.getElementById('telefono').value;
         const correo = document.getElementById('correo').value;
         const direccion = document.getElementById('direccion').value;
-        const Estado = document.getElementById('Estado').value === "true";
+        const Estado = document.getElementById('estado').value === "true";
 
         const proveedor = {
             idProveedor,

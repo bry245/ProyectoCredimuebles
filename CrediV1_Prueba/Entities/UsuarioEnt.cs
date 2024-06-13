@@ -16,6 +16,11 @@ namespace CrediV1_Prueba.Entities
         public string direccion { get; set; }
         public bool estado { get; set; }
         public long idRol { get; set; }
+        public string idEncriptado { get; set; }
+        public string cedula { get; set; }
+        public string descripcionRol { get; set; }
    
+        public bool deseaInactivar { get; set; }
+        public bool deseaActivar{ get; set; }
     }
 }

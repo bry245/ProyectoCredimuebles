@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CrediV1_Prueba.Entities.UsuarioEnt
+@{
     ViewData["Title"] = "ListaClientes";
 
 }
@@ -30,10 +31,9 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Apellidos</th>
                 <th>Correo</th>
-                <th>Telèfono</th>
-                <th>Direcciòn</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
                 <th>Inactivar</th>
                 <th>Actualizar</th>
                 <th>Notificar</th>
@@ -41,39 +41,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-                <td>74410784</td>
-                <td>Costa Rica</td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+            @foreach (var it in ViewBag.Clientes)
+            {
+                @if (@it.descripcionRol == "Cliente")
+                {
+                    <tr>
+                        <td>@it.nombreCompleto</td>
+                        <td>@it.correo</td>
+                        <td>@it.telefono</td>
+                        <td>@it.cedula</td>
+                        <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
+                        <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
+                        <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
 
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-                <td>74410784</td>
-                <td>Costa Rica</td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
-
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-                <td>74410784</td>
-                <td>Costa Rica</td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
-
-            </tr>
+                    </tr>
+                }
+            }
+           
+           
         </tbody>
     </table>
     <nav aria-label="Page navigation example" style="background-color:white">
@@ -121,7 +106,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label class="text-black" for="lname">Cedula</label>
+                                    <label class="text-black" for="lname">Cédula</label>
                                     <input type="text" class="form-control input-form " id="lname">
                                 </div>
                             </div>
@@ -135,7 +120,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label class="text-black" for="phone">Telefono</label>
+                                    <label class="text-black" for="phone">Teléfono</label>
                                     <input type="number" class="form-control input-form" id="phone">
                                 </div>
                             </div>
@@ -159,63 +144,78 @@
 
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-lg-4" style="background-color:white">
+            <div class="col-lg-3" style="background-color:white">
+                @{
+                    var message = TempData["Mensaje"] as string;
+                }
+                @if (!string.IsNullOrEmpty(message))
+                {
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <b>@message</b>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
 
                 <h3>Registrar Empleado</h3>
-                <form>
-
+                @using(Html.BeginForm("RegistrarUsuario","Usuario",FormMethod.Post))
+                
+                {
                     <div>
                         <div class="form-group">
                             <label class="text-black" for="fname">Nombre</label>
-                            <input type="text" class="form-control input-form" id="fname">
+                            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control input-form",@type="text"})
                         </div>
                     </div>
                     <div>
                         <div class="form-group">
                             <label class="text-black" for="lname">Apellidos</label>
-                            <input type="text" class="form-control input-form" id="lname">
+                            @Html.TextBoxFor(m => m.apellidos, new { @class = "form-control input-form", @type = "text" })
+
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label class="text-black">Rol</label>
-                            <select class="form-group form-control input-form">
-                                <option value="">Seleccionar opción</option>
-                                <option value="opcion1">Administrador</option>
-                                <option value="opcion2">Vendedor</option>
-                                <option value="opcion3">Gerente</option>
-                                <!-- Agrega más opciones según sea necesario -->
-                            </select>
+                    <div>
+                        <div class="form-group">
+                            <label class="text-black" for="lname">Cedula</label>
+                            @Html.TextBoxFor(m=>m.cedula , new { @class = "form-control input-form", @type = "text" })
 
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <label class="text-black">Rol</label>
+                            @Html.DropDownListFor(m => m.idRol, ViewBag.Roles as List<SelectListItem>, new { @style = "color:black", @class = "form-group form-control input-form" })
+
+
+                        </div>
+                        <div class="col-sm-5">
                             <div class="form-group">
                                 <label class="text-black" for="phone">Teléfono</label>
-                                <input type="num" class="form-control input-form" id="phone">
+                                @Html.TextBoxFor(m => m.telefono, new { @class = "form-control input-form", @pattern = "[0-9]{8}",@maxlength = "8" })
+
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="text-black" for="email">Correo</label>
-                        <input type="email" class="form-control input-form" id="email">
+                        @Html.TextBoxFor(m => m.correo, new { @class = "form-control input-form", @type = "email" })
+
                     </div>
                     <div class="form-group mb-5">
                         <label class="text-black" for="message">Dirección</label>
-                        <textarea name="message" class="form-control input-form" id="message" cols="30" rows="3"></textarea>
+                        @Html.TextAreaFor(m => m.direccion, new { @class = "form-control input-form", @type = "text", @cols="30",@rows="3"})
                     </div>
-                    <p><a href="shop.html" class="btn">Agregar</a></p>
+                    <p><button type="submit" class="btn">Agregar</button> </p>
 
-                </form>
+                }
             </div>
 
-            <div class="col-lg-8" style="background-color:white">
+            <div class="col-lg-9" style="background-color:white">
                 <div class="container">
                     <h2>Lista De Empleados</h2>
 
                     <div class="container mt-4">
                         <div class="row justify-content-end">
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <form action="#" method="GET" class="form-inline">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
@@ -227,38 +227,34 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-hover" style="text-align:center">
+                    <table class="table table-hover" style="text-align:center" id="tabla-Usuarios">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Apellidos</th>
                                 <th>Correo</th>
                                 <th>Telèfono</th>
                                 <th>Rol</th>
+                                @if (Context.Session.GetString("Rol") == "Gerente")
+                                    {
                                 <th>Actualizar</th>
-
+                                    }
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>74410784</td>
-                                <td>Costa Rica</td>
-                                <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-
-                            </tr>
-                            <tr>
-                                <td>Mary</td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
-                            </tr>
+                            @foreach(var item in ViewBag.Usuarios)
+                            {
+                                <tr>
+                                    <td>@item.nombreCompleto</td>
+                                    <td>@item.correo</td>
+                                    <td>@item.telefono</td>
+                                    <td>@item.descripcionRol</td>
+                                    @if (Context.Session.GetString("Rol") == "Gerente")
+                                    {
+                                    <td style="text-align:center"><a href="@Url.Action("ActualizarUsuario","Usuario",new{q=item.idUsuario})"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></a></td>
+                                    }
+                                </tr>
+                            }
+                            
 
                         </tbody>
                     </table>
