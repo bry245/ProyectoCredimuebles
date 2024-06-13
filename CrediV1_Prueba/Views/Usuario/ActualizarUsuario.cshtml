@@ -1,0 +1,95 @@
+﻿@model CrediV1_Prueba.Entities.UsuarioEnt
+@{
+    ViewData["Title"] = "ActualizarUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="product-section">
+    <div class="container">
+        <div class="row">
+
+            <!--    Actualizar Usuario -->
+            <div class="col-md-12 col-lg-3 mt-0 mb-lg-0">
+                <h2 class="mb-4 section-title">Actulizar Usuario</h2>
+                <i class="fa  fa-circle-info"></i>
+                <p class="mb-3">
+                    Ingrese los datos por modificar de @Model.nombre
+                </p>
+
+            </div>
+
+            <div class="col-12 col-md-4 col-lg mb-5 mb-md-0 ">
+                @using (Html.BeginForm("ActualizarUsuario", "Usuario", FormMethod.Post))
+                {
+
+                    @Html.HiddenFor(m => m.idUsuario)
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group ">
+                                <label class="text-black" for="fname">Nombre</label>
+                                @Html.TextBoxFor(m => m.nombre, new { @type = "text", @class = "form-control input-form" })
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label class="text-black" for="lname">Apellidos</label>
+                                @Html.TextBoxFor(m => m.apellidos, new { @type = "text", @class = "form-control input-form" })
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label class="text-black" for="lname">Cédula</label>
+                                @Html.TextBoxFor(m => m.cedula, new { @type = "text", @class = "form-control input-form" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-black" for="email">Correo</label>
+                                @Html.TextBoxFor(m => m.correo, new { @type = "email", @class = "form-control input-form" })
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-black" for="phone">Teléfono</label>
+                                @Html.TextBoxFor(m => m.telefono, new { @type = "tel", @maxlength = "8", @class = "form-control input-form" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group ">
+                                <label class="text-black" for="fname">Rol</label>
+                                @Html.DropDownListFor(m => m.idRol, ViewBag.Roles as List<SelectListItem>, new { @style = "color:black", @class = "form-group form-control input-form" })
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group ">
+                                <label class="text-black" for="fname">Cambiar Estado </label>
+                                @if (Model.estado == true)
+                                {
+                                    <a href="@Url.Action("CambiarEstadoUsuario","Usuario",new{q=Model.idUsuario})" class="btn form-group form-control">Inactivar</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("CambiarEstadoUsuario","Usuario",new{q=Model.idUsuario})" class="btn form-group form-control">Activar</a>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mb-5">
+                        <label class="text-black" for="message">Dirección</label>
+                        @Html.TextAreaFor(m => m.direccion, new { @class = "form-control input-form", @cols = "30", @rows = "5" })
+                    </div>
+                    <button type="submit" class="btn">Guardar</button>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

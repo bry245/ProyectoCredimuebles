@@ -13,6 +13,15 @@
     <None Remove="wwwroot\js\Functions\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Others\LogoC2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Others\LogoC2.PNG">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />

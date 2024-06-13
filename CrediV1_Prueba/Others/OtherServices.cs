@@ -1,4 +1,6 @@
 ﻿using CrediV1_Prueba.Entities;
+using CrediV1_Prueba.Interfaces;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -7,7 +9,7 @@ namespace CrediV1_Prueba.Others
 {
 
 
-    public class OtherServices
+    public class OtherServices: IOtherServices
     {
         private readonly IConfiguration _configuration;
         private IHostEnvironment _hostingEnvironment; //para saber ubicación de app
@@ -25,8 +27,15 @@ namespace CrediV1_Prueba.Others
             string rutaArchivo = Path.Combine(_hostingEnvironment.ContentRootPath, "Others\\RecuperarContrasenna.html");
             string htmlArchivo = System.IO.File.ReadAllText(rutaArchivo);
             htmlArchivo = htmlArchivo.Replace("@@Nombre", entidad.nombre);
-          //  htmlArchivo = htmlArchivo.Replace("@@ClaveTemp", contrasennaTemp);
-            htmlArchivo = htmlArchivo.Replace("@@Link", "https://localhost:7044/Login/CambiarContrasennaTemp?q=" + Encrypt(entidad.idUsuario.ToString()));
+            htmlArchivo = htmlArchivo.Replace("@@Link", "https://localhost:7001/Inicio/CambiarContrasenna?q=" + Encrypt(entidad.idUsuario.ToString()));
+
+            return htmlArchivo;
+        }
+        public string GenerarHtmlBienvenida(UsuarioEnt entidad)
+        {
+            string rutaArchivo = Path.Combine(_hostingEnvironment.ContentRootPath, "Others\\Bienvenida.html");
+            string htmlArchivo = System.IO.File.ReadAllText(rutaArchivo);
+            htmlArchivo = htmlArchivo.Replace("@@ClaveTemporal", entidad.contrasenna);
 
             return htmlArchivo;
         }
@@ -84,6 +93,27 @@ namespace CrediV1_Prueba.Others
             }
         }
 
+        public void EnviarCorreo(string Destinatario, string Asunto, string Mensaje)
+        {
+            string correoSMTP = _configuration.GetSection("Correo:correoSMTP").Value;
+            string claveSMTP = _configuration.GetSection("Correo:claveSMTP").Value;
+
+            MailMessage msg = new MailMessage();
+            msg.To.Add(new MailAddress(Destinatario));
+            msg.From = new MailAddress(correoSMTP);
+            msg.Subject = Asunto;
+            msg.Body = Mensaje;
+            msg.IsBodyHtml = true;
+
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential(correoSMTP, claveSMTP);
+            client.Port = 587;
+            client.Host = "smtp.office365.com";
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Send(msg);
+        }
 
 
 

@@ -43,7 +43,7 @@
 						<td>@proveedor.telefono</td>
 						<td>@proveedor.direccion</td>
 						<td>@proveedor.correo</td>
-						@if (proveedor.Estado)
+						@if (proveedor.estado)
 						{
 							<td>Activo</td>
 						}
@@ -53,7 +53,7 @@
 						}
 						<td style="text-align:center">
 
-							@if (proveedor.Estado)
+							@if (proveedor.estado)
 							{
 								<button class="btn btn-danger confirmButtonInactivar"
 										data-id="@proveedor.idProveedor"
