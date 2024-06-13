@@ -64,7 +64,7 @@ namespace CrediV1_Prueba.Controllers
         {
             var dato = _usuarioModel.IniciarSesion(usuario);
             if (dato!= null){
-                HttpContext.Session.SetString("NombreUsuario", dato.Usuario);
+                HttpContext.Session.SetString("NombreUsuario", dato.nombre);
                 return RedirectToAction("Index", "Home");
             }
             else

@@ -60,6 +60,7 @@ namespace CrediV1_Prueba.Controllers
 
 			try
 			{
+				proveedor.Estado = true;
 				var resultado =await _proveedorModel.AddProveedor(proveedor);
 
 				if (resultado)
