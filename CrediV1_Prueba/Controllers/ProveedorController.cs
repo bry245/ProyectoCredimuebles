@@ -82,6 +82,7 @@ namespace CrediV1_Prueba.Controllers
 		
 			try
 			{
+				proveedor.estado = true;
 				await _proveedorModel.UpdateProveedor(proveedor);
 				return Ok();
 			}

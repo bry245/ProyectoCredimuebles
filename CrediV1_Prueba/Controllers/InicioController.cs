@@ -58,9 +58,9 @@ namespace CrediV1_Prueba.Controllers
 		}
 
 
-		        [HttpPost]
 
-        public IActionResult IniciarSesion(UsuarioEnt usuario)
+		[HttpPost]
+		public IActionResult IniciarSesion(UsuarioEnt usuario)
         {
             var dato = _usuarioModel.IniciarSesion(usuario);
             if (dato!= null){
@@ -74,7 +74,7 @@ namespace CrediV1_Prueba.Controllers
             }
 
 
-        }        [HttpPost]
+        }        
 
 
         

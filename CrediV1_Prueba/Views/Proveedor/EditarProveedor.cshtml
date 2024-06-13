@@ -24,7 +24,7 @@
                         <div class="form-outline mb-5 mb-xl-4">
                             <select id="Estado" name="Estado" class="form-control form-control-lg">
                                 <option value="@Model.estado" selected>
-                                    @if (@Model.estado)
+                                    @if (Model.estado)
                                     {
                                         <text>Activo</text>
                                     }
@@ -68,7 +68,7 @@
         const telefono = document.getElementById('telefono').value;
         const correo = document.getElementById('correo').value;
         const direccion = document.getElementById('direccion').value;
-        const Estado = document.getElementById('estado').value === "true";
+        const Estado = document.getElementById('Estado').value === "true";
 
         const proveedor = {
             idProveedor,
