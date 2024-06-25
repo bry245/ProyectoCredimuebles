@@ -1,111 +1,137 @@
-﻿
+﻿@model IEnumerable<CrediV1_Prueba.Entities.ProductoEnt>
 @{
     ViewData["Title"] = "ListadoProducto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
-
 <div class="container">
+    <div class="container mt-4">
+        <a href="@Url.Action("AgregarProducto", "Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Proveedor</i> </a>
+        <div class="row justify-content-end">
+            <div class="col-md-6">
+                <form action="#" method="GET" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        </div>
+                        <button class="btn" type="submit" id="button-addon2"> <i class="fa fa-search"></i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-	<div class="container mt-4">
+    <div class="container mt-4">
+        <table class="table table-hover" style="text-align:center">
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Costo</th>
+                    <th>Cantidad Stock</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <input type="hidden" name="idProducto" id="idProducto" value="@producto.idProducto" />
+                        <td>@producto.nombre</td>
+                        <td>@producto.costo</td>
+                        <td>@producto.cantidadStock</td>
 
-
-
-
-		<a href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
-		<div class="row justify-content-end">
-			<div class="col-md-6">
-				<form action="#" method="GET" class="form-inline">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
-						<div class="input-group-append">
-						</div>
-						<button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i> </button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<table<!-- Tabla de productos -->
-<div class="container mt-4">
-	<table class="table table-hover" style="text-align:center">
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>Descripción</th>
-				<th>Precio</th>
-				<th>Categoría</th>
-				<th>Proveedor</th>
-				<th>Inactivar</th>
-				<th>Actualizar</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Producto 1</td>
-				<td>Descripción del producto 1</td>
-				<td>$50.00</td>
-				<td>Categoría 1</td>
-				<td>Proveedor 1</td>
-				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
-				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
-			</tr>
-			<tr>
-				<td>Producto 2</td>
-				<td>Descripción del producto 2</td>
-				<td>$40.00</td>
-				<td>Categoría 2</td>
-				<td>Proveedor 2</td>
-				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
-				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
-			</tr>
-			<tr>
-				<td>Producto 3</td>
-				<td>Descripción del producto 3</td>
-				<td>$60.00</td>
-				<td>Categoría 3</td>
-				<td>Proveedor 3</td>
-				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
-				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
-			</tr>
-		</tbody>
-	</table>
+                        @if (producto.estado)
+                        {
+                            <td>Activo</td>
+                            <td style="text-align:center">
+                                <button class="btn btn-danger confirmButtonInactivar" data-id="@producto.idProducto">Inactivar</button>
+                                <a class="btn btn-danger" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>Inactivo</td>
+                            <td style="text-align:center">
+                                <button class="btn btn-danger confirmButtonInactivar" data-id="@producto.idProducto">Activar</button>
+                                <a class="btn btn-danger" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example" style="background-color:white">
+        <ul class="pagination justify-content-center" style="background-color:#dce5e4">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
 </div>
- <nav aria-label="Page navigation example" style="background-color:white">
-		<ul class="pagination justify-content-center" style="background-color:#dce5e4">
-			<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Siguiente</a>
-			</li>
-		</ul>
-	</nav>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.querySelectorAll('.confirmButtonInactivar').forEach(button => {
+        button.addEventListener('click', async function () {
+            let idProducto = this.getAttribute('data-id');
 
+            const data = {
+                idProducto: parseInt(idProducto)
+            };
 
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Esto desactivará/activará el producto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#c31e1e',
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch('@Url.Action("DesactivarProducto", "Inventario")', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
 
-
-
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        if (response.ok) {
+                            const mensaje = await response.text();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Acción Realizada',
+                                text: mensaje
+                            }).then(() => {
+                                window.location.href = '@Url.Action("ListadoProducto", "Inventario")';
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un problema al cambiar el estado del producto.'
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al cambiar el estado del producto.'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
