@@ -6,6 +6,7 @@ namespace CrediV1_Prueba.Controllers
     {
         public IActionResult Index()
         {
+            //codigo de inventario
             return View();
         }
 
