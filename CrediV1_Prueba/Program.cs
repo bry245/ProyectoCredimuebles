@@ -16,6 +16,8 @@ builder.Services.AddSession();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IUsuarioModel, UsuarioModel>();
 builder.Services.AddSingleton<IProveedoresModel, ProveedoresModel>();
+builder.Services.AddSingleton<IProducto, ProductosModel>();
+builder.Services.AddSingleton<ICategoria, CategoriaModel>();
 builder.Services.AddSingleton<IOtherServices, OtherServices>();
 
 

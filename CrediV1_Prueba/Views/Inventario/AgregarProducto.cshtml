@@ -1,123 +1,154 @@
-﻿@{
-	ViewData["Title"] = "AgregarProducto";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+﻿
+
+@{
+    ViewData["Title"] = "Agregar Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CrediV1_Prueba.Entities.CategoriaEnt> categorias = ViewData["categorias"] as List<CrediV1_Prueba.Entities.CategoriaEnt>;
+    List<CrediV1_Prueba.Entities.ProveedorEnt> proveedores = ViewData["proveedores"] as List<CrediV1_Prueba.Entities.ProveedorEnt>;
 }
 
+<div class="container">
+    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+        <div class="card-body p-4">
+            <div class="form-outline mb-5 mb-xl-4">
+                <h2>Agregar Producto</h2>
+            </div>
+            <form id="agregarProductoForm">
+                <div class="row">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <input type="text" id="Nombre" name="Nombre" class="form-control form-control-lg" placeholder="Nombre" required />
+                        </div>
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <input type="number" step="0.01" id="Costo" name="Costo" class="form-control form-control-lg" placeholder="Costo" required />
+                        </div>
+                        <div class="form-outline mb-4 mb-xl-4">
+                            <input type="number" id="CantidadStock" name="CantidadStock" class="form-control form-control-lg" placeholder="Cantidad en Stock" required />
+                        </div>
+                       
+
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <select id="idCategoria" name="idCategoria" class="form-control form-control-lg" required>
 
 
-<<div class="container">
-	<div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-		<div class="card-body p-4">
-			<div class="form-outline mb-5 mb-xl-4">
-				<h2>Agregar Producto</h2>
-			</div>
-			<div class="row">
-				<div class="col-lg-8 col-xl-6">
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="NombreJuridico" name="NombreJuridico" class="form-control form-control-lg" placeholder="Nombre" />
-					</div>
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="ApellidoJuridico" name="ApellidoJuridico" class="form-control form-control-lg" placeholder="Apellido" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="direccion" class="form-control form-control-lg" placeholder="Dirección" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
-					</div>
+                                <option value="">Selecciona una categoria</option>
+                                @foreach (var categoria in categorias)
+                                {
+                                    <option value="@categoria.idCategoria">@categoria.descripcion</option>
+                                }
 
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="file" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
-					</div>
-				</div>
-
-				<div class="col-lg-8 col-xl-6">
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="NombreJuridico" name="NombreJuridico" class="form-control form-control-lg" placeholder="Nombre" />
-					</div>
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="ApellidoJuridico" name="ApellidoJuridico" class="form-control form-control-lg" placeholder="Apellido" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="direccion" class="form-control form-control-lg" placeholder="Dirección" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="zipCode" class="form-control form-control-lg" placeholder="Código Postal" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<a href="@Url.Action("Index","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
-					</div>
+                            </select>
+                        </div>
 
 
-				</div>
-
-				<a href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
-			</div>
-		</div>
-	</div>
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <select id="ProveedorId" name="ProveedorId" class="form-control form-control-lg" required>
+                               
+                               
+                                    <option value="">Selecciona un proveedor</option>
+                                    @foreach (var proveedor in proveedores)
+                                    {
+                                        <option value="@proveedor.idProveedor">@proveedor.nombre</option>
+                                    }
+                                
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-outline mb-4 mb-xl-4">
+                    <button type="submit" class="btn " id="button-addon2">Agregar Producto</button>
+                    <a href="@Url.Action("Index", "Inventario")" class="btn" id="button-addon2">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-
-
-
 
 <nav aria-label="Page navigation example" style="background-color:aquamarine">
-	<ul class="pagination justify-content-center">
-		<li class="page-item disabled">
-			<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-		</li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item">
-			<a class="page-link" href="#">Siguiente</a>
-		</li>
-	</ul>
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Siguiente</a>
+        </li>
+    </ul>
 </nav>
 
-<div class="product-section">
-	<div class="container">
-		<div class="row">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('agregarProductoForm');
 
-			<!-- Start Column 1 -->
-			<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-				<h2 class="mb-4 section-title">Registrar Cliente</h2>
-				<i class="fa  fa-circle-info"></i>
-				<p class="mb-4">
-					Ingrese los datos solicitados para registrar un nuevo cliente
-				</p>
-				<p><a href="shop.html" class="btn">Explore</a></p>
-			</div>
-			<!-- End Column 1 -->
-			<!-- Start Column 2 -->
-			<!-- End Column 2 -->
-			<!-- Start Column 3 -->
-			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-				<a class="product-item" href="cart.html">
-					<img src="~/images/product-2.png" class="img-fluid product-thumbnail">
-					<h3 class="product-title">Kruzo Aero Chair</h3>
-					<strong class="product-price">$78.00</strong>
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
 
-					<span class="icon-cross">
-						<img src="~/images/cross.svg" class="img-fluid">
-					</span>
-				</a>
-			</div>
-			<!-- End Column 3 -->
-			<!-- Start Column 4 -->
-			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-				<a class="product-item" href="cart.html">
-					<img src="~/images/product-3.png" class="img-fluid product-thumbnail">
-					<h3 class="product-title">Ergonomic Chair</h3>
-					<strong class="product-price">$43.00</strong>
+            // Obtener los valores de los campos del formulario
+            const nombre = document.getElementById('Nombre').value;
+            const costo = document.getElementById('Costo').value;
+            const cantidadStock = document.getElementById('CantidadStock').value;
+            const estadoElement = document.getElementById('Estado');
+            const estado = estadoElement ? estadoElement.value : null;
+            const categoria = document.getElementById('idCategoria').value;
+            const proveedor = document.getElementById('ProveedorId').value;
 
-					<span class="icon-cross">
-						<img src="~/images/cross.svg" class="img-fluid">
-					</span>
-				</a>
-			</div>
-			<!-- End Column 4 -->
+            // Crear el objeto de datos
+            const data = {
+                Nombre: nombre,
+                Costo: parseFloat(costo),
+                CantidadStock: parseInt(cantidadStock),
+                Estado: estado ? estado.toLowerCase() === 'activo' : false,
+                Categoria: parseInt(categoria),
+                Proveedor: parseInt(proveedor)
+            };
 
-		</div>
-	</div>
-</div>
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Agregarás este producto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#c31e1e',
+                confirmButtonText: 'Sí, agregar',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch('@Url.Action("GuardarProductoNuevo", "Inventario")', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (response.ok) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Producto agregado',
+                                text: 'El producto ha sido agregado correctamente.'
+                            }).then(() => {
+                                window.location.href = '@Url.Action("ListadoProducto", "Inventario")';
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un problema al agregar el producto.'
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al agregar el producto.'
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+</script>
