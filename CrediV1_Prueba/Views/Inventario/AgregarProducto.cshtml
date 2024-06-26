@@ -116,7 +116,7 @@
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await fetch('@Url.Action("AgregarProducto", "Inventario")', {
+                        const response = await fetch('@Url.Action("GuardarProductoNuevo", "Inventario")', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

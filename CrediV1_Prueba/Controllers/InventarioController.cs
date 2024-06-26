@@ -88,6 +88,9 @@ namespace CrediV1_Prueba.Controllers
 
             try
             {
+                Console.WriteLine("Datos del producto"+" "+producto.cantidadStock,producto.idCategoria);
+
+                return Ok();
 
             }catch (Exception ex)
             {
