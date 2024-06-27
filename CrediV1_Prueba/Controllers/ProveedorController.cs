@@ -96,10 +96,12 @@ namespace CrediV1_Prueba.Controllers
 
 
 		[HttpPost]
-		public async Task<IActionResult> DesactivarProducto([FromBody] ProveedorEnt idProveedor)
+		public async Task<IActionResult> DesactivarProveedor([FromBody] ProveedorEnt idProveedor)
 		{
 			try
 			{
+
+				
 				await _proveedorModel.DesactivarProveedor(idProveedor);
 				return Ok();
 			}

@@ -76,20 +76,21 @@
         </ul>
     </nav>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     document.querySelectorAll('.confirmButtonInactivar').forEach(button => {
         button.addEventListener('click', async function () {
-            let idProducto = this.getAttribute('data-id');
+            let idUsuario = this.getAttribute('data-id');
+            let estado = this.getAttribute('data-estado') === 'true';
 
             const data = {
-                idProducto: parseInt(idProducto)
+                idUsuario: parseInt(idUsuario)
             };
 
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡Esto desactivará/activará el producto!",
+                text: estado ? "¿Quieres inactivar este usuario?" : "¿Quieres activar este usuario?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#0d6efd',
@@ -99,7 +100,7 @@
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await fetch('@Url.Action("DesactivarProducto", "Inventario")', {
+                        const response = await fetch('@Url.Action("DesactivarActivarUsuario", "Usuario")', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -114,20 +115,37 @@
                                 title: 'Acción Realizada',
                                 text: mensaje
                             }).then(() => {
-                                window.location.href = '@Url.Action("ListadoProducto", "Inventario")';
+                                // Actualiza la vista sin recargar la página
+                                const row = button.closest('tr');
+                                const estadoCell = row.querySelector('td:nth-child(4)');
+                                const accionButton = row.querySelector('.confirmButtonInactivar');
+
+                                if (estado) {
+                                    estadoCell.textContent = 'Inactivo';
+                                    accionButton.classList.remove('btn-danger');
+                                    accionButton.classList.add('btn-success');
+                                    accionButton.textContent = 'Activar';
+                                    accionButton.setAttribute('data-estado', 'false');
+                                } else {
+                                    estadoCell.textContent = 'Activo';
+                                    accionButton.classList.remove('btn-success');
+                                    accionButton.classList.add('btn-danger');
+                                    accionButton.textContent = 'Inactivar';
+                                    accionButton.setAttribute('data-estado', 'true');
+                                }
                             });
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
-                                text: 'Hubo un problema al cambiar el estado del producto.'
+                                text: 'Hubo un problema al cambiar el estado del usuario.'
                             });
                         }
                     } catch (error) {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Hubo un problema al cambiar el estado del producto.'
+                            text: 'Hubo un problema al cambiar el estado del usuario.'
                         });
                     }
                 }
@@ -135,3 +153,4 @@
         });
     });
 </script>
+

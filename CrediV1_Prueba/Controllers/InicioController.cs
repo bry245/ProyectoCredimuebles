@@ -92,12 +92,7 @@ namespace CrediV1_Prueba.Controllers
         [HttpPost]
         public IActionResult GestionarCambioContrasenna(UsuarioEnt entidad)
         {
-            var dato = _usuarioModel.ConsultarCorreo(entidad);  
-            if (dato!= null)
-            {
-                //falta arma el correo
-                //lo redirige
-            }
+           
             return View();
         }
 

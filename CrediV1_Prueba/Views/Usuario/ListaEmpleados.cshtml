@@ -7,7 +7,7 @@
 <div class="container">
 
     <div class="container mt-4">
-        <a href="@Url.Action("AgregarCliente","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-plus"></i> Agregar Cliente </a>
+        <a href="@Url.Action("AgregarEmpleado","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-plus"></i> Agregar Cliente </a>
         <a href="@Url.Action("Usuarios","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-plus"></i> Volver  </a>
         <div class="row justify-content-end">
             <div class="col-md-6">
@@ -35,16 +35,17 @@
                 </tr>
             </thead>
             <tbody>
+
+
                 @foreach (var usuario in @Model)
                 {
 
-                    @if (usuario.idRol == 5)
-                    {
+                   
                         <tr>
                             <input type="hidden" name="idUsuario" id="idUsuario" value="@usuario.idUsuario" />
                             <td>@usuario.nombreCompleto</td>
                             <td>@usuario.telefono</td>
-                            <td>@usuario.correo</td>
+                            <td>@usuario.idRol</td>
                             @if (usuario.estado == true)
                             {
                                 <td>Activo</td>
@@ -77,8 +78,8 @@
                                 <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
                             </td>
                         </tr>
-                    }
-                   
+                    
+                 
                 }
             </tbody>
 

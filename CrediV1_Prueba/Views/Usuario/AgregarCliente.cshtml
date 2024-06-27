@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Agregar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+        <div class="card-body p-4">
+            <div class="form-outline mb-5 mb-xl-4">
+                <h2>Agregar Usuario</h2>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" placeholder="Nombre" required />
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <input type="text" id="telefono" name="telefono" class="form-control form-control-lg" required placeholder="Teléfono" />
+                    </div>
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <input type="text" id="apellidos" name="apellidos" class="form-control form-control-lg" placeholder="apellidos" required />
+                    </div>
+                  
+
+                </div>
+
+                <div class="col-lg-8 col-xl-6">
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <input type="email" id="correo" name="correo" class="form-control form-control-lg" required placeholder="Correo Electrónico" />
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <input type="text" id="direccion" name="direccion" class="form-control form-control-lg" required placeholder="Dirección" />
+                    </div>
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <input type="text" id="cedula" name="cedula" class="form-control form-control-lg" required placeholder="cedula" />
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between">
+                        <button class="btn y" type="button" id="guardar">
+                            <i class="fa fa-save"></i> Registrar Usuario
+                        </button>
+                        <a href="@Url.Action("ListaClientes","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-plus"></i> Volver  </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('guardar').addEventListener('click', async () => {
+        // Obtener los valores de los campos
+        const nombre = document.getElementById('nombre').value.trim();
+        const apellidos = document.getElementById('apellidos').value.trim();
+        const cedula = document.getElementById('cedula').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const correo = document.getElementById('correo').value.trim();
+        const direccion = document.getElementById('direccion').value.trim();
+
+        // Verificar que todos los campos tienen datos
+        if (!nombre || !telefono || !correo || !direccion) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor complete todos los campos.'
+            });
+            return; // Salir de la función si algún campo está vacío
+        }
+
+        // Crear el objeto de datos
+        const data = {
+            nombre,
+            apellidos,
+            telefono,
+            correo,
+            cedula,
+            direccion
+        };
+
+        try {
+            // Realizar la llamada fetch
+            const response = await fetch('@Url.Action("GuardarCliente", "Usuario")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            // Verificar el estado de la respuesta
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuario Agregado',
+                    text: 'El usuario ha sido registrado correctamente.'
+                }).then(() => {
+                    window.location.href = '@Url.Action("ListaClientes", "Usuario")';
+                });
+            } else {
+                // Mostrar mensaje de error si la respuesta no es exitosa
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al registrar el usuario.'
+                });
+            }
+        } catch (error) {
+            // Mostrar mensaje de error si hay un problema con la llamada fetch
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un problema al registrar el usuario.'
+            });
+        }
+    });
+</script>

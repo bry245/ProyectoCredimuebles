@@ -1,0 +1,235 @@
+﻿@model CrediV1_Prueba.Entities.UsuarioEnt
+@{
+    ViewData["Title"] = "ListarEmpleados";
+
+}
+
+@section Estilos {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link href="~/css/UsuarioCards.css" rel="stylesheet" />
+}
+<div class="text-center ">
+    <div class="hero-subMenu">
+        <h1>Clientes <span clsas="d-block">- Usuarios</span></h1>
+    </div>
+</div>
+
+
+<div class="container">
+
+
+    <div class="container mt-4">
+        <div class="row justify-content-end">
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row ">
+
+
+
+        <div class="col-xl-6 col-lg-6">
+            <a href="@Url.Action("ListaEmpleados","Usuario")" class="text-decoration-none">
+                <div class="card l-bg-blue-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0">Administrar</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    Empleados
+                                </h2>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+            <a href="@Url.Action("ListaClientes","Usuario")" class="text-decoration-none">
+                <div class="card l-bg-blue-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0">Administrar</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    Clientes
+                                </h2>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+        <!-- Repite lo mismo para las demás tarjetas -->
+    </div>
+
+
+
+
+
+
+    <!--Modal para actualizar informaciòn-->
+    <div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
+                    <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text1" class="col-form-label">Apellidos:</label>
+                            <input class="form-control" id="message-text1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text2" class="col-form-label">Correo:</label>
+                            <input class="form-control" id="message-text2">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text4" class="col-form-label">Telèfono:</label>
+                            <input class="form-control" id="message-text4">
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-black" for="message">Dirección</label>
+                            <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<!--MODAL DE INACTIVACIÓN-->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-black">
+                <p>¿Estás seguro de que deseas inactivar este usuario?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" style="background-color:red" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmButton">Inactivar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL DE NOTIFICACION-->
+<div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Enviar Notificación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-black">
+                <p>Usuario:</p>
+                <form>
+
+                    <div class="form-group mb-5">
+                        <label class="text-black" for="message">Mensage</label>
+                        <textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmButton">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+    // Obtener el modal Para actualizar
+    var modal = document.getElementById("ModalClientes");
+
+    // Obtener el botón que abre el btn
+    var btnsMostrarModal = document.getElementById("btn-Modal");
+
+    // Obtener el span que cierra el modal
+    var span = document.getElementsByClassName("btn-close")[0];
+    var cerrar = document.getElementById("btn-cerrar");
+
+
+    btnsMostrarModal.onclick = function () {
+        // Obtener el ID de la fila de la tabla
+        // var id = this.getAttribute("data-id");
+
+        // Llamar a una función para cargar la información detallada (debes implementarla)
+        // cargarInformacionDetalle(id);
+
+        // Mostrar el modal
+        modal.style.display = "block";
+        document.body.classList.add("modal-open");
+    }
+
+    // Manejar clic en el span para cerrar el modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Cuando el usuario hace clic fuera del modal, ciérralo
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Función para cargar la información detallada (debes implementarla)
+    function cargarInformacionDetalle(id) {
+        // Aquí puedes usar AJAX para cargar la información desde el servidor
+        // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
+        // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
+    }
+
+</script>
+
