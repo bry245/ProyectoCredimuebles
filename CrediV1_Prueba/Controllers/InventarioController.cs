@@ -75,31 +75,38 @@ namespace CrediV1_Prueba.Controllers
 		}
 
 
-		public IActionResult EditarProducto() { 
+		public IActionResult EditarProducto(int idProducto) { 
         
-        
+            
             return View();
         }
 
 
         public async Task <IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
         {
-
-
             try
             {
-                Console.WriteLine("Datos del producto"+" "+producto.cantidadStock,producto.idCategoria);
+                Console.WriteLine("Datos del producto" + " " + producto.cantidadStock, producto.idCategoria);
 
-                return Ok();
 
-            }catch (Exception ex)
+                var mensaje = await _productoModel.agregarProducto(producto);
+                if (mensaje == true)
+                {
+                    return RedirectToAction("Index", "Inventario"); ;
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+            }
+            catch (Exception ex)
             {
-
-
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error alagregar el producto: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
             }
 
-
-            return View();
+            
         }
 
 
@@ -125,6 +132,12 @@ namespace CrediV1_Prueba.Controllers
                 return StatusCode(500, "Error interno del servidor.");
             }
         }
+
+
+
+
+       
+
     }
 
 

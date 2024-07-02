@@ -42,8 +42,7 @@
 
 
                         <div class="form-outline mb-5 mb-xl-4">
-                            <select id="ProveedorId" name="ProveedorId" class="form-control form-control-lg" required>
-                               
+                            <select id="idProveedor" name="idProveedor" class="form-control form-control-lg" required>
                                
                                     <option value="">Selecciona un proveedor</option>
                                     @foreach (var proveedor in proveedores)
@@ -91,8 +90,8 @@
             const cantidadStock = document.getElementById('CantidadStock').value;
             const estadoElement = document.getElementById('Estado');
             const estado = estadoElement ? estadoElement.value : null;
-            const categoria = document.getElementById('idCategoria').value;
-            const proveedor = document.getElementById('ProveedorId').value;
+            const idCategoria = document.getElementById('idCategoria').value;
+            const idProveedor = document.getElementById('idProveedor').value;
 
             // Crear el objeto de datos
             const data = {
@@ -100,8 +99,8 @@
                 Costo: parseFloat(costo),
                 CantidadStock: parseInt(cantidadStock),
                 Estado: estado ? estado.toLowerCase() === 'activo' : false,
-                Categoria: parseInt(categoria),
-                Proveedor: parseInt(proveedor)
+                idCategoria: parseInt(idCategoria),
+                idProveedor: parseInt(idProveedor)
             };
 
             Swal.fire({
