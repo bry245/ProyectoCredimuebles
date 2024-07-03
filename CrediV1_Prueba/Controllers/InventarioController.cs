@@ -75,10 +75,21 @@ namespace CrediV1_Prueba.Controllers
 		}
 
 
-		public IActionResult EditarProducto(int idProducto) { 
-        
-            
+		public async Task<IActionResult> EditarProducto(int idProducto) { 
+            var producto = await _productoModel.buscarProducto(idProducto);
+            if (producto.Codigo == 1)
+            {
+                ProductoEnt resp = new ProductoEnt();
+                resp = (ProductoEnt)producto.Contenido;
+                return View(resp);
+
+            }
+            else {
+                ViewBag["error"] = producto.Codigo;
+            }
             return View();
+            
+             
         }
 
 

@@ -52,9 +52,43 @@ namespace CrediV1_Prueba.Models
                 }
             
 
-        }
+			}
 
         }
+
+
+
+        [HttpPost]
+        public async Task<Respuesta> buscarProducto(int id)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var connection = new SqlConnection(_connection))
+            {
+
+                var result = await connection.QueryAsync<ProductoEnt>("BuscarProducto",
+                   new {id },
+                   commandType: System.Data.CommandType.StoredProcedure);
+
+                if (result.Count() > 0)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result.FirstOrDefault();
+                    return resp;
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "La información del usuario ya se encuentra registrada";
+                    resp.Contenido = false;
+                    return resp;
+                }
+
+            }
+
+        }
+
 
 
 
