@@ -10,12 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IUsuarioModel, UsuarioModel>();
 builder.Services.AddSingleton<IProveedoresModel, ProveedoresModel>();
+builder.Services.AddSingleton<ISalidasModel, SalidasModel>();
 builder.Services.AddSingleton<IOtherServices, OtherServices>();
 
 

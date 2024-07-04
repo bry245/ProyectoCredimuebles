@@ -2490,6 +2490,15 @@
             "rid": "win"
           }
         }
+      },
+      "X.PagedList/9.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/X.PagedList.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/X.PagedList.dll": {}
+        }
       }
     }
   },
@@ -7011,6 +7020,23 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "X.PagedList/9.1.2": {
+      "sha512": "qePK/lt+Y8PeQM9E/DkWY/AIyxDVEMX0XFCU5CfLP1+Y9SUThFyaY8/QgldOg9uOJLvse1i3oAQDJOrhb3usdw==",
+      "type": "package",
+      "path": "x.pagedlist/9.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/X.PagedList.dll",
+        "lib/net8.0/X.PagedList.dll",
+        "lib/netstandard2.0/X.PagedList.dll",
+        "lib/netstandard2.1/X.PagedList.dll",
+        "x.pagedlist.9.1.2.nupkg.sha512",
+        "x.pagedlist.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -7020,23 +7046,24 @@
       "Microsoft.AspNet.WebApi.Client >= 6.0.0",
       "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter >= 8.0.3",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.2",
-      "System.Data.SqlClient >= 4.8.6"
+      "System.Data.SqlClient >= 4.8.6",
+      "X.PagedList >= 9.1.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jason\\.nuget\\packages\\": {}
+    "C:\\Users\\vinda\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "projectUniqueName": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
       "projectName": "CrediV1_Prueba",
-      "projectPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-      "packagesPath": "C:\\Users\\jason\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
+      "projectPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+      "packagesPath": "C:\\Users\\vinda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vinda\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7056,6 +7083,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -7085,6 +7117,10 @@
           "System.Data.SqlClient": {
             "target": "Package",
             "version": "[4.8.6, )"
+          },
+          "X.PagedList": {
+            "target": "Package",
+            "version": "[9.1.2, )"
           }
         },
         "imports": [
@@ -7106,7 +7142,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

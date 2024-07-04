@@ -990,3 +990,4 @@ C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\ne
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\vinda\OneDrive\Escritorio\CredimueblesGitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\X.PagedList.dll

@@ -1,134 +1,294 @@
-﻿
+﻿@using Newtonsoft.Json
+
+@model CrediV1_Prueba.Entities.SalidasEnt
 @{
     ViewData["Title"] = "EditarVenta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <div class="container">
-	<div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-		<div class="card-body p-4">
-			<div class="form-outline mb-5 mb-xl-4">
-				<h2>Agregar Producto</h2>
-			</div>
-			<div class="row">
-				<div class="col-lg-8 col-xl-6">
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="nombreProducto" name="nombreProducto" class="form-control form-control-lg" placeholder="Nombre del Producto" />
-					</div>
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="descripcion" name="descripcion" class="form-control form-control-lg" placeholder="Descripción del Producto" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="precio" name="precio" class="form-control form-control-lg" placeholder="Precio del Producto" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="stock" name="stock" class="form-control form-control-lg" placeholder="Cantidad en Stock" />
-					</div>
+    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+        <div class="card-body p-4">
+            <div class="form-outline mb-5 mb-xl-4" style="text-align:center">
+                <h2>Modificar Salida @Model.idSalida</h2>
+                
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-xl-6">
+                    <h4>Datos Cliente</h4>
+                    <input type="hidden" id="idSalida" name="idSalida" value="@Model.idSalida" />
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.cedulaCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "cedulaCliente", @onkeyup = "ConsultarNombre()", @placeholder = "Cedula Cliente" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.nombreCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "nombreCliente", @placeholder = "Nombre" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.apellidosCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "apellidosCliente", @placeholder = "Apellidos" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.telefonoCliente, new { @type = "text", @pattern = "[0-9]{8}", @maxlength = "8", @class = "form-control form-control-lg", @id = "telefonoCliente", @placeholder = "Telefono" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                            </div>
+                            @Html.TextAreaFor(m => m.direccionCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "direccionCliente", @placeholder = "Dirección", @cols = "30", @rows = "10" })
+                        </div>
+                    </div>
+                </div>
+                <!--Datos de la factura-->
+                <div class="col-lg-8 col-xl-6">
+                    <h4>Datos Factura</h4>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <label class="col-form-label"> Cantidad De Productos</label>
 
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="file" id="imagenProducto" name="imagenProducto" class="form-control form-control-lg" placeholder="Imagen del Producto" />
-					</div>
-				</div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-cubes"></i></span>
+                                </div>
+                                @Html.TextBoxFor(m => m.cantidad, new { @type = "text", @readOnly = "true", @class = "form-control form-control-lg", @id = "cantidadProductos", @placeholder = "Cantidad de Productos" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Costo De Venta</label>
 
-				<div class="col-lg-8 col-xl-6">
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="fabricante" name="fabricante" class="form-control form-control-lg" placeholder="Fabricante" />
-					</div>
-					<div class="form-outline mb-5 mb-xl-4">
-						<input type="text" id="categoria" name="categoria" class="form-control form-control-lg" placeholder="Categoría del Producto" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="marca" name="marca" class="form-control form-control-lg" placeholder="Marca del Producto" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<input type="text" id="codigoProducto" name="codigoProducto" class="form-control form-control-lg" placeholder="Código del Producto" />
-					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<a href="@Url.Action("Index","Salidas")" class="btn btn-soft" type="submit" id="button-addon2"> <i class="">Volver </i>  </a>
-					</div>
-				</div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas  fa-coins"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.costoVenta, new { @type = "text", @readOnly = "true", @class = "form-control form-control-lg", @id = "costoVenta", @placeholder = "Costo de venta" })
+                        </div>
+                    </div>
+                    @if (Model.comisionVenta != 0)
+                    {
+                        <div class="form-outline mb-5 mb-xl-4">
 
-				<div class="col-lg-8 col-xl-6">
-					<a href="@Url.Action("AgregarProducto","Inventario")" class="btn btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <label class="col-form-label"> Comisión Venta</label>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                </div>
+                                @Html.TextBoxFor(m => m.comisionVenta, new { @type = "text", @readOnly = "true", @class = "form-control form-control-lg", @id = "comisionVenta", @placeholder = "Comisión de la venta" })
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Factura N°</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-file-invoice"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.numeroFactura, new { @type = "text", @class = "form-control form-control-lg", @id = "numeroFactura", @placeholder = "N°Factura" })
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Método De Pago</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-check-alt"></i></span>
+                            </div>
+                            @Html.DropDownListFor(m => m.idMetodoPago, new SelectList(ViewBag.MetodosPago, "Value", "Text", ViewBag.MetodoPago), "Método Pago", new { @id = "metodoPago", @class = "form-control form-control-lg" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Vendedor</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+                            </div>
+                            @Html.DropDownListFor(m => m.idVendedor, new SelectList(ViewBag.Vendedores, "Value", "Text", ViewBag.Vendedor), "Vendedor", new {@id="vendedor", @class = "form-control form-control-lg" })
+
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <label class="col-form-label"> Monto De Venta</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.MontoDeVenta, new { @type = "number", @class = "form-control form-control-lg", @id = "montoDeVenta", @placeholder = "₡ Monto De Venta" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <label class="col-form-label"> Fecha de venta: <b>@ViewBag.Fecha.ToString("yyyy-MM-dd")</b></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.fecha, new { @type = "date", @class = "form-control form-control-lg", @id = "fecha", @placeholder = "Fecha", @autocomplete = "off" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>Artículos</h4>
+            <div class="input-group col-lg-4">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto" aria-describedby="buscarButton">
+            </div>
+            <div id="resultadosProductos"></div>
+            <div class="row">
+                <div class="col">
+                    <table id="tablaProductos" class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productosSeleccionados">
+                            <!-- productos seleccionados -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="@Url.Action("Index","Salidas")" class="btn">Volver</a>
+                    <button type="button" class="btn" onclick="registrarSalida()">Actualizar Salida</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
+<script src="~/functions/functions.js"></script>
+<script>
+    var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
+    var productosSalida = @Html.Raw(JsonConvert.SerializeObject(ViewBag.ProductosSalida));
 
+    function buscarProducto() {
+        var textoBusqueda = $('#buscarProducto').val().toLowerCase();
+        var html = '<ul class="list-group">';
+        productos.forEach(function (producto) {
+            if (producto.nombre.toLowerCase().includes(textoBusqueda)) {
+                html += '<li class="list-group-item" style="cursor: pointer;" onclick="agregarProducto(' + producto.idProducto + ', \'' + producto.nombre + '\')">' + producto.nombre + ' ₡' + producto.costo + '</li>';
+            }
+        });
+        html += '</ul>';
+        $('#resultadosProductos').html(html);
+    }
 
+    function agregarProducto(id, nombre) {
+        var fila = '<tr data-id="' + id + '"><td>' + nombre + '</td><td><input type="number" min="1" value="1" class="form-control" /></td><td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button></td></tr>';
+        $('#productosSeleccionados').append(fila);
+        limpiarBuscador();
+    }
 
+    function eliminarProducto(button) {
+        $(button).closest('tr').remove();
+    }
 
+    function limpiarBuscador() {
+        $('#buscarProducto').val('');
+        $('#resultadosProductos').html('');
+    }
 
-<nav aria-label="Page navigation example" style="background-color:aquamarine">
-	<ul class="pagination justify-content-center">
-		<li class="page-item disabled">
-			<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-		</li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item">
-			<a class="page-link" href="#">Siguiente</a>
-		</li>
-	</ul>
-</nav>
+    $(document).ready(function () {
+        $('#buscarProducto').keyup(function () {
+            buscarProducto();
+        });
 
-<div class="product-section">
-	<div class="container">
-		<div class="row">
+        // Inicializar tabla con productos seleccionados de la base de datos
+        productosSalida.forEach(function (producto) {
+            var fila = '<tr data-id="' + producto.idProducto + '"><td>' + producto.nombre + '</td><td><input type="number" min="1" value="' + producto.cantidadSalida + '" class="form-control" /></td><td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button></td></tr>';
+            $('#productosSeleccionados').append(fila);
+        });
+    });
 
-			<!-- Start Column 1 -->
-			<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-				<h2 class="mb-4 section-title">Registrar Cliente</h2>
-				<i class="fa  fa-circle-info"></i>
-				<p class="mb-4">
-					Ingrese los datos solicitados para registrar un nuevo cliente
-				</p>
-				<p><a href="shop.html" class="btn">Explore</a></p>
-			</div>
-			<!-- End Column 1 -->
-			<!-- Start Column 2 -->
-			<!-- End Column 2 -->
-			<!-- Start Column 3 -->
-			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-				<a class="product-item" href="cart.html">
-					<img src="~/images/product-2.png" class="img-fluid product-thumbnail">
-					<h3 class="product-title">Kruzo Aero Chair</h3>
-					<strong class="product-price">$78.00</strong>
+    function registrarSalida() {
+        var productosSeleccionados = [];
+        $('#productosSeleccionados tr').each(function () {
+            var id = $(this).data('id');
+            var nombre = $(this).find('td:eq(0)').text().trim();
+            var cantidad = $(this).find('td:eq(1) input').val();
 
-					<span class="icon-cross">
-						<img src="~/images/cross.svg" class="img-fluid">
-					</span>
-				</a>
-			</div>
-			<!-- End Column 3 -->
-			<!-- Start Column 4 -->
-			<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-				<a class="product-item" href="cart.html">
-					<img src="~/images/product-3.png" class="img-fluid product-thumbnail">
-					<h3 class="product-title">Ergonomic Chair</h3>
-					<strong class="product-price">$43.00</strong>
+            var producto = {
+                idProducto: id,
+                nombre: nombre,
+                cantidadSalida: cantidad
+            };
 
-					<span class="icon-cross">
-						<img src="~/images/cross.svg" class="img-fluid">
-					</span>
-				</a>
-			</div>
-			<!-- End Column 4 -->
+            productosSeleccionados.push(producto);
+        });
 
-		</div>
-	</div>
-</div>
-
-
-
-
-
-
-
-
-
+        var datos = {
+            idSalida: $('#idSalida').val(),
+            cedulaCliente: $('#cedulaCliente').val(),
+            nombreCliente: $('#nombreCliente').val(),
+            apellidosCliente: $('#apellidosCliente').val(),
+            telefonoCliente: $('#telefonoCliente').val(),
+            direccionCliente: $('#direccionCliente').val(),
+            numeroFactura: $('#numeroFactura').val(),
+            fecha: $('#fecha').val(),
+             metodoPago: $('#metodoPago').val(),
+             vendedor: $('#vendedor').val(),
+             MontoDeVenta: $('#montoDeVenta').val(),
+             productosCompra: productosSeleccionados
+        };
+      
+        $.ajax({
+            url: '@Url.Action("EditarSalida", "Salidas")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(datos),
+            success: function (response) {
+                console.log('Datos a enviar:', JSON.stringify(datos));
+                localStorage.setItem('successMessage', 'Salida actualizada con éxito');
+                window.location.href = '@Url.Action("ListadoSalidas", "Salidas")';
+            },
+            error: function (error) {
+                toastr.error('Ocurrió un error, por favor valide los datos');
+            }
+        });
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "3500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    }
+</script>
 

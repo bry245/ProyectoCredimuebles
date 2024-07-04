@@ -59,8 +59,6 @@ namespace CrediV1_Prueba.Controllers
 				Console.WriteLine($"Error al guardar el proveedor: {ex.Message}");
 				return StatusCode(500, "Error interno del servidor.");
 			}
-
-
 		}
 
 		[HttpGet]
