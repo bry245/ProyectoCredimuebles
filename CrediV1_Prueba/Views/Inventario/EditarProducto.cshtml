@@ -38,7 +38,7 @@
 					</div>
 
                         <div class="form-outline mb-4 mb-xl-4">
-                            <button type="submit" class="btn " id="button-addon2">Actualizar Producto</button>
+                            <button type="submit" class="btn " id="button-addon2">Guardar</button>
                             
                         </div>
 
@@ -117,12 +117,12 @@
 
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡Agregarás este producto!",
+                text: "¡Actualizarás este producto!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#0d6efd',
                 cancelButtonColor: '#c31e1e',
-                confirmButtonText: 'Sí, agregar',
+                confirmButtonText: 'Sí, actualizar',
                 cancelButtonText: 'Cancelar'
             }).then(async (result) => {
                 if (result.isConfirmed) {
@@ -138,8 +138,8 @@
                         
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Producto agregado',
-                                text: 'El producto ha sido agregado correctamente.'
+                                title: 'Producto aztualizado',
+                                text: 'El producto ha sido actualizado correctamente.'
                             }).then(() => {
                                 window.location.href = '@Url.Action("ListadoProducto", "Inventario")';
                             });
@@ -148,7 +148,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Hubo un problema al agregar el producto.'
+                            text: 'Hubo un problema al actualizar el producto.'
                         });
                     }
                 }
