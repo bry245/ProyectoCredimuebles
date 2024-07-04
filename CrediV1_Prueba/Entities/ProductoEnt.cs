@@ -11,5 +11,22 @@
         public bool estado { get; set; }
         public string costoReferencia { get; set; }
         public long idSalida { get; set; }
+
+
+      
+
+        public long idProveedor { get; set; }
+
+    
+        public string proveedor_nombre { get; set; }
+
+
+        
+
+
+ 
+         
+
+        public string CategoriaNombre { get; set; }
     }
 }

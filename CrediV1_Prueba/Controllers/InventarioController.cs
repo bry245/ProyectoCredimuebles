@@ -1,55 +1,184 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CrediV1_Prueba.Entities;
+using CrediV1_Prueba.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Controllers
 {
     public class InventarioController : Controller
     {
-        public IActionResult Index()
+
+		private readonly IHttpClientFactory _clientFactory;
+		private readonly IConfiguration _configuration;
+		private string _connection;
+		private readonly IProducto _productoModel;
+        private readonly ICategoria _categoriaModel;
+        private readonly IProveedoresModel _proveedoresModel;
+
+
+		public InventarioController(IHttpClientFactory clientFactory, 
+            ICategoria categoriaModel, IConfiguration configuration, 
+            IProducto productoModel, IProveedoresModel proveedoresModel)
+		{
+			_configuration = configuration;
+			_clientFactory = clientFactory;
+			_connection = _configuration.GetConnectionString("Connection");
+			_productoModel = productoModel;
+            _categoriaModel = categoriaModel;
+           _proveedoresModel = proveedoresModel;
+		}
+
+		public IActionResult Index()
         {
             return View();
         }
 
 
-        public IActionResult AgregarProducto()
+        public async Task<IActionResult> AgregarProducto()
         {
-            return View();
+            try
+            {
+                var categorias = await _categoriaModel.GetCategorias();
+                var proveedores = await _proveedoresModel.GetProveedores(); 
+
+                ViewData["categorias"] = categorias;
+                ViewData["proveedores"] = proveedores;
+                
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores aquí
+                ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
+                return View(); // Retornar la vista con el mensaje de error
+            }
         }
 
-		public IActionResult ListadoProducto()
+
+
+        public async Task<IActionResult> ListadoProducto()
 		{
+			try
+			{
+                //var categorias = await _categoriaModel.GetCategorias(); para mas adelante para filtrar por categorias
+				var productos = await _productoModel.GetProductos();
+
+
+				return View(productos);
+			}
+			catch (Exception ex)
+			{
+			}
 			return View();
 		}
 
 
-        public IActionResult EditarProducto() { 
-        
-        
+		public async Task<IActionResult> EditarProducto(int idProducto) { 
+            var producto = await _productoModel.buscarProducto(idProducto);
+            if (producto.Codigo == 1)
+            {
+                var categorias = await _categoriaModel.GetCategorias();
+                var proveedores = await _proveedoresModel.GetProveedores(); 
+
+                ViewData["categorias"] = categorias;
+                ViewData["proveedores"] = proveedores;
+
+                ProductoEnt resp = new ProductoEnt();
+                resp = (ProductoEnt)producto.Contenido;
+                return View(resp);
+
+            }
+            else {
+                ViewBag["error"] = producto.Codigo;
+            }
             return View();
+            
+             
         }
 
 
 
-        public IActionResult ListadoProveedor()
+        [HttpPost]
+        public async Task<IActionResult> DesactivarProducto([FromBody] ProductoEnt producto)
         {
-            return View();
+            try
+            {
+                var mensaje = await _productoModel.DesactivarProducto(producto);
+                if (mensaje == "Producto desactivado exitosamente" || mensaje == "Producto activado exitosamente")
+                {
+                    return Ok(mensaje);
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error al cambiar el estado del producto: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
         }
 
-		public IActionResult AgregarProveedor()
-		{
-			return View();
-		}
 
 
-		public IActionResult EditarProveedor()
-		{
+        public async Task<IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                Console.WriteLine("Datos del producto" + " " + producto.cantidadStock, producto.idCategoria);
 
 
-			return View();
-		}
+                var mensaje = await _productoModel.agregarProducto(producto);
+                if (mensaje == true)
+                {
+                    return RedirectToAction("Index", "Inventario"); ;
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error alagregar el producto: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+
+
+        }
+
+        public async Task<IActionResult> ActualizarProducto([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                var resp = await _productoModel.actualizarProducto(producto);
+                if (resp == true)
+                {
+                    return RedirectToAction("ListadoProduct", "Inventario"); ;
+                }
+                else
+                {
+                    // Aquí también debes retornar el resultado de RedirectToAction
+                    return NotFound(resp); 
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores aquí
+                ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
+                // Aquí también debes asegurarte de retornar algo, en este caso, una redirección
+                return RedirectToAction("ListadoProduct", "Inventario");
+            }
+        }
 
 
 
 
 
-	}
+
+    }
+
 }

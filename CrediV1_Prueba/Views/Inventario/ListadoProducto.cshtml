@@ -1,111 +1,179 @@
-﻿
+﻿@model IEnumerable<CrediV1_Prueba.Entities.ProductoEnt>
 @{
     ViewData["Title"] = "ListadoProducto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
+<style>
+    /* Estilos personalizados para las columnas */
+    .acciones-col {
+        white-space: nowrap;
+        width: 150px; /* Ajusta el ancho según tus necesidades */
+    }
 
+    /* Centrar el texto en las celdas de la tabla */
+    table#mitabla th, table#mitabla td {
+        text-align: center;
+        vertical-align: middle;
+    }
 
+    /* Centrar los botones dentro de la columna de acciones */
+    .acciones-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+        .acciones-col button, .acciones-col a {
+            margin: 0 5px; /* Espacio entre los botones */
+        }
+</style>
 
 <div class="container">
+    <div class="container mt-4">
+        <a href="@Url.Action("AgregarProducto", "Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i> </a>
+    </div>
 
-	<div class="container mt-4">
+    <div class="container mt-4">
+        <table id="mitabla" class="table table-hover" >
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Costo</th>
+                    <th>Cantidad Stock</th>
+                    <th>Estado</th>
+                    <th class="acciones-col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <input type="hidden" name="idProducto" id="idProducto" value="@producto.idProducto" />
+                        <td>@producto.nombre</td>
+                        <td>@producto.costo</td>
+                        <td>@producto.cantidadStock</td>
 
-
-
-
-		<a href="@Url.Action("AgregarProducto","Inventario")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Producto</i>  </a>
-		<div class="row justify-content-end">
-			<div class="col-md-6">
-				<form action="#" method="GET" class="form-inline">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
-						<div class="input-group-append">
-						</div>
-						<button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i> </button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<table<!-- Tabla de productos -->
-<div class="container mt-4">
-	<table class="table table-hover" style="text-align:center">
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>Descripción</th>
-				<th>Precio</th>
-				<th>Categoría</th>
-				<th>Proveedor</th>
-				<th>Inactivar</th>
-				<th>Actualizar</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Producto 1</td>
-				<td>Descripción del producto 1</td>
-				<td>$50.00</td>
-				<td>Categoría 1</td>
-				<td>Proveedor 1</td>
-				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
-				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
-			</tr>
-			<tr>
-				<td>Producto 2</td>
-				<td>Descripción del producto 2</td>
-				<td>$40.00</td>
-				<td>Categoría 2</td>
-				<td>Proveedor 2</td>
-				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
-				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
-			</tr>
-			<tr>
-				<td>Producto 3</td>
-				<td>Descripción del producto 3</td>
-				<td>$60.00</td>
-				<td>Categoría 3</td>
-				<td>Proveedor 3</td>
-				<td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Inactivar</button></td>
-				<td style="text-align:center"><a href="@Url.Action("EditarProducto","Inventario")" class="btn btn-danger" data-toggle="modal" id="btn-Modal">Actualizar <i class="fa fa-bars"></i></a></td>
-			</tr>
-		</tbody>
-	</table>
+                        @if (producto.estado)
+                        {
+                            <td>Activo</td>
+                            <td style="text-align:left">
+                                <button class="btn btn-danger confirmButtonInactivar" data-id="@producto.idProducto">Inactivar</button>
+                                <a class="btn btn-danger" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>Inactivo</td>
+                            <td style="text-align:left">
+                                <button class="btn btn-danger confirmButtonInactivar" data-id="@producto.idProducto">Activar</button>
+                                <a class="btn btn-danger" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
- <nav aria-label="Page navigation example" style="background-color:white">
-		<ul class="pagination justify-content-center" style="background-color:#dce5e4">
-			<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Siguiente</a>
-			</li>
-		</ul>
-	</nav>
 
+<!-- Carga de jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.querySelectorAll('.confirmButtonInactivar').forEach(button => {
+        button.addEventListener('click', async function () {
+            let idProducto = this.getAttribute('data-id');
 
+            const data = {
+                idProducto: parseInt(idProducto)
+            };
 
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Esto desactivará/activará el producto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#c31e1e',
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch('@Url.Action("DesactivarProducto", "Inventario")', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
 
-	</div>
+                        if (response.ok) {
+                            const mensaje = await response.text();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Acción Realizada',
+                                text: mensaje
+                            }).then(() => {
+                                window.location.href = '@Url.Action("ListadoProducto", "Inventario")';
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un problema al cambiar el estado del producto.'
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al cambiar el estado del producto.'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- Inicialización de DataTables -->
+<script>
+    $(document).ready(function () {
+        $('#mitabla').DataTable({
+            "columnDefs": [
+                { "width": "450px", "targets": 4 } // Ajusta el índice según la columna "Acciones"
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+        });
+    });
+</script>
 
