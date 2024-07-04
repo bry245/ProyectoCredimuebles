@@ -21,11 +21,7 @@
         public string proveedor_nombre { get; set; }
 
 
-        
-
-
- 
-         
+    
 
         public string CategoriaNombre { get; set; }
     }
