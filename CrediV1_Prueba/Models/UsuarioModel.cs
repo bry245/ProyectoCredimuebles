@@ -21,6 +21,7 @@ namespace CrediV1_Prueba.Models
         private string _connection;
         private readonly IOtherServices _otherServices;
 
+
         public UsuarioModel(HttpClient httpClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor,IOtherServices otherServices)
         {
             _httpClient = httpClient;
@@ -29,26 +30,7 @@ namespace CrediV1_Prueba.Models
             _otherServices = otherServices;
         }
 
-        public UsuarioEnt? IniciarSesion(UsuarioEnt entidad)
-        {
-            try
-            {
-                using (var con = new SqlConnection(_connection))
-                {
-                    var dato = con.Query<UsuarioEnt>("getUserbyEmail",
-                        new { entidad.correo },
-                        commandType: CommandType.StoredProcedure).FirstOrDefault();
-
-
-                    return dato;
-
-                    
-                }
-            }catch( Exception ex )
-            {
-                return null;
-            }
-        }
+    
        
 
 
@@ -104,7 +86,7 @@ namespace CrediV1_Prueba.Models
             }
 
         }
-        public List<UsuarioEnt>? ListarClientes()
+        public async Task< List<UsuarioEnt>>? ListarClientes()
         {
             try
             {
@@ -156,25 +138,7 @@ namespace CrediV1_Prueba.Models
         }
       
 
-        public async Task<bool> VerificarContraseña(string contraseña, string hashContraseña)
-        {
-            try
-            {
-
-                bool validatepassword = BCrypt.Net.BCrypt.Verify(contraseña, hashContraseña);
-
-
-                return validatepassword;
-
-            }
-            catch (Exception ex)
-            {
-
-                return false;
-               
-            }
-
-        }
+        
 
         public async Task<string> DesactivarActivarUsuario(UsuarioEnt usuario)
         {
@@ -224,6 +188,23 @@ namespace CrediV1_Prueba.Models
             {
                 return null;
 
+            }
+        }
+
+        public async Task<UsuarioEnt> consultarUsuariobyCorreo(string correo)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("correo", correo, DbType.Int64);
+
+                var usuario = await connection.QueryFirstOrDefaultAsync<UsuarioEnt>(
+                    "ConsultarUsuarioByCorreo",
+                    parameters,
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return usuario;
             }
         }
     }

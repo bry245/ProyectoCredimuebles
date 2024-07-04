@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KcSGXQIqfn/cjmZ2Q6zCzmh3lCHQBoMXCBD/Rg/DH6g=",
+  "Hash": "RtYzUfdf3ilRdBo2CaTKPKhHz+ZaZITAodoqF7h0/dA=",
   "Source": "CrediV1_Prueba",
   "BasePath": "_content/CrediV1_Prueba",
   "Mode": "Default",
@@ -186,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
+    },
+    {
+      "Identity": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\tablas.css",
+      "SourceId": "CrediV1_Prueba",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\",
+      "BasePath": "_content/CrediV1_Prueba",
+      "RelativePath": "css/tablas.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\tablas.css"
     },
     {
       "Identity": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\tiny-slider.css",

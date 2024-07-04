@@ -22,15 +22,12 @@
             }
             <div class="row my-5" style="justify-content:center">
                 <div class="col-6 col-md-6">
-                    
-                    @using (Html.BeginForm("IniciarSesion", "Inicio", FormMethod.Post))
-                    {
-
+                    <form id="loginForm">
                         <div class="row">
                             <div class="form-group py-2">
                                 <div class="input-login">
                                     <span class="fa fa-user p-2"></span>
-                                    @Html.TextBoxFor(m => m.correo, new { @type = "text", @class = "input-l", @id = "usernameL", @placeholder = "Usuario" })
+                                    <input type="text" name="correo" class="input-l" id="usernameL" placeholder="Usuario" />
                                 </div>
                             </div>
                         </div>
@@ -39,13 +36,12 @@
                             <div class="form-group py-2">
                                 <div class="input-login">
                                     <span class="fa fa-lock p-2"></span>
-                                    @Html.TextBoxFor(m => m.contrasenna, new { @type = "password", @class = "input-l", @id = "passwordL", @placeholder = "Contraseña" })
+                                    <input type="password" name="contrasenna" class="input-l" id="passwordL" placeholder="Contraseña" />
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submitBtn" class="btn btn-danger" disabled>Ingresar <i class=" fa-solid fa-arrow-right-to-bracket"> </i></button>
-
-                    }
+                        <button type="button" id="submitBtn" class="btn btn-danger">Ingresar <i class=" fa-solid fa-arrow-right-to-bracket"> </i></button>
+                    </form>
                 </div>
             </div>
             <div class="row my-5">
@@ -61,8 +57,6 @@
                 </a>
             </div>
 
-
-
             <div class="col-6 col-md-6">
                 <div class="feature">
                     <div class="icon">
@@ -72,9 +66,6 @@
                     <p> Fecha: @ViewData["CurrentDate"] ₡ @ViewData["ExchangeRate"]  </p>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 
@@ -83,8 +74,61 @@
             <img src="images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
         </div>
     </div>
-
 </div>
 
-<script src="~/Functions/Functions.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('submitBtn').addEventListener('click', async function () {
+        const correo = document.getElementById('usernameL').value;
+        const contrasenna = document.getElementById('passwordL').value;
 
+        const usuario = {
+            correo,
+            contrasenna
+        };
+
+        try {
+            const response = await fetch('@Url.Action("IniciarSesion", "Inicio")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usuario)
+            });
+
+            if (response.ok) {
+                const mensaje = await response.text();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Acción Realizada',
+                    text: mensaje
+                }).then(() => {
+                    // Redirige a la página principal o a otra página deseada
+                    window.location.href = '@Url.Action("Index", "Home")';
+                });
+            } else {
+                const errorText = await response.text();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: `Hubo un problema al iniciar sesión: ${errorText}`
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: `Hubo un problema al iniciar sesión: ${error.message}`
+            });
+        }
+    });
+
+    document.getElementById('usernameL').addEventListener('input', toggleSubmitButton);
+    document.getElementById('passwordL').addEventListener('input', toggleSubmitButton);
+
+    function toggleSubmitButton() {
+        const correo = document.getElementById('usernameL').value;
+        const contrasenna = document.getElementById('passwordL').value;
+        document.getElementById('submitBtn').disabled = !correo || !contrasenna;
+    }
+</script>

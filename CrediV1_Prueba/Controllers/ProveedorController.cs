@@ -2,11 +2,12 @@
 using CrediV1_Prueba.Models;
 using CrediV1_Prueba.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CrediV1_Prueba.Controllers
 
 {
-
+    [Authorize(Roles = "Administrador,Gerente,Vendedor")]
     [ResponseCache(NoStore = true, Duration = 0)]
     public class ProveedorController : Controller
 	{
@@ -39,14 +40,14 @@ namespace CrediV1_Prueba.Controllers
 			}
 			return View();
 		}
-
-		public IActionResult AgregarProveedor()
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
+        public IActionResult AgregarProveedor()
 		{
 
 			return View();
 		}
-
-		[HttpPost]
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
+        [HttpPost]
 		public async Task<IActionResult> GuardarProveedor([FromBody] ProveedorEnt proveedor)
 		{
 			try
@@ -62,8 +63,8 @@ namespace CrediV1_Prueba.Controllers
 
 
 		}
-
-		[HttpGet]
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
+        [HttpGet]
 		public async Task<IActionResult> EditarProveedor(int Proveedor)
 		{
 			
@@ -71,8 +72,8 @@ namespace CrediV1_Prueba.Controllers
 
 			return View(proveedorEditar); // Pasa el proveedor a la vista
 		}
-
-		[HttpPost]
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
+        [HttpPost]
 		public async Task<IActionResult> GuardarEditarProveedor([FromBody] ProveedorEnt proveedor)
 		{
 			if (proveedor == null || !ModelState.IsValid)
@@ -94,8 +95,8 @@ namespace CrediV1_Prueba.Controllers
 			}
 		}
 
-
-		[HttpPost]
+        [Authorize(Roles = "Administrador,Gerente")]
+        [HttpPost]
 		public async Task<IActionResult> DesactivarProveedor([FromBody] ProveedorEnt idProveedor)
 		{
 			try

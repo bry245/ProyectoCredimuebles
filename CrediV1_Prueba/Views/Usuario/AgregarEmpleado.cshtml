@@ -111,7 +111,7 @@
 
         try {
             // Realizar la llamada fetch
-            const response = await fetch('@Url.Action("GuardarCliente", "Usuario")', {
+            const response = await fetch('@Url.Action("GuardarEmpleado", "Usuario")', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -126,7 +126,7 @@
                     title: 'Usuario Agregado',
                     text: 'El usuario ha sido registrado correctamente.'
                 }).then(() => {
-                    window.location.href = '@Url.Action("ListaClientes", "Usuario")';
+                    window.location.href = '@Url.Action("Usuarios", "Usuario")';
                 });
             } else {
                 // Mostrar mensaje de error si la respuesta no es exitosa

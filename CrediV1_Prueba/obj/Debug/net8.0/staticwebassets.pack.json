@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
+      "Id": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\tablas.css",
+      "PackagePath": "staticwebassets\\css\\tablas.css"
+    },
+    {
       "Id": "C:\\Users\\jason\\Documents\\GitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\tiny-slider.css",
       "PackagePath": "staticwebassets\\css\\tiny-slider.css"
     },

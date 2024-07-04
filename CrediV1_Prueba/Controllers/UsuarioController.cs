@@ -1,10 +1,14 @@
 ﻿using CrediV1_Prueba.Entities;
 using CrediV1_Prueba.Interfaces;
 using CrediV1_Prueba.Models;
+using CrediV1_Prueba.Entities.Otros;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Controllers
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [Authorize(Roles = "Administrador,Gerente")]
     public class UsuarioController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
@@ -12,8 +16,9 @@ namespace CrediV1_Prueba.Controllers
         private string _connection;
         private readonly IUsuarioModel _usuarioModel;
         private readonly IOtherServices _otherServices;
+        private readonly IEmailService _emailService;
 
-        public UsuarioController(IHttpClientFactory clientFactory, IConfiguration configuration, IUsuarioModel usuarioModel,
+        public UsuarioController(IHttpClientFactory clientFactory, IEmailService emailService, IConfiguration configuration, IUsuarioModel usuarioModel,
             IOtherServices otherServices)
         {
             _configuration = configuration;
@@ -21,13 +26,14 @@ namespace CrediV1_Prueba.Controllers
             _connection = _configuration.GetConnectionString("Connection");
             _usuarioModel = usuarioModel;
             _otherServices = otherServices;
+            _emailService = emailService;
         }
         [HttpGet]
-        public  IActionResult ListaClientes()
+        public async  Task<IActionResult> ListaClientes()
         {
             try
             {
-                var usuarios =  _usuarioModel.ListarClientes();
+                var usuarios =   await _usuarioModel.ListarClientes();
 
                 return View(usuarios);
 
@@ -36,6 +42,26 @@ namespace CrediV1_Prueba.Controllers
 
             }
             return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EnviarNotificacion([FromBody] EnviarNotificacion notificacion)
+        {
+            try
+            {
+
+                Console.WriteLine("USUARIO" + notificacion.Usuario);
+                Console.WriteLine("correo" + notificacion.Correo);
+                Console.WriteLine("Mensaje" + notificacion.Mensaje);
+                // Aquí puedes agregar la lógica para enviar el correo electrónico usando tu servicio de correo
+                await _emailService.SendNotificationEmailAsync(notificacion.Correo, notificacion.Mensaje,notificacion.Usuario);
+                return Ok(new { message = "Notificación enviada correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error al enviar la notificación: " + ex.Message });
+            }
         }
 
         [HttpGet]

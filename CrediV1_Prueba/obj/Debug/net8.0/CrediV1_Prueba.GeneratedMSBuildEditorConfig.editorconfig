@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxJbmRleENhamEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -52,6 +56,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/RecuperarContrasenna.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/VerificacionRecuperarContrasenna.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFZlcmlmaWNhY2lvblJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/AgregarProducto.cshtml]
