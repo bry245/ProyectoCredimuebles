@@ -3,6 +3,7 @@ using CrediV1_Prueba.Interfaces;
 using System.Data.SqlClient;
 using System.Data;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Models
 {
@@ -31,8 +32,67 @@ namespace CrediV1_Prueba.Models
 			
 		}
 
+		[HttpPost]
+        public async Task<bool> agregarProducto(ProductoEnt producto)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+              var result = await connection.ExecuteAsync("AgregarProducto",
+                    new { producto.nombre, producto.idCategoria, producto.idProveedor, producto.cantidadStock, producto.costo },
+                    commandType: System.Data.CommandType.StoredProcedure);
+                if (result > 0)
+                {
+                    
+                    return true;
+                }
+                else
+                {
+                    
+                    return false;
+                }
+            
 
-		public async Task<string> DesactivarProducto(ProductoEnt producto)
+			}
+
+        }
+
+
+
+        [HttpPost]
+        public async Task<Respuesta> buscarProducto(int id)
+        {
+            Respuesta resp = new Respuesta();
+
+            using (var connection = new SqlConnection(_connection))
+            {
+
+                var result = await connection.QueryAsync<ProductoEnt>("BuscarProducto",
+                   new {id },
+                   commandType: System.Data.CommandType.StoredProcedure);
+
+                if (result.Count() > 0)
+                {
+                    resp.Codigo = 1;
+                    resp.Mensaje = "OK";
+                    resp.Contenido = result.FirstOrDefault();
+                    return resp;
+                }
+                else
+                {
+                    resp.Codigo = 0;
+                    resp.Mensaje = "La información del usuario ya se encuentra registrada";
+                    resp.Contenido = false;
+                    return resp;
+                }
+
+            }
+
+        }
+
+
+
+
+        public async Task<string> DesactivarProducto(ProductoEnt producto)
 		{
 			using (var connection = new SqlConnection(_connection))
 			{

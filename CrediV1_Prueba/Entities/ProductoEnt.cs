@@ -4,9 +4,13 @@
     {
         public long idProducto { get; set; }
 
-        public string nombre { get; set; }
+        public long idProveedor { get; set; }
 
-        public long idCategoria { get; set; }
+        public string nombre { get; set; }
+		public string proveedor_nombre { get; set; }
+
+
+		public long idCategoria { get; set; }
 
         public int cantidadStock { get; set; }
         

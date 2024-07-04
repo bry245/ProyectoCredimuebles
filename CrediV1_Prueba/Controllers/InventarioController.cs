@@ -13,8 +13,8 @@ public class InventarioController : Controller
 		private readonly IConfiguration _configuration;
 		private string _connection;
 		private readonly IProducto _productoModel;
-    private readonly ICategoria _categoriaModel;
-    private readonly IProveedoresModel _proveedoresModel;
+        private readonly ICategoria _categoriaModel;
+        private readonly IProveedoresModel _proveedoresModel;
 
 
 		public InventarioController(IHttpClientFactory clientFactory, 
@@ -66,7 +66,6 @@ public class InventarioController : Controller
 				var productos = await _productoModel.GetProductos();
 
 
-           
 
 				return View(productos);
 			}
@@ -76,11 +75,109 @@ public class InventarioController : Controller
 			return View();
 		}
 
-    [Authorize(Roles = "Administrador,Gerente")]
-    public IActionResult EditarProducto() { 
-    
-    
-        return View();
+
+
+		public async Task<IActionResult> EditarProducto(int idProducto) { 
+            var producto = await _productoModel.buscarProducto(idProducto);
+            if (producto.Codigo == 1)
+            {
+                var categorias = await _categoriaModel.GetCategorias();
+                var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
+
+                ViewData["categorias"] = categorias;
+                ViewData["proveedores"] = proveedores;
+
+                ProductoEnt resp = new ProductoEnt();
+                resp = (ProductoEnt)producto.Contenido;
+                return View(resp);
+
+            }
+            else {
+                ViewBag["error"] = producto.Codigo;
+            }
+            return View();
+            
+             
+        }
+
+
+        public async Task <IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                Console.WriteLine("Datos del producto" + " " + producto.cantidadStock, producto.idCategoria);
+
+
+                var mensaje = await _productoModel.agregarProducto(producto);
+                if (mensaje == true)
+                {
+                    return RedirectToAction("Index", "Inventario"); ;
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error alagregar el producto: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+
+            
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DesactivarProducto([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                var mensaje = await _productoModel.DesactivarProducto(producto);
+                if (mensaje == "Producto desactivado exitosamente" || mensaje == "Producto activado exitosamente")
+                {
+                    return Ok(mensaje);
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error al cambiar el estado del producto: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+        }
+
+
+
+        public async Task<IActionResult> ActualizarProducto([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                var categorias = await _categoriaModel.GetCategorias();
+                var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
+
+                ViewData["categorias"] = categorias;
+                ViewData["proveedores"] = proveedores;
+
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores aquí
+                ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
+                return View(); // Retornar la vista con el mensaje de error
+            }
+        }
+
+
+
+
     }
 
     [Authorize(Roles = "Administrador,Gerente")]

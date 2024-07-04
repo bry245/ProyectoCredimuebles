@@ -6,7 +6,8 @@ namespace CrediV1_Prueba.Interfaces
 	{
 
 		public Task<IEnumerable<ProductoEnt>> GetProductos();
-
-		public  Task<string> DesactivarProducto(ProductoEnt idProducto);
+        public Task<bool> agregarProducto(ProductoEnt producto);
+		public Task<Respuesta> buscarProducto(int id);
+        public  Task<string> DesactivarProducto(ProductoEnt idProducto);
 	}
 }
