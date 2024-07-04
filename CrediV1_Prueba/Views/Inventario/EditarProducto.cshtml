@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "EditarProducto";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CrediV1_Prueba.Entities.CategoriaEnt> categorias = ViewData["categorias"] as List<CrediV1_Prueba.Entities.CategoriaEnt>;
+    List<CrediV1_Prueba.Entities.ProveedorEnt> proveedores = ViewData["proveedores"] as List<CrediV1_Prueba.Entities.ProveedorEnt>;
+
+
 }
 
 @if (ViewBag.error != null)
@@ -16,50 +20,147 @@
 			<div class="form-outline mb-5 mb-xl-4">
 				<h2>Editar Producto</h2>
 			</div>
+            <form id="actualizarProductoForm">
 			<div class="row">
+                 
 				<div class="col-lg-8 col-xl-6">
 					<div class="form-outline mb-5 mb-xl-4">
 						<label>Nombre de Producto</label>
-						<input type="text" id="nombreProducto" name="nombreProducto" class="form-control form-control-lg" value="@Model.nombre" placeholder="Nombre del Producto" />
+                            <input type="text" id="Nombre" name="Nombre" class="form-control form-control-lg" value="@Model.nombre" placeholder="Nombre del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
 						<label>Precio</label>
-						<input type="text" id="precio" name="precio" class="form-control form-control-lg" value="@Model.costo" placeholder="Precio del Producto" />
+						<input type="text" id="Costo" name="Costo" class="form-control form-control-lg" value="@Model.costo" placeholder="Precio del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
 						<label>Cantidad en Stock</label>
-						<input type="text" id="stock" name="stock" class="form-control form-control-lg" value="@Model.cantidadStock" placeholder="Cantidad en Stock" />
+                            <input type="text" id="CantidadStock" name="CantidadStock" class="form-control form-control-lg" value="@Model.cantidadStock" placeholder="Cantidad en Stock" />
 					</div>
-					<div class="form-outline mb-4 mb-xl-4">
-						<label>Imagen</label>
-						<input type="file" id="imagenProducto" name="imagenProducto" class="form-control form-control-lg" placeholder="Imagen del Producto" />
-					</div>
+
+                        <div class="form-outline mb-4 mb-xl-4">
+                            <button type="submit" class="btn " id="button-addon2">Actualizar Producto</button>
+                            
+                        </div>
+
+
 				</div>
 				<div class="col-lg-8 col-xl-6">
-					<div class="form-outline mb-5 mb-xl-4">
-						<label>Proveedor</label>
-						<input type="text" id="fabricante" name="fabricante" class="form-control form-control-lg" value="@Model.proveedor_nombre" placeholder="Proveedor" />
-					</div>
-					<div class="form-outline mb-5 mb-xl-4">
-						<label>Categoria</label>
-						<input type="text" id="categoria" name="categoria" class="form-control form-control-lg" value="@Model.CategoriaNombre" placeholder="Categoría del Producto" />
-					</div>
+                    <div class="form-outline mb-4 mb-xl-4">
+                    <label>Proveedor</label>
+
+                    <select id="idProveedor" name="idProveedor" class="form-control form-control-lg" required>
+
+                                <option value="@Model.idProveedor">@Model.proveedor_nombre</option>
+                        @foreach (var proveedor in proveedores)
+                        {
+                            <option value="@proveedor.idProveedor">@proveedor.nombre</option>
+                        }
+
+                    </select>
+                    </div>
+
+                    <div class="form-outline mb-4 mb-xl-4">
+                    <label>Categoria</label>
+                     <select id="idCategoria" name="idCategoria" class="form-control form-control-lg" required>
+                                <option value="@Model.idCategoria">@Model.CategoriaNombre</option>
+                            @foreach (var categoria in categorias)
+                            {
+                                <option value="@categoria.idCategoria">@categoria.descripcion  </option>
+                            }
+                    </select>
+
+
+
+                    </div>
 					<div class="form-outline mb-4 mb-xl-4">
-						<label>Coódigo</label>
-						<input type="text" id="codigoProducto" name="codigoProducto" class="form-control form-control-lg" value="@Model.idProducto" placeholder="Código del Producto" />
+						<label>Código</label>
+                            <input type="text" id="idProducto" name="idProducto" class="form-control form-control-lg" value="@Model.idProducto" placeholder="Código del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
 						<a href="@Url.Action("Index", "Inventario")" class="btn btn-soft" id="button-addon2"> <i class="">Volver </i> </a>
 					</div>
 				</div>
-				<div class="col-lg-8 col-xl-6">
-					<a href="@Url.Action("EditarProducto", "Inventario")" class="btn btn" id="button-addon2"> <i class="">Editar Producto</i> </a>
-				</div>
-			</div>
+                </div>
+                </form>
+				
+			
 		</div>
 	</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('actualizarProductoForm');
 
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Obtener los valores de los campos del formulario
+            const nombre = document.getElementById('Nombre').value;
+            const idProducto = document.getElementById('idProducto').value;
+            const costo = document.getElementById('Costo').value;
+            const cantidadStock = document.getElementById('CantidadStock').value;
+            const idCategoria = document.getElementById('idCategoria').value;
+            const idProveedor = document.getElementById('idProveedor').value;
+
+            // Crear el objeto de datos
+            const data = {
+                Nombre: nombre,
+                idProducto: parseInt(idProducto),
+                Costo: parseFloat(costo),
+                CantidadStock: parseInt(cantidadStock),
+                idCategoria: parseInt(idCategoria),
+                idProveedor: parseInt(idProveedor),
+            };
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Agregarás este producto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#c31e1e',
+                confirmButtonText: 'Sí, agregar',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch('@Url.Action("ActualizarProducto", "Inventario")', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (response.ok) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Producto agregado',
+                                text: 'El producto ha sido agregado correctamente.'
+                            }).then(() => {
+                                window.location.href = '@Url.Action("ListadoProducto", "Inventario")';
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un problema al agregar el producto.'
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al agregar el producto.'
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+</script>
 

@@ -64,8 +64,6 @@ namespace CrediV1_Prueba.Controllers
 				var productos = await _productoModel.GetProductos();
 
 
-               
-
 				return View(productos);
 			}
 			catch (Exception ex)
@@ -79,6 +77,12 @@ namespace CrediV1_Prueba.Controllers
             var producto = await _productoModel.buscarProducto(idProducto);
             if (producto.Codigo == 1)
             {
+                var categorias = await _categoriaModel.GetCategorias();
+                var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
+
+                ViewData["categorias"] = categorias;
+                ViewData["proveedores"] = proveedores;
+
                 ProductoEnt resp = new ProductoEnt();
                 resp = (ProductoEnt)producto.Contenido;
                 return View(resp);
@@ -146,8 +150,28 @@ namespace CrediV1_Prueba.Controllers
 
 
 
+        public async Task<IActionResult> ActualizarProducto([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                var categorias = await _categoriaModel.GetCategorias();
+                var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
 
-       
+                ViewData["categorias"] = categorias;
+                ViewData["proveedores"] = proveedores;
+
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores aquí
+                ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
+                return View(); // Retornar la vista con el mensaje de error
+            }
+        }
+
+
 
     }
 
