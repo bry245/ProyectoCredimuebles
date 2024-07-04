@@ -11,6 +11,23 @@
         white-space: nowrap;
         width: 150px; /* Ajusta el ancho según tus necesidades */
     }
+
+    /* Centrar el texto en las celdas de la tabla */
+    table#mitabla th, table#mitabla td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    /* Centrar los botones dentro de la columna de acciones */
+    .acciones-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .acciones-col button, .acciones-col a {
+            margin: 0 5px; /* Espacio entre los botones */
+        }
 </style>
 
 <div class="container">
@@ -19,7 +36,7 @@
     </div>
 
     <div class="container mt-4">
-        <table id="mitabla" class="table table-hover" style="text-align:center">
+        <table id="mitabla" class="table table-hover" >
             <thead>
                 <tr>
                     <th>Nombre del Producto</th>
@@ -41,7 +58,7 @@
                         @if (producto.estado)
                         {
                             <td>Activo</td>
-                            <td style="text-align:center">
+                            <td style="text-align:left">
                                 <button class="btn btn-danger confirmButtonInactivar" data-id="@producto.idProducto">Inactivar</button>
                                 <a class="btn btn-danger" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
                             </td>
@@ -49,7 +66,7 @@
                         else
                         {
                             <td>Inactivo</td>
-                            <td style="text-align:center">
+                            <td style="text-align:left">
                                 <button class="btn btn-danger confirmButtonInactivar" data-id="@producto.idProducto">Activar</button>
                                 <a class="btn btn-danger" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
                             </td>

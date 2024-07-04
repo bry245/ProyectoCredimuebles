@@ -19,20 +19,25 @@
 			<div class="row">
 				<div class="col-lg-8 col-xl-6">
 					<div class="form-outline mb-5 mb-xl-4">
+						<label>Nombre de Producto</label>
 						<input type="text" id="nombreProducto" name="nombreProducto" class="form-control form-control-lg" value="@Model.nombre" placeholder="Nombre del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
+						<label>Precio</label>
 						<input type="text" id="precio" name="precio" class="form-control form-control-lg" value="@Model.costo" placeholder="Precio del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
+						<label>Cantidad en Stock</label>
 						<input type="text" id="stock" name="stock" class="form-control form-control-lg" value="@Model.cantidadStock" placeholder="Cantidad en Stock" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
+						<label>Imagen</label>
 						<input type="file" id="imagenProducto" name="imagenProducto" class="form-control form-control-lg" placeholder="Imagen del Producto" />
 					</div>
 				</div>
 				<div class="col-lg-8 col-xl-6">
 					<div class="form-outline mb-5 mb-xl-4">
+						<label>Proveedor</label>
 						<input type="text" id="fabricante" name="fabricante" class="form-control form-control-lg" value="@Model.proveedor_nombre" placeholder="Proveedor" />
 					</div>
 					<div class="form-outline mb-5 mb-xl-4">
@@ -40,6 +45,7 @@
 						<input type="text" id="categoria" name="categoria" class="form-control form-control-lg" value="@Model.CategoriaNombre" placeholder="Categoría del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
+						<label>Coódigo</label>
 						<input type="text" id="codigoProducto" name="codigoProducto" class="form-control form-control-lg" value="@Model.idProducto" placeholder="Código del Producto" />
 					</div>
 					<div class="form-outline mb-4 mb-xl-4">
@@ -47,7 +53,7 @@
 					</div>
 				</div>
 				<div class="col-lg-8 col-xl-6">
-					<a href="@Url.Action("AgregarProducto", "Inventario")" class="btn btn" id="button-addon2"> <i class="">Agregar Producto</i> </a>
+					<a href="@Url.Action("EditarProducto", "Inventario")" class="btn btn" id="button-addon2"> <i class="">Editar Producto</i> </a>
 				</div>
 			</div>
 		</div>
