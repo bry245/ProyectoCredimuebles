@@ -3,47 +3,47 @@
     ViewData["Title"] = "Listado de Productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
-
-<style>
-    /* Estilos personalizados para las columnas */
-    .acciones-col {
-        white-space: nowrap;
-        width: 150px; /* Ajusta el ancho según tus necesidades */
-    }
-
-    /* Centrar el texto en las celdas de la tabla */
-    table#mitabla th, table#mitabla td {
-        text-align: center;
-        vertical-align: middle;
-    }
-
-    /* Centrar los botones dentro de la columna de acciones */
-    .acciones-col {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-        .acciones-col button, .acciones-col a {
-            margin: 0 5px; /* Espacio entre los botones */
-        }
-</style>
 
 @section Estilos {
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+
+    <style>
+        /* Estilos personalizados para las columnas */
+        .acciones-col {
+            white-space: nowrap;
+            width: 150px; /* Ajusta el ancho según tus necesidades */
+        }
+
+        /* Centrar el texto en las celdas de la tabla */
+        table#productosTable th, table#productosTable td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Centrar los botones dentro de la columna de acciones */
+        .acciones-col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .acciones-col button, .acciones-col a {
+                margin: 0 5px; /* Espacio entre los botones */
+            }
+    </style>
+
     <link href="~/css/tablas.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 }
 
 <div class="container">
     <div class="container mt-4">
-
-        <a href="@Url.Action("AgregarProducto", "Inventario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-plus"></i> Agregar Producto </a>
+        <a href="@Url.Action("AgregarProducto", "Inventario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-plus"></i> Agregar Producto
+        </a>
     </div>
 
     <div class="container mt-4">
         <table id="productosTable" class="table table-striped table-bordered" style="width:100%">
-
             <thead>
                 <tr>
                     <th>Nombre del Producto</th>
@@ -58,15 +58,13 @@
                 @foreach (var producto in Model)
                 {
                     <tr>
-                        <input type="hidden"  />
                         <td>@producto.nombre</td>
-                        <td>@producto.costo</td>   
+                        <td>@producto.costo</td>
                         <td>@producto.cantidadStock</td>
                         <td>@producto.CategoriaNombre</td>
                         @if (producto.estado)
                         {
                             <td>Activo</td>
-
                             <td style="text-align:center">
                                 <button class="btn btn-danger confirmButtonInactivar"
                                         data-id="@producto.idProducto"
@@ -75,13 +73,11 @@
                                     Inactivar
                                 </button>
                                 <a class="btn btn-warning" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
-
                             </td>
                         }
                         else
                         {
                             <td>Inactivo</td>
-
                             <td style="text-align:center">
                                 <button class="btn btn-success confirmButtonInactivar"
                                         data-id="@producto.idProducto"
@@ -90,8 +86,6 @@
                                     Activar
                                 </button>
                                 <a class="btn btn-warning" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
-
-
                             </td>
                         }
                     </tr>
@@ -101,22 +95,10 @@
     </div>
 </div>
 
-
 @section Scripts {
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<!-- Carga de jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.querySelectorAll('.confirmButtonInactivar').forEach(button => {
-        button.addEventListener('click', async function () {
-            let idProducto = this.getAttribute('data-id');
-
 
     <script>
         $(document).ready(function () {
@@ -191,46 +173,5 @@
                 });
             });
         });
-
-
+    </script>
 }
-
-    });
-</script>
-
-<!-- Inicialización de DataTables -->
-<script>
-    $(document).ready(function () {
-        $('#mitabla').DataTable({
-            "columnDefs": [
-                { "width": "450px", "targets": 4 } // Ajusta el índice según la columna "Acciones"
-            ],
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "oAria": {
-                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
-            }
-        });
-    });
-</script>
-
-
