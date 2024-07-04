@@ -127,7 +127,7 @@
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await fetch('@Url.Action("ActualizarProducto", "Inventario")', {
+                        const response = await fetch('@Url.Action("actualizarProducto", "Inventario")', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -135,7 +135,7 @@
                             body: JSON.stringify(data)
                         });
 
-                        if (response.ok) {
+                        
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Producto agregado',
@@ -143,13 +143,7 @@
                             }).then(() => {
                                 window.location.href = '@Url.Action("ListadoProducto", "Inventario")';
                             });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'Hubo un problema al agregar el producto.'
-                            });
-                        }
+                        
                     } catch (error) {
                         Swal.fire({
                             icon: 'error',

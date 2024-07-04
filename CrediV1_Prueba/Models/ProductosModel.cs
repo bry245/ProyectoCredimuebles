@@ -110,6 +110,28 @@ namespace CrediV1_Prueba.Models
 		}
 
 
+        public async Task<bool> actualizarProducto(ProductoEnt producto)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var result = await connection.ExecuteAsync("ActualizarProducto",
+                      new { producto.nombre, producto.idCategoria,producto.idProducto, producto.idProveedor, producto.cantidadStock, producto.costo },
+                      commandType: System.Data.CommandType.StoredProcedure);
+                if (result > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+
+                    return false;
+                }
+
+
+            }
+
         }
+    }
 
 }

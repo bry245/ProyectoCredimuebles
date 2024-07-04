@@ -97,33 +97,6 @@ namespace CrediV1_Prueba.Controllers
         }
 
 
-        public async Task <IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
-        {
-            try
-            {
-                Console.WriteLine("Datos del producto" + " " + producto.cantidadStock, producto.idCategoria);
-
-
-                var mensaje = await _productoModel.agregarProducto(producto);
-                if (mensaje == true)
-                {
-                    return RedirectToAction("Index", "Inventario"); ;
-                }
-                else
-                {
-                    return NotFound(mensaje);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Registra el error para fines de depuración
-                Console.WriteLine($"Error alagregar el producto: {ex.Message}");
-                return StatusCode(500, "Error interno del servidor.");
-            }
-
-            
-        }
-
 
         [HttpPost]
         public async Task<IActionResult> DesactivarProducto([FromBody] ProductoEnt producto)
@@ -150,35 +123,62 @@ namespace CrediV1_Prueba.Controllers
 
 
 
+        public async Task<IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                Console.WriteLine("Datos del producto" + " " + producto.cantidadStock, producto.idCategoria);
+
+
+                var mensaje = await _productoModel.agregarProducto(producto);
+                if (mensaje == true)
+                {
+                    return RedirectToAction("Index", "Inventario"); ;
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error alagregar el producto: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+
+
+        }
+
         public async Task<IActionResult> ActualizarProducto([FromBody] ProductoEnt producto)
         {
             try
             {
-                var categorias = await _categoriaModel.GetCategorias();
-                var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
-
-                ViewData["categorias"] = categorias;
-                ViewData["proveedores"] = proveedores;
-
-
-                return View();
+                var resp = await _productoModel.actualizarProducto(producto);
+                if (resp == true)
+                {
+                    return RedirectToAction("ListadoProduct", "Inventario"); ;
+                }
+                else
+                {
+                    // Aquí también debes retornar el resultado de RedirectToAction
+                    return NotFound(resp); 
+                }
             }
             catch (Exception ex)
             {
                 // Manejo de errores aquí
                 ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
-                return View(); // Retornar la vista con el mensaje de error
+                // Aquí también debes asegurarte de retornar algo, en este caso, una redirección
+                return RedirectToAction("ListadoProduct", "Inventario");
             }
         }
 
 
 
+
+
+
     }
-
-
-
-
-
-
 
 }
