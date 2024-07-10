@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Eeh/oby7tz9iITxajElON74SVWx3OfgHYgmXb0AS/uo=",
+  "Hash": "0DEtl5ptTG5GxjGXBzi5H35OXZbeiRG6iwkEJ8T9JME=",
   "Source": "CrediV1_Prueba",
   "BasePath": "_content/CrediV1_Prueba",
   "Mode": "Default",
@@ -205,6 +205,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\tiny-slider.css"
+    },
+    {
+      "Identity": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\UsuarioCards.css",
+      "SourceId": "CrediV1_Prueba",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\",
+      "BasePath": "_content/CrediV1_Prueba",
+      "RelativePath": "css/UsuarioCards.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\UsuarioCards.css"
     },
     {
       "Identity": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\Functions\\CrearVenta.js",

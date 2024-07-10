@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace CrediV1_Prueba.Controllers
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,15 +14,32 @@ namespace CrediV1_Prueba.Controllers
         {
             _logger = logger;
         }
+
+        //
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
         [HttpGet]
-        
         public IActionResult Index()
         {
+
+
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var username = HttpContext.Session.GetString("Nombre");
+
+            ViewData["Nombre"] = username;
             return View();
         }
 
         [HttpPost]
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult AccessDenied()
         {
             return View();
         }

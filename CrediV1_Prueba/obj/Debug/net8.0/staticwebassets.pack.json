@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\css\\Reportes.css"
     },
     {
+      "Id": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\UsuarioCards.css",
+      "PackagePath": "staticwebassets\\css\\UsuarioCards.css"
+    },
+    {
       "Id": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },

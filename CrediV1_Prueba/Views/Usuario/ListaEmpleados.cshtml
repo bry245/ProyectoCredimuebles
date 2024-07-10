@@ -1,0 +1,147 @@
+﻿@model IEnumerable<CrediV1_Prueba.Entities.UsuarioEnt>
+@{
+    ViewData["Title"] = "Listado de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+    <link href="~/css/tablas.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+}
+
+<div class="container">
+    <div class="container mt-4" id="botonesagregar" style="padding-bottom:30px;padding-top:10px">
+        <a href="@Url.Action("AgregarEmpleado","Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-plus"></i> Agregar Cliente
+        </a>
+        <a href="@Url.Action("Usuarios","Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-sign-out-alt"></i> Volver
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table id="usuariosTable" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Correo Electrónico</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+                @foreach (var usuario in Model)
+                {
+
+                    @if (usuario.idRol !=5)
+                    {
+
+                        <tr>
+                            <td>@usuario.nombreCompleto</td>
+                            <td>@usuario.telefono</td>
+                            <td>@usuario.correo</td>
+                            <td>@(usuario.estado ? "Activo" : "Inactivo")</td>
+                            <td style="text-align:start">
+                                <button class="btn @(usuario.estado ? "btn-danger" : "btn-success") confirmButtonInactivar"
+                                        data-id="@usuario.idUsuario"
+                                        data-nombre="@usuario.nombre"
+                                        data-correo="@usuario.correo"
+                                        data-telefono="@usuario.telefono"
+                                        data-estado="@usuario.estado.ToString().ToLower()">
+                                    @(usuario.estado ? "Inactivar" : "Activar")
+                                </button>
+                                <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#usuariosTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "lengthChange": true,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            $('.confirmButtonInactivar').on('click', function () {
+                let idUsuario = $(this).data('id');
+                let estado = $(this).data('estado');
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: estado ? "¿Quieres inactivar este usuario?" : "¿Quieres activar este usuario?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#0d6efd',
+                    cancelButtonColor: '#c31e1e',
+                    confirmButtonText: 'Sí',
+                    cancelButtonText: 'Cancelar'
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch('@Url.Action("DesactivarActivarUsuario", "Usuario")', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ idUsuario: idUsuario })
+                            });
+
+                            if (response.ok) {
+                                const mensaje = await response.text();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Acción Realizada',
+                                    text: mensaje
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Hubo un problema al cambiar el estado del usuario.'
+                                });
+                            }
+                        } catch (error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un problema al cambiar el estado del usuario.'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

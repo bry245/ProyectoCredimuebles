@@ -5,15 +5,23 @@ namespace CrediV1_Prueba.Interfaces
 {
     public interface IUsuarioModel
     {
-        public UsuarioEnt? IniciarSesion(UsuarioEnt entidad);
-        public UsuarioEnt? ConsultarCorreo(UsuarioEnt entidad);
-        public int validarCambioContrasenna(UsuarioEnt usuario);
-        public List<SelectListItem>? ConsultarRoles();
-        public UsuarioEnt? RegistrarUsuario(UsuarioEnt usuario);
-        public List<UsuarioEnt>? ListarUsuarios();
-        public UsuarioEnt? ConsultarUsuario(long q);
-        public int ActualizarUsuario(UsuarioEnt usuario);
-        public int CambiarEstado(long q);
-        public List<UsuarioEnt>? ListarClientes();
+     
+      
+
+
+        public Task<UsuarioEnt> consultarUsuariobyId(int idUsuario);
+
+        public Task<UsuarioEnt> consultarUsuariobyCorreo(string correo);
+
+        public Task<IEnumerable<RolEnt>> ConsultarRoles();
+        public  Task? RegistrarUsuario(UsuarioEnt usuario);
+        public  List<UsuarioEnt>? ListarUsuarios();
+       
+        public Task ActualizarUsuario(UsuarioEnt usuario);
+
+        public Task <List<UsuarioEnt>>? ListarClientes();
+
+        public  Task<string> DesactivarActivarUsuario(UsuarioEnt usuario);
+
     }
 }

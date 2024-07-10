@@ -1,431 +1,235 @@
-﻿@model CrediV1_Prueba.Entities.UsuarioEnt
+﻿@model IEnumerable<CrediV1_Prueba.Entities.UsuarioEnt>
 @{
-    ViewData["Title"] = "ListaClientes";
-
+    ViewData["Title"] = "Listado de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="text-center ">
-    <div class="hero-subMenu">
-        <h1>Clientes <span clsas="d-block">- Usuarios</span></h1>
-    </div>
-</div>
 
+@section Estilos {
+    <link href="~/css/tablas.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+}
 
 <div class="container">
-    <h2>Lista De Clientes</h2>
+    <div class="container mt-4">
+        <a href="@Url.Action("AgregarCliente", "Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-plus"></i> Agregar Cliente
+        </a>
+        <a href="@Url.Action("Usuarios", "Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-sign-out-alt"></i> Volver
+        </a>
+    </div>
 
     <div class="container mt-4">
-        <div class="row justify-content-end">
-            <div class="col-md-6">
-                <form action="#" method="GET" class="form-inline">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                        </div>
-                        <button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i>  </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <table class="table table-hover" style="text-align:center">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Inactivar</th>
-                <th>Actualizar</th>
-                <th>Notificar</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var it in ViewBag.Clientes)
-            {
-                @if (@it.descripcionRol == "Cliente")
+        <table id="usuariosTable" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Correo Electrónico</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in Model)
                 {
-                    <tr>
-                        <td>@it.nombreCompleto</td>
-                        <td>@it.correo</td>
-                        <td>@it.telefono</td>
-                        <td>@it.cedula</td>
-                        <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Inactivar</button></td>
-                        <td style="text-align:center"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></td>
-                        <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
-
-                    </tr>
-                }
-            }
-           
-           
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation example" style="background-color:white">
-        <ul class="pagination justify-content-center" style="background-color:#dce5e4">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Siguiente</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="product-section">
-        <div class="container">
-            <div class="row">
-
-                <!-- RegistrarCliente -->
-                <div class="col-md-12 col-lg-3 mt-0 mb-lg-0">
-                    <h2 class="mb-4 section-title">Registrar Cliente</h2>
-                    <i class="fa  fa-circle-info"></i>
-                    <p class="mb-3">
-                        Ingrese los datos solicitados para registrar un nuevo cliente
-                    </p>
-                    <p><a href="shop.html" class="btn">Agregar</a></p>
-                </div>
-
-                <div class="col-12 col-md-4 col-lg mb-5 mb-md-0 ">
-                    <form>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group ">
-                                    <label class="text-black" for="fname">Nombre</label>
-                                    <input type="text" class="form-control input-form" id="fname">
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="form-group">
-                                    <label class="text-black" for="lname">Apellidos</label>
-                                    <input type="text" class="form-control input-form " id="lname">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label class="text-black" for="lname">Cédula</label>
-                                    <input type="text" class="form-control input-form " id="lname">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="text-black" for="email">Correo</label>
-                                    <input type="email" class="form-control input-form" id="email">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="text-black" for="phone">Teléfono</label>
-                                    <input type="number" class="form-control input-form" id="phone">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-5">
-                            <label class="text-black" for="message">Dirección</label>
-                            <textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="text-center">
-        <div class="hero-subMenu">
-            <h1> <span clsas="d-block">Empleados</span></h1>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-lg-3" style="background-color:white">
-                @{
-                    var message = TempData["Mensaje"] as string;
-                }
-                @if (!string.IsNullOrEmpty(message))
-                {
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <b>@message</b>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                }
-
-                <h3>Registrar Empleado</h3>
-                @using(Html.BeginForm("RegistrarUsuario","Usuario",FormMethod.Post))
-                
-                {
-                    <div>
-                        <div class="form-group">
-                            <label class="text-black" for="fname">Nombre</label>
-                            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control input-form",@type="text"})
-                        </div>
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <label class="text-black" for="lname">Apellidos</label>
-                            @Html.TextBoxFor(m => m.apellidos, new { @class = "form-control input-form", @type = "text" })
-
-                        </div>
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <label class="text-black" for="lname">Cedula</label>
-                            @Html.TextBoxFor(m=>m.cedula , new { @class = "form-control input-form", @type = "text" })
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <label class="text-black">Rol</label>
-                            @Html.DropDownListFor(m => m.idRol, ViewBag.Roles as List<SelectListItem>, new { @style = "color:black", @class = "form-group form-control input-form" })
-
-
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="form-group">
-                                <label class="text-black" for="phone">Teléfono</label>
-                                @Html.TextBoxFor(m => m.telefono, new { @class = "form-control input-form", @pattern = "[0-9]{8}",@maxlength = "8" })
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-black" for="email">Correo</label>
-                        @Html.TextBoxFor(m => m.correo, new { @class = "form-control input-form", @type = "email" })
-
-                    </div>
-                    <div class="form-group mb-5">
-                        <label class="text-black" for="message">Dirección</label>
-                        @Html.TextAreaFor(m => m.direccion, new { @class = "form-control input-form", @type = "text", @cols="30",@rows="3"})
-                    </div>
-                    <p><button type="submit" class="btn">Agregar</button> </p>
-                    
-
-                }
-            </div>
-
-            <div class="col-lg-9" style="background-color:white">
-                <div class="container">
-                    <h2>Lista De Empleados</h2>
-
-                    <div class="container mt-4">
-                        <div class="row justify-content-end">
-                            <div class="col-md-9">
-                                <form action="#" method="GET" class="form-inline">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
-                                        <div class="input-group-append">
-                                        </div>
-                                        <button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i>  </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table table-hover" style="text-align:center" id="tabla-Usuarios">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Telèfono</th>
-                                <th>Rol</th>
-                                @if (Context.Session.GetString("Rol") == "Gerente")
-                                    {
-                                <th>Actualizar</th>
-                                    }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(var item in ViewBag.Usuarios)
+                    @if(usuario.idRol == 5)
+                    {
+                        <tr>
+                            <td>@usuario.nombreCompleto</td>
+                            <td>@usuario.telefono</td>
+                            <td>@usuario.correo</td>
+                            @if (usuario.estado)
                             {
-                                <tr>
-                                    <td>@item.nombreCompleto</td>
-                                    <td>@item.correo</td>
-                                    <td>@item.telefono</td>
-                                    <td>@item.descripcionRol</td>
-                                    @if (Context.Session.GetString("Rol") == "Gerente")
-                                    {
-                                    <td style="text-align:center"><a href="@Url.Action("ActualizarUsuario","Usuario",new{q=item.idUsuario})"><button class="btn btn-danger" data-toggle="modal" id="btn-Modal">Ver Detalles <i class="fa fa-bars"></i></button></a></td>
-                                    }
-                                </tr>
+                                <td>Activo</td>
+                                <td style="text-align:start">
+                                    <button class="btn btn-danger confirmButtonInactivar"
+                                            data-id="@usuario.idUsuario"
+                                            data-nombre="@usuario.nombre"
+                                            data-correo="@usuario.correo"
+                                            data-telefono="@usuario.telefono"
+                                            data-estado="false">
+                                        Inactivar
+                                    </button>
+                                    <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">
+                                        <i class="fa fa-edit"></i> Editar
+                                    </a>
+                                    <button class="btn" onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
+                                        <i class="fa fa-envelope"></i> Enviar Notificación
+                                    </button>
+                                </td>
                             }
-                            
-
-                        </tbody>
-                    </table>
-                    <nav aria-label="Page navigation example" style="background-color:white">
-                        <ul class="pagination justify-content-center" style="background-color:#dce5e4">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Siguiente</a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <!--Modal para actualizar informaciòn-->
-    <div class="modal" id="ModalClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Actulizar Información</h5>
-                    <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text1" class="col-form-label">Apellidos:</label>
-                            <input class="form-control" id="message-text1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text2" class="col-form-label">Correo:</label>
-                            <input class="form-control" id="message-text2">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text4" class="col-form-label">Telèfono:</label>
-                            <input class="form-control" id="message-text4">
-                        </div>
-                        <div class="mb-3">
-                            <label class="text-black" for="message">Dirección</label>
-                            <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-mdb-ripple-init>Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-
-
-
-
-<!--MODAL DE INACTIVACIÓN-->
-<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-black">
-                <p>¿Estás seguro de que deseas inactivar este usuario?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" style="background-color:red" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirmButton">Inactivar</button>
-            </div>
-        </div>
+                            else
+                            {
+                                <td>Inactivo</td>
+                                <td style="text-align:start">
+                                    <button class="btn btn-success confirmButtonInactivar"
+                                            data-id="@usuario.idUsuario"
+                                            data-nombre="@usuario.nombre"
+                                            data-correo="@usuario.correo"
+                                            data-telefono="@usuario.telefono"
+                                            data-estado="true">
+                                        Activar
+                                    </button>
+                                    <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
+                                    <button class="btn " onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
+                                        <i class="fa fa-envelope"></i> Enviar Notificación
+                                    </button>
+                                </td>
+                            }
+                        </tr>
+                    }
+                   
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
-<!--MODAL DE NOTIFICACION-->
-<div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">Enviar Notificación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-black">
-                <p>Usuario:</p>
-                <form>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                    <div class="form-group mb-5">
-                        <label class="text-black" for="message">Mensage</label>
-                        <textarea name="" class="form-control input-form" id="message" cols="30" rows="5"></textarea>
-                    </div>
+    <script>
+        function enviarNotificacion(usuario, correo) {
+            Swal.fire({
+                title: 'Enviar Notificación',
+                html: `
+                            <div class="mb-3">
+                                <label class="form-label">Usuario:</label>
+                                <input type="text" class="form-control" id="usuario" readonly value="${usuario}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Correo Electrónico:</label>
+                                <input type="email" class="form-control" id="correo" readonly value="${correo}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mensaje:</label>
+                                <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                            </div>
+                        `,
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                focusConfirm: false,
+                preConfirm: () => {
+                    const mensaje = document.getElementById('mensaje').value;
 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="confirmButton">Enviar</button>
-            </div>
-        </div>
-    </div>
-</div>
+                    if (!mensaje) {
+                        Swal.showValidationMessage('El mensaje no puede estar vacío');
+                        return false;
+                    }
 
+                    const data = {
+                        usuario: usuario,
+                        correo: correo,
+                        mensaje: mensaje
+                    };
 
-
-
-
-
-
-
-<script>
-    // Obtener el modal Para actualizar
-    var modal = document.getElementById("ModalClientes");
-
-    // Obtener el botón que abre el btn
-    var btnsMostrarModal = document.getElementById("btn-Modal");
-
-    // Obtener el span que cierra el modal
-    var span = document.getElementsByClassName("btn-close")[0];
-    var cerrar = document.getElementById("btn-cerrar");
-
-
-    btnsMostrarModal.onclick = function () {
-        // Obtener el ID de la fila de la tabla
-        // var id = this.getAttribute("data-id");
-
-        // Llamar a una función para cargar la información detallada (debes implementarla)
-        // cargarInformacionDetalle(id);
-
-        // Mostrar el modal
-        modal.style.display = "block";
-        document.body.classList.add("modal-open");
-    }
-
-    // Manejar clic en el span para cerrar el modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-
-    // Cuando el usuario hace clic fuera del modal, ciérralo
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+                    return fetch('/Usuario/EnviarNotificacion', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(`Error al enviar la notificación: ${error}`);
+                        });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Notificación enviada',
+                        text: 'La notificación se ha enviado correctamente.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
         }
-    }
 
-    // Función para cargar la información detallada (debes implementarla)
-    function cargarInformacionDetalle(id) {
-        // Aquí puedes usar AJAX para cargar la información desde el servidor
-        // Por ejemplo, puedes hacer una llamada a un controlador de ASP.NET Core
-        // y devolver la información detallada en formato JSON, luego mostrarla en el modal.
-    }
+        $(document).ready(function () {
+            $('#usuariosTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "ordering": true,
+                "pageLength": 10,
+                "language": {
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente"
+                    },
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ filas por página",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ filas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 filas",
+                    "emptyTable": "No hay datos disponibles en la tabla",
+                    "infoFiltered": "(filtrado de _MAX_ filas en total)",
+                    "zeroRecords": "No se encontraron coincidencias"
+                }
+            });
 
-</script>
+            $('.confirmButtonInactivar').on('click', function () {
+                let idUsuario = $(this).data('id');
+                let nombre = $(this).data('nombre');
+                let correo = $(this).data('correo');
+                let telefono = $(this).data('telefono');
+                let estado = $(this).data('estado');
 
+                let accion = estado ? "activar" : "inactivar";
+
+                Swal.fire({
+                    title: `¿Estás seguro de ${accion} a ${correo}?`,
+                    text: ``,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, continuar',
+                    cancelButtonText: 'Cancelar'
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch('/Usuario/DesactivarActivarUsuario', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ idUsuario: idUsuario })
+                            });
+
+                            if (response.ok) {
+                                const mensaje = await response.text();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Acción Realizada',
+                                    text: mensaje
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                throw new Error('Error en la solicitud');
+                            }
+                        } catch (error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un problema al cambiar el estado del usuario.'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

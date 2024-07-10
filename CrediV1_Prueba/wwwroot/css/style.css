@@ -25,12 +25,17 @@
         color: #cabebe;
     }
 body {
-    overflow-x: hidden;
+    
     position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .content {
     transition: filter 0.3s ease;
+    flex: 1;
 }
 
 /* Estilos para atenuar el fondo cuando se abre el modal */
@@ -864,6 +869,10 @@ a {
 .footer-section {
     padding: 80px 0;
     background: #ffffff;
+    background-color: gainsboro;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
 }
 
     .footer-section .relative {

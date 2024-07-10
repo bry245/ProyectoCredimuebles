@@ -1,171 +1,173 @@
 ﻿@model IEnumerable<CrediV1_Prueba.Entities.ProveedorEnt>
 @{
-	ViewData["Title"] = "ListadoProveedor";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "ListadoProveedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Estilos {
+    <link href="~/css/tablas.css" rel="stylesheet" />
+}
+
 
 <div class="container">
 
-	<div class="container mt-4">
-		<a href="@Url.Action("AgregarProveedor","Proveedor")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Proveedor</i>  </a>
-		<div class="row justify-content-end">
-			<div class="col-md-6">
-				<form action="#" method="GET" class="form-inline">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
-						<div class="input-group-append">
-						</div>
-						<button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i> </button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="container mt-4">
+        <a href="@Url.Action("AgregarProveedor","Proveedor")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Proveedor</i>  </a>
+    </div>
 
-	<div class="container mt-4">
-		<table class="table table-hover" style="text-align:center">
-			<thead>
-				<tr>
-					<th>Nombre del Proveedor</th>
-					<th>Telefono</th>
-					<th>Dirección</th>
-					<th>Correo Electrónico</th>
-					<th>Estado</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var proveedor in @Model)
-				{
-					<tr>
-						<input type="hidden" name="idProveedor" id="idProveedor" value="@proveedor.idProveedor" />
-						<td>@proveedor.nombre</td>
-						<td>@proveedor.telefono</td>
-						<td>@proveedor.direccion</td>
-						<td>@proveedor.correo</td>
-						@if (proveedor.estado)
-						{
-							<td>Activo</td>
-						}
-						else
-						{
-							<td>Inactivo</td>
-						}
-						<td style="text-align:center">
-
-							@if (proveedor.estado)
-							{
-								<button class="btn btn-danger confirmButtonInactivar"
-										data-id="@proveedor.idProveedor"
-										data-nombre="@proveedor.nombre"
-										data-correo="@proveedor.correo"
-										data-direccion="@proveedor.direccion"
-										data-telefono="@proveedor.telefono">
-									Inactivar
-								</button>
-							}
-							else
-							{
-							<button class="btn btn-danger confirmButtonInactivar"
-									data-id="@proveedor.idProveedor"
-									data-nombre="@proveedor.nombre"
-									data-correo="@proveedor.correo"
-									data-direccion="@proveedor.direccion"
-									data-telefono="@proveedor.telefono">
-									Activar
-							</button>
-							}
-						
-							<a class="btn btn-danger" asp-controller="Proveedor" asp-action="EditarProveedor" asp-route-Proveedor="@proveedor.idProveedor">Editar</a>
-						</td>
-					</tr>
-				}
-
-			</tbody>
-		</table>
-	</div>
-	<nav aria-label="Page navigation example" style="background-color:white">
-		<ul class="pagination justify-content-center" style="background-color:#dce5e4">
-			<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Siguiente</a>
-			</li>
-		</ul>
-	</nav>
+    <div class="container mt-4">
+        <table class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre del Proveedor</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Correo Electrónico</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var proveedor in @Model)
+                {
+                    <tr>
+                        <input type="hidden" name="idProveedor" id="idProveedor" value="@proveedor.idProveedor" />
+                        <td>@proveedor.nombre</td>
+                        <td>@proveedor.telefono</td>
+                        <td>@proveedor.direccion</td>
+                        <td>@proveedor.correo</td>
+                        <td>@(proveedor.estado ? "Activo" : "Inactivo")</td>
+                        <td style="text-align:center">
+                            @if (proveedor.estado)
+                            {
+                                <button class="btn btn-danger confirmButtonInactivar"
+                                        data-id="@proveedor.idProveedor"
+                                        data-nombre="@proveedor.nombre"
+                                        data-correo="@proveedor.correo"
+                                        data-direccion="@proveedor.direccion"
+                                        data-telefono="@proveedor.telefono">
+                                    Inactivar
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-success confirmButtonInactivar"
+                                        data-id="@proveedor.idProveedor"
+                                        data-nombre="@proveedor.nombre"
+                                        data-correo="@proveedor.correo"
+                                        data-direccion="@proveedor.direccion"
+                                        data-telefono="@proveedor.telefono">
+                                    Activar
+                                </button>
+                            }
+                            <a class="btn btn-danger" asp-controller="Proveedor" asp-action="EditarProveedor" asp-route-Proveedor="@proveedor.idProveedor">Editar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
 </div>
+@section Scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-	document.querySelectorAll('.confirmButtonInactivar').forEach(button => {
-		button.addEventListener('click', async function () {
-			let idProveedor = this.getAttribute('data-id');
-			let nombre = this.getAttribute('data-nombre');
-			let correo = this.getAttribute('data-correo');
-			let direccion = this.getAttribute('data-direccion');
-			let telefono = this.getAttribute('data-telefono');
-			let estado = false;
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.confirmButtonInactivar').forEach(button => {
+            button.addEventListener('click', async function () {
+                let idProveedor = this.getAttribute('data-id');
+                let nombre = this.getAttribute('data-nombre');
+                let correo = this.getAttribute('data-correo');
+                let direccion = this.getAttribute('data-direccion');
+                let telefono = this.getAttribute('data-telefono');
+                let estado = false;
 
-			const data = {
-				idProveedor: parseInt(idProveedor),
-				nombre: nombre,
-				correo: correo,
-				direccion: direccion,
-				telefono: telefono,
-				estado: estado
-			};
+                const data = {
+                    idProveedor: parseInt(idProveedor),
+                    nombre: nombre,
+                    correo: correo,
+                    direccion: direccion,
+                    telefono: telefono,
+                    estado: estado
+                };
 
-			Swal.fire({
-				title: '¿Estás seguro?',
-				text: "¡!",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#0d6efd',
-				cancelButtonColor: '#c31e1e',
-				confirmButtonText: 'Sí',
-				cancelButtonText: 'Cancelar'
-			}).then(async (result) => {
-				if (result.isConfirmed) {
-					try {
-						const response = await fetch('@Url.Action("DesactivarProveedor", "Proveedor")', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json'
-							},
-							body: JSON.stringify(data)
-						});
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#0d6efd',
+                    cancelButtonColor: '#c31e1e',
+                    confirmButtonText: 'Sí',
+                    cancelButtonText: 'Cancelar'
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch('@Url.Action("DesactivarProveedor", "Proveedor")', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(data)
+                            });
 
-						if (response.ok) {
-							Swal.fire({
-								icon: 'success',
-								title: 'Accion Realizada',
-								text: 'El proveedor ha sido inactivado correctamente.'
-							}).then(() => {
-								window.location.href = '@Url.Action("ListadoProveedor", "Proveedor")';
-							});
-						} else {
-							Swal.fire({
-								icon: 'error',
-								title: 'Error',
-								text: 'Hubo un problema al inactivar el proveedor.'
-							});
-						}
-					} catch (error) {
-						Swal.fire({
-							icon: 'error',
-							title: 'Error',
-							text: 'Hubo un problema al inactivar el proveedor.'
-						});
-					}
-				}
-			});
-		});
-	});
+                            if (response.ok) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Accion Realizada',
+                                    text: 'El proveedor ha sido inactivado correctamente.'
+                                }).then(() => {
+                                    window.location.href = '@Url.Action("ListadoProveedor", "Proveedor")';
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Hubo un problema al inactivar el proveedor.'
+                                });
+                            }
+                        } catch (error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Hubo un problema al inactivar el proveedor.'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        // Inicializar DataTables
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "ordering": true,
+                "pageLength": 10,
+                "language": {
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente"
+                    },
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ filas por página",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ filas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 filas",
+                    "emptyTable": "No hay datos disponibles en la tabla",
+                    "infoFiltered": "(filtrado de _MAX_ filas en total)",
+                    "zeroRecords": "No se encontraron coincidencias"
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5'
+                ]
+            });
+        });
+    </script>
 
 
-</script>
+}

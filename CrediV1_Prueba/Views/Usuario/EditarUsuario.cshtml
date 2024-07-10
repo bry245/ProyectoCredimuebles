@@ -1,0 +1,137 @@
+﻿@model CrediV1_Prueba.Entities.UsuarioEnt
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CrediV1_Prueba.Entities.RolEnt> roles = ViewData["roles"] as List<CrediV1_Prueba.Entities.RolEnt>;
+}
+
+<div class="container">
+    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+        <div class="card-body p-4">
+            <div class="form-outline mb-5 mb-xl-4">
+                <h2>Editar Usuario</h2>
+            </div>
+            <form id="editarUsuarioForm">
+                <input type="hidden" id="idUsuario" name="idUsuario" value="@Model.idUsuario" />
+                <div class="row">
+                    <div class="col-lg-8 col-xl-6">
+
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" value="@Model.nombre" />
+                        </div>
+
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input type="text" id="apellidos" name="apellidos" class="form-control form-control-lg" value="@Model.apellidos" />
+                        </div>
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <label for="cedula" class="form-label">Cédula</label>
+                            <input type="text" id="cedula" name="cedula" class="form-control form-control-lg" value="@Model.cedula" />
+                        </div>
+                        <div class="form-outline mb-4 mb-xl-4">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" id="telefono" name="telefono" class="form-control form-control-lg" value="@Model.telefono" />
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-lg-8 col-xl-6">
+
+
+                        <div class="form-outline mb-4 mb-xl-4">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" id="direccion" name="direccion" class="form-control form-control-lg" value="@Model.direccion" />
+                        </div>
+
+
+                        <div class="form-outline mb-4 mb-xl-4">
+                            <label for="correo" class="form-label">Correo Electrónico</label>
+                            <input type="email" id="correo" name="correo" class="form-control form-control-lg" value="@Model.correo" />
+                        </div>
+
+                        <div class="form-outline mb-4 mb-xl-4">
+                            <label for="idRol" class="form-label">Rol</label>
+                            <select id="idRol" name="idRol" class="form-control form-control-lg">
+                                <option value="@Model.idRol" selected>@Model.descripcionRol</option>
+
+                                @foreach (var rol in roles)
+                                {
+                                    <option value="@rol.IdRol">@rol.Descripcion</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-8 col-xl-6 mt-4">
+                        <button type="button" class="btn" id="guardar">Guardar Cambios</button>
+                        <a href="@Url.Action("Usuarios", "Usuario")" class="btn ">Volver</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('guardar').addEventListener('click', async () => {
+        const idUsuario = document.getElementById('idUsuario').value;
+        const nombre = document.getElementById('nombre').value;
+        const apellidos = document.getElementById('apellidos').value;
+        const cedula = document.getElementById('cedula').value;
+        const telefono = document.getElementById('telefono').value;
+        const direccion = document.getElementById('direccion').value;
+        const correo = document.getElementById('correo').value;
+        const idRol = document.getElementById('idRol').value;
+
+        const usuario = {
+            idUsuario,
+            nombre,
+            apellidos,
+            cedula,
+            telefono,
+            direccion,
+            correo,
+            idRol
+        };
+
+        try {
+            const response = await fetch('@Url.Action("GuardarEditarUsuario", "Usuario")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usuario)
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuario actualizado',
+                    text: 'El usuario ha sido actualizado correctamente.'
+                }).then(() => {
+                    window.location.href = '@Url.Action("Usuarios", "Usuario")';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al actualizar el usuario.'
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un problema al actualizar el usuario.'
+            });
+        }
+    });
+</script>

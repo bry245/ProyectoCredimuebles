@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.SqlClient;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -19,6 +21,7 @@ namespace CrediV1_Prueba.Models
         private string _connection;
         private readonly IOtherServices _otherServices;
 
+
         public UsuarioModel(HttpClient httpClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor,IOtherServices otherServices)
         {
             _httpClient = httpClient;
@@ -27,111 +30,41 @@ namespace CrediV1_Prueba.Models
             _otherServices = otherServices;
         }
 
-        public UsuarioEnt? IniciarSesion(UsuarioEnt entidad)
+    
+       
+
+
+
+        public async Task RegistrarUsuario(UsuarioEnt usuario)
         {
             try
             {
-                using (var con = new SqlConnection(_connection))
+                var connectionString = _configuration.GetConnectionString("Connection");
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    var dato = con.Query<UsuarioEnt>("IniciarSesion",
-                        new { entidad.correo, entidad.contrasenna },
-                        commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    var passwordHash = BCrypt.Net.BCrypt.HashPassword(usuario.contrasenna);
 
-                    if (dato != null)
-                    {
-                        return dato;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }catch( Exception ex )
-            {
-                return null;
-            }
-        }
-        public UsuarioEnt? ConsultarCorreo(UsuarioEnt entidad)
-        {
-            using (var con = new SqlConnection(_connection))
-            {
-                var dato = con.Query<UsuarioEnt>("consultarCorreo",
-                    new { entidad.correo },
-                    commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@nombre", usuario.nombre);
+                    parameters.Add("@apellidos", usuario.apellidos);
+                    parameters.Add("@contrasenna", passwordHash);
+                    parameters.Add("@correo", usuario.correo);
+                    parameters.Add("@telefono", usuario.telefono);
+                    parameters.Add("@direccion", usuario.direccion);
+                    parameters.Add("@estado", usuario.estado);
+                    parameters.Add("@idRol", usuario.idRol);
+                    parameters.Add("@cedula", usuario.cedula);
 
-                if (dato != null)
-                {
-                    return dato;
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
-        }
-
-        public int validarCambioContrasenna(UsuarioEnt usuario)
-        {
-            try
-            {
-                using (var con = new SqlConnection(_connection))
-                {
-                     var dato = con.Execute("validarCambioContrasenna",
-                        new { usuario.correo, usuario.contrasenna, usuario.Usuario,usuario.idUsuario},
-                        commandType: CommandType.StoredProcedure);
-
-                    return dato;
-
-                }
-            } catch (Exception ex)
-            {
-                return -1;
-            }
-        }
-
-
-
-        // Gestión Usuarios 
-
-        public List<SelectListItem>? ConsultarRoles()
-        {
-            try
-            {
-                using (var con = new SqlConnection(_connection))
-                {
-                    var dato = con.Query<SelectListItem>("ConsultarRoles", new {},
-                       commandType: CommandType.StoredProcedure).ToList();
-                    return dato;
-
+                    await connection.ExecuteAsync("registrarCliente", parameters, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception ex)
             {
-                return null;
+                Console.WriteLine("Error al registrar el usuario: " + ex.Message);
+                throw new Exception("Error al registrar el usuario: " + ex.Message, ex);
             }
         }
-      
-        public UsuarioEnt? RegistrarUsuario(UsuarioEnt usuario)
-        {
-            try
-            {
-                using (var con = new SqlConnection(_connection))
-                {
-                    var dato = con.Query<UsuarioEnt>("registrarUsuario",
-                       new { usuario.nombre, usuario.apellidos, usuario.correo, usuario.telefono,usuario.direccion,usuario.idRol,usuario.cedula },
-                       commandType: CommandType.StoredProcedure).FirstOrDefault();
 
-                    return dato;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-
-        }
 
         public List<UsuarioEnt>? ListarUsuarios()
         {
@@ -153,7 +86,7 @@ namespace CrediV1_Prueba.Models
             }
 
         }
-        public List<UsuarioEnt>? ListarClientes()
+        public async Task< List<UsuarioEnt>>? ListarClientes()
         {
             try
             {
@@ -174,66 +107,113 @@ namespace CrediV1_Prueba.Models
 
         }
 
-        public UsuarioEnt? ConsultarUsuario(long q)
+      
+        public async Task ActualizarUsuario(UsuarioEnt usuario)
         {
             try
             {
-                using (var con = new SqlConnection(_connection))
+                var parameters = new DynamicParameters();
+                parameters.Add("@idUsuario", usuario.idUsuario, DbType.Int32);
+                parameters.Add("@nombre", usuario.nombre, DbType.String);
+                parameters.Add("@apellidos", usuario.apellidos, DbType.String);
+                parameters.Add("@cedula", usuario.cedula, DbType.String);
+                parameters.Add("@telefono", usuario.telefono, DbType.String);
+                parameters.Add("@correo", usuario.correo, DbType.String);
+                parameters.Add("@direccion", usuario.direccion, DbType.String);
+                parameters.Add("@Estado", usuario.estado, DbType.Boolean);
+                parameters.Add("@idRol", usuario.idRol, DbType.Int32);
+
+                using (var connection = new SqlConnection(_connection))
                 {
-                    var dato = con.Query<UsuarioEnt>("ConsultarUsuario",
-                       new {q},
-                       commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    await connection.ExecuteAsync("ActualizarUsuario", parameters, commandType: CommandType.StoredProcedure);
+                }
 
-                    return dato;
 
+            }
+            
+            catch (Exception ex)
+            {
+                
+            }
+        }
+      
+
+        
+
+        public async Task<string> DesactivarActivarUsuario(UsuarioEnt usuario)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("idUsuario", usuario.idUsuario, DbType.Int64); // Asegúrate de que el tipo sea Int64 si BIGINT en SQL
+
+            using (var connection = new SqlConnection(_connection))
+            {
+
+                var result = await connection.QuerySingleAsync<string>(
+                    "DesactivarActivarUsuario",
+                    parameters,
+                    commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
+        public async Task<UsuarioEnt> consultarUsuariobyId(int idUsuario)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("idUsuario", idUsuario, DbType.Int64);
+
+                var usuario = await connection.QueryFirstOrDefaultAsync<UsuarioEnt>(
+                    "ConsultarUsuarioById",
+                    parameters,
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return usuario;
+            }
+        }
+
+        public async Task<IEnumerable<RolEnt>> ConsultarRoles()
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connection))
+                {
+                    var parameters = new DynamicParameters();
+                    var roles = await connection.QueryAsync<RolEnt>("ConsultarRoles",commandType: CommandType.StoredProcedure);
+                    return roles;
+                }
+
+            }catch (Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+        public async Task<UsuarioEnt> consultarUsuariobyCorreo(string correo)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connection))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("Correo", correo, DbType.Int64);
+
+                var usuario = await connection.QueryFirstOrDefaultAsync<UsuarioEnt>(
+                    "ConsultarUsuarioByCorreo",
+                    parameters,
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return usuario;
                 }
             }
             catch (Exception ex)
             {
                 return null;
+
             }
         }
-        public int ActualizarUsuario(UsuarioEnt usuario)
-        {
-            try
-            {
-                using (var con = new SqlConnection(_connection))
-                {
-                    var dato = con.Execute("ActualizarUsuario",
-                       new { usuario.idRol,usuario.idUsuario,usuario.nombre,usuario.apellidos,usuario.correo,usuario.telefono,usuario.direccion
-                       , usuario.cedula},
-                       commandType: CommandType.StoredProcedure);
-
-                    return dato;
-    
-
-                }
-            }
-            catch (Exception ex)
-            {
-                return -1;
-            }
-        }
-        public int CambiarEstado(long q)
-        {
-             try
-            {
-                using (var con = new SqlConnection(_connection))
-                {
-                    var dato = con.Execute("CambiarEstadoUsuario",
-                       new {q },
-                       commandType: CommandType.StoredProcedure);
-
-                    return dato;
-    
-
-                }
-            }
-            catch (Exception ex)
-            {
-                return -1;
-            }
-        }
-
     }
 }

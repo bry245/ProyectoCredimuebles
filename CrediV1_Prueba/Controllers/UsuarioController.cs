@@ -1,9 +1,14 @@
 ﻿using CrediV1_Prueba.Entities;
 using CrediV1_Prueba.Interfaces;
+using CrediV1_Prueba.Models;
+using CrediV1_Prueba.Entities.Otros;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Controllers
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [Authorize(Roles = "Administrador,Gerente")]
     public class UsuarioController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
@@ -11,8 +16,9 @@ namespace CrediV1_Prueba.Controllers
         private string _connection;
         private readonly IUsuarioModel _usuarioModel;
         private readonly IOtherServices _otherServices;
+        private readonly IEmailService _emailService;
 
-        public UsuarioController(IHttpClientFactory clientFactory, IConfiguration configuration, IUsuarioModel usuarioModel,
+        public UsuarioController(IHttpClientFactory clientFactory, IEmailService emailService, IConfiguration configuration, IUsuarioModel usuarioModel,
             IOtherServices otherServices)
         {
             _configuration = configuration;
@@ -20,22 +26,222 @@ namespace CrediV1_Prueba.Controllers
             _connection = _configuration.GetConnectionString("Connection");
             _usuarioModel = usuarioModel;
             _otherServices = otherServices;
+            _emailService = emailService;
         }
         [HttpGet]
-        public IActionResult ListaClientes()
+        public async  Task<IActionResult> ListaClientes()
         {
-            ViewBag.Usuarios = _usuarioModel.ListarUsuarios();
-            ViewBag.Clientes = _usuarioModel.ListarClientes();
-            ViewBag.Roles = _usuarioModel.ConsultarRoles();
+            try
+            {
+                var usuarios =   await _usuarioModel.ListarClientes();
+
+                return View(usuarios);
+
+            }catch (Exception ex)
+            {
+
+            }
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EnviarNotificacion([FromBody] EnviarNotificacion notificacion)
+        {
+            try
+            {
+
+                Console.WriteLine("USUARIO" + notificacion.Usuario);
+                Console.WriteLine("correo" + notificacion.Correo);
+                Console.WriteLine("Mensaje" + notificacion.Mensaje);
+                // Aquí puedes agregar la lógica para enviar el correo electrónico usando tu servicio de correo
+                await _emailService.SendNotificationEmailAsync(notificacion.Correo, notificacion.Mensaje,notificacion.Usuario);
+                return Ok(new { message = "Notificación enviada correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error al enviar la notificación: " + ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ListaEmpleados()
+        {
+            try
+            {
+                var usuarios = _usuarioModel.ListarUsuarios();
+
+                return View(usuarios);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Usuarios()
+        {
+    
             return View();
         }
 
         [HttpGet]
         public IActionResult ConsultarRoles()
         {
-            ViewBag.Roles = _usuarioModel.ConsultarRoles();
+           
 
             return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult AgregarCLiente()
+        {
+          
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AgregarEmpleado()
+        {
+
+            var roles = await _usuarioModel.ConsultarRoles();
+            ViewData["roles"] = roles;
+
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> GuardarEmpleado([FromBody] UsuarioEnt user)
+        {
+
+            try
+            {
+
+                if (user == null)
+                {
+                    return BadRequest(string.Empty);
+                }
+
+                Console.WriteLine("ASDSA" + user.cedula);
+                Console.WriteLine("ASDSA" + user.apellidos);
+                Console.WriteLine("ASDSA" + user.telefono);
+                Console.WriteLine("ASDSA" + user.contrasenna);
+                Console.WriteLine("ASDSA" + user.direccion);
+                Console.WriteLine("ASDSA" + user.nombre);
+                user.estado = true;
+                user.contrasenna = "1232131";
+                await _usuarioModel.RegistrarUsuario(user);
+
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
+
+            }
+        }
+
+
+
+        [HttpPost]
+        public async Task <IActionResult> GuardarCliente([FromBody] UsuarioEnt user)
+        {
+
+            try
+            {
+
+                if (user == null)
+                {
+                    return BadRequest(string.Empty);
+                }
+
+                Console.WriteLine("ASDSA" + user.cedula);
+                Console.WriteLine("ASDSA" + user.apellidos);
+                Console.WriteLine("ASDSA" + user.telefono);
+                Console.WriteLine("ASDSA" + user.contrasenna);
+                Console.WriteLine("ASDSA" + user.direccion);
+                Console.WriteLine("ASDSA" + user.nombre);
+                user.idRol = 5;
+                user.estado = true;
+                user.contrasenna = "1232131";
+                await _usuarioModel.RegistrarUsuario(user);
+
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
+
+            }
+        }
+
+        [HttpGet]
+        public async Task <IActionResult> EditarUsuario(int Usuario)
+        {
+
+            try
+            {
+                Console.WriteLine("AAAAAAAAGHJDS" + Usuario);
+                var usuarioEditar = await _usuarioModel.consultarUsuariobyId(Usuario);
+                var roles = await _usuarioModel.ConsultarRoles();
+                ViewData["roles"] = roles;
+
+                return View(usuarioEditar);
+              
+
+            }catch (Exception ex)
+            {
+
+            }
+
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> GuardarEditarUsuario([FromBody] UsuarioEnt user)
+        {
+
+            try
+            {
+
+                if (user == null)
+                {
+                    return BadRequest(string.Empty);
+                }
+
+                Console.WriteLine("ASDSA" + user.cedula);
+                Console.WriteLine("ASDSA" + user.apellidos);
+                Console.WriteLine("ASDSA" + user.telefono);
+                Console.WriteLine("ASDSA" + user.contrasenna);
+                Console.WriteLine("ASDSA" + user.direccion);
+                Console.WriteLine("ASDSA" + user.nombre);
+                await _usuarioModel.ActualizarUsuario(user);
+
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
+
+            }
         }
 
 
@@ -43,19 +249,8 @@ namespace CrediV1_Prueba.Controllers
         {
             var salida = _usuarioModel.RegistrarUsuario(usuario);
 
-            if (salida != null)
-            {
-                var mensaje = _otherServices.GenerarHtmlBienvenida(salida);
-
-                _otherServices.EnviarCorreo(salida.correo, "Bienvenido a Credimuebles CR", mensaje);
-                TempData["Mensaje"] = "Usuario registrado correctamente";
-
-            }
-            else
-            {
-                TempData["Mensaje"] = "Ocurrió un error al ingresar los datos, intente de nuevo";
-
-            }
+          
+          
             return RedirectToAction("ListaClientes", "Usuario");
         }
 
@@ -64,43 +259,51 @@ namespace CrediV1_Prueba.Controllers
         public IActionResult ActualizarUsuario(long q)
         {
 
-            ViewBag.Roles = _usuarioModel.ConsultarRoles();
-            var usuario = _usuarioModel.ConsultarUsuario(q);
-
-            if (usuario != null)
-            {
-                usuario.idUsuario = q;
-                return View(usuario);
-            }
-            else
-            {
-                TempData["Mensaje"] = "Error al ver detalles del usuario";
-                return RedirectToAction("ListaClientes", "Usuario");
-            }
+            return View();
         }
-        [HttpPost]
-
-        public IActionResult ActualizarUsuario(UsuarioEnt usuario)
-        {
-         
-            var dato = _usuarioModel.ActualizarUsuario(usuario);
-
-            if (dato>=0)
-            {
-                return RedirectToAction("ListaClientes","Usuario");
-            }
-            else
-            {
-                return View(usuario);
-            }
-        }
+    
 
         public async Task<IActionResult> CambiarEstadoUsuario(long q)
         {
-            _usuarioModel.CambiarEstado(q);
+           
 
             return RedirectToAction("ActualizarUsuario", "Usuario", new { q = q });
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult>DesactivarActivarUsuario([FromBody] UsuarioEnt usuario)
+        {
+            try
+            {
+                Console.WriteLine("ID USUARIO "+usuario.idUsuario);
+                var mensaje = await _usuarioModel.DesactivarActivarUsuario(usuario);
+
+                if (mensaje == "Usuario desactivado exitosamente" || mensaje == "Usuario activado exitosamente")
+                {
+                    return Ok(mensaje);
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error al desactivar el proveedor: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+        }
+
+
+
+
+
+
+
+
     }
 }
 

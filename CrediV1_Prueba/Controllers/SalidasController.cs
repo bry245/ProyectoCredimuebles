@@ -1,10 +1,12 @@
 ﻿using CrediV1_Prueba.Entities;
 using CrediV1_Prueba.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrediV1_Prueba.Controllers
 {
+    [Authorize(Roles = "Administrador,Gerente,Vendedor")]
     public class SalidasController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
@@ -19,10 +21,12 @@ namespace CrediV1_Prueba.Controllers
             _connection = _configuration.GetConnectionString("Connection");
             _salidasModel = salidasModel;
         }
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
         public IActionResult Index()
         {
             return View();
         }
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
         [HttpGet]
         public async Task<IActionResult> ListadoSalidas(int page = 1)
         {

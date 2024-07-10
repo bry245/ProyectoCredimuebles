@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxJbmRleENhamEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -46,12 +50,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXENhbWJpYXJDb250cmFzZW5uYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/CambiarContrasennaVista.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXENhbWJpYXJDb250cmFzZW5uYVZpc3RhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/InicioDeSesion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXEluaWNpb0RlU2VzaW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/RecuperarContrasenna.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/VerificacionRecuperarContrasenna.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFZlcmlmaWNhY2lvblJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/AgregarProducto.cshtml]
@@ -126,8 +138,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBY3R1YWxpemFyVXN1YXJpby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBZ3JlZ2FyQ2xpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarEmpleado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBZ3JlZ2FyRW1wbGVhZG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/EditarUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXJVc3VhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaClientes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xMaXN0YUNsaWVudGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaEmpleados.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xMaXN0YUVtcGxlYWRvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/Usuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xVc3Vhcmlvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/_ViewImports.cshtml]
