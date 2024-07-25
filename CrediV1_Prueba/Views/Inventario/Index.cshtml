@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 @section Estilos{
@@ -39,11 +40,11 @@
 								<div class="row align-items-center mb-2 d-flex">
 									<div class="col-8">
 										<h2 class="d-flex align-items-center mb-0">
-										7
+											@ViewData["Articulos"]
 										</h2>
 									</div>
 									<div class="col-4 text-right">
-										<span>9.23% <i class="fa fa-arrow-up"></i></span>
+										@* <span>9.23% <i class="fa fa-arrow-up"></i></span> *@
 									</div>
 								</div>
 								<div class="progress mt-1 " data-height="8" style="height: 8px;">
@@ -65,11 +66,11 @@
 								<div class="row align-items-center mb-2 d-flex">
 									<div class="col-8">
 										<h2 class="d-flex align-items-center mb-0">
-											3
+											@ViewData["Proveedores"]
 										</h2>
 									</div>
 									<div class="col-4 text-right">
-										<span>9.23% <i class="fa fa-arrow-up"></i></span>
+										@* <span>9.23% <i class="fa fa-arrow-up"></i></span> *@
 									</div>
 								</div>
 								<div class="progress mt-1 " data-height="8" style="height: 8px;">

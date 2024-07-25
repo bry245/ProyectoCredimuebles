@@ -30,5 +30,6 @@ namespace CrediV1_Prueba.Models
                 return result;
             }
         }
+
     }
 }

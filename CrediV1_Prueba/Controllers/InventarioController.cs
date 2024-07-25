@@ -29,8 +29,13 @@ public class InventarioController : Controller
        _proveedoresModel = proveedoresModel;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
     {
+        var Articulos = await _productoModel.GetCantidadArticulo();
+        var Proveedores = await _productoModel.GetCantidadProveedor();
+        ViewData["Articulos"] = Articulos;
+        ViewData["Proveedores"] = Proveedores;
+
         return View();
     }
 
