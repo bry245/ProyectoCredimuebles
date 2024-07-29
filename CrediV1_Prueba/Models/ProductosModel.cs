@@ -89,7 +89,33 @@ namespace CrediV1_Prueba.Models
 
         }
 
+        public async Task<int> GetCantidadArticulo()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                // Ejecuta el procedimiento almacenado y obtiene el resultado como un entero
+                var cantidad = await connection.QuerySingleAsync<int>(
+                    "GetCantidadArticulo",
+                    commandType: CommandType.StoredProcedure
+                );
 
+                return cantidad;
+            }
+        }
+
+        public async Task<int> GetCantidadProveedor()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                // Ejecuta el procedimiento almacenado y obtiene el resultado como un entero
+                var cantidad = await connection.QuerySingleAsync<int>(
+                    "GetCantidadProveedor",
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return cantidad;
+            }
+        }
 
 
         public async Task<string> DesactivarProducto(ProductoEnt producto)
@@ -110,6 +136,28 @@ namespace CrediV1_Prueba.Models
 		}
 
 
+        public async Task<bool> actualizarProducto(ProductoEnt producto)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var result = await connection.ExecuteAsync("ActualizarProducto",
+                      new { producto.nombre, producto.idCategoria,producto.idProducto, producto.idProveedor, producto.cantidadStock, producto.costo },
+                      commandType: System.Data.CommandType.StoredProcedure);
+                if (result > 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+
+                    return false;
+                }
+
+
+            }
+
         }
+    }
 
 }

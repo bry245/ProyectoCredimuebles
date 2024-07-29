@@ -92,11 +92,13 @@ namespace CrediV1_Prueba.Models
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
+
                     var passwordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
 
                     var parameters = new DynamicParameters();
                     parameters.Add("@Email", email);
                     parameters.Add("@NewPassword", passwordHash);
+
 
                     await connection.ExecuteAsync("ResetPassword", parameters, commandType: CommandType.StoredProcedure);
                 }

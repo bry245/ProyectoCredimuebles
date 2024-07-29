@@ -193,10 +193,12 @@ namespace CrediV1_Prueba.Models
 
         public async Task<UsuarioEnt> consultarUsuariobyCorreo(string correo)
         {
-            using (var connection = new SqlConnection(_connection))
+            try
+            {
+                using (var connection = new SqlConnection(_connection))
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("correo", correo, DbType.Int64);
+                parameters.Add("Correo", correo, DbType.Int64);
 
                 var usuario = await connection.QueryFirstOrDefaultAsync<UsuarioEnt>(
                     "ConsultarUsuarioByCorreo",
@@ -205,6 +207,12 @@ namespace CrediV1_Prueba.Models
                 );
 
                 return usuario;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
             }
         }
     }

@@ -963,6 +963,7 @@ C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\ne
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+<<<<<<< HEAD
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
@@ -993,3 +994,7 @@ C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\ne
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\ref\CrediV1_Prueba.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\SendGrid.dll
 C:\Users\jason\Documents\GitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\StarkbankEcdsa.dll
+=======
+C:\Users\vinda\OneDrive\Escritorio\CredimueblesGitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\X.PagedList.dll
+C:\Users\vinda\OneDrive\Escritorio\CredimueblesGitHub\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\BCrypt.Net-Next.dll
+>>>>>>> 156c0ccb8ba98032d0c0e9feb74451a854da3c86

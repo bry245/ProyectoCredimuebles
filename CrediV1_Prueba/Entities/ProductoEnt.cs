@@ -2,21 +2,26 @@
 {
     public class ProductoEnt
     {
-        public long idProducto { get; set; }
+        public long idProducto {  get; set; }
+        public string nombre { get; set; }
+        public long idCategoria {  get; set; }
+        public int cantidadStock { get; set; }
+        public int cantidadSalida { get; set; }
+        public decimal costo { get; set; }
+        public bool estado { get; set; }
+        public string costoReferencia { get; set; }
+        public long idSalida { get; set; }
+
+
+      
 
         public long idProveedor { get; set; }
 
-        public string nombre { get; set; }
-		public string proveedor_nombre { get; set; }
+    
+        public string proveedor_nombre { get; set; }
 
 
-		public long idCategoria { get; set; }
-
-        public int cantidadStock { get; set; }
-        
-        public int costo { get; set; }
-
-        public bool estado { get; set; }
+    
 
         public string CategoriaNombre { get; set; }
     }

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Chat";
+}
+<link rel="stylesheet" href="~/css/chat.css">
+
+<div class="d-lg-flex mb-4">
+    <div class="w-100 user-chat mt-4 mt-sm-0">
+        <div class="p-3 px-lg-4 user-chat-border">
+            <div class="row">
+                <div class="col-md-4 col-6">
+                    <h5 class="font-size-15 mb-1 text-truncate">Credimuebles chat</h5>
+                    <p class="text-muted text-truncate mb-0"><i class="mdi mdi-circle text-success align-middle me-1"></i>Activo Ahora</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-lg-2">
+            <div class="chat-conversation p-3">
+                <ul class="list-unstyled mb-0 pe-3" data-simplebar style="max-height: 450px;">
+                    <li id="welcome-msg">
+                        <div class="conversation-list">
+                            <div class="ctext-wrap">
+                                <p class="mb-0" style="white-space: pre-line;">Recuerde que nuestro horario de atención es de lunes a viernes de 8 am a 5 pm.</p>
+                                <p class="chat-time mb-0"><i class="mdi mdi-clock-outline align-middle me-1"></i> @DateTime.Now</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="px-lg-3">
+            <div class="p-3 chat-input-section">
+                <div class="row">
+                    <div class="col">
+                        <div class="position-relative">
+                            <input type="text" class="form-control chat-input" id="prompt" name="prompt" placeholder="Escriba su pregunta...">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button id="generate" class="btn btn-primary chat-send w-md waves-effect waves-light">
+                            <span class="d-none d-sm-inline-block me-2">Enviar</span>
+                            <i class="mdi mdi-send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/chat.js"></script>
+}

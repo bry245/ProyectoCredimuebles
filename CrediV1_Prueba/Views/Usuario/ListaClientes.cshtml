@@ -11,8 +11,14 @@
 
 <div class="container">
     <div class="container mt-4">
-        <a href="@Url.Action("AgregarEmpleado","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-plus"></i> Agregar Cliente </a>
-        <a href="@Url.Action("Usuarios","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-sign-out-alt"></i> Volver  </a>
+
+        <a href="@Url.Action("AgregarCliente", "Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-plus"></i> Agregar Cliente
+        </a>
+        <a href="@Url.Action("Usuarios", "Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-sign-out-alt"></i> Volver
+        </a>
+
     </div>
 
     <div class="container mt-4">
@@ -29,49 +35,54 @@
             <tbody>
                 @foreach (var usuario in Model)
                 {
-                    <tr>
-                        <td>@usuario.nombreCompleto</td>
-                        <td>@usuario.telefono</td>
-                        <td>@usuario.correo</td>
-                        @if (usuario.estado)
-                        {
-                            <td>Activo</td>
-                            <td style="text-align:start">
-                                <button class="btn btn-danger confirmButtonInactivar"
-                                        data-id="@usuario.idUsuario"
-                                        data-nombre="@usuario.nombre"
-                                        data-correo="@usuario.correo"
-                                        data-telefono="@usuario.telefono"
-                                        data-estado="false">
-                                    Inactivar
-                                </button>
-                                <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">
-                                    <i class="fa fa-edit"></i> Editar
-                                </a>
-                                <button class="btn " onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
-                                    <i class="fa fa-envelope"></i> Enviar Notificación
-                                </button>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>Inactivo</td>
-                            <td style="text-align:start">
-                                <button class="btn btn-success confirmButtonInactivar"
-                                        data-id="@usuario.idUsuario"
-                                        data-nombre="@usuario.nombre"
-                                        data-correo="@usuario.correo"
-                                        data-telefono="@usuario.telefono"
-                                        data-estado="true">
-                                    Activar
-                                </button>
-                                <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
-                                <button class="btn btn-primary" onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
-                                    Enviar Notificación
-                                </button>
-                            </td>
-                        }
-                    </tr>
+
+                    @if(usuario.idRol == 5)
+                    {
+                        <tr>
+                            <td>@usuario.nombreCompleto</td>
+                            <td>@usuario.telefono</td>
+                            <td>@usuario.correo</td>
+                            @if (usuario.estado)
+                            {
+                                <td>Activo</td>
+                                <td style="text-align:start">
+                                    <button class="btn btn-danger confirmButtonInactivar"
+                                            data-id="@usuario.idUsuario"
+                                            data-nombre="@usuario.nombre"
+                                            data-correo="@usuario.correo"
+                                            data-telefono="@usuario.telefono"
+                                            data-estado="false">
+                                        Inactivar
+                                    </button>
+                                    <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">
+                                        <i class="fa fa-edit"></i> Editar
+                                    </a>
+                                    <button class="btn" onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
+                                        <i class="fa fa-envelope"></i> Enviar Notificación
+                                    </button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>Inactivo</td>
+                                <td style="text-align:start">
+                                    <button class="btn btn-success confirmButtonInactivar"
+                                            data-id="@usuario.idUsuario"
+                                            data-nombre="@usuario.nombre"
+                                            data-correo="@usuario.correo"
+                                            data-telefono="@usuario.telefono"
+                                            data-estado="true">
+                                        Activar
+                                    </button>
+                                    <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
+                                    <button class="btn " onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
+                                        <i class="fa fa-envelope"></i> Enviar Notificación
+                                    </button>
+                                </td>
+                            }
+                        </tr>
+                    }
+                   
                 }
             </tbody>
         </table>
@@ -79,7 +90,8 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -129,6 +141,7 @@
                             if (!response.ok) {
                                 throw new Error(response.statusText);
                             }
+
                             return response.json();
                         })
                         .catch(error => {
@@ -170,7 +183,8 @@
                 }
             });
 
-            // Mueve esta inicialización dentro del document ready
+
+
             $('.confirmButtonInactivar').on('click', function () {
                 let idUsuario = $(this).data('id');
                 let nombre = $(this).data('nombre');

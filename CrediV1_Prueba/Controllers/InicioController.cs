@@ -142,8 +142,10 @@ namespace CrediV1_Prueba.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet]
-        public IActionResult CambiarContrasenna(string email)
+
+        [HttpPost]
+        public IActionResult CambiarContrasennaVista(string email)
+
         {
             ViewBag.Email = email;
             return View();
@@ -155,13 +157,9 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
-                Console.WriteLine("CAMBIOASHDAS" + model.Email);
-                Console.WriteLine("CAMBIOASHDAS" + model.Token);
 
-                // Aquí debes implementar la lógica para cambiar la contraseña
                 await _passwordResetService.ResetPasswordAsync(model.Email, model.Token);
 
-                // Redirigir a la página de inicio de sesión después de cambiar la contraseña
                 return Ok("Contraseña cambiada exitosamente.");
             }
             catch (Exception ex)
@@ -209,18 +207,24 @@ namespace CrediV1_Prueba.Controllers
                 if (codigoExiste)
                 {
                     // Redirigir a la vista para cambiar la contraseña
-                    return Json(new { success = true, redirectUrl = Url.Action("CambiarContrasenna", "Inicio", new { email = model.Email }) });
+
+                    return Json(new { success = true });
                 }
                 else
                 {
-                    return BadRequest("Código incorrecto o vencido.");
+                    return BadRequest(new { message = "Código incorrecto o vencido." });
+
                 }
             }
             catch (Exception ex)
             {
-                return BadRequest("Error al procesar la solicitud: " + ex.Message);
+
+                return BadRequest(new { message = "Error al procesar la solicitud: " + ex.Message });
+
             }
         }
+
+        
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> GestionarCambioContrasenna([FromBody] UsuarioEnt entidad)

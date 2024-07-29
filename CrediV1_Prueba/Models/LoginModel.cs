@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.SqlClient;
 
+
 namespace CrediV1_Prueba.Models
 {
     public class LoginModel : ILogin

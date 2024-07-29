@@ -11,8 +11,14 @@
 
 <div class="container">
     <div class="container mt-4" id="botonesagregar" style="padding-bottom:30px;padding-top:10px">
-        <a href="@Url.Action("AgregarEmpleado","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-plus"></i> Agregar Cliente </a>
-        <a href="@Url.Action("Usuarios","Usuario")" class="btn" type="submit" id="button-addon2"> <i class="fa fa-sign-out-alt"></i> Volver  </a>
+
+        <a href="@Url.Action("AgregarEmpleado","Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-plus"></i> Agregar Cliente
+        </a>
+        <a href="@Url.Action("Usuarios","Usuario")" class="btn" type="submit" id="button-addon2">
+            <i class="fa fa-sign-out-alt"></i> Volver
+        </a>
+
     </div>
 
     <div class="table-responsive">
@@ -27,25 +33,34 @@
                 </tr>
             </thead>
             <tbody>
+
+               
                 @foreach (var usuario in Model)
                 {
-                    <tr>
-                        <td>@usuario.nombreCompleto</td>
-                        <td>@usuario.telefono</td>
-                        <td>@usuario.correo</td>
-                        <td>@(usuario.estado ? "Activo" : "Inactivo")</td>
-                        <td style="text-align:start">
-                            <button class="btn @(usuario.estado ? "btn-danger" : "btn-success") confirmButtonInactivar"
-                                    data-id="@usuario.idUsuario"
-                                    data-nombre="@usuario.nombre"
-                                    data-correo="@usuario.correo"
-                                    data-telefono="@usuario.telefono"
-                                    data-estado="@usuario.estado.ToString().ToLower()">
-                                @(usuario.estado ? "Inactivar" : "Activar")
-                            </button>
-                            <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
-                        </td>
-                    </tr>
+
+                    @if (usuario.idRol !=5)
+                    {
+
+                        <tr>
+                            <td>@usuario.nombreCompleto</td>
+                            <td>@usuario.telefono</td>
+                            <td>@usuario.correo</td>
+                            <td>@(usuario.estado ? "Activo" : "Inactivo")</td>
+                            <td style="text-align:start">
+                                <button class="btn @(usuario.estado ? "btn-danger" : "btn-success") confirmButtonInactivar"
+                                        data-id="@usuario.idUsuario"
+                                        data-nombre="@usuario.nombre"
+                                        data-correo="@usuario.correo"
+                                        data-telefono="@usuario.telefono"
+                                        data-estado="@usuario.estado.ToString().ToLower()">
+                                    @(usuario.estado ? "Inactivar" : "Activar")
+                                </button>
+                                <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
+                            </td>
+                        </tr>
+                    }
+
+
                 }
             </tbody>
         </table>
@@ -53,7 +68,12 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <script>
         $(document).ready(function () {
             $('#usuariosTable').DataTable({
@@ -74,7 +94,9 @@
                         "last": "Último",
                         "next": "Siguiente",
                         "previous": "Anterior"
-                    },
+
+                    }
+
                 }
             });
 

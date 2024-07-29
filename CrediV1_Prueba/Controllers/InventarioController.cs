@@ -29,8 +29,15 @@ public class InventarioController : Controller
        _proveedoresModel = proveedoresModel;
 		}
 
-		public IActionResult Index()
+
+		public async Task<IActionResult> Index()
     {
+        var Articulos = await _productoModel.GetCantidadArticulo();
+        var Proveedores = await _productoModel.GetCantidadProveedor();
+        ViewData["Articulos"] = Articulos;
+        ViewData["Proveedores"] = Proveedores;
+
+
         return View();
     }
 
@@ -82,7 +89,7 @@ public class InventarioController : Controller
             if (producto.Codigo == 1)
             {
                 var categorias = await _categoriaModel.GetCategorias();
-                var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
+                var proveedores = await _proveedoresModel.GetProveedores(); 
 
                 ViewData["categorias"] = categorias;
                 ViewData["proveedores"] = proveedores;
@@ -101,7 +108,9 @@ public class InventarioController : Controller
         }
 
 
-        public async Task <IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
+
+
+        public async Task<IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
         {
             try
             {
@@ -125,81 +134,41 @@ public class InventarioController : Controller
                 return StatusCode(500, "Error interno del servidor.");
             }
 
-            
+
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> DesactivarProducto([FromBody] ProductoEnt producto)
-        {
-            try
+         public async Task<IActionResult> ActualizarProducto([FromBody] ProductoEnt producto)
             {
-                var mensaje = await _productoModel.DesactivarProducto(producto);
-                if (mensaje == "Producto desactivado exitosamente" || mensaje == "Producto activado exitosamente")
+                try
                 {
-                    return Ok(mensaje);
+                    var resp = await _productoModel.actualizarProducto(producto);
+                    if (resp == true)
+                    {
+                        return RedirectToAction("ListadoProduct", "Inventario"); ;
+                    }
+                    else
+                    {
+                        // Aquí también debes retornar el resultado de RedirectToAction
+                        return NotFound(resp); 
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    return NotFound(mensaje);
+                    // Manejo de errores aquí
+                    ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
+                    // Aquí también debes asegurarte de retornar algo, en este caso, una redirección
+                    return RedirectToAction("ListadoProduct", "Inventario");
                 }
             }
-            catch (Exception ex)
-            {
-                // Registra el error para fines de depuración
-                Console.WriteLine($"Error al cambiar el estado del producto: {ex.Message}");
-                return StatusCode(500, "Error interno del servidor.");
-            }
-        }
-
-
-
-        public async Task<IActionResult> ActualizarProducto([FromBody] ProductoEnt producto)
-        {
-            try
-            {
-                var categorias = await _categoriaModel.GetCategorias();
-                var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
-              
-                ViewData["categorias"] = categorias;
-                ViewData["proveedores"] = proveedores;
-
-
-                return View();
-            }
-            catch (Exception ex)
-            {
-                // Manejo de errores aquí
-                ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
-                return View(); // Retornar la vista con el mensaje de error
-            }
-        }
 
 
 
 
-    }
-
-    [Authorize(Roles = "Administrador,Gerente")]
-    public async Task <IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
-    {
 
 
-        try
-        {
-            Console.WriteLine("Datos del producto"+" "+producto.cantidadStock,producto.idCategoria);
+   
 
-            return Ok();
-
-        }catch (Exception ex)
-        {
-
-
-        }
-
-
-        return View();
-    }
+   
 
     [Authorize(Roles = "Administrador,Gerente")]
     [HttpPost]
@@ -224,4 +193,12 @@ public class InventarioController : Controller
             return StatusCode(500, "Error interno del servidor.");
         }
     }
+
 }
+
+
+
+
+
+  
+  
