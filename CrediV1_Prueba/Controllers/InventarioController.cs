@@ -129,7 +129,28 @@ public class InventarioController : Controller
         }
 
 
-    
+        [HttpPost]
+        public async Task<IActionResult> DesactivarProducto([FromBody] ProductoEnt producto)
+        {
+            try
+            {
+                var mensaje = await _productoModel.DesactivarProducto(producto);
+                if (mensaje == "Producto desactivado exitosamente" || mensaje == "Producto activado exitosamente")
+                {
+                    return Ok(mensaje);
+                }
+                else
+                {
+                    return NotFound(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Registra el error para fines de depuración
+                Console.WriteLine($"Error al cambiar el estado del producto: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+        }
 
 
 
@@ -139,7 +160,7 @@ public class InventarioController : Controller
             {
                 var categorias = await _categoriaModel.GetCategorias();
                 var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
-
+              
                 ViewData["categorias"] = categorias;
                 ViewData["proveedores"] = proveedores;
 
@@ -157,9 +178,28 @@ public class InventarioController : Controller
 
 
 
-   
+    }
 
-   
+    [Authorize(Roles = "Administrador,Gerente")]
+    public async Task <IActionResult> GuardarProductoNuevo([FromBody] ProductoEnt producto)
+    {
+
+
+        try
+        {
+            Console.WriteLine("Datos del producto"+" "+producto.cantidadStock,producto.idCategoria);
+
+            return Ok();
+
+        }catch (Exception ex)
+        {
+
+
+        }
+
+
+        return View();
+    }
 
     [Authorize(Roles = "Administrador,Gerente")]
     [HttpPost]
@@ -185,4 +225,3 @@ public class InventarioController : Controller
         }
     }
 }
-
