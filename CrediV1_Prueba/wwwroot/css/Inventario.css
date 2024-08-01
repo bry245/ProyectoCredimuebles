@@ -1,0 +1,50 @@
+﻿#alertaBajoStockBtn {
+    animation: blinker 1.5s linear infinite;
+}
+
+.acciones-col {
+    white-space: nowrap;
+    width: 150px;
+}
+
+table#productosTable th, table#productosTable td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.acciones-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .acciones-col button, .acciones-col a {
+        margin: 0 5px;
+    }
+
+#agregarProductoBtn {
+    display: none;
+}
+
+
+
+#alertaBajoStockBtn {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+    animation: blink 1s infinite;
+}
+
+    #alertaBajoStockBtn:hover {
+        background-color: #2874a6;
+    }

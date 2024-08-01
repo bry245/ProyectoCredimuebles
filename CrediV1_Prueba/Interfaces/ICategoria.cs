@@ -6,5 +6,6 @@ namespace CrediV1_Prueba.Interfaces
     {
 
         public Task<IEnumerable<CategoriaEnt>> GetCategorias();
+
     }
 }

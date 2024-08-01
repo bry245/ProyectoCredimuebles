@@ -56,7 +56,9 @@
                         <div class="form-outline mb-4 mb-xl-4">
                             <label for="idRol" class="form-label">Rol</label>
                             <select id="idRol" name="idRol" class="form-control form-control-lg">
+
                                 <option value="@Model.idRol" selected>@Model.descripcionRol</option>
+
 
                                 @foreach (var rol in roles)
                                 {
@@ -68,8 +70,10 @@
                     </div>
 
                     <div class="col-lg-8 col-xl-6 mt-4">
+
                         <button type="button" class="btn" id="guardar">Guardar Cambios</button>
                         <a href="@Url.Action("Usuarios", "Usuario")" class="btn ">Volver</a>
+
                     </div>
                 </div>
             </form>

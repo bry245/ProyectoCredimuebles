@@ -11,12 +11,14 @@
 
 <div class="container">
     <div class="container mt-4" id="botonesagregar" style="padding-bottom:30px;padding-top:10px">
+
         <a href="@Url.Action("AgregarEmpleado","Usuario")" class="btn" type="submit" id="button-addon2">
             <i class="fa fa-plus"></i> Agregar Cliente
         </a>
         <a href="@Url.Action("Usuarios","Usuario")" class="btn" type="submit" id="button-addon2">
             <i class="fa fa-sign-out-alt"></i> Volver
         </a>
+
     </div>
 
     <div class="table-responsive">
@@ -31,6 +33,7 @@
                 </tr>
             </thead>
             <tbody>
+
                
                 @foreach (var usuario in Model)
                 {
@@ -57,6 +60,7 @@
                         </tr>
                     }
 
+
                 }
             </tbody>
         </table>
@@ -64,9 +68,11 @@
 </div>
 
 @section Scripts {
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
         $(document).ready(function () {
@@ -88,7 +94,9 @@
                         "last": "Último",
                         "next": "Siguiente",
                         "previous": "Anterior"
+
                     }
+
                 }
             });
 

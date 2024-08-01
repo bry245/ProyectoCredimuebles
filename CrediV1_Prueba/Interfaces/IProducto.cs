@@ -10,5 +10,7 @@ namespace CrediV1_Prueba.Interfaces
         public Task<bool> actualizarProducto(ProductoEnt producto);
         public Task<Respuesta> buscarProducto(int id);
         public  Task<string> DesactivarProducto(ProductoEnt idProducto);
-	}
+        public Task<int> GetCantidadArticulo();
+        public Task<int> GetCantidadProveedor();
+    }
 }

@@ -82,7 +82,7 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
-               
+
 
                 var usuarioValidar = _loginModel.IniciarSesion(usuario);
                 if (usuarioValidar == null)
@@ -138,7 +138,6 @@ namespace CrediV1_Prueba.Controllers
             }
         }
 
-
         [AllowAnonymous]
         [HttpPost]
         public IActionResult CambiarContrasennaVista(string email)
@@ -153,9 +152,13 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
-               
+                Console.WriteLine("CAMBIOASHDAS" + model.Email);
+                Console.WriteLine("CAMBIOASHDAS" + model.Token);
 
+                // Aquí debes implementar la lógica para cambiar la contraseña
                 await _passwordResetService.ResetPasswordAsync(model.Email, model.Token);
+
+                // Redirigir a la página de inicio de sesión después de cambiar la contraseña
                 return Ok("Contraseña cambiada exitosamente.");
             }
             catch (Exception ex)
@@ -179,7 +182,7 @@ namespace CrediV1_Prueba.Controllers
             return View();
         }
 
-   
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult VerificacionRecuperarContrasenna(string email)
@@ -239,7 +242,6 @@ namespace CrediV1_Prueba.Controllers
                 return Json(new { success = false, message = "Error al procesar la solicitud: " + ex.Message });
             }
         }
-
 
 
 

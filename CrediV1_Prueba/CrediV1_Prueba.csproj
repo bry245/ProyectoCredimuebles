@@ -13,7 +13,13 @@
     <None Remove="wwwroot\js\Functions\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot\css\Inventario.scss" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Others\LogoC2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\Inventario.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Others\LogoC2.PNG">
@@ -22,6 +28,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\css\Inventario.scss" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
@@ -68,8 +75,13 @@
     <PackageReference Include="Chart.js" Version="3.7.1" />
     <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SendGrid" Version="9.29.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="X.PagedList" Version="9.1.2" />
   </ItemGroup>

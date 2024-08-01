@@ -2,34 +2,42 @@
 @{
     ViewData["Title"] = "Recuperar Contraseña";
     Layout = "~/Views/Shared/Layout_login.cshtml";
-    var email = TempData["Email"]?.ToString();
 }
 
-<div class="container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-10 login-bg" style="text-align:center">
-            <h3 class="section-title">Recuperar Contraseña</h3>
-            <form id="resetPasswordForm">
-                <div class="row my-5">
-                    <div class="col-12 col-md-6">
-                        <h4 class="section-title">Ingrese su código para restablecer la contraseña</h4>
-                        <div class="row">
-                            <div class="form-group py-2">
-                                <div class="input-login">
-                                    <span class="fa fa-envelope p-2"></span>
-                                    <input type="text" id="codigo" class="input-l form-control" placeholder="Código">
+
+
+    <div class="why-choose-section" style="padding: 6rm">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-10 login-bg" style="text-align:center">
+                    <img src="~/logoc2.PNG" alt="100" width="200px" align="middle" />
+                    <h2 class="section-title">&nbsp;</h2>
+                    <h3 class="section-title">Recuperar Contraseña</h3>
+                    <div class="row my-5" style="justify-content:center">
+                        <div class="col-12 col-md-6">
+                            <h4 class="section-title">Ingrese su codigo de restablecimiento de contraseña</h4>
+                            <form id="resetPasswordForm">
+                                <div class="row">
+                                    <div class="form-group py-2">
+                                        <div class="input-login">
+                                            <span class="fa fa-envelope p-2"></span>
+                                            <input type="text" id="codigo" class="input-l form-control" placeholder="Código">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <input type="hidden" id="email" value="jimenezjason35@gmail.com" />
+                                <a href="@Url.Action("InicioDeSesion", "Inicio")" type="button" class="btn btn-danger">Atrás <i class="fa-solid fa-arrow-left-to-bracket"></i></a>
+                                <button type="submit" class="btn btn-danger">Validar <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                            </form>
                         </div>
-                        <!-- Campo oculto para el email -->
-                        <input type="hidden" id="email" value="@email" />
-                        <button type="submit" class="btn btn-danger">Validar <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+
+
+
 
 <!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

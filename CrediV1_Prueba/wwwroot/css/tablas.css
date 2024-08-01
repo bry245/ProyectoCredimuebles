@@ -1,0 +1,43 @@
+﻿.table-responsive {
+    overflow-y: auto;
+    max-height: 1000px; /* Ajusta la altura máxima de la tabla según tus necesidades */
+}
+
+/* Aplica transparencia a toda la envoltura de DataTables */
+.dataTables_wrapper {
+
+ /* Fondo transparente */
+    padding: 10px; /* Un poco de espacio alrededor */
+}
+
+
+.dataTables_info {
+    float: left;
+    background: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
+    padding: 5px;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Ajusta la transparencia de los encabezados de la tabla */
+.dataTables_wrapper .dataTables_scrollHead {
+    background: rgba(255, 255, 255, 0.8); /* Fondo con opacidad */
+}
+
+/* Ajusta la transparencia de las filas de la tabla */
+table.dataTable tbody tr {
+    background: rgba(255, 255, 255, 0.3); /* Fondo semitransparente */
+}
+
+/* Estiliza el número de la página actual */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #4CAF50; /* Color de fondo */
+    color: black; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 0px 10px; /* Espaciado interno */
+    margin: 2px; /* Margen */
+}
+
+    /* Añade un hover distinto para la página actual */
+
+
+

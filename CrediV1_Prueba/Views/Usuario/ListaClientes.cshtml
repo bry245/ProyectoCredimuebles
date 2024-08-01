@@ -11,12 +11,14 @@
 
 <div class="container">
     <div class="container mt-4">
+
         <a href="@Url.Action("AgregarCliente", "Usuario")" class="btn" type="submit" id="button-addon2">
             <i class="fa fa-plus"></i> Agregar Cliente
         </a>
         <a href="@Url.Action("Usuarios", "Usuario")" class="btn" type="submit" id="button-addon2">
             <i class="fa fa-sign-out-alt"></i> Volver
         </a>
+
     </div>
 
     <div class="container mt-4">
@@ -33,6 +35,7 @@
             <tbody>
                 @foreach (var usuario in Model)
                 {
+
                     @if(usuario.idRol == 5)
                     {
                         <tr>
@@ -138,6 +141,7 @@
                             if (!response.ok) {
                                 throw new Error(response.statusText);
                             }
+
                             return response.json();
                         })
                         .catch(error => {
@@ -178,6 +182,8 @@
                     "zeroRecords": "No se encontraron coincidencias"
                 }
             });
+
+
 
             $('.confirmButtonInactivar').on('click', function () {
                 let idUsuario = $(this).data('id');
