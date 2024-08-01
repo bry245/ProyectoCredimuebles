@@ -13,7 +13,13 @@
     <None Remove="wwwroot\js\Functions\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot\css\Inventario.scss" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Others\LogoC2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\Inventario.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Others\LogoC2.PNG">
@@ -22,6 +28,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\css\Inventario.scss" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />

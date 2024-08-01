@@ -17,214 +17,163 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CrediV1_Prueba
 build_property.RootNamespace = CrediV1_Prueba
-build_property.ProjectDir = C:\Users\vinda\OneDrive\Escritorio\CredimueblesGitHub\ProyectoCredimuebles\CrediV1_Prueba\
+build_property.ProjectDir = C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\vinda\OneDrive\Escritorio\CredimueblesGitHub\ProyectoCredimuebles\CrediV1_Prueba
+build_property.MSBuildProjectDirectory = C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Caja/Gastos.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Caja/Gastos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxHYXN0b3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Caja/IndexCaja.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Caja/IndexCaja.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxJbmRleENhamEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-<<<<<<< HEAD
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/AccessDenied.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Chat/chat.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxjaGF0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Index.cshtml]
-=======
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/AccessDenied.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2Nlc3NEZW5pZWQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Index.cshtml]
->>>>>>> 156c0ccb8ba98032d0c0e9feb74451a854da3c86
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Privacy.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/CambiarContrasenna.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/CambiarContrasenna.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXENhbWJpYXJDb250cmFzZW5uYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/CambiarContrasennaVista.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/CambiarContrasennaVista.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXENhbWJpYXJDb250cmFzZW5uYVZpc3RhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/InicioDeSesion.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/InicioDeSesion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXEluaWNpb0RlU2VzaW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/RecuperarContrasenna.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/RecuperarContrasenna.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-<<<<<<< HEAD
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/VerificacionRecuperarContrasenna.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/VerificacionRecuperarContrasenna.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFZlcmlmaWNhY2lvblJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/AgregarProducto.cshtml]
-=======
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inicio/VerificacionRecuperarContrasenna.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFZlcmlmaWNhY2lvblJlY3VwZXJhckNvbnRyYXNlbm5hLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/AgregarProducto.cshtml]
->>>>>>> 156c0ccb8ba98032d0c0e9feb74451a854da3c86
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/AgregarProducto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xBZ3JlZ2FyUHJvZHVjdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/EditarProducto.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/EditarProducto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xFZGl0YXJQcm9kdWN0by5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/Index.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/ListadoProducto.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/ListadoProducto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xMaXN0YWRvUHJvZHVjdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/AgregarProveedor.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/AgregarProveedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yXEFncmVnYXJQcm92ZWVkb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/EditarProveedor.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/EditarProveedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yXEVkaXRhclByb3ZlZWRvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/ListadoProveedor.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/ListadoProveedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yXExpc3RhZG9Qcm92ZWVkb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Reporte/Index.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Reporte/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearBono.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearBono.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xDcmVhckJvbm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearVenta.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearVenta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xDcmVhclZlbnRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/EditarVenta.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/EditarVenta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xFZGl0YXJWZW50YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/Index.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/ListadoBono.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/ListadoBono.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xMaXN0YWRvQm9uby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/ListadoSalidas.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/ListadoSalidas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xMaXN0YWRvU2FsaWRhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/Error.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/Layout_login.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/Layout_login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExheW91dF9sb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-<<<<<<< HEAD
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/_ValidationScriptsPartial.cshtml]
-=======
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/_ValidationScriptsPartial.cshtml]
->>>>>>> 156c0ccb8ba98032d0c0e9feb74451a854da3c86
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ActualizarUsuario.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ActualizarUsuario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBY3R1YWxpemFyVXN1YXJpby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-<<<<<<< HEAD
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarCliente.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBZ3JlZ2FyQ2xpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarEmpleado.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarEmpleado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBZ3JlZ2FyRW1wbGVhZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/EditarUsuario.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/EditarUsuario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXJVc3VhcmlvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaClientes.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaClientes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xMaXN0YUNsaWVudGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaEmpleados.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaEmpleados.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xMaXN0YUVtcGxlYWRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/Usuarios.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/Usuarios.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xVc3Vhcmlvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Documents/GitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/_ViewImports.cshtml]
-=======
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarCliente.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBZ3JlZ2FyQ2xpZW50ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/AgregarEmpleado.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBZ3JlZ2FyRW1wbGVhZG8uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/EditarUsuario.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXJVc3VhcmlvLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaClientes.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xMaXN0YUNsaWVudGVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/ListaEmpleados.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xMaXN0YUVtcGxlYWRvcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Usuario/Usuarios.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xVc3Vhcmlvcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/_ViewImports.cshtml]
->>>>>>> 156c0ccb8ba98032d0c0e9feb74451a854da3c86
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/_ViewStart.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
-<<<<<<< HEAD
-=======
 
-[C:/Users/vinda/OneDrive/Escritorio/CredimueblesGitHub/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/_Layout.cshtml]
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-81xqwrv9qp
->>>>>>> 156c0ccb8ba98032d0c0e9feb74451a854da3c86

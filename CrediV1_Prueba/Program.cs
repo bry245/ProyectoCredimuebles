@@ -20,7 +20,9 @@ builder.Services.AddSingleton<ICategoria, CategoriaModel>();
 builder.Services.AddSingleton<IOtherServices, OtherServices>();
 builder.Services.AddSingleton<ILogin, LoginModel>();
 builder.Services.AddSingleton<IEmailService, EmailService>();
+builder.Services.AddSingleton<IInventarioModel, InventarioModel>();
 builder.Services.AddSingleton<IPasswordResetService, PasswordResetServiceModel>();
+builder.Services.AddSingleton<ISalidasModel, SalidasModel>();
 
 // Register IDbConnection
 builder.Services.AddSingleton<IDbConnection>(sp =>

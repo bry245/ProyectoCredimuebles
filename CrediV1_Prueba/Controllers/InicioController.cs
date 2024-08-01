@@ -82,10 +82,10 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
-               
+
 
                 var usuarioValidar = _loginModel.IniciarSesion(usuario);
-                Console.WriteLine("PASSS" + usuario.contrasenna+"ROLL"+ usuarioValidar.descripcionRol);
+                Console.WriteLine("PASSS" + usuario.contrasenna + "ROLL" + usuarioValidar.descripcionRol);
                 if (usuarioValidar == null)
                 {
                     TempData["Mensaje"] = "Usuario no registrado";
@@ -140,12 +140,9 @@ namespace CrediV1_Prueba.Controllers
             }
         }
 
-
         [AllowAnonymous]
-
         [HttpPost]
         public IActionResult CambiarContrasennaVista(string email)
-
         {
             ViewBag.Email = email;
             return View();
@@ -157,9 +154,13 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
+                Console.WriteLine("CAMBIOASHDAS" + model.Email);
+                Console.WriteLine("CAMBIOASHDAS" + model.Token);
 
+                // Aquí debes implementar la lógica para cambiar la contraseña
                 await _passwordResetService.ResetPasswordAsync(model.Email, model.Token);
 
+                // Redirigir a la página de inicio de sesión después de cambiar la contraseña
                 return Ok("Contraseña cambiada exitosamente.");
             }
             catch (Exception ex)
@@ -183,7 +184,7 @@ namespace CrediV1_Prueba.Controllers
             return View();
         }
 
-   
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult VerificacionRecuperarContrasenna(string email)
@@ -191,7 +192,6 @@ namespace CrediV1_Prueba.Controllers
             ViewBag.Email = email;
             return View();
         }
-
 
 
 
@@ -207,24 +207,18 @@ namespace CrediV1_Prueba.Controllers
                 if (codigoExiste)
                 {
                     // Redirigir a la vista para cambiar la contraseña
-
                     return Json(new { success = true });
                 }
                 else
                 {
                     return BadRequest(new { message = "Código incorrecto o vencido." });
-
                 }
             }
             catch (Exception ex)
             {
-
                 return BadRequest(new { message = "Error al procesar la solicitud: " + ex.Message });
-
             }
         }
-
-        
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> GestionarCambioContrasenna([FromBody] UsuarioEnt entidad)
@@ -250,7 +244,6 @@ namespace CrediV1_Prueba.Controllers
                 return Json(new { success = false, message = "Error al procesar la solicitud: " + ex.Message });
             }
         }
-
 
 
 

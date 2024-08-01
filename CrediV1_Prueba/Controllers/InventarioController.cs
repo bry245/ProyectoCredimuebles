@@ -1,4 +1,6 @@
 ﻿using CrediV1_Prueba.Entities;
+using CrediV1_Prueba.Entities.DTO;
+using CrediV1_Prueba.Entities.Otros;
 using CrediV1_Prueba.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +17,12 @@ public class InventarioController : Controller
 		private readonly IProducto _productoModel;
         private readonly ICategoria _categoriaModel;
         private readonly IProveedoresModel _proveedoresModel;
+        private readonly IInventarioModel _inventarioModel;
 
 
-		public InventarioController(IHttpClientFactory clientFactory, 
+    public InventarioController(IHttpClientFactory clientFactory, 
         ICategoria categoriaModel, IConfiguration configuration, 
-        IProducto productoModel, IProveedoresModel proveedoresModel)
+        IProducto productoModel, IProveedoresModel proveedoresModel, IInventarioModel inventarioModel)
 		{
 			_configuration = configuration;
 			_clientFactory = clientFactory;
@@ -27,7 +30,8 @@ public class InventarioController : Controller
 			_productoModel = productoModel;
         _categoriaModel = categoriaModel;
        _proveedoresModel = proveedoresModel;
-		}
+        _inventarioModel = inventarioModel;
+    }
 
 
 		public async Task<IActionResult> Index()
@@ -65,26 +69,33 @@ public class InventarioController : Controller
 
 
 
+
+    [HttpGet]
     public async Task<IActionResult> ListadoProducto()
-		{
-			try
-			{
+    {
+        try
+        {
             //var categorias = await _categoriaModel.GetCategorias(); para mas adelante para filtrar por categorias
-				var productos = await _productoModel.GetProductos();
+            var productos = await _productoModel.GetProductos();
+            var productosStockBajo = await _inventarioModel.ConsultarProductosBajosStock();
+            var recomendacionesStock = await _inventarioModel.ConsultarRecomendacionestock();
+            ViewBag.ProductosStock = productosStockBajo ?? new List<ProductosBajoStock>();
+       
 
 
 
-				return View(productos);
-			}
-			catch (Exception ex)
-			{
-			}
-			return View();
-		}
+            return View(productos);
+         
+        }
+        catch (Exception ex)
+        {
+            return NotFound("No hay productos con bajo stock.");
+
+        }
+    }
 
 
-
-		public async Task<IActionResult> EditarProducto(int idProducto) { 
+            public async Task<IActionResult> EditarProducto(int idProducto) { 
             var producto = await _productoModel.buscarProducto(idProducto);
             if (producto.Codigo == 1)
             {
@@ -164,11 +175,32 @@ public class InventarioController : Controller
 
 
 
+    [HttpPost]
+    public async Task<IActionResult> ActualizarStock([FromBody] RestablecerCantidadDTO stock)
+    {
+        try
+        {
+            Console.WriteLine("IDD", stock.idProducto);
+            Console.WriteLine("CANTIDADD", stock.cantidadStock);
+            var resp = await _inventarioModel.RestablecerStockProducto(stock);
+            if (resp == true)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error al actualizar el stock" });
+            }
+        }
+        catch (Exception ex)
+        {
+            // Retorna un JSON con el mensaje de error
+            return Json(new { success = false, message = "Error al actualizar el stock: " + ex.Message });
+        }
+    }
 
 
-   
 
-   
 
     [Authorize(Roles = "Administrador,Gerente")]
     [HttpPost]
