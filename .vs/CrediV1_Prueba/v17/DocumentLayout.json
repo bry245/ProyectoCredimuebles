@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\wwwroot\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\wwwroot\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\chat\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\chat\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\wwwroot\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\wwwroot\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inventario\\listadoproducto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -214,7 +214,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -246,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "chat.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Chat\\chat.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Chat\\chat.cshtml",
@@ -258,15 +258,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "chat.js",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\js\\chat.js",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\wwwroot\\js\\chat.js",
               "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\js\\chat.js",
               "RelativeToolTip": "CrediV1_Prueba\\wwwroot\\js\\chat.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAABJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-08-01T22:26:56.35Z"
+              "WhenOpened": "2024-08-01T22:26:56.35Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -330,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Shared\\_Layout.cshtml",
@@ -343,7 +344,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "InicioController.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\InicioController.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Controllers\\InicioController.cs",
