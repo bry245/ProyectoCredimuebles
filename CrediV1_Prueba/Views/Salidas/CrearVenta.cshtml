@@ -130,6 +130,7 @@
                             <tr>
                                 <th>Producto</th>
                                 <th>Cantidad</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody id="productosSeleccionados">
@@ -171,9 +172,13 @@
     }
 
     function agregarProducto(id, nombre) {
-        var fila = '<tr data-id="' + id + '"><td>' + nombre + '</td><td><input type="number" min="1" value="1" class="form-control" /></td></tr>';
+        var fila = '<tr data-id="' + id + '"><td>' + nombre + '</td><td><input type="number" min="1" value="1" class="form-control" /></td><td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)"><i class="fa fa-trash"></i></button></td></tr>';
+
         $('#productosSeleccionados').append(fila);
         limpiarBuscador();
+    }
+    function eliminarProducto(button) {
+        $(button).closest('tr').remove();
     }
 
     function limpiarBuscador() {
@@ -246,7 +251,7 @@
                 console.log('Datos a enviar2:', JSON.stringify(datos));
                 localStorage.setItem('successMessage', 'Salida registrada con éxito');
 
-                window.location.href = '@Url.Action("ListadoSalidas", "Salidas")';
+                window.location.href = '@Url.Action("ListadoSalidasMes", "Salidas")';
 
 
             },

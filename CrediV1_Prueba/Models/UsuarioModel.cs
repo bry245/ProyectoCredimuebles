@@ -58,7 +58,13 @@ namespace CrediV1_Prueba.Models
                     await connection.ExecuteAsync("registrarCliente", parameters, commandType: CommandType.StoredProcedure);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException exs)
+            {
+				throw new Exception("Error al registrar el usuario: " + exs.Message, exs);
+
+
+			}
+			catch (Exception ex)
             {
                 Console.WriteLine("Error al registrar el usuario: " + ex.Message);
                 throw new Exception("Error al registrar el usuario: " + ex.Message, ex);

@@ -165,12 +165,6 @@ namespace CrediV1_Prueba.Controllers
                     return BadRequest(string.Empty);
                 }
 
-                Console.WriteLine("ASDSA" + user.cedula);
-                Console.WriteLine("ASDSA" + user.apellidos);
-                Console.WriteLine("ASDSA" + user.telefono);
-                Console.WriteLine("ASDSA" + user.contrasenna);
-                Console.WriteLine("ASDSA" + user.direccion);
-                Console.WriteLine("ASDSA" + user.nombre);
                 user.idRol = 5;
                 user.estado = true;
                 user.contrasenna = "1232131";
@@ -180,13 +174,11 @@ namespace CrediV1_Prueba.Controllers
 
 
             }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex);
-
-            }
-        }
+			catch (Exception ex)
+			{
+				return BadRequest(new { mensaje = ex.Message });
+			}
+		}
 
         [HttpGet]
         public async Task <IActionResult> EditarUsuario(int Usuario)

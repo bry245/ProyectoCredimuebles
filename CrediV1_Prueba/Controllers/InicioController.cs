@@ -85,14 +85,12 @@ namespace CrediV1_Prueba.Controllers
                
 
                 var usuarioValidar = _loginModel.IniciarSesion(usuario);
-                Console.WriteLine("PASSS" + usuario.contrasenna+"ROLL"+ usuarioValidar.descripcionRol);
                 if (usuarioValidar == null)
                 {
                     TempData["Mensaje"] = "Usuario no registrado";
                     return BadRequest("Usuario no registrado.");
                 }
 
-                Console.WriteLine("PASSS" + usuario.contrasenna);
 
                 bool auth = await _loginModel.VerificarContraseña(usuario.contrasenna, usuarioValidar.contrasenna);
 

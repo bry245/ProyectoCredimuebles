@@ -40,7 +40,7 @@ public class InventarioController : Controller
         try
         {
             var categorias = await _categoriaModel.GetCategorias();
-            var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
+            var proveedores = await _proveedoresModel.GetProveedores(); 
 
             ViewData["categorias"] = categorias;
             ViewData["proveedores"] = proveedores;
@@ -50,9 +50,8 @@ public class InventarioController : Controller
         }
         catch (Exception ex)
         {
-            // Manejo de errores aquí
             ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
-            return View(); // Retornar la vista con el mensaje de error
+            return View(); 
         }
     }
 
@@ -64,7 +63,6 @@ public class InventarioController : Controller
 			{
             //var categorias = await _categoriaModel.GetCategorias(); para mas adelante para filtrar por categorias
 				var productos = await _productoModel.GetProductos();
-
 
 
 				return View(productos);
@@ -149,7 +147,6 @@ public class InventarioController : Controller
             {
                 // Manejo de errores aquí
                 ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
-                // Aquí también debes asegurarte de retornar algo, en este caso, una redirección
                 return RedirectToAction("ListadoProduct", "Inventario");
             }
         }
