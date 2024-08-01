@@ -115,6 +115,7 @@ namespace CrediV1_Prueba.Controllers
                     HttpContext.Session.SetString("Email", usuarioValidar.correo);
                     HttpContext.Session.SetString("Apellido", usuarioValidar.apellidos);
                     HttpContext.Session.SetString("Nombre", usuarioValidar.nombre);
+                    HttpContext.Session.SetString("ROL", usuarioValidar.descripcionRol);
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

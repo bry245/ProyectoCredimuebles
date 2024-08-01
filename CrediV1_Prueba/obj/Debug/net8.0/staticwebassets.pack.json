@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
+      "Id": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
       "Id": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -263,6 +267,10 @@
     {
       "Id": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\js\\chat.js",
+      "PackagePath": "staticwebassets\\js\\chat.js"
     },
     {
       "Id": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\js\\custom.js",
