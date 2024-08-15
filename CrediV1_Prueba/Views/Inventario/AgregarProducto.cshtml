@@ -22,6 +22,10 @@
                         <div class="form-outline mb-5 mb-xl-4">
                             <input type="number" step="0.01" id="Costo" name="Costo" class="form-control form-control-lg" placeholder="Costo" required />
                         </div>
+
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <input type="number" step="0.01" id="CostoProveedor" name="CostoProveedor" class="form-control form-control-lg" placeholder="CostoProveedor" required />
+                        </div>
                         <div class="form-outline mb-4 mb-xl-4">
                             <input type="number" id="CantidadStock" name="CantidadStock" class="form-control form-control-lg" placeholder="Cantidad en Stock" required />
                         </div>
@@ -73,6 +77,8 @@
 
             // Obtener los valores de los campos del formulario
             const nombre = document.getElementById('Nombre').value;
+            
+            const costoProveedor = document.getElementById('CostoProveedor').value;
             const costo = document.getElementById('Costo').value;
             const cantidadStock = document.getElementById('CantidadStock').value;
             const estadoElement = document.getElementById('Estado');
@@ -83,6 +89,7 @@
             // Crear el objeto de datos
             const data = {
                 Nombre: nombre,
+                CostoProveedor: parseFloat(costoProveedor),
                 Costo: parseFloat(costo),
                 CantidadStock: parseInt(cantidadStock),
                 Estado: estado ? estado.toLowerCase() === 'activo' : false,

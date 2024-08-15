@@ -44,7 +44,11 @@
        
 
         .swal-height {
-            width: 1500px;
+            width: 1300px;
+        }
+
+        .custom-modal-width {
+            width: 500px;
         }
 
        
@@ -70,6 +74,9 @@
       background-color:black;
     }
 
+       
+
+
     </style>
 
     <link href="~/css/tablas.css" rel="stylesheet" />
@@ -82,11 +89,117 @@
                 <i class="fa fa-plus"></i> Agregar Producto
             </a>
 
+            <a class="btn btn-warning" type="button" href="@Url.Action("Pedidos","Inventario")" id="alertaBajoStockBtn">
+                <i class="fa fa-exclamation-triangle" style="margin-right: 5px;"></i> Gestion pedidos
+            </a>
+
             @if (productosStockBajo != null && productosStockBajo.Any())
             {
                 <button class="btn btn-warning" type="button" id="alertaBajoStockBtn">
                     <i class="fa fa-exclamation-triangle" style="margin-right: 5px;"></i> Alerta, inventario bajo
                 </button>
+
+                
+
+
+                <!-- Botón que abre el modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#invoiceModal">
+                    Abrir Factura
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+                    <div class="modal-dialog custom-modal-width ">
+                        <div class="modal-content">
+                           
+                            <div class="modal-body">
+                                <div class="card">
+                                    <div class=" "></div>
+                                    <div class="card-body">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <i class="far fa-building text-danger fa-6x float-start"></i>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <ul class="list-unstyled float-end">
+                                                        <li style="font-size: 30px; color: red;">Company</li>
+                                                        <li>123, Elm Street</li>
+                                                        <li>123-456-789</li>
+                                                        <li>mail@mail.com</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row text-center">
+                                                <h3 class="text-uppercase text-center mt-3" style="font-size: 40px;">Invoice</h3>
+                                                <p>123456789</p>
+                                            </div>
+                                            <div class="row mx-3">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Description</th>
+                                                            <th scope="col">Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Samsung TV</td>
+                                                            <td><i class="fas fa-dollar-sign"></i> 500,00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>JBL Speaker</td>
+                                                            <td><i class="fas fa-dollar-sign"></i> 300,00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Macbook Air</td>
+                                                            <td><i class="fas fa-dollar-sign"></i> 1000,00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Iphone 11 PRO</td>
+                                                            <td><i class="fas fa-dollar-sign"></i> 5000,00</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-4">
+                                                    <ul class="list-unstyled float-end me-0">
+                                                        <li><span class="me-3 float-start">Total Amount:</span><i class="fas fa-dollar-sign"></i> 6850,00</li>
+                                                        <li><span class="me-5">Discount:</span><i class="fas fa-dollar-sign"></i> 500,00</li>
+                                                        <li><span class="float-start" style="margin-right: 35px;">Shippment:</span><i class="fas fa-dollar-sign"></i> 500,00</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-xl-4" style="margin-left:60px">
+                                                    <p class="float-end" style="font-size: 30px; color: red; font-weight: 400;font-family: Arial, Helvetica, sans-serif;">
+                                                        Total: <span><i class="fas fa-dollar-sign"></i> 6350,00</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2 mb-5">
+                                                <p class="fw-bold">Date: <span class="text-muted">23 June 20221</span></p>
+                                                <p class="fw-bold mt-3">Signature:</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer ">
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+
+
             }
 
 
@@ -99,6 +212,8 @@
                 <tr>
                     <th>Nombre del Producto</th>
                     <th>Costo</th>
+                    <th>Costo Proveedor</th>
+                    <th>Proveedor</th>
                     <th>Cantidad Stock</th>
                     <th>Categoria</th>
                     <th>Estado</th>
@@ -106,26 +221,34 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var producto in Model)
+                @if (Model != null)
                 {
-                    <tr>
-                        <input type="hidden" />
-                        <td>@producto.nombre</td>
-                        <td>@producto.costo</td>
-                        <td>@producto.cantidadStock</td>
-                        <td>@producto.CategoriaNombre</td>
-                        <td>@(producto.estado ? "Activo" : "Inactivo")</td>
-                        <td style="text-align:center">
-                            <button class="btn @(producto.estado ? "btn-danger" : "btn-success") confirmButtonInactivar"
-                                    data-id="@producto.idProducto"
-                                    data-nombre="@producto.nombre"
-                                    data-estado="@(producto.estado ? "false" : "true")">
-                                @(producto.estado ? "Inactivar" : "Activar")
-                            </button>
-                            <a class="btn btn-warning" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
-                        </td>
-                    </tr>
+                    @foreach (var producto in Model)
+                    {
+                        <tr>
+                            <input type="hidden" />
+                            <td>@producto.nombre</td>
+                            <td>@producto.costo</td>
+
+                            <td>@producto.CostoProveedor</td>
+                            <td>@producto.nombreProveedor</td>
+                            <td>@producto.cantidadStock</td>
+                            <td>@producto.categoriaNombre</td>
+                            <td>@(producto.estado ? "Activo" : "Inactivo")</td>
+                            <td style="text-align:center">
+                                <button class="btn @(producto.estado ? "btn-danger" : "btn-success") confirmButtonInactivar"
+                                        data-id="@producto.idProducto"
+                                        data-nombre="@producto.nombre"
+                                        data-estado="@(producto.estado ? "false" : "true")">
+                                    @(producto.estado ? "Inactivar" : "Activar")
+                                </button>
+                                <a class="btn btn-warning" asp-controller="Inventario" asp-action="EditarProducto" asp-route-idProducto="@producto.idProducto">Editar</a>
+                            </td>
+                        </tr>
+                    }
+                    
                 }
+             
             </tbody>
         </table>
     </div>
@@ -235,6 +358,8 @@
         }
 
         mostrarAlerta(productosStockBajo);
+
+        /*
         function mostrarBajoStock() {
             if (!Array.isArray(productosStockBajo)) {
                 console.error("productosStockBajo no es un array válido.");
@@ -274,7 +399,7 @@
                 customClass: 'swal-height'
             });
         }
-
+       
         function actualizarCantidad(productoId, index) {
             var cantidad = document.getElementById('inputRestablecer_' + index).value;
             if (cantidad === '' || cantidad <= 0) {

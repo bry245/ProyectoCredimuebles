@@ -82,24 +82,23 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
-
+                
 
                 var usuarioValidar = _loginModel.IniciarSesion(usuario);
-                Console.WriteLine("PASSS" + usuario.contrasenna + "ROLL" + usuarioValidar.descripcionRol);
+
                 if (usuarioValidar == null)
                 {
                     TempData["Mensaje"] = "Usuario no registrado";
                     return BadRequest("Usuario no registrado.");
                 }
 
-                Console.WriteLine("PASSS" + usuario.contrasenna);
 
                 bool auth = await _loginModel.VerificarContraseña(usuario.contrasenna, usuarioValidar.contrasenna);
 
                 if (auth)
                 {
 
-
+                    Console.WriteLine("SI PASOO");
 
                     var claims = new List<Claim>
                     {
@@ -113,9 +112,8 @@ namespace CrediV1_Prueba.Controllers
 
                     HttpContext.Session.SetInt32("idUsuario", (int)usuarioValidar.idUsuario);
                     HttpContext.Session.SetString("Email", usuarioValidar.correo);
-                    HttpContext.Session.SetString("Apellido", usuarioValidar.apellidos);
+
                     HttpContext.Session.SetString("Nombre", usuarioValidar.nombre);
-                    HttpContext.Session.SetString("ROL", usuarioValidar.descripcionRol);
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

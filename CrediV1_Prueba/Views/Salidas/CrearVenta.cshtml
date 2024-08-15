@@ -130,6 +130,7 @@
                             <tr>
                                 <th>Producto</th>
                                 <th>Cantidad</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody id="productosSeleccionados">
@@ -150,10 +151,9 @@
 </div>
 
 
-
 <script src="~/functions/functions.js"></script>>
-
 <script>
+
     var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
 
     function buscarProducto() {
@@ -162,7 +162,7 @@
         var html = '<ul class="list-group">';
         productos.forEach(function (producto) {
             if (producto.nombre.toLowerCase().includes(textoBusqueda)) {
-                html += '<li class="list-group-item" style="cursor: pointer;" onclick="agregarProducto(' + producto.idProducto + ', \'' + producto.nombre + '\')">' + producto.nombre + ' ₡' + producto.costo + '</li>';
+                html += '<li class="list-group-item" style="cursor: pointer;" onclick="agregarProducto(' + producto.idProducto + ', \'' + producto.nombre + '\', ' + producto.costo + ')">' + producto.nombre + ' ₡' + producto.costo + '</li>';
             }
         });
         html += '</ul>';
@@ -170,10 +170,21 @@
         $('#resultadosProductos').html(html);
     }
 
+
     function agregarProducto(id, nombre) {
-        var fila = '<tr data-id="' + id + '"><td>' + nombre + '</td><td><input type="number" min="1" value="1" class="form-control" /></td></tr>';
+        var fila = '<tr data-id="' + id + '"><td>' + nombre + '</td><td><input type="number" min="1" value="1" class="form-control" /></td><td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)"><i class="fa fa-trash"></i></button></td></tr>';
+
         $('#productosSeleccionados').append(fila);
         limpiarBuscador();
+    }
+    function eliminarProducto(button) {
+        $(button).closest('tr').remove();
+    }
+
+    function actualizarTotal(input, costo) {
+        var cantidad = $(input).val();
+        var totalInput = $(input).closest('tr').find('input[name="total"]');
+        totalInput.val(cantidad * costo);
     }
 
     function limpiarBuscador() {
@@ -193,16 +204,19 @@
             var id = $(this).data('id');
             var nombre = $(this).find('td:eq(0)').text().trim();
             var cantidad = $(this).find('td:eq(1) input').val();
+            var precio = $(this).find('td:eq(2) input').val();
+            var total = $(this).find('td:eq(3) input').val();
 
             var producto = {
                 idProducto: id,
                 nombre: nombre,
-                cantidadSalida: cantidad
+                cantidadSalida: cantidad,
+                precioUnitario: precio,
+                total: total
             };
 
             productosSeleccionados.push(producto);
         });
-
 
         var datos = {
             cedulaCliente: $('#cedulaCliente').val(),
@@ -246,14 +260,15 @@
                 console.log('Datos a enviar2:', JSON.stringify(datos));
                 localStorage.setItem('successMessage', 'Salida registrada con éxito');
 
-                window.location.href = '@Url.Action("ListadoSalidas", "Salidas")';
+
+                window.location.href = '@Url.Action("ListadoSalidasMes", "Salidas")';
+
 
 
             },
             error: function (error) {
                 console.error('Error al registrar salida:', error);
                 toastr.error('Ocurrió un error, por favor valide los datos');
-
             }
         });
     }
@@ -263,11 +278,8 @@
             buscarProducto();
         });
     });
+
 </script>
-
-
-
-
 
 
 

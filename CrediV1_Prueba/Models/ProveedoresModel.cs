@@ -36,7 +36,7 @@ namespace CrediV1_Prueba.Models
             parameters.Add("telefono", proveedor.telefono, DbType.String);
             parameters.Add("correo", proveedor.correo, DbType.String);
             parameters.Add("direccion", proveedor.direccion, DbType.String);
-            parameters.Add("Estado", 1, DbType.Boolean);
+            parameters.Add("estado", 1, DbType.Boolean);
 
             using (var connection = new SqlConnection(_connection))
             {
@@ -91,7 +91,7 @@ namespace CrediV1_Prueba.Models
             parameters.Add("@telefono", proveedor.telefono, DbType.String);
             parameters.Add("@correo", proveedor.correo, DbType.String);
             parameters.Add("@direccion", proveedor.direccion, DbType.String);
-            parameters.Add("@Estado", proveedor.estado, DbType.Boolean);
+            parameters.Add("@estado", proveedor.estado, DbType.Boolean);
 
             using (var connection = new SqlConnection(_connection))
             {

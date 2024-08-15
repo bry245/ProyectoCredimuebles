@@ -32,6 +32,11 @@
 						<label>Precio</label>
 						<input type="text" id="Costo" name="Costo" class="form-control form-control-lg" value="@Model.costo" placeholder="Precio del Producto" />
 					</div>
+
+                        <div class="form-outline mb-4 mb-xl-4">
+                            <label>Costo Proveedor</label>
+                            <input type="text" id="CostoProveedor" name="CostoProveedor" class="form-control form-control-lg" value="@Model.CostoProveedor" placeholder="Precio del Producto del Proveedor" />
+                        </div>
 					<div class="form-outline mb-4 mb-xl-4">
 						<label>Cantidad en Stock</label>
                             <input type="text" id="CantidadStock" name="CantidadStock" class="form-control form-control-lg" value="@Model.cantidadStock" placeholder="Cantidad en Stock" />
@@ -50,7 +55,7 @@
 
                     <select id="idProveedor" name="idProveedor" class="form-control form-control-lg" required>
 
-                                <option value="@Model.idProveedor">@Model.proveedor_nombre</option>
+                                <option value="@Model.idProveedor">@Model.nombreProveedor</option>
                         @foreach (var proveedor in proveedores)
                         {
                             <option value="@proveedor.idProveedor">@proveedor.nombre</option>
@@ -62,7 +67,7 @@
                     <div class="form-outline mb-4 mb-xl-4">
                     <label>Categoria</label>
                      <select id="idCategoria" name="idCategoria" class="form-control form-control-lg" required>
-                                <option value="@Model.idCategoria">@Model.CategoriaNombre</option>
+                                <option value="@Model.idCategoria">@Model.categoriaNombre</option>
                             @foreach (var categoria in categorias)
                             {
                                 <option value="@categoria.idCategoria">@categoria.descripcion  </option>
@@ -100,6 +105,7 @@
             // Obtener los valores de los campos del formulario
             const nombre = document.getElementById('Nombre').value;
             const idProducto = document.getElementById('idProducto').value;
+            const costoProveedor = document.getElementById('CostoProveedor').value;
             const costo = document.getElementById('Costo').value;
             const cantidadStock = document.getElementById('CantidadStock').value;
             const idCategoria = document.getElementById('idCategoria').value;
@@ -109,6 +115,7 @@
             const data = {
                 Nombre: nombre,
                 idProducto: parseInt(idProducto),
+                CostoProveedor: parseFloat(costoProveedor),
                 Costo: parseFloat(costo),
                 CantidadStock: parseInt(cantidadStock),
                 idCategoria: parseInt(idCategoria),

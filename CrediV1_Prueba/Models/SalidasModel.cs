@@ -31,7 +31,16 @@ namespace CrediV1_Prueba.Models
                 return pagedSalidas;
             }
         }
-    
+        public async Task<IPagedList<SalidasEnt>> ConsultarSalidasOrdenadas(int paginas, int tamaño)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var salidas = await connection.QueryAsync<SalidasEnt>("ConsultarSalidasOrdenadas", commandType: CommandType.StoredProcedure);
+                var pagedSalidas = salidas.ToPagedList(paginas, tamaño);
+
+                return pagedSalidas;
+            }
+        }
 
         public List<SelectListItem>? ConsultarVendedores()
         {
@@ -189,6 +198,27 @@ namespace CrediV1_Prueba.Models
                 return -1;
             }
         }
+
+        public int ActualizarInventarioEditarSalida(ProductoEnt producto)
+        {
+            try
+            {
+                using (var con = new SqlConnection(_connection))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@idproducto", producto.idProducto);
+                    parameters.Add("@cantidadSalida", producto.cantidadSalida);
+
+                    con.Execute("ActualizarInventarioEditarSalida", parameters, commandType: CommandType.StoredProcedure);
+
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
         public async Task<bool> RegistrarProductosSalida(ProductoEnt producto)
         {
             {
@@ -245,10 +275,10 @@ namespace CrediV1_Prueba.Models
             {
                 using (var connection = new SqlConnection(_connection))
                 {
-                    var salida= connection.Query<SalidasEnt>("VerSalida", new { idSalida},
+                    var salida = connection.Query<SalidasEnt>("VerSalida", new { idSalida },
                        commandType: CommandType.StoredProcedure).FirstOrDefault();
                     return salida;
-                }  
+                }
             }
             catch (Exception ex)
             {
@@ -256,5 +286,144 @@ namespace CrediV1_Prueba.Models
             }
         }
 
+        public int AnularSalida(long idsalida)
+        {
+
+
+            try
+            {
+                using (var connection = new SqlConnection(_connection))
+                {
+                    var salida = connection.Execute("AnularSalida", new { idsalida },
+                       commandType: CommandType.StoredProcedure);
+                    return salida;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al anular la salida.", ex);
+            }
+
+        }
+
+
+        //Cuentas por cobrar
+        public long RegistrarCuentaCredito(SalidasEnt salida)
+        {
+            try
+            {
+                using (var con = new SqlConnection(_connection))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@idMetodoPago", salida.idMetodoPago);
+                    parameters.Add("@MontoVenta", salida.MontoDeVenta);
+                    parameters.Add("@idVendedor", salida.idVendedor);
+                    parameters.Add("@fechaCompra", salida.fecha);
+                    parameters.Add("@cedulaCliente", salida.cedulaCliente);
+                    parameters.Add("@nombreCliente", salida.nombreCliente);
+                    parameters.Add("@apellidosCliente", salida.apellidosCliente);
+                    parameters.Add("@direccionCliente", salida.direccionCliente);
+                    parameters.Add("@telefonoCliente", salida.telefonoCliente);
+                    parameters.Add("@numeroFactura", salida.numeroFactura);
+                    parameters.Add("@prima", salida.prima);
+                    parameters.Add("@plazo", salida.plazo);
+                    parameters.Add("@SalidaID", dbType: DbType.Int64, direction: ParameterDirection.Output);
+
+                    con.Execute("RegistrarCuentaCredito", parameters, commandType: CommandType.StoredProcedure);
+
+                    var idSalida = parameters.Get<long>("@SalidaID");
+                    return idSalida;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+
+        public async Task<IPagedList<SalidasEnt>> ListarCuentasPorCobrar(int paginas, int tamaño)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var salidas = await connection.QueryAsync<SalidasEnt>("ListarCuentasPorCobrar", commandType: CommandType.StoredProcedure);
+                var pagedSalidas = salidas.ToPagedList(paginas, tamaño);
+
+                return pagedSalidas;
+            }
+        }
+
+        public SalidasEnt VerCuentaPorCobrar(long idCuenta)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connection))
+                {
+                    var salida = connection.Query<SalidasEnt>("VerCuentaPorCobrar", new { idCuenta },
+                       commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    return salida;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al consultar la información", ex);
+            }
+        }
+
+        public List<SalidasEnt> ObtenerPagosRealizados(long idCuenta)
+        {
+            List<SalidasEnt> productos = new List<SalidasEnt>();
+
+            using (SqlConnection connection = new SqlConnection(_connection))
+            {
+                SqlCommand command = new SqlCommand("ConsultarPagosACuenta", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@idCuenta", SqlDbType.BigInt)).Value = idCuenta;
+
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    SalidasEnt producto = new SalidasEnt();
+                    producto.idLinea = (long)reader["idLinea"];
+                    producto.idCuenta = (long)reader["idCuenta"];
+                    producto.fechaAbono = (DateTime)reader["fechaPago"];
+                    producto.MontoDeVenta = (decimal)reader["montoVenta"];
+                    producto.abono = (decimal)reader["montoPago"];
+                    producto.numeroFactura = (string)reader["numeroFactura"];
+                    productos.Add(producto);
+                }
+
+                reader.Close();
+            }
+
+            return productos;
+        }
+
+        public int AgregarAbono(SalidasEnt cuenta)
+        {
+            try
+            {
+                using (var con = new SqlConnection(_connection))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@idCuenta", cuenta.idCuenta);
+                    parameters.Add("@abono", cuenta.abono);
+                    parameters.Add("@numeroFactura", cuenta.numeroFactura);
+
+                    con.Execute("AgregarAbono", parameters, commandType: CommandType.StoredProcedure);
+
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
     }
 }

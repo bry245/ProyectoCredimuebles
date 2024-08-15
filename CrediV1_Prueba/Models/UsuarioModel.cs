@@ -58,7 +58,13 @@ namespace CrediV1_Prueba.Models
                     await connection.ExecuteAsync("registrarCliente", parameters, commandType: CommandType.StoredProcedure);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException exs)
+            {
+				throw new Exception("Error al registrar el usuario: " + exs.Message, exs);
+
+
+			}
+			catch (Exception ex)
             {
                 Console.WriteLine("Error al registrar el usuario: " + ex.Message);
                 throw new Exception("Error al registrar el usuario: " + ex.Message, ex);
@@ -120,7 +126,7 @@ namespace CrediV1_Prueba.Models
                 parameters.Add("@telefono", usuario.telefono, DbType.String);
                 parameters.Add("@correo", usuario.correo, DbType.String);
                 parameters.Add("@direccion", usuario.direccion, DbType.String);
-                parameters.Add("@Estado", usuario.estado, DbType.Boolean);
+                parameters.Add("@estado", usuario.estado, DbType.Boolean);
                 parameters.Add("@idRol", usuario.idRol, DbType.Int32);
 
                 using (var connection = new SqlConnection(_connection))

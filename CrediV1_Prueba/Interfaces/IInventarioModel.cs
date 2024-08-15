@@ -1,4 +1,5 @@
-﻿using CrediV1_Prueba.Entities.DTO;
+﻿using CrediV1_Prueba.Entities;
+using CrediV1_Prueba.Entities.DTO;
 using CrediV1_Prueba.Entities.Otros;
 
 namespace CrediV1_Prueba.Interfaces
@@ -10,8 +11,14 @@ namespace CrediV1_Prueba.Interfaces
 
         public Task<IEnumerable<ProductosBajoStock>> ConsultarRecomendacionestock();
 
+        public Task<IEnumerable<PedidoEnt>> ConsultarPedidos();
+        public Task<IEnumerable<PedidoEnt>> ConsultarPedidosDetalles();
+        public int RegistrarPedido(RegistrarPedidoDTO ent);
+        public void RegistrarPedidoDetalle(RegistrarPedidoDTO ent);
+
 
         public  Task<bool> RestablecerStockProducto(RestablecerCantidadDTO ent);
+        public Task<string> ConfirmarPedido(RegistrarPedidoDTO ent);
 
     }
 }

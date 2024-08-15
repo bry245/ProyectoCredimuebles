@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\CrediV1_Prueba.props" />
-</Project>

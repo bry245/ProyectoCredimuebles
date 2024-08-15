@@ -2,6 +2,7 @@
 using CrediV1_Prueba.Entities.DTO;
 using CrediV1_Prueba.Entities.Otros;
 using CrediV1_Prueba.Interfaces;
+using EllipticCurve.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,19 +19,27 @@ public class InventarioController : Controller
         private readonly ICategoria _categoriaModel;
         private readonly IProveedoresModel _proveedoresModel;
         private readonly IInventarioModel _inventarioModel;
+        private readonly ISalidasModel _salidasModel;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEmailService _emailService;   
 
 
     public InventarioController(IHttpClientFactory clientFactory, 
         ICategoria categoriaModel, IConfiguration configuration, 
-        IProducto productoModel, IProveedoresModel proveedoresModel, IInventarioModel inventarioModel)
+        IProducto productoModel, IProveedoresModel proveedoresModel,
+        IInventarioModel inventarioModel, ISalidasModel salidsaModel,
+        IHttpContextAccessor httpContextAccessor, IEmailService emailService)
 		{
 			_configuration = configuration;
 			_clientFactory = clientFactory;
 			_connection = _configuration.GetConnectionString("Connection");
 			_productoModel = productoModel;
-        _categoriaModel = categoriaModel;
-       _proveedoresModel = proveedoresModel;
-        _inventarioModel = inventarioModel;
+            _categoriaModel = categoriaModel;
+           _proveedoresModel = proveedoresModel;
+            _inventarioModel = inventarioModel;
+            _salidasModel = salidsaModel;
+             _httpContextAccessor =  httpContextAccessor;
+         _emailService = emailService;
     }
 
 
@@ -45,13 +54,152 @@ public class InventarioController : Controller
         return View();
     }
 
+
+
+    [HttpGet]
+    public async Task<IActionResult> Pedidos()
+    {
+        try
+        {
+
+            var productos = await _productoModel.GetProductos();
+
+            var pedidos = await _inventarioModel.ConsultarPedidos();
+            var pedidosDetalles = await _inventarioModel.ConsultarPedidosDetalles();
+
+            ViewBag.StockRecomendaciones = _inventarioModel.ConsultarRecomendacionestock();
+            ViewBag.Vendedores = _salidasModel.ConsultarVendedores();
+            ViewBag.MetodosPago = _salidasModel.ConsultarMetodosPago();
+            ViewBag.Productos = productos;
+            ViewBag.Pedidos = pedidos;
+            ViewBag.PedidosDetalles = pedidosDetalles;
+
+            return View();
+        }
+        catch (Exception ex)
+        {
+            ViewBag.exepcion = "Ocurrió un error: " + ex.Message;
+            return View();
+        }
+    }
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> EnviarNotificacion([FromBody] EnviarNotificacion notificacion)
+    {
+        try
+        {
+
+            Console.WriteLine("USUARIO" + notificacion.Usuario);
+            Console.WriteLine("correo" + notificacion.Correo);
+            Console.WriteLine("Mensaje" + notificacion.Mensaje);
+            // Aquí puedes agregar la lógica para enviar el correo electrónico usando tu servicio de correo
+            await _emailService.SendNotificationProveedorAsync(notificacion.Correo, notificacion.Mensaje, notificacion.Usuario);
+            return Ok(new { message = "Notificación enviada correctamente" });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = "Error al enviar la notificación: " + ex.Message });
+        }
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> RegistrarPedido([FromBody] List<RegistrarPedidoDTO> productos)
+    {
+        try
+        {
+            if (productos == null || productos.Count == 0)
+            {
+                return BadRequest("No se han recibido productos.");
+            }
+
+           
+
+            float montoTotalPedidoArray = (float)(productos.FirstOrDefault()?.montoTotalPedido);
+            RegistrarPedidoDTO pedido = new RegistrarPedidoDTO
+            {
+                idEmpleado = (int)HttpContext.Session.GetInt32("idUsuario"),
+                fechaEncargo = DateTime.Now,
+                Estado = "En Curso",
+                montoTotalPedido = montoTotalPedidoArray
+
+            };
+
+            int idPedidoRegistrado = _inventarioModel.RegistrarPedido(pedido);
+            Console.WriteLine("ID pedidooo: " + idPedidoRegistrado);
+
+
+            foreach (var producto in productos)
+            {
+
+          
+
+                RegistrarPedidoDTO pedidoDetalle = new RegistrarPedidoDTO
+                {
+                    idPedido = idPedidoRegistrado,
+                    idProducto = producto.idProducto,
+                    idProveedor = producto.idProveedor,
+                    cantidad = producto.cantidad,
+                    montoUnitario = producto.montoUnitario,
+                    montoTotalProducto = producto.montoTotalProducto
+                };
+
+                _inventarioModel.RegistrarPedidoDetalle(pedidoDetalle);
+            }
+
+            return Ok(new { mensaje = "Pedido registrado con éxito" });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+            return BadRequest(new { mensaje = "Error al registrar el pedido", detalle = ex.Message });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RecibirProductoPedido([FromBody] ConfirmarPedidoDTO pedido)
+    {
+        Console.WriteLine("IDDETALLEEEE"+pedido.idDetalle);
+
+        int idUsuario = (int)HttpContext.Session.GetInt32("idUsuario");
+
+        if (idUsuario == null)
+        {
+    
+            return BadRequest(new { mensaje = "Usuario no autenticado" });
+        }
+        Console.WriteLine("ASDASDAS"+pedido.idDetalle);
+
+
+        RegistrarPedidoDTO confirmar = new RegistrarPedidoDTO
+        {
+            idDetalle = pedido.idDetalle,
+            fechaRecibido = DateTime.UtcNow,
+            EmpleadoRecibido = idUsuario  
+        };
+
+           string result = await _inventarioModel.ConfirmarPedido(confirmar);
+
+        return Ok(new { mensaje = "Pedido registrado con éxito" });
+    }
+
+
+
+
+
+
+
+
+
     [Authorize(Roles = "Administrador,Gerente")]
     public async Task<IActionResult> AgregarProducto()
     {
         try
         {
             var categorias = await _categoriaModel.GetCategorias();
-            var proveedores = await _proveedoresModel.GetProveedores(); // Asumiendo que GetProveedores es un método que obtiene los proveedores
+            var proveedores = await _proveedoresModel.GetProveedores(); 
 
             ViewData["categorias"] = categorias;
             ViewData["proveedores"] = proveedores;
@@ -61,9 +209,8 @@ public class InventarioController : Controller
         }
         catch (Exception ex)
         {
-            // Manejo de errores aquí
             ViewBag.ErrorMessage = "Error al obtener datos para agregar producto: " + ex.Message;
-            return View(); // Retornar la vista con el mensaje de error
+            return View(); 
         }
     }
 
@@ -89,11 +236,10 @@ public class InventarioController : Controller
         }
         catch (Exception ex)
         {
-            return NotFound("No hay productos con bajo stock.");
+            return View();
 
         }
     }
-
 
             public async Task<IActionResult> EditarProducto(int idProducto) { 
             var producto = await _productoModel.buscarProducto(idProducto);

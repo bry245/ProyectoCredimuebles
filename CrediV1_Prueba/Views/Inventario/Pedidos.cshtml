@@ -1,0 +1,645 @@
+﻿@using Newtonsoft.Json
+@model CrediV1_Prueba.Entities.PedidoEnt
+@{
+    ViewData["Title"] = "Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var errorMessage = ViewBag.exepcion as string;
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+                    <div class="alert alert-danger">
+                        @errorMessage
+                    </div>
+    }
+}
+@section Estilos {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.2/css/buttons.dataTables.min.css">
+
+    <style>
+        /* Cambiar el color de fondo y el texto de las pestañas activas */
+        .nav-pills .nav-link.active {
+            background-color: #007bff; /* Cambia a tu color preferido */
+            color: #fff; /* Cambia a tu color de texto preferido */
+        }
+
+
+      
+
+        /* Cambiar el color de fondo y el texto de las pestañas inactivas */
+        .nav-pills .nav-link {
+            background-color: #f8f9fa; /* Cambia a tu color preferido */
+            color: #495057; /* Cambia a tu color de texto preferido */
+        }
+
+            /* Cambiar el color de fondo cuando se pasa el mouse por encima de las pestañas */
+            .nav-pills .nav-link:hover {
+                background-color: #e2e6ea; /* Cambia a tu color preferido */
+            }
+    </style>
+
+}
+
+<div class="container">
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between">
+
+
+            <ul class="nav nav-pills mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active"
+                       id="ex1-tab-1"
+                       href="#ex1-pills-1"
+                       role="tab"
+                       aria-controls="ex1-pills-1"
+                       aria-selected="true"
+                       data-mdb-toggle="pill">Pedidos en Curso</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link"
+                       id="ex1-tab-2"
+                       href="#ex1-pills-2"
+                       role="tab"
+                       aria-controls="ex1-pills-2"
+                       aria-selected="false"
+                       data-mdb-toggle="pill">Realizar Pedido</a>
+                </li>
+         
+            </ul>
+            <!-- Pills navs -->
+      
+
+
+
+            </div>
+    </div>
+
+
+
+    <div class="tab-content" id="ex1-content">
+        <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+            <div class="container mt-4">
+                <table id="productosTable" class="table  table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Fecha de encargo</th>
+                            <th>Estado</th>
+                            <th>Precio Total</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pedido in ViewBag.Pedidos)
+                        {
+                            <tr>
+                                <td>@pedido.fechaEncargo</td>
+                                <td>@pedido.estado</td>
+                                <td>@pedido.montoTotalPedido</td>
+                                <td>
+                                    <!-- Botón para desplegar el acordeón -->
+                                    <button type="button" class="btn " data-mdb-toggle="collapse" data-mdb-target="#collapse_@pedido.idPedido" aria-expanded="false" aria-controls="collapse_@pedido.idPedido">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Fila con la tabla anidada, ignorada por DataTables -->
+                            <tr id="collapse_@pedido.idPedido" class="collapse">
+                                <td colspan="4" class="dtr-hidden">
+                                    <!-- Clase para ocultar a DataTables -->
+                                    <!-- Tabla de detalles del pedido dentro del acordeón -->
+                                    <table class="table table-striped mt-3">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha encargado</th>
+                                                <th>Fecha recibido</th>
+                                                <th>Producto</th>
+                                                <th>Cantidad</th>
+                                                <th>Monto Unitario</th>
+                                                <th>Monto Total</th>
+                                                <th>Proveedor</th>
+                                                <th>Confirmar Pedido</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var detalle in ViewBag.PedidosDetalles)
+                                            {
+                                                @if (detalle.idPedido == pedido.idPedido)
+                                                {
+                                                    <tr>
+                                                        <input type="hidden" class="idDetallePedido" name="idDetallePedido" value="@detalle.idDetalle" />
+
+                                                        <td>@detalle.fechaEncargo</td>
+                                                        @if (@detalle.fechaRecibido == null)
+                                                        {
+                                                            <td>Aún no recibido</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>@detalle.fechaRecibido</td>
+                                                        }
+                                                        <td>@detalle.nombreProducto</td>
+                                                        <td>@detalle.cantidad</td>
+                                                        <td>@detalle.montoUnitario</td>
+                                                        <td>@detalle.montoTotalProducto</td>
+                                                        <td>@detalle.nombreProveedor</td>
+                                                        @if (detalle.fechaRecibido == null)
+                                                        {
+                                                            <td style="text-align:center">
+                                                                <!-- Pasar el botón a la función -->
+                                                                <button onclick="enviarIdDetallePedido(this)" class="btn btn-success">
+                                                                    <i class="fas fa-check"></i>
+                                                                </button>
+
+                                                                <button onclick="enviarNotificacion('@detalle.nombreProveedor', '@detalle.correoProveedor')" class="btn btn-success">
+                                                                    <i class="fas fa-envelope"></i>
+                                                                </button>
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td style="text-align:center">
+                                                                <button disabled class="btn btn-success">
+                                                                    <i class="fas fa-check"></i>
+                                                                </button>
+
+                                                                <button onclick="enviarNotificacion('@detalle.nombreProveedor', '@detalle.correoProveedor')" class="btn btn-success">
+                                                                    <i class="fas fa-envelope"></i>
+                                                                </button>
+                                                            </td>
+                                                        }
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                        
+                </h2>
+               
+            </div>
+         
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+           
+        </div>
+        <div class="tab-pane fade"
+             id="ex1-pills-2"
+             role="tabpanel"
+             aria-labelledby="ex1-tab-2">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-7">
+                <!-- Aumenté el tamaño de la columna -->
+                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                    <div class="card-body p-4">
+                        <div class="form-outline mb-5 mb-xl-4 text-center">
+                            <h2>Crear pedido</h2>
+                        </div>
+                        <h4>Datos del pedido</h4>
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <label for="cedulaCliente">Empleado</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                </div>
+                                <input type="text" id="idEmpleado" name="idEmpleado" onkeyup="ConsultarNombre()" class="form-control form-control-lg" readonly value="@Context.Session.GetString("Nombre")" />
+                            </div>
+                        </div>
+                        <div class="form-outline mb-3 mb-xl-4">
+                            <label for="costoTotal">Costo Total</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                </div>
+                                <input readonly type="text" class="form-control form-control-lg" id="costoTotal" placeholder="Costo Total" />
+                            </div>
+                        </div>
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <label for="nombreCliente">Nombre Proveedor</label>
+                            <div class="input-group">
+                            </div>
+                        </div>
+                        <div id="proveedorInputs" class="form-outline mb-5 mb-xl-4">
+                            <!-- Aquí se agregarán los inputs de proveedores -->
+                        </div>
+                        <h4>Artículos</h4>
+                        <div class="input-group col-lg-4 mb-3">
+                            <label for="buscarProducto">Buscar Producto</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto" aria-describedby="buscarButton">
+                            </div>
+                        </div>
+                        <div id="resultadosProductos"></div>
+                        <div class="row">
+                            <div class="col">
+                                <table id="tablaProductos" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productosSeleccionados">
+                                        <!-- Aquí se agregarán los productos seleccionados -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a href="@Url.Action("Index","Salidas")" class="btn btn-primary">Volver</a> <!-- Agregué la clase btn-primary -->
+                                <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Salida</button> <!-- Agregué la clase btn-success -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xl-5">
+                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px; background-color: #ffeded;">
+                    @{
+                        // Esperamos la tarea si es una Task<IEnumerable>
+                        var stockRecomendaciones = ViewBag.StockRecomendaciones as IEnumerable<CrediV1_Prueba.Entities.Otros.ProductosBajoStock>;
+
+                        if (stockRecomendaciones != null)
+                        {
+                                <h4 class="text-danger">¡Atención!</h4>
+                                <p>Los siguientes productos están por debajo del stock mínimo:</p>
+                                <ul class="list-group">
+                                    @foreach (var item in stockRecomendaciones)
+                                {
+                                        <li class="list-group-item">
+                                            <strong>@item.NombreProducto:</strong> Se recomienda solicitar al menos <strong>@item.CantidadStock unidades</strong>.
+                                        </li>
+                                }
+                                </ul>
+
+                                <button class="btn btn-warning mt-3">Solicitar Producto</button>
+                        }
+                        else
+                        {
+                          
+                        }
+                    }
+                  
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+        </div>
+        <div class="tab-pane fade"
+             id="ex1-pills-3"
+             role="tabpanel"
+             aria-labelledby="ex1-tab-3">
+            Tab 3 content
+        </div>
+    </div>
+
+</div>
+
+<!-- Pills content -->
+@section Scripts {
+ 
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.2/js/buttons.html5.min.js"></script>
+
+
+
+    <script>
+
+        function enviarNotificacion(usuario, correo) {
+            Swal.fire({
+                title: 'Enviar Notificación',
+                html: `
+                    <div class="mb-3">
+                        <label class="form-label">Usuario:</label>
+                        <input type="text" class="form-control" id="usuario" readonly value="${usuario}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correo Electrónico:</label>
+                        <input type="email" class="form-control" id="correo" readonly value="${correo}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mensaje:</label>
+                        <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                focusConfirm: false,
+                preConfirm: () => {
+                    const mensaje = document.getElementById('mensaje').value;
+
+                    if (!mensaje) {
+                        Swal.showValidationMessage('El mensaje no puede estar vacío');
+                        return false;
+                    }
+
+                    const data = {
+                        usuario: usuario,
+                        correo: correo,
+                        mensaje: mensaje
+                    };
+
+                    return fetch('/Inventario/EnviarNotificacion', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(`Error al enviar la notificación: ${error}`);
+                        });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Notificación enviada',
+                        text: 'La notificación se ha enviado correctamente.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    </script>
+
+
+    <script>
+        function enviarIdDetallePedido(button) {
+            // Encuentra la fila más cercana al botón clicado
+            const row = button.closest('tr');
+            // Busca el input de tipo hidden dentro de esa fila
+            const idDetalle = row.querySelector('.idDetallePedido').value;
+
+            console.log(idDetalle);  // Para verificar si estás obteniendo la ID correcta
+
+            // Crear el objeto RegistrarPedidoDTO correctamente
+            const ent = {
+                idDetalle: idDetalle
+            };
+
+            fetch('/Inventario/RecibirProductoPedido', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ent)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Respuesta del servidor:', data);
+
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: 'ID enviada correctamente',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                });
+        }
+
+
+
+    
+    </script>
+
+
+
+
+    <script>
+
+       var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
+
+        function buscarProducto() {
+            var textoBusqueda = $('#buscarProducto').val().toLowerCase();
+
+            var html = '<ul class="list-group">';
+            productos.forEach(function (producto) {
+                if (producto.nombre.toLowerCase().includes(textoBusqueda)) {
+                    html += '<li class="list-group-item" style="cursor: pointer;" onclick="agregarProducto(' + producto.idProducto + ', \'' + producto.nombre + '\', ' + producto.CostoProveedor + ', \'' + producto.nombreProveedor + '\', ' + producto.idProveedor + ')">' + producto.nombre + ' ₡' + producto.CostoProveedor + '</li>';
+                }
+            });
+            html += '</ul>';
+
+            $('#resultadosProductos').html(html);
+        }
+
+    var proveedores = []; // Array para almacenar los proveedores únicos
+
+        function agregarProducto(id, nombre, CostoProveedor, proveedor, idProveedor) {
+            var filaExistente = $('#productosSeleccionados tr[data-id="' + id + '"]');
+            if (filaExistente.length > 0) {
+                // Si el producto ya está en la tabla, actualiza la cantidad y el total
+                var cantidadInput = filaExistente.find('input[name="cantidad"]');
+                var nuevaCantidad = parseInt(cantidadInput.val()) + 1;
+                cantidadInput.val(nuevaCantidad);
+                filaExistente.find('input[name="total"]').val(nuevaCantidad * CostoProveedor);
+            } else {
+                // Si el producto no está en la tabla, agrégalo con los nuevos inputs
+                var fila = '<tr data-id="' + id + '" data-proveedor-id="' + idProveedor + '">' +
+                    '<td>' + nombre + '</td>' +
+                    '<td><input type="number" name="cantidad" min="1" value="1" class="form-control" onchange="actualizarTotal(this, ' + CostoProveedor + ')" /></td>' +
+                    '<td><input type="number" name="precio" value="' + CostoProveedor + '" class="form-control" readonly /></td>' +
+                    '<td><input type="number" name="total" value="' + CostoProveedor + '" class="form-control" readonly /></td>' +
+                    '</tr>';
+                $('#productosSeleccionados').append(fila);
+            }
+
+            // Verificar si el proveedor ya está en la lista
+            if (!proveedores.includes(proveedor)) {
+                proveedores.push(proveedor);
+                var proveedorInput = '<div class="input-group mb-3">' +
+                    '<div class="input-group-prepend">' +
+                    '<span class="input-group-text"><i class="fas fa-user"></i></span>' +
+                    '</div>' +
+                    '<input type="text" name="proveedores[]" value="' + proveedor + '" class="form-control form-control-lg" readonly />' +
+                    '</div>';
+                $('#proveedorInputs').append(proveedorInput);
+            }
+
+            limpiarBuscador();
+            actualizarCostoTotal();
+        }
+
+
+        function actualizarTotal(input, CostoProveedor) {
+        var cantidad = $(input).val();
+        var totalInput = $(input).closest('tr').find('input[name="total"]');
+        totalInput.val(cantidad * CostoProveedor);
+        actualizarCostoTotal();
+    }
+
+    function actualizarCostoTotal() {
+        var totalPedido = 0;
+
+        $('#productosSeleccionados tr').each(function () {
+            var totalProducto = $(this).find('input[name="total"]').val();
+            totalPedido += parseFloat(totalProducto);
+        });
+
+        // Asigna el total calculado al input de costoTotal
+        $('#costoTotal').val(totalPedido.toFixed(2));
+    }
+
+
+        function limpiarBuscador() {
+            $('#buscarProducto').val('');
+            $('#resultadosProductos').html('');
+        }
+
+        $(document).ready(function () {
+            $('#buscarProducto').keyup(function () {
+                buscarProducto();
+            });
+        });
+
+        function RegistrarPedido() {
+            var productosSeleccionados = [];
+            $('#productosSeleccionados tr').each(function () {
+                var id = $(this).data('id');
+                var cantidad = $(this).find('td:eq(1) input').val();
+                var precio = $(this).find('td:eq(2) input').val();
+                var total = $(this).find('td:eq(3) input').val();
+                var idProveedor = $(this).data('proveedor-id');
+
+                var producto = {
+                    idProducto: id,
+                    idProveedor: idProveedor,
+                    cantidad: parseInt(cantidad),  // Agrega la cantidad aquí
+                    montoUnitario: parseFloat(precio),
+                    montoTotalProducto: parseFloat(total),
+                    montoTotalPedido: parseFloat($('#costoTotal').val())
+                };
+                productosSeleccionados.push(producto);
+            });
+
+            // Usando fetch para realizar la solicitud
+            fetch('/Inventario/RegistrarPedido', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productosSeleccionados)  // Enviando todos los productos seleccionados
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ocurrió un error al registrar el pedido');
+                    }
+                    return response.json(); // Esto asume que el servidor devuelve un JSON en la respuesta
+                })
+                .then(data => {
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: 'Pedido registrado con éxito',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        window.location.href = '/Inventario/Pedidos';
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                });
+        }
+
+
+
+
+
+
+        $(document).ready(function () {
+            $('#buscarProducto').keyup(function () {
+                buscarProducto();
+            });
+        });
+
+    </script>
+
+
+
+
+
+}

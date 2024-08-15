@@ -86,6 +86,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xMaXN0YWRvUHJvZHVjdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Inventario/Pedidos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xQZWRpZG9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Proveedor/AgregarProveedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yXEFncmVnYXJQcm92ZWVkb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -102,8 +106,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearBono.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xDcmVhckJvbm8uY3NodG1s
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearAbono.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xDcmVhckFib25vLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearCuentaCredito.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsaWRhc1xDcmVhckN1ZW50YUNyZWRpdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jason/Videos/FPS/ProyectoCredimuebles/CrediV1_Prueba/Views/Salidas/CrearVenta.cshtml]

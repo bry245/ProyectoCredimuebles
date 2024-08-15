@@ -93,7 +93,7 @@
                 },
                 body: JSON.stringify(data)
             });
-
+            //
             // Verificar el estado de la respuesta
             if (response.ok) {
                 Swal.fire({
@@ -105,17 +105,19 @@
                 });
             } else {
                 // Mostrar mensaje de error si la respuesta no es exitosa
+                const result = await response.json();
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Hubo un problema al registrar el usuario.'
+                    text: result.mensaje
+
                 });
             }
         } catch (error) {
             // Mostrar mensaje de error si hay un problema con la llamada fetch
             Swal.fire({
                 icon: 'error',
-                title: 'Error',
+                title: 'ErrorC',
                 text: 'Hubo un problema al registrar el usuario.'
             });
         }

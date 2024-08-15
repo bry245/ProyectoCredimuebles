@@ -39,36 +39,7 @@ body {
 }
 
 /* Estilos para atenuar el fondo cuando se abre el modal */
-.modal-open .content {
-    filter: brightness(0.7); /* Reducción de brillo */
-}
 
-body {
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    line-height: 28px;
-    color: #6a6a6a;
-    font-size: 14px;
-    background-color: #eff2f1;
-}
-
-a {
-    text-decoration: none;
-    -webkit-transition: .3s all ease;
-    -o-transition: .3s all ease;
-    transition: .3s all ease;
-    color: #2f2f2f;
-    
-}
-
-    a:hover {
-        color: #2f2f2f;
-        text-decoration: none;
-    }
-
-    a.more {
-        font-weight: 600;
-    }
 
 .custom-navbar {
     background: #c31e1e !important;

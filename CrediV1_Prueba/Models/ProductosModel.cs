@@ -38,7 +38,7 @@ namespace CrediV1_Prueba.Models
             using (var connection = new SqlConnection(_connection))
             {
               var result = await connection.ExecuteAsync("AgregarProducto",
-                    new { producto.nombre, producto.idCategoria, producto.idProveedor, producto.cantidadStock, producto.costo },
+                    new { producto.nombre, producto.idCategoria, producto.idProveedor, producto.cantidadStock, producto.costo,producto.CostoProveedor },
                     commandType: System.Data.CommandType.StoredProcedure);
                 if (result > 0)
                 {
@@ -141,7 +141,7 @@ namespace CrediV1_Prueba.Models
             using (var connection = new SqlConnection(_connection))
             {
                 var result = await connection.ExecuteAsync("ActualizarProducto",
-                      new { producto.nombre, producto.idCategoria,producto.idProducto, producto.idProveedor, producto.cantidadStock, producto.costo },
+                      new { producto.nombre, producto.idCategoria,producto.idProducto, producto.idProveedor, producto.cantidadStock, producto.costo, producto.CostoProveedor },
                       commandType: System.Data.CommandType.StoredProcedure);
                 if (result > 0)
                 {

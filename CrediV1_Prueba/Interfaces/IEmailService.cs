@@ -4,5 +4,7 @@
     {
         public Task SendNotificationEmailAsync(string toEmail, string message, string nombreCompletoUsuario);
         public Task SendPasswordResetEmailAsync(string toEmail, string resetToken);
+
+        public  Task SendNotificationProveedorAsync(string toEmail, string message, string nombreCompletoProveedor);
     }
 }

@@ -12,17 +12,20 @@
         public string costoReferencia { get; set; }
         public long idSalida { get; set; }
 
+        public decimal CostoProveedor { get; set; }
+        
+
 
       
 
         public long idProveedor { get; set; }
 
     
-        public string proveedor_nombre { get; set; }
+        public string nombreProveedor { get; set; }
 
 
     
 
-        public string CategoriaNombre { get; set; }
+        public string categoriaNombre { get; set; }
     }
 }

@@ -30,6 +30,7 @@
                     <th>Correo Electrónico</th>
                     <th>Estado</th>
                     <th>Acciones</th>
+             
                 </tr>
             </thead>
             <tbody>
@@ -58,15 +59,16 @@
                                         <i class="fa fa-edit"></i> Editar
                                     </a>
                                     <button class="btn" onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
-                                        <i class="fa fa-envelope"></i> Enviar Notificación
+                                        <i class="fa fa-envelope"></i> 
                                     </button>
                                 </td>
+                           
                             }
                             else
                             {
                                 <td>Inactivo</td>
                                 <td style="text-align:start">
-                                    <button class="btn btn-success confirmButtonInactivar"
+                                    <button class="btn"
                                             data-id="@usuario.idUsuario"
                                             data-nombre="@usuario.nombre"
                                             data-correo="@usuario.correo"
@@ -74,9 +76,9 @@
                                             data-estado="true">
                                         Activar
                                     </button>
-                                    <a class="btn btn-warning" asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</a>
+                                    <button class="btn " asp-controller="Usuario" asp-action="EditarUsuario" asp-route-Usuario="@usuario.idUsuario">Editar</button>
                                     <button class="btn " onclick="enviarNotificacion('@usuario.nombreCompleto', '@usuario.correo')">
-                                        <i class="fa fa-envelope"></i> Enviar Notificación
+                                        <i class="fa fa-envelope"></i> 
                                     </button>
                                 </td>
                             }
