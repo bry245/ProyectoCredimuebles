@@ -181,11 +181,14 @@
         $(button).closest('tr').remove();
     }
 
+
     function actualizarTotal(input, costo) {
         var cantidad = $(input).val();
         var totalInput = $(input).closest('tr').find('input[name="total"]');
         totalInput.val(cantidad * costo);
     }
+
+
 
     function limpiarBuscador() {
         $('#buscarProducto').val('');

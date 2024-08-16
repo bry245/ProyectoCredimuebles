@@ -22,10 +22,12 @@ namespace CrediV1_Prueba.Interfaces
         public int AnularSalida(long q);
         public long RegistrarCuentaCredito(SalidasEnt salida);
 
-        public Task<IPagedList<SalidasEnt>> ListarCuentasPorCobrar(int paginas, int tamaño);
+        public  Task<IPagedList<SalidasEnt>> ListarCuentasPorCobrar(int paginas, int tamaño);
+
         public SalidasEnt VerCuentaPorCobrar(long idCuenta);
         public List<SalidasEnt> ObtenerPagosRealizados(long idCuenta);
         public int AgregarAbono(SalidasEnt cuenta);
+
 
 
 

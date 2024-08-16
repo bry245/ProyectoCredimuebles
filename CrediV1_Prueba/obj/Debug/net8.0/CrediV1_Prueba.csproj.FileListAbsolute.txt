@@ -1,9 +1,0 @@
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.csproj.AssemblyReference.cache
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.AssemblyInfoInputs.cache
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.AssemblyInfo.cs
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.csproj.CoreCompileInputs.cache
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.RazorAssemblyInfo.cache
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.RazorAssemblyInfo.cs
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.sourcelink.json
