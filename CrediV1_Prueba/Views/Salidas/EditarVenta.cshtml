@@ -140,7 +140,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
                             </div>
-                            @Html.TextBoxFor(m => m.MontoDeVenta, new { @type = "number", @class = "form-control form-control-lg", @id = "montoDeVenta", @placeholder = "₡ Monto De Venta" })
+                            @Html.TextBoxFor(m => m.MontoDeVenta, new { @type = "number", @class = "form-control form-control-lg", @id = "montoVenta", @placeholder = "₡ Monto De Venta" })
                         </div>
                     </div>
                     <div class="form-outline mb-4 mb-xl-4">
@@ -149,7 +149,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                             </div>
-                            @Html.TextBoxFor(m => m.fecha, new { @type = "date", @class = "form-control form-control-lg", @id = "fecha", @placeholder = "Fecha", @autocomplete = "off" })
+                            @Html.TextBoxFor(m => m.fecha, new { @type = "date", @class = "form-control form-control-lg", @id = "fecha", @placeholder = "Fecha", @autocomplete = "off", @max = DateTime.Now.ToString("yyyy-MM-dd") })
                         </div>
                     </div>
                 </div>
@@ -264,7 +264,7 @@
             fecha: $('#fecha').val(),
             metodoPago: $('#metodoPago').val(),
             vendedor: $('#vendedor').val(),
-            MontoDeVenta: $('#montoDeVenta').val(),
+            MontoDeVenta: $('#montoVenta').val(),
             productosCompra: productosSeleccionados
         };
 

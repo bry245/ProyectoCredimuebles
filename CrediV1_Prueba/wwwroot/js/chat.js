@@ -1,6 +1,8 @@
 
-const API_KEY = '';
+
+const API_KEY = '19c2bbaccfac67c49677f3d3657c88092c48583c';
 parent of a9db5e0 (Check)
+
 let chatHistory = [];
 
 async function GPTChat(mensaje) {

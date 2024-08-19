@@ -183,7 +183,7 @@
                     <table id="tablaProductos" class="table">
                         <thead>
                             <tr>
-                                <th>Pago N°</th>
+                                
                                 <th>Crédito N°</th>
                                 <th>Fecha</th>
                                 <th>Monto De Venta</th>
@@ -252,8 +252,12 @@
 
 
         // Inicializar tabla con cuentas seleccionados de la base de datos
+       
+
         productos.forEach(function (producto) {
-            var fila = '<tr data-id="' + producto.idLinea + '"><td>' + producto.idLinea + '</td><td>' + producto.idCuenta + '</td><td>' + producto.fechaAbono + '</td><td>' + producto.MontoDeVenta + '</td><td>' + producto.abono + '</td><td>' + producto.numeroFactura + '</td></tr>';
+          
+
+            var fila = '<tr data-id="' + producto.idLinea + '"><td>' + producto.idCuenta + '</td><td>' + producto.fecha2 + '</td><td>' + producto.MontoDeVenta + '</td><td>' + producto.abono + '</td><td>' + producto.numeroFactura + '</td></tr>';
             $('#productosSeleccionados').append(fila);
         });
 

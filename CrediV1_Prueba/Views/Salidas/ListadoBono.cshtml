@@ -78,9 +78,15 @@
                                     </td>
                                 }
 
-                                <td style="text-align:center"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#notiModal"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                                @if(item.correoCliente!=null){
+                                    <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion('@item.nombreCliente', '@item.correoCliente')"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                                }
+                                else{
+                                    <td style="text-align:center"><button class="btn btn-danger" disabled="true"onclick="enviarNotificacion('@item.nombreCliente', '@item.correoCliente')"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
 
-                            </tr>
+                                    
+                                    }
+                                </tr>
                         }
                     </tbody>
                 </table>
@@ -117,6 +123,73 @@
     }
 }
 <script>
+    function enviarNotificacion(usuario, correo) {
+        Swal.fire({
+            title: 'Enviar Notificación',
+            html: `
+                                <div class="mb-3">
+                                    <label class="form-label">Usuario:</label>
+                                    <input type="text" class="form-control" id="usuario" readonly value="${usuario}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Correo Electrónico:</label>
+                                    <input type="email" class="form-control" id="correo" readonly value="${correo}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mensaje:</label>
+                                    <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                                </div>
+                            `,
+            showCancelButton: true,
+            confirmButtonText: 'Enviar',
+            cancelButtonText: 'Cancelar',
+            focusConfirm: false,
+            preConfirm: () => {
+                const mensaje = document.getElementById('mensaje').value;
+
+                if (!mensaje) {
+                    Swal.showValidationMessage('El mensaje no puede estar vacío');
+                    return false;
+                }
+
+                const data = {
+                    usuario: usuario,
+                    correo: correo,
+                    mensaje: mensaje
+                };
+
+                return fetch('/Usuario/EnviarNotificacion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+
+                        return response.json();
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(`Error al enviar la notificación: ${error}`);
+                    });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Notificación enviada',
+                    text: 'La notificación se ha enviado correctamente.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+
+
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -146,6 +219,16 @@
             localStorage.removeItem('successMessage');
         }
     });
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

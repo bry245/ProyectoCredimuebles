@@ -89,7 +89,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                             </div>
-                            @Html.TextBoxFor(m => m.fecha, new { @type = "date", @class = "form-control form-control-lg", @id = "fecha", @placeholder = "Fecha", @autocomplete = "off" })
+                            @Html.TextBoxFor(m => m.fecha, new { @type = "date", @class = "form-control form-control-lg", @id = "fecha", @placeholder = "Fecha", @autocomplete = "off", @max = DateTime.Now.ToString("yyyy-MM-dd") })
                         </div>
                     </div>
                     <div class="form-outline mb-5 mb-xl-4">
