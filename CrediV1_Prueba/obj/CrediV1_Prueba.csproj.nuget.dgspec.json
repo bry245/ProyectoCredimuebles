@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
+    "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
+    "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "projectUniqueName": "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
         "projectName": "CrediV1_Prueba",
-        "projectPath": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-        "packagesPath": "C:\\Users\\jason\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
+        "projectPath": "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "packagesPath": "C:\\Users\\nahum\\.nuget\\packages\\",
+        "outputPath": "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nahum\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -80,7 +79,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -118,7 +117,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
