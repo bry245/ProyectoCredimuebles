@@ -1,4 +1,6 @@
-﻿@{
+﻿@using X.PagedList
+@model IPagedList<CrediV1_Prueba.Entities.CajaEnt>
+@{
     ViewData["Title"] = "Gastos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,12 +8,12 @@
 <div class="container mt-4">
     <div class="text-center">
         <div class="">
-            <h1>Gestión de <span clsas="d-block">Gastos</span></h1>
+            <h1>Gestión de <span class="d-block">Gastos</span></h1>
         </div>
     </div>
     <div class="text-center">
         <div class="hero-subMenu">
-            <h1><span clsas="d-block">Gastos de la fecha 01/01/1900</span></h1>
+            <h1><span class="d-block">Gastos de la fecha @ViewBag.fecha</span></h1>
         </div>
     </div>
 
@@ -20,17 +22,19 @@
             <div class="col-lg-4" style="background-color:white">
                 <h3>Nuevo Gasto</h3>
                 <form>
+                    <input type="hidden" id="fecha" value="@ViewBag.fecha" />
                     <div>
                         <div class="form-group">
                             <label class="text-black" for="fname">Monto</label>
-                            <input type="number" class="form-control input-form" id="fname">
+                            <input type="number" id="montoGastos" class="form-control input-form">
                         </div>
                     </div>
                     <div class="form-group mb-5">
-                        <label class="text-black" for="message">Por concepto de:</label>
-                        <textarea name="message" class="form-control input-form" id="message" cols="30" rows="3"></textarea>
+                        <label class="text-black" for="descripcion">Por concepto de:</label>
+                        <textarea name="descripcion" class="form-control input-form" id="descripcion" cols="30" rows="3"></textarea>
                     </div>
-                    <p><a href="#" class="btn btn-primary">Agregar</a></p>
+                    <button type="button" class="btn" onclick="registrarGasto()">Registrar</button>
+                    <div>&nbsp;</div>
                 </form>
             </div>
 
@@ -46,12 +50,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Pago de planillas</td>
-                                <td>₡300000</td>
-                                <td><i class="fa fa-trash"></i></td>
-                            </tr>
-                            <!-- Más filas de ejemplo -->
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.descripcion</td>
+                                    <td>₡ @item.montoGastos</td>
+                                    <td><i class="fa fa-trash"></i></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example" style="background-color:white">
@@ -71,33 +77,48 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="gastoModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Agregar Gasto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-black">
-                    <p>Registrar gasto del día 01/01/1900</p>
-                    <form>
-                        <div class="mb-3">
-                            <label class="col-form-label">Monto:</label>
-                            <input type="number" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label class="text-black" for="message">Por concepto de:</label>
-                            <textarea name="" class="form-control" id="message" cols="30" rows="2"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" style="background-color:red" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmButton">Agregar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
+<script>
+    function registrarGasto() {
+        var fecha = $('#fecha').val();
+        var datos = {
+            fechaID: fecha,
+            montoGastos: $('#montoGastos').val(),
+            descripcion: $('#descripcion').val()
+        };
+        console.log('Datos a enviar uno:', JSON.stringify(datos));
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "3500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        $.ajax({
+            url: '@Url.Action("RegistrarGasto", "Caja")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(datos),
+            success: function (response) {
+                console.log('Registro exitoso:', response);
+                localStorage.setItem('successMessage', 'Gasto registrado con éxito');
+                window.location.href = '@Url.Action("Gastos", "Caja")' + '?fecha=' + encodeURIComponent(fecha);
+            },
+            error: function (error) {
+                console.error('Error al registrar salida:', error);
+                toastr.error('Ocurrió un error, por favor valide los datos');
+            }
+        });
+    }
+</script>

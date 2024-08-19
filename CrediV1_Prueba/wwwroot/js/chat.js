@@ -1,4 +1,4 @@
-const API_KEY = 'sk-proj-kdMIU1slOLZcIIxFMTE5T3BlbkFJdNCTdOBmvYqEoKt8zss7';
+// Poner el API KEY AQUÍ       const API_KEY = '';
 let chatHistory = [];
 
 async function GPTChat(mensaje) {

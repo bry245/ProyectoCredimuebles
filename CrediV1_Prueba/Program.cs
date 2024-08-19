@@ -23,6 +23,7 @@ builder.Services.AddSingleton<IEmailService, EmailService>();
 builder.Services.AddSingleton<IInventarioModel, InventarioModel>();
 builder.Services.AddSingleton<IPasswordResetService, PasswordResetServiceModel>();
 builder.Services.AddSingleton<ISalidasModel, SalidasModel>();
+builder.Services.AddSingleton<ICajaModel, CajaModel>();
 
 // Register IDbConnection
 builder.Services.AddSingleton<IDbConnection>(sp =>

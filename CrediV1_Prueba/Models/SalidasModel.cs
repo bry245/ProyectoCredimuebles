@@ -5,6 +5,7 @@ using Dapper;
 using CrediV1_Prueba.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace CrediV1_Prueba.Models
 {
@@ -168,6 +169,29 @@ namespace CrediV1_Prueba.Models
                 return -1;
             }
         }
+
+        public int RegistroAControlDeCaja (SalidasEnt salida )
+        {
+
+            try
+            {
+                using (var con = new SqlConnection(_connection))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@fechaCompra", salida.fecha);
+                  
+
+                    con.Execute("RegistrarDatosCaja", parameters, commandType: CommandType.StoredProcedure);
+
+                    
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
         public long ActualizarSalida(SalidasEnt salida)
         {
             try
@@ -269,6 +293,7 @@ namespace CrediV1_Prueba.Models
             }
 
         }
+
         public SalidasEnt VerSalida(long idSalida)
         {
             try

@@ -3,6 +3,7 @@ using CrediV1_Prueba.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CrediV1_Prueba.Controllers
@@ -113,7 +114,10 @@ namespace CrediV1_Prueba.Controllers
                             };
                             _salidasModel.RegistrarProductosSalida(productoSalida);
                         }
-                        return Ok(new { success = true, message = "Registro de salida exitoso" });
+
+                            return Ok(new { success = true, message = "Registro de salida exitoso" });
+                       
+                       
                     }
                     else
                     {
@@ -329,7 +333,9 @@ namespace CrediV1_Prueba.Controllers
                             };
                             _salidasModel.RegistrarProductosSalida(productoSalida);
                         }
-                        return Ok(new { success = true, message = "Registro de crédito exitoso" });
+
+                        return Ok(new { success = true, message = "Registro de cuenta exitoso" });
+                    
                     }
                     else
                     {
@@ -355,7 +361,7 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
-                int pageSize = 4; // Número de elementos por página
+                int pageSize = 8; // Número de elementos por página
                 var creditos = await _salidasModel.ListarCuentasPorCobrar(page, pageSize);
 
                 return View(creditos);
@@ -382,6 +388,10 @@ namespace CrediV1_Prueba.Controllers
                     ViewBag.Vendedores = _salidasModel.ConsultarVendedores();
                     ViewBag.MetodosPago = _salidasModel.ConsultarMetodosPago();
                     List<SalidasEnt> productos = _salidasModel.ObtenerPagosRealizados(idCuenta);
+                    foreach (var producto in productos)
+                    {
+                        producto.fecha2 = producto.fechaAbono.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    }
                     if (productos.Count() <= 0)
                     {
 
@@ -420,7 +430,7 @@ namespace CrediV1_Prueba.Controllers
         public IActionResult CrearAbonos([FromBody] SalidasEnt datos)
         {
 
-            if (datos == null)
+            if (datos == null || datos.abono<=0)
             {
                 return BadRequest(ModelState);
             }

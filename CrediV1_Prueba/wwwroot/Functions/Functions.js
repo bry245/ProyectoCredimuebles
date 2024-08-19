@@ -60,16 +60,5 @@ $(document).ready(function () {
 
     });
 
-    // // En caso se hacerlo por formulario
-    // $('#formulario').on('submit', function (e) {
-    //     // Obtener el valor numérico para enviar al backend
-    //     var valorNumerico = $('#montoDeVenta').val().replace('₡', '').trim();
-    //     // Asignar el valor numérico al campo oculto (opcional)
-    //     $('#montoDeVentaHidden').val(valorNumerico);
-    //     // Puedes continuar con el envío del formulario
-    //     // Ejemplo: this.submit();
-    //     // Evitar que el formulario se envíe realmente para este ejemplo
-    //     e.preventDefault();
-    //     console.log('Valor numérico para enviar al backend:', valorNumerico);
-    // });
+
 });

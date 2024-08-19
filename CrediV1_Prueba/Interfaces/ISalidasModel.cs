@@ -25,6 +25,7 @@ namespace CrediV1_Prueba.Interfaces
         public SalidasEnt VerCuentaPorCobrar(long idCuenta);
         public List<SalidasEnt> ObtenerPagosRealizados(long idCuenta);
         public int AgregarAbono(SalidasEnt cuenta);
+        public int RegistroAControlDeCaja(SalidasEnt salida);
 
 
 

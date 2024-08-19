@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
+    "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {}
   },
   "projects": {
-    "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
+    "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "projectUniqueName": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
         "projectName": "CrediV1_Prueba",
-        "projectPath": "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
-        "packagesPath": "C:\\Users\\nahum\\.nuget\\packages\\",
-        "outputPath": "b:\\Universidad\\Ambiente Web Cliente servidor\\XAMPP\\htdocs\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
+        "projectPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\CrediV1_Prueba.csproj",
+        "packagesPath": "C:\\Users\\vinda\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vinda\\OneDrive\\Escritorio\\CredimueblesGitHub\\ProyectoCredimuebles\\CrediV1_Prueba\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\nahum\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\vinda\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
