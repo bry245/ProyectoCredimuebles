@@ -1,6 +1,6 @@
 
 
-const API_KEY = '';
+
 parent of a9db5e0 (Check)
 
 let chatHistory = [];
