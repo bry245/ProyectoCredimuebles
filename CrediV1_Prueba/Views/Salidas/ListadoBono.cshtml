@@ -1,0 +1,234 @@
+﻿@using X.PagedList
+@model IPagedList<CrediV1_Prueba.Entities.SalidasEnt>
+@{
+    ViewData["Title"] = "ListadoBono";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var errorMessage = ViewBag.MensajeCuentas as string;
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">
+            @errorMessage
+        </div>
+    }
+    else
+    {
+
+
+        <div class="container">
+            <div class="container mt-4">
+                <a href="@Url.Action("CrearCuentaCredito","Salidas")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Cuenta</i>  </a>
+                <div class="row justify-content-end">
+                    <div class="col-md-6">
+
+                        <form action="#" method="GET" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                </div>
+                                <button class="btn" type="submit" id="button-addon2"> <i class=" fa fa-search"></i> </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="container mt-4">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>N° Crédito</th>
+                            <th>Cliente</th>
+                            <th>Teléfono</th>
+                            <th>Venta</th>
+                            <th>Saldo </th>
+                            <th>Cuenta </th>
+                            <th>Acciones</th>
+                            <th>Notificar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.idCuenta</td>
+                                <td>@item.nombreCliente</td>
+                                <td>@item.telefonoCliente</td>
+                                <td>@item.MontoDeVenta</td>
+                                <td>@item.saldo</td>
+                                <td class="@(!item.cuentaCancelada ? "bg-danger text-white" : "bg-success text-white")">
+                                    @(!item.cuentaCancelada ? "Activa" : "Cancelada")
+                                </td>
+                                @if (!item.cuentaCancelada)
+                                {
+                                    <td style="text-align:center">
+
+                                        <a href="@Url.Action("CrearAbono","Salidas",new { idCuenta = item.idCuenta })" class="btn btn-danger">Abonar</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="text-align:center">
+
+                                        <button href="@Url.Action("CrearAbono","Salidas",new { idCuenta = item.idCuenta })" class="btn btn-danger" disabled="true" >Abonar</button>
+                                    </td>
+                                }
+
+                                @if(item.correoCliente!=null){
+                                    <td style="text-align:center"><button class="btn btn-danger" onclick="enviarNotificacion('@item.nombreCliente', '@item.correoCliente')"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+                                }
+                                else{
+                                    <td style="text-align:center"><button class="btn btn-danger" disabled="true"onclick="enviarNotificacion('@item.nombreCliente', '@item.correoCliente')"> <i class="fa fa-envelope" aria-hidden="true"></i></button></td>
+
+                                    
+                                    }
+                                </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("ListadoBono", new { page = Model.PageNumber - 1 })" aria-label="Previous">
+                                <span aria-hidden="true">&laquo; Anterior</span>
+                            </a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("ListadoBono", new { page = i })">@i</a>
+                        </li>
+                    }
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("ListadoBono", new { page = Model.PageNumber + 1 })" aria-label="Next">
+                                <span aria-hidden="true">Siguiente &raquo;</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+
+        </div>
+    }
+}
+<script>
+    function enviarNotificacion(usuario, correo) {
+        Swal.fire({
+            title: 'Enviar Notificación',
+            html: `
+                                <div class="mb-3">
+                                    <label class="form-label">Usuario:</label>
+                                    <input type="text" class="form-control" id="usuario" readonly value="${usuario}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Correo Electrónico:</label>
+                                    <input type="email" class="form-control" id="correo" readonly value="${correo}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mensaje:</label>
+                                    <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                                </div>
+                            `,
+            showCancelButton: true,
+            confirmButtonText: 'Enviar',
+            cancelButtonText: 'Cancelar',
+            focusConfirm: false,
+            preConfirm: () => {
+                const mensaje = document.getElementById('mensaje').value;
+
+                if (!mensaje) {
+                    Swal.showValidationMessage('El mensaje no puede estar vacío');
+                    return false;
+                }
+
+                const data = {
+                    usuario: usuario,
+                    correo: correo,
+                    mensaje: mensaje
+                };
+
+                return fetch('/Usuario/EnviarNotificacion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+
+                        return response.json();
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(`Error al enviar la notificación: ${error}`);
+                    });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Notificación enviada',
+                    text: 'La notificación se ha enviado correctamente.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-center-custom",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "3000",
+        "hideDuration": "1000",
+        "timeOut": "2500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener el mensaje almacenado en localStorage
+        var successMessage = localStorage.getItem('successMessage');
+
+        if (successMessage) {
+            // Mostrar el mensaje usando Toastr
+            toastr.success(successMessage);
+
+            // Eliminar el mensaje de localStorage
+            localStorage.removeItem('successMessage');
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+</script>
+
+

@@ -1,0 +1,124 @@
+﻿@using X.PagedList
+@model IPagedList<CrediV1_Prueba.Entities.CajaEnt>
+@{
+    ViewData["Title"] = "Gastos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="text-center">
+        <div class="">
+            <h1>Gestión de <span class="d-block">Gastos</span></h1>
+        </div>
+    </div>
+    <div class="text-center">
+        <div class="hero-subMenu">
+            <h1><span class="d-block">Gastos de la fecha @ViewBag.fecha</span></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-4" style="background-color:white">
+                <h3>Nuevo Gasto</h3>
+                <form>
+                    <input type="hidden" id="fecha" value="@ViewBag.fecha" />
+                    <div>
+                        <div class="form-group">
+                            <label class="text-black" for="fname">Monto</label>
+                            <input type="number" id="montoGastos" class="form-control input-form">
+                        </div>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label class="text-black" for="descripcion">Por concepto de:</label>
+                        <textarea name="descripcion" class="form-control input-form" id="descripcion" cols="30" rows="3"></textarea>
+                    </div>
+                    <button type="button" class="btn" onclick="registrarGasto()">Registrar</button>
+                    <div>&nbsp;</div>
+                </form>
+            </div>
+
+            <div class="col-lg-8" style="background-color:white">
+                <div class="container">
+                    <h2>Lista De Gastos</h2>
+                    <table class="table table-hover" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Monto</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.descripcion</td>
+                                    <td>₡ @item.montoGastos</td>
+                                    <td><i class="fa fa-trash"></i></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example" style="background-color:white">
+                        <ul class="pagination justify-content-center" style="background-color:#dce5e4">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function registrarGasto() {
+        var fecha = $('#fecha').val();
+        var datos = {
+            fechaID: fecha,
+            montoGastos: $('#montoGastos').val(),
+            descripcion: $('#descripcion').val()
+        };
+        console.log('Datos a enviar uno:', JSON.stringify(datos));
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "3500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        $.ajax({
+            url: '@Url.Action("RegistrarGasto", "Caja")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(datos),
+            success: function (response) {
+                console.log('Registro exitoso:', response);
+                localStorage.setItem('successMessage', 'Gasto registrado con éxito');
+                window.location.href = '@Url.Action("Gastos", "Caja")' + '?fecha=' + encodeURIComponent(fecha);
+            },
+            error: function (error) {
+                console.error('Error al registrar salida:', error);
+                toastr.error('Ocurrió un error, por favor valide los datos');
+            }
+        });
+    }
+</script>

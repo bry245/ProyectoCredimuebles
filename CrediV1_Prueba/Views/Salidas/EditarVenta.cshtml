@@ -1,0 +1,348 @@
+﻿@using Newtonsoft.Json
+
+@model CrediV1_Prueba.Entities.SalidasEnt
+@{
+    ViewData["Title"] = "EditarVenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+        <div class="card-body p-4">
+            <div class="form-outline mb-5 mb-xl-4" style="text-align:center">
+                <h2>Modificar Salida @Model.idSalida</h2>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-8 col-xl-6">
+                    <h4>Datos Cliente</h4>
+
+                    <input type="hidden" id="idSalida" name="idSalida" value="@Model.idSalida" />
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.cedulaCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "cedulaCliente", @onkeyup = "ConsultarNombre()", @placeholder = "Cedula Cliente" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.nombreCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "nombreCliente", @placeholder = "Nombre" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.apellidosCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "apellidosCliente", @placeholder = "Apellidos" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.telefonoCliente, new { @type = "text", @pattern = "[0-9]{8}", @maxlength = "8", @class = "form-control form-control-lg", @id = "telefonoCliente", @placeholder = "Telefono" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-home"></i></span>
+                            </div>
+                            @Html.TextAreaFor(m => m.direccionCliente, new { @type = "text", @class = "form-control form-control-lg", @id = "direccionCliente", @placeholder = "Dirección", @cols = "30", @rows = "10" })
+                        </div>
+                    </div>
+                </div>
+
+                <!--Datos de la factura-->
+                <div class="col-lg-8 col-xl-6">
+                    <h4>Datos Factura</h4>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <div class="form-outline mb-5 mb-xl-4">
+                            <label class="col-form-label"> Cantidad De Productos</label>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-cubes"></i></span>
+                                </div>
+                                @Html.TextBoxFor(m => m.cantidad, new { @type = "text", @readOnly = "true", @class = "form-control form-control-lg", @id = "cantidadProductos", @placeholder = "Cantidad de Productos" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Costo De Venta</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas  fa-coins"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.costoVenta, new { @type = "text", @readOnly = "true", @class = "form-control form-control-lg", @id = "costoVenta", @placeholder = "Costo de venta" })
+                        </div>
+                    </div>
+                    @if (Model.comisionVenta != 0)
+                    {
+                        <div class="form-outline mb-5 mb-xl-4">
+
+                            <label class="col-form-label"> Comisión Venta</label>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                </div>
+                                @Html.TextBoxFor(m => m.comisionVenta, new { @type = "text", @readOnly = "true", @class = "form-control form-control-lg", @id = "comisionVenta", @placeholder = "Comisión de la venta" })
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Factura N°</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-file-invoice"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.numeroFactura, new { @type = "text", @class = "form-control form-control-lg", @id = "numeroFactura", @placeholder = "N°Factura" })
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Método De Pago</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-check-alt"></i></span>
+                            </div>
+                            @Html.DropDownListFor(m => m.idMetodoPago, new SelectList(ViewBag.MetodosPago, "Value", "Text", ViewBag.MetodoPago), "Método Pago", new { @id = "metodoPago", @class = "form-control form-control-lg" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label class="col-form-label"> Vendedor</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+                            </div>
+                            @Html.DropDownListFor(m => m.idVendedor, new SelectList(ViewBag.Vendedores, "Value", "Text", ViewBag.Vendedor), "Vendedor", new { @id = "vendedor", @class = "form-control form-control-lg" })
+
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <label class="col-form-label"> Monto De Venta</label>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.MontoDeVenta, new { @type = "number", @class = "form-control form-control-lg", @id = "montoVenta", @placeholder = "₡ Monto De Venta" })
+                        </div>
+                    </div>
+                    <div class="form-outline mb-4 mb-xl-4">
+                        <label class="col-form-label"> Fecha de venta: <b>@ViewBag.Fecha.ToString("yyyy-MM-dd")</b></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            @Html.TextBoxFor(m => m.fecha, new { @type = "date", @class = "form-control form-control-lg", @id = "fecha", @placeholder = "Fecha", @autocomplete = "off", @max = DateTime.Now.ToString("yyyy-MM-dd") })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>Artículos</h4>
+            <div class="input-group col-lg-4">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto" aria-describedby="buscarButton">
+            </div>
+            <div id="resultadosProductos"></div>
+            <div class="row">
+                <div class="col">
+                    <table id="tablaProductos" class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productosSeleccionados">
+                            <!-- productos seleccionados -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="@Url.Action("Index","Salidas")" class="btn">Volver</a>
+                    <button type="button" class="btn" onclick="registrarSalida()">Actualizar Salida</button>
+                </div>
+                <div class="col-lg-8 col-xl-6 md">
+                    <button type="button" id="anularSalida" class="btn" ><i class="fa fa-trash"></i>Anular Salida</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<script src="~/functions/functions.js"></script>
+<script>
+    var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
+    var productosSalida = @Html.Raw(JsonConvert.SerializeObject(ViewBag.ProductosSalida));
+
+    function buscarProducto() {
+        var textoBusqueda = $('#buscarProducto').val().toLowerCase();
+        var html = '<ul class="list-group">';
+        productos.forEach(function (producto) {
+            if (producto.nombre.toLowerCase().includes(textoBusqueda)) {
+                html += '<li class="list-group-item" style="cursor: pointer;" onclick="agregarProducto(' + producto.idProducto + ', \'' + producto.nombre + '\')">' + producto.nombre + ' ₡' + producto.costo + '</li>';
+            }
+        });
+        html += '</ul>';
+        $('#resultadosProductos').html(html);
+    }
+
+    function agregarProducto(id, nombre) {
+        var fila = '<tr data-id="' + id + '"><td>' + nombre + '</td><td><input type="number" min="1" value="1" class="form-control" /></td><td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button></td></tr>';
+        $('#productosSeleccionados').append(fila);
+        limpiarBuscador();
+    }
+
+    function eliminarProducto(button) {
+        $(button).closest('tr').remove();
+    }
+
+    function limpiarBuscador() {
+        $('#buscarProducto').val('');
+        $('#resultadosProductos').html('');
+    }
+
+    $(document).ready(function () {
+        $('#buscarProducto').keyup(function () {
+            buscarProducto();
+        });
+
+        // Inicializar tabla con productos seleccionados de la base de datos
+        productosSalida.forEach(function (producto) {
+            var fila = '<tr data-id="' + producto.idProducto + '"><td>' + producto.nombre + '</td><td><input type="number" min="1" value="' + producto.cantidadSalida + '" class="form-control" /></td><td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button></td></tr>';
+            $('#productosSeleccionados').append(fila);
+        });
+    });
+
+    function registrarSalida() {
+        var productosSeleccionados = [];
+        $('#productosSeleccionados tr').each(function () {
+            var id = $(this).data('id');
+            var nombre = $(this).find('td:eq(0)').text().trim();
+            var cantidad = $(this).find('td:eq(1) input').val();
+
+            var producto = {
+                idProducto: id,
+                nombre: nombre,
+                cantidadSalida: cantidad
+            };
+
+            productosSeleccionados.push(producto);
+        });
+
+        var datos = {
+            idSalida: $('#idSalida').val(),
+            cedulaCliente: $('#cedulaCliente').val(),
+            nombreCliente: $('#nombreCliente').val(),
+            apellidosCliente: $('#apellidosCliente').val(),
+            telefonoCliente: $('#telefonoCliente').val(),
+            direccionCliente: $('#direccionCliente').val(),
+            numeroFactura: $('#numeroFactura').val(),
+            fecha: $('#fecha').val(),
+            metodoPago: $('#metodoPago').val(),
+            vendedor: $('#vendedor').val(),
+            MontoDeVenta: $('#montoVenta').val(),
+            productosCompra: productosSeleccionados
+        };
+
+        $.ajax({
+            url: '@Url.Action("EditarSalida", "Salidas")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(datos),
+            success: function (response) {
+                console.log('Datos a enviar:', JSON.stringify(datos));
+                localStorage.setItem('successMessage', 'Salida actualizada con éxito');
+                window.location.href = '@Url.Action("ListadoSalidas", "Salidas")';
+            },
+            error: function (error) {
+                toastr.error('Ocurrió un error, por favor valide los datos');
+            }
+        });
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "3500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('anularSalida').addEventListener('click', async () => {
+        const idSalida = document.getElementById('idSalida').value;
+ 
+
+        const salida = {
+           idSalida
+        };
+
+        try {
+            const response = await fetch('@Url.Action("AnularSalida", "Salidas")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(salida)
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Salida Anulada',
+                    text: 'Salida Anulada exitosamente'
+                }).then(() => {
+                    window.location.href = '@Url.Action("ListadoSalidasMes", "Salidas")';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al anular la salida.'
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un problema al actualizar el proveedor.'
+            });
+        }
+    });
+</script>
+
+
