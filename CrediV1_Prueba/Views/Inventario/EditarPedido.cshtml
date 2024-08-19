@@ -1,0 +1,286 @@
+﻿@using Newtonsoft.Json
+@model IEnumerable<CrediV1_Prueba.Entities.ProductoEnt>
+@{
+    ViewData["Title"] = "EditarPedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-xl-7">
+            <!-- Aumenté el tamaño de la columna -->
+            <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                <div class="card-body p-4">
+                    <div class="form-outline mb-5 mb-xl-4 text-center">
+                        <h2>Crear pedido</h2>
+                    </div>
+                    <h4>Datos del pedido</h4>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label for="cedulaCliente">Empleado</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                            </div>
+                            <input type="text" id="idPedido" name="idEmpleado" class="form-control form-control-lg" readonly value="@ViewBag.idPedido" />
+                            <input type="hidden" id="idEmpleado" name="idEmpleado" class="form-control form-control-lg" readonly value="@ViewBag.idEmpleado" />
+                            <input type="text" id="nombreEmpleado" name="idEmpleado" class="form-control form-control-lg" readonly value="@ViewBag.NombreEmpleadoPedido" />
+                        </div>
+                    </div>
+                    <div class="form-outline mb-3 mb-xl-4">
+                        <label for="costoTotal">Costo Total</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                            </div>
+                            <input readonly type="text" class="form-control form-control-lg" id="costoTotal" value="@ViewBag.CostoTotalPedido" placeholder="Costo Total" />
+                        </div>
+                    </div>
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <label for="nombreCliente">Nombre Proveedor</label>
+                        <div class="input-group">
+                        </div>
+                    </div>
+                    <div id="proveedorInputs" class="form-outline mb-5 mb-xl-4">
+                        <!-- Aquí se agregarán los inputs de proveedores -->
+                    </div>
+                    <h4>Artículos</h4>
+                    <div class="input-group col-lg-4 mb-3">
+                        <label for="buscarProducto">Buscar Producto</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto" aria-describedby="buscarButton">
+                        </div>
+                    </div>
+                    <div id="resultadosProductos"></div>
+                    <div class="row">
+                        <div class="col">
+                            <table id="tablaProductos" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productosSeleccionados">
+                                    <!-- Aquí se agregarán los productos seleccionados -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="@Url.Action("Pedidos","Inventario")" class="btn btn-primary">Volver</a> <!-- Agregué la clase btn-primary -->
+                            <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Salida</button> <!-- Agregué la clase btn-success -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
+        var proveedores = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Proveedores ?? new List<object>()));
+        var productosPedido = @Html.Raw(JsonConvert.SerializeObject(ViewBag.pedidoDetalles ?? new List<object>()));
+
+        var proveedoresIds = new Set(proveedores.map(p => p.idProveedor));
+
+        // Obtener idPedido desde ViewBag o algún otro lugar
+        var idPedido = @Html.Raw(JsonConvert.SerializeObject(ViewBag.IdPedido));
+
+        $(document).ready(function () {
+            $('#buscarProducto').keyup(function () {
+                buscarProducto();
+            });
+
+            // Inicializar tabla con productos del pedido existente
+            productosPedido.forEach(function (producto) {
+                console.log('EmpleadoRecibido:', producto.EmpleadoRecibido, 'FechaRecibido:', producto.fechaRecibido);
+                var fila = '<tr data-id="' + producto.idProducto + '" data-empleado-id="' + producto.EmpleadoRecibido + '" data-proveedor-id="' + producto.idProveedor + '" data-detalle-id="' + producto.idDetalle + '" data-fecha-recibido="' + producto.fechaRecibido + '">' + // Añadir idDetalle y fechaRecibido
+                    '<td>' + producto.nombreProducto + '</td>' +
+                    '<td><input type="number" name="cantidad" min="1" value="' + producto.cantidad + '" class="form-control" onchange="actualizarTotal(this, ' + parseFloat(producto.CostoProveedor) + ')" /></td>' +
+                    '<td><input type="number" name="precio" value="' + parseFloat(producto.CostoProveedor) + '" class="form-control" readonly /></td>' +
+                    '<td><input type="number" name="total" value="' + (producto.cantidad * parseFloat(producto.CostoProveedor)) + '" class="form-control" readonly /></td>' +
+                    '<td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button></td>' +
+                    '</tr>';
+                $('#productosSeleccionados').append(fila);
+            });
+
+            // Inicializar los inputs de proveedores
+            proveedores.forEach(function (proveedor) {
+                var proveedorInput = '<div class="input-group mb-3" id="proveedor-' + proveedor.idProveedor + '">' +
+                    '<div class="input-group-prepend">' +
+                    '<span class="input-group-text"><i class="fas fa-user"></i></span>' +
+                    '</div>' +
+                    '<input type="text" name="proveedores[]" value="' + proveedor.nombreProveedor + '" class="form-control form-control-lg" readonly />' +
+                    '</div>';
+                $('#proveedorInputs').append(proveedorInput);
+            });
+        });
+
+        function buscarProducto() {
+            var textoBusqueda = $('#buscarProducto').val().toLowerCase();
+            var html = '<ul class="list-group">';
+            productos.forEach(function (producto) {
+                if (producto.nombre.toLowerCase().includes(textoBusqueda)) {
+                    html += '<li class="list-group-item" style="cursor: pointer;" onclick="agregarProducto(' + producto.idProducto + ', \'' + producto.nombre + '\', ' + producto.CostoProveedor + ', \'' + producto.nombreProveedor + '\', ' + producto.idProveedor + ')">' + producto.nombre + ' ₡' + producto.CostoProveedor + '</li>';
+                }
+            });
+            html += '</ul>';
+            $('#resultadosProductos').html(html);
+        }
+
+        function agregarProducto(id, nombre, CostoProveedor, proveedor, idProveedor, cantidad, idDetalle) {
+            var empleadoRecibido = $('#empleadoRecibido').val(); // Obtener el valor actual del empleado recibido
+            var filaExistente = $('#productosSeleccionados tr[data-id="' + id + '"]');
+            if (filaExistente.length > 0) {
+                // Si el producto ya está en la tabla, actualiza la cantidad y el total
+                var cantidadInput = filaExistente.find('input[name="cantidad"]');
+                var nuevaCantidad = parseInt(cantidadInput.val()) + (cantidad || 1);
+                cantidadInput.val(nuevaCantidad);
+                var totalInput = filaExistente.find('input[name="total"]');
+                totalInput.val(nuevaCantidad * parseFloat(CostoProveedor));
+            } else {
+                // Si el producto no está en la tabla, agrégalo con los nuevos inputs
+                var fila = '<tr data-id="' + id + '" data-empleado-recibido="' + empleadoRecibido + '" data-proveedor-id="' + idProveedor + '" data-detalle-id="' + (idDetalle || 0) + '">' +
+                    '<td>' + nombre + '</td>' +
+                    '<td><input type="number" name="cantidad" min="1" value="' + (cantidad || 1) + '" class="form-control" onchange="actualizarTotal(this, ' + parseFloat(CostoProveedor) + ')" /></td>' +
+                    '<td><input type="number" name="precio" value="' + parseFloat(CostoProveedor) + '" class="form-control" readonly /></td>' +
+                    '<td><input type="number" name="total" value="' + (cantidad || 1) * parseFloat(CostoProveedor) + '" class="form-control" readonly /></td>' +
+                    '<td><button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button></td>' +
+                    '</tr>';
+                $('#productosSeleccionados').append(fila);
+            }
+
+            // Verificar si el proveedor ya está en la lista
+            if (!proveedoresIds.has(idProveedor)) {
+                // Si el proveedor no está en la lista, agrégalo
+                proveedoresIds.add(idProveedor);
+                var proveedorInput = '<div class="input-group mb-3" id="proveedor-' + idProveedor + '">' +
+                    '<div class="input-group-prepend">' +
+                    '<span class="input-group-text"><i class="fas fa-user"></i></span>' +
+                    '</div>' +
+                    '<input type="text" name="proveedores[]" value="' + proveedor + '" class="form-control form-control-lg" readonly />' +
+                    '</div>';
+                $('#proveedorInputs').append(proveedorInput);
+            }
+
+            limpiarBuscador();
+            actualizarCostoTotal();
+        }
+
+
+
+        function eliminarProducto(button) {
+            var fila = $(button).closest('tr');
+            var proveedorId = fila.data('proveedor-id');
+            fila.remove();
+
+            // Verificar si el proveedor tiene más productos asociados
+            var productosRestantes = $('#productosSeleccionados tr[data-proveedor-id="' + proveedorId + '"]');
+            if (productosRestantes.length === 0) {
+                // Si no hay más productos asociados al proveedor, eliminar el proveedor
+                $('#proveedor-' + proveedorId).remove();
+                proveedoresIds.delete(proveedorId);
+            }
+
+            actualizarCostoTotal();
+        }
+
+        function actualizarTotal(input, CostoProveedor) {
+            var cantidad = $(input).val();
+            var totalInput = $(input).closest('tr').find('input[name="total"]');
+            totalInput.val(cantidad * parseFloat(CostoProveedor));
+            actualizarCostoTotal();
+        }
+
+        function actualizarCostoTotal() {
+            var totalPedido = 0;
+            $('#productosSeleccionados tr').each(function () {
+                var totalProducto = $(this).find('input[name="total"]').val();
+                totalPedido += parseFloat(totalProducto);
+            });
+            $('#costoTotal').val(totalPedido.toFixed(2));
+        }
+
+        function limpiarBuscador() {
+            $('#buscarProducto').val('');
+            $('#resultadosProductos').html('');
+        }
+
+        function RegistrarPedido() {
+            var productosSeleccionados = [];
+            var fechaRecibido = $('#fechaRecibido').val();
+
+            $('#productosSeleccionados tr').each(function () {
+                var id = $(this).data('id');
+                var cantidad = $(this).find('td:eq(1) input').val();
+                var precio = $(this).find('td:eq(2) input').val();
+                var total = $(this).find('td:eq(3) input').val();
+                var idProveedor = $(this).data('proveedor-id');
+                var idDetalle = $(this).data('detalle-id'); // Obtener idDetalle
+                var empleadoRecibido = $(this).data('empleado-id'); // Obtener empleadoRecibido
+                var fechaRecibido = $(this).data('fecha-recibido'); // Obtener fechaRecibido
+
+                var producto = {
+                    idPedido: idPedido, // Agregar idPedido
+                    idDetalle: idDetalle, // Incluir idDetalle
+                    idProducto: id,
+                    idProveedor: idProveedor,
+                    cantidad: parseInt(cantidad),
+                    montoUnitario: parseFloat(precio),
+                    montoTotalProducto: parseFloat(total),
+                    montoTotalPedido: parseFloat($('#costoTotal').val()),
+                    fechaRecibido: fechaRecibido, // Agregar fechaRecibido
+                    empleadoRecibido: empleadoRecibido // Agregar empleadoRecibido
+                };
+                productosSeleccionados.push(producto);
+            });
+
+            console.log('Datos a enviar:', productosSeleccionados);
+
+            fetch('/Inventario/ActualizarPedido', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productosSeleccionados)  // Enviar la lista de productos con los nuevos campos
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ocurrió un error al registrar el pedido');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: 'Pedido registrado con éxito',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        window.location.href = '/Inventario/Pedidos';
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                });
+        }
+
+
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}

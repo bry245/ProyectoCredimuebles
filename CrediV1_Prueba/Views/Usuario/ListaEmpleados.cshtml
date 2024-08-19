@@ -13,7 +13,7 @@
     <div class="container mt-4" id="botonesagregar" style="padding-bottom:30px;padding-top:10px">
 
         <a href="@Url.Action("AgregarEmpleado","Usuario")" class="btn" type="submit" id="button-addon2">
-            <i class="fa fa-plus"></i> Agregar Cliente
+            <i class="fa fa-plus"></i> Agregar Empleado
         </a>
         <a href="@Url.Action("Usuarios","Usuario")" class="btn" type="submit" id="button-addon2">
             <i class="fa fa-sign-out-alt"></i> Volver
@@ -38,7 +38,7 @@
                 @foreach (var usuario in Model)
                 {
 
-                    @if (usuario.idRol !=5)
+                    @if (usuario.idRol != 5 && usuario.idUsuario != Context.Session.GetInt32("idUsuario"))
                     {
 
                         <tr>

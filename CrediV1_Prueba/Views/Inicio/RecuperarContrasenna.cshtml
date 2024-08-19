@@ -1,9 +1,9 @@
 ﻿@model CrediV1_Prueba.Entities.UsuarioEnt
 @{
-    ViewData["Title"] = "InicioDeSesion";
+    ViewData["Title"] = "Verificación de Recuperación de Contraseña";
     Layout = "~/Views/Shared/Layout_login.cshtml";
 }
-<div class="why-choose-section" style="padding: 6rm">
+<div class="why-choose-section" style="padding: 6rem">
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-10 login-bg" style="text-align:center">
@@ -18,11 +18,11 @@
                                 <div class="form-group py-2">
                                     <div class="input-login">
                                         <span class="fa fa-envelope p-2"></span>
-                                        <input type="text" id="correo" class="input-l" placeholder="Correo" />
+                                        <input type="text" id="correo" name="correo" class="input-l" placeholder="Correo" value="@ViewBag.Email" />
                                     </div>
                                 </div>
-                            </div>sadf
-                            <a href="@Url.Action("InicioDeSesion", "Inicio")" type="button" class="btn btn-danger">Atrás <i class="fa-solid fa-arrow-left-to-bracket"></i></a>
+                            </div>
+                            <a href="@Url.Action("InicioDeSesion", "Inicio")" class="btn btn-danger">Atrás <i class="fa-solid fa-arrow-left-to-bracket"></i></a>
                             <button type="submit" class="btn btn-danger">Validar <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
                         </form>
                     </div>
@@ -32,11 +32,9 @@
     </div>
 </div>
 
-
-<<!-- SweetAlert2 JS -->
+<!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // Manejar el envío del formulario con JavaScript
     document.getElementById('resetPasswordForm').addEventListener('submit', function (event) {
         event.preventDefault();
 

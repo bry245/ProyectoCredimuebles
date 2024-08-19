@@ -1,12 +1,16 @@
-﻿@{
+﻿@using CrediV1_Prueba.Entities
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var ventasDelDia = ViewBag.VentasDelDia as ReporteEnt;
+    var abonoSemanal = ViewBag.AbonoSemanal as ReporteEnt;
 }
 
 @section Estilos {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <link href="~/css/Reportes.css" rel="stylesheet" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
         canvas {
             max-width: 1000px; /* Puedes ajustar este valor según el tamaño que desees */
@@ -38,7 +42,12 @@
                                 <div class="row align-items-center mb-2 d-flex">
                                     <div class="col-8 text-center">
                                         <h2 class="d-flex align-items-center mb-0 text''">
-                                            3,243
+                                            @if (ventasDelDia != null)
+                                            {
+                                                <h2 class="d-flex align-items-center mb-0 text''">
+                                                    @ventasDelDia.CantidadVentas
+                                                </h2>
+                                            }
                                         </h2>
                                     </div>
                                     <div class="col-4 text-center">
@@ -63,57 +72,47 @@
                                 <div class="row align-items-center mb-2 d-flex">
                                     <div class="col-8">
                                         <h2 class="d-flex align-items-center mb-0">
-                                            15.07k
+                                            @if (abonoSemanal != null)
+                                            {
+                                                <h2 class="d-flex align-items-center mb-0 text''">
+                                                    @abonoSemanal.CantidadVentas
+                                                </h2>
+                                            }
+                                        </h2>
                                         </h2>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <span>24h<i class="fa fa-arrow-up"></i></span>
+                                        <span>Semanal<i class="fa fa-arrow-up"></i></span>
                                     </div>
                                 </div>
                                 <div class="progress mt-1" data-height="8" style="height: 8px;">
                                     <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="text-decoration-none">
-                        <div class="card">
-                            <canvas id="GraficoLinealVentasSemana"></canvas>
-                        </div>
-                    </div>
+         
+               
+                <div>
+                    <canvas id="GraficoBarras" style="height:600px;"></canvas>
+         
+                    <button class="btn-m" id="btnExportarPDF"><i class="fas fa-file-pdf"></i>  </button>
+
                 </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="text-decoration-none">
-                        <div class="card">
-                            <canvas id="miGraficoRadar"></canvas>
-                        </div>
-                    </div>
-                </div>
+           
+
+                 
                 <div class="col-xl-12 col-lg-12">
-                    <div class="text-decoration-none">
-                        <div class="card">
-                            <div class="card-statistic-5 p-5 d-flex justify-content-center bg-white">
-                                <canvas id="GraficoBarras"></canvas>
-                            </div>
-                            <div>
-                                <span class="card title">Excel <i class="fa fa-download"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-12 col-lg-12">
-                    <div class="text-decoration-none">
-                        <div class="card">
+                
                             <div class="card-statistic-5 p-5 d-flex justify-content-center bg-white">
                                 <canvas id="GraficoPie"></canvas>
                             </div>
-                            <div>
-                                <span class="card title">Excel <i class="fa fa-download"></i></span>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="btn-m" id="btnExportarPiePDF"><i class="fas fa-file-pdf"></i>  </button>
+                         
+                       
+                  
                 </div>
             </div>
         </div>
@@ -121,17 +120,118 @@
 </div>
 
 @section Scripts {
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+
     <script>
         const DATA_COUNT = 5;
         const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+        function exportarPDF(datos) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Cargar la imagen del logo
+            const logoImg = new Image();
+            logoImg.src = '/images/logoc2.PNG'; // Ruta a la imagen del logo
+
+            logoImg.onload = function () {
+                // Dibujar el logo en el PDF (x, y, width, height)
+                doc.addImage(logoImg, 'PNG', 150, 10, 50, 20);  // Ajusta las posiciones y el tamaño según sea necesario
+
+                // Array con los nombres de los meses
+                const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+                // Establecer el título principal
+                doc.setFontSize(22);
+                doc.setTextColor(40);
+                doc.text("Reporte de Ventas Mensuales", 10, 20);
+                doc.setLineWidth(0.5);
+                doc.line(10, 25, 200, 25); // Línea debajo del título
+
+                // Agregar subtítulos y textos
+                doc.setFontSize(12);
+                doc.setTextColor(100);
+                doc.text("Informe detallado del desempeño financiero de las ventas mensuales", 10, 35);
+                doc.text("Fecha de generación: " + new Date().toLocaleDateString(), 10, 45);
+
+                // Mapear los datos para convertir los números de mes a nombres de mes
+                const datosParaPDF = datos.map(item => ({
+                    mes: meses[item.mes - 1],  // Convertir el número del mes al nombre del mes
+                    anio: item.anio,
+                    nombreProducto: item.nombreProducto,  // Agregar nombre del producto
+                    totalVentas: item.totalVentas.toLocaleString('es-ES', { style: 'currency', currency: 'USD' }),
+                    cantidadVentas: item.cantidadVentas
+                }));
+
+                // Definir las opciones de la tabla
+                const options = {
+                    startY: 60,
+                    head: [['Mes', 'Año', 'Producto', 'Ventas Totales', 'Cantidad de Ventas']],
+                    body: datosParaPDF.map(item => [
+                        item.mes,
+                        item.anio,
+                        item.nombreProducto,  // Incluir nombre del producto
+                        item.totalVentas,
+                        item.cantidadVentas
+                    ]),
+                    styles: {
+                        fontSize: 10,
+                        cellPadding: 3,
+                        halign: 'center', // Alinear horizontalmente
+                        valign: 'middle', // Alinear verticalmente
+                        fillColor: [240, 240, 240], // Color de fondo de las celdas
+                    },
+                    headStyles: {
+                        fillColor: [41, 128, 185], // Color del encabezado
+                        textColor: [255, 255, 255], // Color del texto del encabezado
+                    },
+                    alternateRowStyles: {
+                        fillColor: [255, 255, 255], // Alternar el color de las filas
+                    },
+                };
+
+                // Generar la tabla
+                doc.autoTable(options);
+
+                // Agregar pie de página
+                doc.setFontSize(10);
+                doc.text("Este informe es generado automáticamente por el sistema.", 10, doc.internal.pageSize.height - 20);
+                doc.text("Página " + doc.internal.getCurrentPageInfo().pageNumber, 180, doc.internal.pageSize.height - 20);
+
+                // Guardar el PDF
+                doc.save("Reporte_Ventas_Mensuales.pdf");
+            };
+
+            logoImg.onerror = function () {
+                console.error("Error al cargar la imagen del logo.");
+            };
+        }
 
 
 
-        var ctx = document.getElementById('GraficoPie').getContext('2d');
-        var barChart = document.getElementById('GraficoBarras').getContext('2d');
-        var LineChart = document.getElementById('GraficoLinealVentasSemana').getContext('2d');
-        var RadarChart = document.getElementById('miGraficoRadar').getContext('2d');
+
+        // Llama a la función exportarPDF con tus datos JSON
+        document.getElementById('btnExportarPDF').addEventListener('click', () => {
+            fetch('VentasMensuales')
+                .then((response) => response.json())
+                .then((dataJson) => {
+                    exportarPDF(dataJson);
+                })
+                .catch((error) => console.error("Error al cargar los datos:", error));
+        });
+
+
+
+
+
+        // Llama a la función exportarExcel con tus datos JSON
+     
+
+
+
 
         const data = {
             labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
@@ -236,44 +336,287 @@
             }
         };
 
-        // Ejemplo para el gráfico de Ventas Mensuales
-        fetch('/Reporte/VentasMensuales')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const labels = data.map(d => `${d.año}-${d.mes}`);
-                const values = data.map(d => d.totalVentas);
 
-                const ctx = document.getElementById('GraficoBarras').getContext('2d');
-                new Chart(ctx, {
+
+        // Configuración del gráfico
+        fetch('VentasPorPagos')
+            .then(response => response.json())
+            .then(dataJson => {
+                console.log(dataJson);
+
+                const labels = dataJson.map(item => item.descripcion);
+                const values = dataJson.map(item => item.totalVentas);
+
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Cantidad de Ventas por Método de Pago',
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 205, 86, 0.7)',
+                            'rgba(1, 175, 64, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 205, 86, 1)',
+                            'rgba(1, 175, 64, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                };
+
+                const config = {
                     type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Ventas Mensuales',
-                            data: values,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
+                    data: data,
                     options: {
+                        responsive: true,
                         scales: {
                             y: {
                                 beginAtZero: true
                             }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.raw.toLocaleString('es-ES', { style: 'currency', currency: 'USD' });
+                                        return label;
+                                    }
+                                }
+                            },
+                            legend: {
+                                onClick: (e, legendItem, legend) => {
+                                    const index = legendItem.datasetIndex;
+                                    const ci = legend.chart;
+                                    const meta = ci.getDatasetMeta(index);
+
+                                    meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+                                    ci.update();
+                                }
+                            }
+                        },
+                        onClick: (e, elements) => {
+                            if (elements.length > 0) {
+                                const chart = elements[0].chart;
+                                const datasetIndex = elements[0].datasetIndex;
+                                const dataIndex = elements[0].index;
+                                const ventas = chart.data.datasets[datasetIndex].data[dataIndex];
+                                const metodoPago = chart.data.labels[dataIndex];
+                                alert(`Ventas con ${metodoPago}: ${ventas.toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}`);
+                            }
+                        },
+                        animation: {
+                            duration: 1500,
+                            easing: 'easeInOutBounce'
                         }
                     }
+                };
+
+                const canvasBarras = document.getElementById("GraficoPie").getContext("2d");
+                new Chart(canvasBarras, config);
+
+                // Función para exportar el gráfico a PDF
+                function exportarPDF(datos) {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+
+                    // Añadir el logo
+                    const logoImg = new Image();
+                    logoImg.src = '/images/logoc2.PNG'; // Ruta al logo
+
+                    logoImg.onload = function () {
+                        doc.addImage(logoImg, 'PNG', 150, 10, 50, 20);
+
+                        // Título y encabezados
+                        doc.setFontSize(22);
+                        doc.setTextColor(40);
+                        doc.text("Reporte de Ventas por Métodos de Pago", 10, 20);
+                        doc.setLineWidth(0.5);
+                        doc.line(10, 25, 200, 25);
+
+                        doc.setFontSize(12);
+                        doc.setTextColor(100);
+                        doc.text("Informe de ventas por método de pago", 10, 35);
+                        doc.text("Fecha de generación: " + new Date().toLocaleDateString(), 10, 45);
+
+                        // Crear la tabla
+                        const datosParaPDF = datos.map(item => ({
+                            metodoPago: item.descripcion,
+                            totalVentas: item.totalVentas.toLocaleString('es-ES', { style: 'currency', currency: 'USD' })
+                        }));
+
+                        doc.autoTable({
+                            startY: 60,
+                            head: [['Método de Pago', 'Ventas']],
+                            body: datosParaPDF.map(item => [
+                                item.metodoPago,
+                                item.totalVentas
+                            ]),
+                            styles: {
+                                fontSize: 10,
+                                cellPadding: 3,
+                                halign: 'center',
+                                valign: 'middle',
+                                fillColor: [240, 240, 240],
+                            },
+                            headStyles: {
+                                fillColor: [41, 128, 185],
+                                textColor: [255, 255, 255],
+                            },
+                            alternateRowStyles: {
+                                fillColor: [255, 255, 255],
+                            },
+                        });
+
+                        // Añadir pie de página
+                        doc.setFontSize(10);
+                        doc.text("Este informe es generado automáticamente por el sistema.", 10, doc.internal.pageSize.height - 20);
+                        doc.text("Página " + doc.internal.getCurrentPageInfo().pageNumber, 180, doc.internal.pageSize.height - 20);
+
+                        // Guardar el PDF
+                        doc.save("Reporte_Ventas_Por_Pagos.pdf");
+                    };
+
+                    logoImg.onerror = function () {
+                        console.error("Error al cargar la imagen del logo.");
+                    };
+                }
+
+                // Asigna la función al botón de exportación
+                document.getElementById('btnExportarPiePDF').addEventListener('click', () => {
+                    exportarPDF(dataJson);
                 });
             })
             .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
+                console.error("Error al cargar los datos:", error);
             });
 
+
+
+
+
+        fetch('VentasMensuales')
+            .then((response) => response.json())
+            .then((dataJson) => {
+                // Mapea los meses numerados a sus nombres correspondientes
+                const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                console.log(dataJson);
+
+                // Filtrar los datos nulos
+                const datosValidos = dataJson.filter(item => item.mes !== null && item.anio !== null);
+
+                // Asigna los labels con el formato "Mes - NombreProducto"
+                const labels = datosValidos.map((item) => `${meses[item.mes - 1]} - ${item.nombreProducto}`);
+
+                // Asegúrate de que los valores de ventas son correctos
+                const totalVentas = datosValidos.map((item) => item.totalVentas);
+                const cantidadVentas = datosValidos.map((item) => item.cantidadVentas);
+
+                const data = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Ventas',
+                            data: totalVentas,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 205, 86, 0.7)',
+                                'rgba(1, 175, 64, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 159, 64, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 205, 86, 1)',
+                                'rgba(1, 175, 64, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Cantidad de Ventas',
+                            data: cantidadVentas,
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)', // Puedes cambiar el color
+                            borderColor: 'rgba(75, 192, 192, 1)', // Puedes cambiar el color
+                            borderWidth: 2,
+                            type: 'line' // Cambia el tipo de gráfico si deseas mostrar los datos en una línea
+                        }
+                    ]
+                };
+
+                const config = {
+                    type: 'bar', // Usa 'bar' o 'line' dependiendo del tipo de gráfico que prefieras
+                    data: data,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                               
+                                }
+                            },
+                            legend: {
+                                onClick: (e, legendItem, legend) => {
+                                    const index = legendItem.datasetIndex;
+                                    const ci = legend.chart;
+                                    const meta = ci.getDatasetMeta(index);
+
+                                    // Toggle the visibility of the dataset
+                                    meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+                                    ci.update();
+                                }
+                            }
+                        },
+                        onClick: (e, elements) => {
+                            if (elements.length > 0) {
+                                const chart = elements[0].chart;
+                                const datasetIndex = elements[0].datasetIndex;
+                                const dataIndex = elements[0].index;
+                                const ventas = chart.data.datasets[datasetIndex].data[dataIndex];
+                                const mesProducto = chart.data.labels[dataIndex];
+                                alert(`Ventas en ${mesProducto}: ${ventas.toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}`);
+                            }
+                        },
+                        animation: {
+                            duration: 1500, // Duración de la animación
+                            easing: 'easeInOutBounce' // Tipo de animación
+                        }
+                    }
+                };
+
+                const canvasBarras = document.getElementById("GraficoBarras").getContext("2d");
+                const graficoBarras = new Chart(canvasBarras, config);
+            })
+            .catch((error) => {
+                console.error("Error al cargar los datos:", error);
+            });
+
+
+
+
+
+        $(document).ready(() => {
+            resumenProducto();
+        });
 
        
         var myChart = new Chart(LineChart, configLine);

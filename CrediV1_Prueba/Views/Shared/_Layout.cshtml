@@ -65,23 +65,32 @@
 
             <div class="collapse navbar-collapse" id="navbarsFurni">
                 <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a> </li>
-                    <li><a class="nav-link" href="@Url.Action("Usuarios","Usuario")">Usuarios-Clientes</a></li>
+                    <li class="nav-item"> </li>
+
+                    @if (Context.Session.GetString("Rol") == "Administrador")
+                    {
+                        <li><a class="nav-link" href="@Url.Action("Usuarios","Usuario")">Usuarios-Clientes</a></li>
+                    }
+
+
+                  
+                  
                     <li><a class="nav-link" href="@Url.Action("Index","Inventario")">Inventario</a></li>
                     <li><a class="nav-link" href="@Url.Action("Index","Salidas")">Salidas</a></li>
-                    <li><a class="nav-link" href="@Url.Action("IndexCaja","Caja")">Caja</a></li>
+                    @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Gerente")
+                    {
+                        <li><a class="nav-link" href="@Url.Action("IndexCaja","Caja")">Caja</a></li>
+                    }
                     <li><a class="nav-link" href="@Url.Action("Index","Reporte")">Reportes</a></li>
                 </ul>
-
-                <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5 d-flex align-items-center">
+                <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5 d-flexjustify-content-center">
                     <li class="nav-item d-flex align-items-center me-3">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link d-flex align-items-center" href="#">
                             <img src="~/images/user.svg" class="user-icon">
                             &nbsp;
                             @if (Context.Session.GetString("Nombre") != null)
                             {
-
-                                @Context.Session.GetString("Nombre")
+                                <span>@Context.Session.GetString("Nombre")</span>
                             }
                         </a>
                     </li>
@@ -92,6 +101,7 @@
                         </a>
                     </li>
                 </ul>
+
             </div>
         </div>
 

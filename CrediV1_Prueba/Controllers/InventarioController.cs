@@ -67,7 +67,7 @@ public class InventarioController : Controller
             var pedidos = await _inventarioModel.ConsultarPedidos();
             var pedidosDetalles = await _inventarioModel.ConsultarPedidosDetalles();
 
-            ViewBag.StockRecomendaciones = _inventarioModel.ConsultarRecomendacionestock();
+            ViewBag.StockRecomendaciones = await _inventarioModel.ConsultarRecomendacionestock();
             ViewBag.Vendedores = _salidasModel.ConsultarVendedores();
             ViewBag.MetodosPago = _salidasModel.ConsultarMetodosPago();
             ViewBag.Productos = productos;
@@ -128,7 +128,7 @@ public class InventarioController : Controller
             };
 
             int idPedidoRegistrado = _inventarioModel.RegistrarPedido(pedido);
-            Console.WriteLine("ID pedidooo: " + idPedidoRegistrado);
+       
 
 
             foreach (var producto in productos)
@@ -153,7 +153,7 @@ public class InventarioController : Controller
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+      
             return BadRequest(new { mensaje = "Error al registrar el pedido", detalle = ex.Message });
         }
     }
@@ -183,6 +183,112 @@ public class InventarioController : Controller
            string result = await _inventarioModel.ConfirmarPedido(confirmar);
 
         return Ok(new { mensaje = "Pedido registrado con éxito" });
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> EditarPedido(long id)
+    {
+        try
+        {
+            // Obtener detalles del pedido
+            var pedidoDetalles = await _inventarioModel.ConsultarPedidoDetallesPorID(id);
+
+            if (pedidoDetalles != null)
+            {
+                // Obtener otros datos necesarios para la vista
+                var productos = await _productoModel.GetProductos();
+                ViewBag.StockRecomendaciones = await _inventarioModel.ConsultarRecomendacionestock();
+                ViewBag.Vendedores = _salidasModel.ConsultarVendedores();
+                ViewBag.Productos = productos;
+                ViewBag.pedidoDetalles = pedidoDetalles;
+
+                // Extraer proveedores únicos de los detalles del pedido
+                var proveedoresRelacionados = pedidoDetalles
+                    .Select(d => new { d.idProveedor, d.nombreProveedor })
+                    .Distinct()
+                    .ToList();
+
+               
+                string empleadoEncargo = (string)(pedidoDetalles.FirstOrDefault()?.nombreEmpleado);
+                float montoTotalPedidoArray = (float)(pedidoDetalles.FirstOrDefault()?.montoTotalPedido);
+                int idEmpleado = (int)(pedidoDetalles.FirstOrDefault()?.idEmpleado);
+                int idPedido = (int)(pedidoDetalles.FirstOrDefault()?.idPedido);
+                ViewBag.CostoTotalPedido = montoTotalPedidoArray;
+                ViewBag.Proveedores = proveedoresRelacionados;
+                ViewBag.NombreEmpleadoPedido = empleadoEncargo;
+                ViewBag.idEmpleado = idEmpleado;
+                ViewBag.idPedido = idPedido;
+
+                // Pasar la lista de detalles del pedido a la vista
+                return View();
+            }
+            else
+            {
+                // Manejar el caso en que el pedido no se encuentra
+                return View();
+            }
+        }
+        catch (Exception ex)
+        {
+            ViewBag.exepcion = "Ocurrió un error: " + ex.Message;
+            return View();
+        }
+    }
+
+
+
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> ActualizarPedido([FromBody] List<RegistrarPedidoDTO> productos)
+    {
+        try
+        {
+            if (productos == null || productos.Count == 0)
+            {
+                Console.WriteLine("No se han recibido productos.");
+                return BadRequest("No se han recibido productos.");
+            }
+            int detalle = (int)(productos.FirstOrDefault()?.idDetalle);
+            
+            
+
+
+    
+            Console.WriteLine("Contenido de productos recibido:");
+            foreach (var producto in productos)
+            {
+
+
+         
+                if (producto.idDetalle != 0)
+                {
+                    _inventarioModel.ActualizarPedido(producto);
+                }
+                else
+                {
+                    _inventarioModel.RegistrarPedidoDetalle(producto);
+                }
+                Console.WriteLine($"ID Detalle: {producto.idDetalle}, ID PEDIDO: {producto.idPedido}, FECHA RECIB: {producto.fechaRecibido}," +
+                    $" monto total: {producto.montoTotalPedido}, EMPLEADO: {producto.EmpleadoRecibido}, Cantidad: {producto.cantidad}, Monto Unitario:" +
+                    $" {producto.montoUnitario}, Monto Total Producto: {producto.montoTotalProducto}");
+            }
+
+      
+
+
+            // Productos para actualizar
+     
+
+            return Ok(new { mensaje = "Pedido actualizado con éxito" });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al actualizar el pedido: {ex.Message}");
+            return BadRequest(new { mensaje = "Error al actualizar el pedido", detalle = ex.Message });
+        }
     }
 
 

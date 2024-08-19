@@ -11,6 +11,7 @@
         public int EmpleadoRecibido { get; set; }
         public float montoUnitario { get; set; }
         public float montoTotalProducto { get; set; }
+        public float CostoProveedor { get; set; }
         public float montoTotalPedido { get; set; }
         public DateTime fechaEncargo { get; set; }
         public DateTime? fechaRecibido { get; set; }

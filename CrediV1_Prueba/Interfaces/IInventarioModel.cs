@@ -13,8 +13,12 @@ namespace CrediV1_Prueba.Interfaces
 
         public Task<IEnumerable<PedidoEnt>> ConsultarPedidos();
         public Task<IEnumerable<PedidoEnt>> ConsultarPedidosDetalles();
+        public Task<IEnumerable<PedidoEnt>> ConsultarPedidoDetallesPorID(long id);
+
         public int RegistrarPedido(RegistrarPedidoDTO ent);
         public void RegistrarPedidoDetalle(RegistrarPedidoDTO ent);
+
+        public void ActualizarPedido(RegistrarPedidoDTO ent);
 
 
         public  Task<bool> RestablecerStockProducto(RestablecerCantidadDTO ent);

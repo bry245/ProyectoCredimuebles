@@ -22,6 +22,27 @@ namespace CrediV1_Prueba.Models
             _connection = _configuration.GetConnectionString("Connection");
         }
 
+        public void ActualizarPedido(RegistrarPedidoDTO ent)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var idPedido = connection.Query("ActualizarPedido", new
+                {
+                    ent.idPedido,
+                    ent.idDetalle,
+                    ent.idProducto,
+                    ent.idProveedor,
+                    ent.cantidad,
+                    ent.montoUnitario,
+                    ent.montoTotalProducto,
+                    ent.montoTotalPedido,
+                    ent.fechaRecibido,
+                    ent.EmpleadoRecibido
+                }, commandType: System.Data.CommandType.StoredProcedure);
+
+
+            }
+        }
 
         public async Task<string> ConfirmarPedido(RegistrarPedidoDTO ent)
         {
@@ -45,6 +66,21 @@ namespace CrediV1_Prueba.Models
                 }
             }
         }
+
+        public async Task<IEnumerable<PedidoEnt>> ConsultarPedidoDetallesPorID(long id)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var pedido = await connection.QueryAsync<PedidoEnt>(
+                    "ConsultarDetallePedido",
+                    new { idPedido = id },
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return pedido.ToList();
+            }
+        }
+
 
 
         public async  Task<IEnumerable<PedidoEnt>> ConsultarPedidos()

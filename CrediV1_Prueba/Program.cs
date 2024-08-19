@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
            .AddCookie(options =>
            {
                options.Cookie.Name = "MyCookieAuthentication";
-               options.LoginPath = "/Inicio/Login";
+               options.LoginPath = "/Inicio/InicioDeSesion";
                options.LogoutPath = "/Inicio/CerrarSesion";
                options.AccessDeniedPath = "/Home/AccessDenied";
                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);

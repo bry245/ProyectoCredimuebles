@@ -106,6 +106,7 @@
                                     <button type="button" class="btn " data-mdb-toggle="collapse" data-mdb-target="#collapse_@pedido.idPedido" aria-expanded="false" aria-controls="collapse_@pedido.idPedido">
                                         <i class="fas fa-eye"></i>
                                     </button>
+                                    <a href="@Url.Action("EditarPedido", "Inventario", new { id = pedido.idPedido })" class="btn btn-danger">Ver más  <i class="fa fa-list"></i></a>
                                 </td>
                             </tr>
                             <!-- Fila con la tabla anidada, ignorada por DataTables -->
@@ -218,106 +219,102 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-xl-7">
-                <!-- Aumenté el tamaño de la columna -->
-                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-                    <div class="card-body p-4">
-                        <div class="form-outline mb-5 mb-xl-4 text-center">
-                            <h2>Crear pedido</h2>
-                        </div>
-                        <h4>Datos del pedido</h4>
-                        <div class="form-outline mb-5 mb-xl-4">
-                            <label for="cedulaCliente">Empleado</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-xl-7">
+                    <!-- Aumenté el tamaño de la columna -->
+                    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                        <div class="card-body p-4">
+                            <div class="form-outline mb-5 mb-xl-4 text-center">
+                                <h2>Crear pedido</h2>
+                            </div>
+                            <h4>Datos del pedido</h4>
+                            <div class="form-outline mb-5 mb-xl-4">
+                                <label for="cedulaCliente">Empleado</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                    </div>
+                                    <input type="text" id="idEmpleado" name="idEmpleado" onkeyup="ConsultarNombre()" class="form-control form-control-lg" readonly value="@Context.Session.GetString("Nombre")" />
                                 </div>
-                                <input type="text" id="idEmpleado" name="idEmpleado" onkeyup="ConsultarNombre()" class="form-control form-control-lg" readonly value="@Context.Session.GetString("Nombre")" />
                             </div>
-                        </div>
-                        <div class="form-outline mb-3 mb-xl-4">
-                            <label for="costoTotal">Costo Total</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                            <div class="form-outline mb-3 mb-xl-4">
+                                <label for="costoTotal">Costo Total</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                    </div>
+                                    <input readonly type="text" class="form-control form-control-lg" id="costoTotal" placeholder="Costo Total" />
                                 </div>
-                                <input readonly type="text" class="form-control form-control-lg" id="costoTotal" placeholder="Costo Total" />
                             </div>
-                        </div>
-                        <div class="form-outline mb-5 mb-xl-4">
-                            <label for="nombreCliente">Nombre Proveedor</label>
-                            <div class="input-group">
+                            <div class="form-outline mb-5 mb-xl-4">
+                                <label for="nombreCliente">Nombre Proveedor</label>
+                                <div class="input-group">
+                                </div>
                             </div>
-                        </div>
-                        <div id="proveedorInputs" class="form-outline mb-5 mb-xl-4">
-                            <!-- Aquí se agregarán los inputs de proveedores -->
-                        </div>
-                        <h4>Artículos</h4>
-                        <div class="input-group col-lg-4 mb-3">
-                            <label for="buscarProducto">Buscar Producto</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto" aria-describedby="buscarButton">
+                            <div id="proveedorInputs" class="form-outline mb-5 mb-xl-4">
+                                <!-- Aquí se agregarán los inputs de proveedores -->
                             </div>
-                        </div>
-                        <div id="resultadosProductos"></div>
-                        <div class="row">
-                            <div class="col">
-                                <table id="tablaProductos" class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th>Cantidad</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="productosSeleccionados">
-                                        <!-- Aquí se agregarán los productos seleccionados -->
-                                    </tbody>
-                                </table>
+                            <h4>Artículos</h4>
+                            <div class="input-group col-lg-4 mb-3">
+                                <label for="buscarProducto">Buscar Producto</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                    <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto" aria-describedby="buscarButton">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <a href="@Url.Action("Index","Salidas")" class="btn btn-primary">Volver</a> <!-- Agregué la clase btn-primary -->
-                                <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Salida</button> <!-- Agregué la clase btn-success -->
+                            <div id="resultadosProductos"></div>
+                            <div class="row">
+                                <div class="col">
+                                    <table id="tablaProductos" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productosSeleccionados">
+                                            <!-- Aquí se agregarán los productos seleccionados -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="@Url.Action("Index","Salidas")" class="btn btn-primary">Volver</a> <!-- Agregué la clase btn-primary -->
+                                    <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Salida</button> <!-- Agregué la clase btn-success -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-xl-5">
-                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px; background-color: #ffeded;">
-                    @{
-                        // Esperamos la tarea si es una Task<IEnumerable>
-                        var stockRecomendaciones = ViewBag.StockRecomendaciones as IEnumerable<CrediV1_Prueba.Entities.Otros.ProductosBajoStock>;
-
-                        if (stockRecomendaciones != null)
-                        {
-                                <h4 class="text-danger">¡Atención!</h4>
-                                <p>Los siguientes productos están por debajo del stock mínimo:</p>
-                                <ul class="list-group">
-                                    @foreach (var item in stockRecomendaciones)
-                                {
-                                        <li class="list-group-item">
-                                            <strong>@item.NombreProducto:</strong> Se recomienda solicitar al menos <strong>@item.CantidadStock unidades</strong>.
-                                        </li>
-                                }
+                @if (ViewBag.StockRecomendaciones != null && ((IEnumerable<object>)ViewBag.StockRecomendaciones).Any())
+                {
+                    <div class="col-lg-4 col-xl-3">
+                        <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px; background-color: #f8d7da;">
+                            <div class="card-body p-4">
+                                <div class="form-outline mb-5 mb-xl-4 text-center">
+                                    <h4 style="color: #721c24;">Recomendacion de Stock</h4>
+                                </div>
+                                <p style="color: #721c24;">Los siguientes productos tienen bajo stock:</p>
+                                <ul style="color: #721c24;">
+                                    @foreach (var producto in ViewBag.StockRecomendaciones)
+                                    {
+                                        <li>@producto.NombreProducto - Recomendación en base al mes pasado: @producto.cantidadStock</li>
+                                    }
                                 </ul>
+                                <p style="color: #721c24;">Se recomienda pedir más unidades para evitar quedarse sin stock.</p>
+                            </div>
+                        </div>
+                    </div>
+                }
 
-                                <button class="btn btn-warning mt-3">Solicitar Producto</button>
-                        }
-                        else
-                        {
-                          
-                        }
-                    }
-                  
 
-                </div>
+
             </div>
-
         </div>
+
+ 
     </div>
 
 

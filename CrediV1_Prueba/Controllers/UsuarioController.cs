@@ -4,6 +4,7 @@ using CrediV1_Prueba.Models;
 using CrediV1_Prueba.Entities.Otros;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace CrediV1_Prueba.Controllers
 {
@@ -132,11 +133,15 @@ namespace CrediV1_Prueba.Controllers
                 Console.WriteLine("ASDSA" + user.cedula);
                 Console.WriteLine("ASDSA" + user.apellidos);
                 Console.WriteLine("ASDSA" + user.telefono);
-                Console.WriteLine("ASDSA" + user.contrasenna);
+                Console.WriteLine("CONTRASENA" + user.contrasenna);
                 Console.WriteLine("ASDSA" + user.direccion);
                 Console.WriteLine("ASDSA" + user.nombre);
                 user.estado = true;
-                user.contrasenna = "1232131";
+
+        
+
+            
+           
                 await _usuarioModel.RegistrarUsuario(user);
 
                 return Ok();

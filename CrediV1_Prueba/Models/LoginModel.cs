@@ -57,21 +57,21 @@ namespace CrediV1_Prueba.Models
         {
             try
             {
+                Console.WriteLine("Contraseña ingresada: " + contraseña);
+                Console.WriteLine("Hash almacenado: " + hashContraseña);
 
                 bool validatepassword = BCrypt.Net.BCrypt.Verify(contraseña, hashContraseña);
 
-
+                Console.WriteLine("Resultado de la verificación: " + validatepassword);
                 return validatepassword;
-
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Error al verificar la contraseña: " + ex.Message);
                 return false;
-
             }
-
         }
+
 
 
 

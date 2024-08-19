@@ -11,7 +11,7 @@
                 <h2>Agregar Usuario</h2>
             </div>
             <div class="row align-items-center">
-                <div class="col-lg-8 col-xl-6">
+                <div class="col-lg-8 col-xl-8">
                     <div class="form-outline mb-5 mb-xl-4">
                         <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" placeholder="Nombre" required />
                     </div>
@@ -26,7 +26,7 @@
 
                 </div>
 
-                <div class="col-lg-8 col-xl-6">
+                <div class="col-lg-8 col-xl-8">
                     <div class="form-outline mb-5 mb-xl-4">
                         <input type="email" id="correo" name="correo" class="form-control form-control-lg" required placeholder="Correo Electrónico" />
                     </div>
@@ -36,6 +36,10 @@
 
                     <div class="form-outline mb-5 mb-xl-4">
                         <input type="text" id="cedula" name="cedula" class="form-control form-control-lg" required placeholder="cedula" />
+                    </div>
+
+                    <div class="form-outline mb-5 mb-xl-4">
+                        <input type="password" id="contrasenna" name="contrasenna" class="form-control form-control-lg" required ="contrasenna" />
                     </div>
 
                    
@@ -84,9 +88,10 @@
         const apellidos = document.getElementById('apellidos').value.trim();
         const cedula = document.getElementById('cedula').value.trim();
         const telefono = document.getElementById('telefono').value.trim();
-        const correo = document.getElementById('correo').value.trim();
+        const correo = document.getElementById('correo').value.trim(); 
         const direccion = document.getElementById('direccion').value.trim();
         const idRol = document.getElementById('idRol').value.trim();
+        const contrasenna = document.getElementById('contrasenna').value.trim();
 
         // Verificar que todos los campos tienen datos
         if (!nombre || !telefono || !correo || !direccion) {
@@ -106,7 +111,8 @@
             correo,
             cedula,
             direccion,
-            idRol
+            idRol,
+            contrasenna
         };
 
         try {

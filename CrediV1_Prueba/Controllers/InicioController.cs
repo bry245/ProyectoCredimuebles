@@ -82,8 +82,8 @@ namespace CrediV1_Prueba.Controllers
         {
             try
             {
-                
 
+                Console.WriteLine("CONTRA ENCONTRADO" + usuario.contrasenna) ;
                 var usuarioValidar = _loginModel.IniciarSesion(usuario);
 
                 if (usuarioValidar == null)
@@ -91,6 +91,9 @@ namespace CrediV1_Prueba.Controllers
                     TempData["Mensaje"] = "Usuario no registrado";
                     return BadRequest("Usuario no registrado.");
                 }
+
+                Console.WriteLine("USUARIO ENCONTRADO"+ usuarioValidar.correo);
+                Console.WriteLine("PASSBASEDEDATOS" + usuarioValidar.contrasenna);
 
 
                 bool auth = await _loginModel.VerificarContraseña(usuario.contrasenna, usuarioValidar.contrasenna);
@@ -114,6 +117,7 @@ namespace CrediV1_Prueba.Controllers
                     HttpContext.Session.SetString("Email", usuarioValidar.correo);
 
                     HttpContext.Session.SetString("Nombre", usuarioValidar.nombre);
+                    HttpContext.Session.SetString("Rol", nombreRol);
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -195,6 +199,7 @@ namespace CrediV1_Prueba.Controllers
 
 
 
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> VerificacionCodigoRecuperarContrasenna([FromBody] ResetPasswordViewModel model)
@@ -229,8 +234,7 @@ namespace CrediV1_Prueba.Controllers
                 if (usuarioExistente != null)
                 {
                     await _passwordResetService.GeneratePasswordResetTokenAsync(entidad.correo);
-                    TempData["Email"] = entidad.correo;
-                    return Json(new { success = true, redirectUrl = Url.Action("VerificacionRecuperarContrasenna", "Inicio") });
+                    return Json(new { success = true, redirectUrl = Url.Action("VerificacionRecuperarContrasenna", "Inicio", new { email = entidad.correo }) });
                 }
                 else
                 {
@@ -243,6 +247,7 @@ namespace CrediV1_Prueba.Controllers
                 return Json(new { success = false, message = "Error al procesar la solicitud: " + ex.Message });
             }
         }
+
 
 
 

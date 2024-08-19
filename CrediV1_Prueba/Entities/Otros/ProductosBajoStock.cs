@@ -6,7 +6,7 @@
         public long IdStockBajo { get; set; }
         public long IdProducto { get; set; }
         public string? Nombre { get; set; }
-        public int CantidadStock { get; set; }
+        public int cantidadStock { get; set; }
         public long? IdProveedor { get; set; }
 
         public DateTime FechaRegistro { get; set; }
