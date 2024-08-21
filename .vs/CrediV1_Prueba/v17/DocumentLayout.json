@@ -3,16 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\usuario\\agregarempleado.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\usuario\\agregarempleado.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inicio\\cambiarcontrasennavista.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inicio\\cambiarcontrasennavista.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\controllers\\cajacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\controllers\\cajacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inventario\\listadoproducto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inventario\\listadoproducto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inventario\\pedidos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inventario\\pedidos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inicio\\verificacionrecuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inicio\\verificacionrecuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inicio\\recuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inicio\\recuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\chat\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\chat\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inicio\\iniciodesesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inicio\\iniciodesesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\wwwroot\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\wwwroot\\js\\chat.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\models\\inventariomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\models\\inventariomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\controllers\\inventariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\controllers\\inventariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inventario\\pedidos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inventario\\pedidos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\reporte\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -27,16 +71,8 @@
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\usuario\\listaempleados.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inicio\\iniciodesesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inicio\\iniciodesesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\usuario\\listaclientes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\usuario\\listaclientes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -45,18 +81,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\entities\\reporteent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\entities\\reporteent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inventario\\listadoproducto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inventario\\listadoproducto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inicio\\verificacionrecuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inicio\\verificacionrecuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\inicio\\recuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\inicio\\recuperarcontrasenna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\models\\passwordresetservicemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -77,10 +101,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\entities\\usuarioent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\entities\\usuarioent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\views\\usuario\\agregarempleado.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|solutionrelative:crediv1_prueba\\views\\usuario\\agregarempleado.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C09A4389-205A-467F-A6B3-4F6AF4FE21B0}|CrediV1_Prueba\\CrediV1_Prueba.csproj|c:\\users\\jason\\videos\\fps\\proyectocredimuebles\\crediv1_prueba\\models\\productosmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -146,7 +166,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -178,44 +198,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "InicioController.cs",
-              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\InicioController.cs",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Controllers\\InicioController.cs",
-              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\InicioController.cs",
-              "RelativeToolTip": "CrediV1_Prueba\\Controllers\\InicioController.cs",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAowHMAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T23:07:10.045Z"
+              "DocumentIndex": 1,
+              "Title": "CambiarContrasennaVista.cshtml",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\CambiarContrasennaVista.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inicio\\CambiarContrasennaVista.cshtml",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\CambiarContrasennaVista.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inicio\\CambiarContrasennaVista.cshtml",
+              "ViewState": "AQIAACgAAAAAAAAAAAAgwDkAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-20T22:44:00.883Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "InicioDeSesion.cshtml",
-              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
-              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
-              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-19T04:39:03.13Z"
+              "DocumentIndex": 2,
+              "Title": "CajaController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\CajaController.cs",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Controllers\\CajaController.cs",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\CajaController.cs",
+              "RelativeToolTip": "CrediV1_Prueba\\Controllers\\CajaController.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAwwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-20T00:22:59.509Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
-              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
-              "RelativeToolTip": "CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
-              "ViewState": "AQIAAPMBAAAAAAAAAAAAAD0CAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-18T20:17:21.438Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "ListadoProducto.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\ListadoProducto.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inventario\\ListadoProducto.cshtml",
@@ -227,32 +234,128 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 4,
+              "Title": "Pedidos.cshtml",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml",
+              "ViewState": "AQIAABYBAAAAAAAAAAAAADgCAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-18T21:59:56.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "VerificacionRecuperarContrasenna.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\VerificacionRecuperarContrasenna.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inicio\\VerificacionRecuperarContrasenna.cshtml",
               "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\VerificacionRecuperarContrasenna.cshtml",
               "RelativeToolTip": "CrediV1_Prueba\\Views\\Inicio\\VerificacionRecuperarContrasenna.cshtml",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAADYAAAAKAAAA",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAUwHEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-08-19T01:45:04.405Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Pedidos.cshtml",
-              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml",
-              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml*",
-              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inventario\\Pedidos.cshtml*",
-              "ViewState": "AQIAAFQCAAAAAAAAAAAAAHkCAAAPAAAA",
+              "DocumentIndex": 5,
+              "Title": "InicioController.cs",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\InicioController.cs",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Controllers\\InicioController.cs",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\InicioController.cs",
+              "RelativeToolTip": "CrediV1_Prueba\\Controllers\\InicioController.cs",
+              "ViewState": "AQIAALAAAAAAAAAAAAAqwMQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T23:07:10.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AgregarEmpleado.cshtml",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACkAAACQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-18T21:59:56.984Z",
+              "WhenOpened": "2024-08-18T22:53:57.497Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
+              "Title": "RecuperarContrasenna.cshtml",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
+              "ViewState": "AQIAABYAAAAAAAAAAAAowCAAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-19T01:48:22.074Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Reporte\\Index.cshtml",
+              "ViewState": "AQIAAPMBAAAAAAAAAAAAAD0CAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-18T20:17:21.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "InicioDeSesion.cshtml",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inicio\\InicioDeSesion.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-19T04:39:03.13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\appsettings.json",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\appsettings.json",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\appsettings.json",
+              "RelativeToolTip": "CrediV1_Prueba\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAB5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-19T23:23:24.231Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "chat.js",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\js\\chat.js",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\wwwroot\\js\\chat.js",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\wwwroot\\js\\chat.js",
+              "RelativeToolTip": "CrediV1_Prueba\\wwwroot\\js\\chat.js",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAAAIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-08-19T23:26:26.791Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "chat.cshtml",
+              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Chat\\chat.cshtml",
+              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Chat\\chat.cshtml",
+              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Chat\\chat.cshtml",
+              "RelativeToolTip": "CrediV1_Prueba\\Views\\Chat\\chat.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-20T00:40:10.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "ListaEmpleados.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Usuario\\ListaEmpleados.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Usuario\\ListaEmpleados.cshtml",
@@ -264,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 13,
               "Title": "InventarioController.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\InventarioController.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Controllers\\InventarioController.cs",
@@ -272,25 +375,23 @@
               "RelativeToolTip": "CrediV1_Prueba\\Controllers\\InventarioController.cs",
               "ViewState": "AQIAACsBAAAAAAAAAAAAwEwBAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T21:52:39.738Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-18T21:52:39.738Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 12,
               "Title": "InventarioModel.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Models\\InventarioModel.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Models\\InventarioModel.cs",
               "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Models\\InventarioModel.cs",
               "RelativeToolTip": "CrediV1_Prueba\\Models\\InventarioModel.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAIwG4AAAAJAAAA",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAIwGkAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T21:56:36.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-18T21:56:36.409Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 15,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Shared\\_Layout.cshtml",
@@ -302,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 17,
               "Title": "ListaClientes.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Usuario\\ListaClientes.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Usuario\\ListaClientes.cshtml",
@@ -314,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 18,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Program.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Program.cs",
@@ -326,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "ReporteEnt.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Entities\\ReporteEnt.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Entities\\ReporteEnt.cs",
@@ -338,19 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "RecuperarContrasenna.cshtml",
-              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
-              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
-              "RelativeToolTip": "CrediV1_Prueba\\Views\\Inicio\\RecuperarContrasenna.cshtml",
-              "ViewState": "AQIAABYAAAAAAAAAAAAowEYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-19T01:48:22.074Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
               "Title": "PasswordResetServiceModel.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Models\\PasswordResetServiceModel.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Models\\PasswordResetServiceModel.cs",
@@ -362,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "UsuarioEnt.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Entities\\UsuarioEnt.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Entities\\UsuarioEnt.cs",
@@ -374,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "LoginModel.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Models\\LoginModel.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Models\\LoginModel.cs",
@@ -386,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 21,
               "Title": "UsuarioModel.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Models\\UsuarioModel.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Models\\UsuarioModel.cs",
@@ -398,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 22,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Controllers\\UsuarioController.cs",
@@ -410,19 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "AgregarEmpleado.cshtml",
-              "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
-              "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
-              "ToolTip": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
-              "RelativeToolTip": "CrediV1_Prueba\\Views\\Usuario\\AgregarEmpleado.cshtml",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-18T22:53:57.497Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "ProductosModel.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Models\\ProductosModel.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Models\\ProductosModel.cs",
@@ -434,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "EditarProducto.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\EditarProducto.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inventario\\EditarProducto.cshtml",
@@ -446,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "ProductosBajoStock.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Entities\\Otros\\ProductosBajoStock.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Entities\\Otros\\ProductosBajoStock.cs",
@@ -458,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\Index.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inventario\\Index.cshtml",
@@ -470,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "IInventarioModel.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Interfaces\\IInventarioModel.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Interfaces\\IInventarioModel.cs",
@@ -482,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 31,
               "Title": "ReporteService.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Models\\ReporteService.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Models\\ReporteService.cs",
@@ -494,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "ReporteController.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Controllers\\ReporteController.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Controllers\\ReporteController.cs",
@@ -506,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "EditarPedido.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Inventario\\EditarPedido.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Inventario\\EditarPedido.cshtml",
@@ -518,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 34,
               "Title": "IProducto.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Interfaces\\IProducto.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Interfaces\\IProducto.cs",
@@ -530,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 35,
               "Title": "ILogin.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Interfaces\\ILogin.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Interfaces\\ILogin.cs",
@@ -542,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 33,
               "Title": "IReporteService.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Interfaces\\IReporteService.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Interfaces\\IReporteService.cs",
@@ -554,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 37,
               "Title": "RegistrarPedidoDTO.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Entities\\DTO\\RegistrarPedidoDTO.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Entities\\DTO\\RegistrarPedidoDTO.cs",
@@ -566,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 38,
               "Title": "PedidoEnt.cs",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Entities\\PedidoEnt.cs",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Entities\\PedidoEnt.cs",
@@ -578,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 36,
               "Title": "ListadoSalidas.cshtml",
               "DocumentMoniker": "C:\\Users\\jason\\Videos\\FPS\\ProyectoCredimuebles\\CrediV1_Prueba\\Views\\Salidas\\ListadoSalidas.cshtml",
               "RelativeDocumentMoniker": "CrediV1_Prueba\\Views\\Salidas\\ListadoSalidas.cshtml",
