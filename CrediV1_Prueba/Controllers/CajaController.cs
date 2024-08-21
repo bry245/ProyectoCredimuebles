@@ -35,6 +35,10 @@ namespace CrediV1_Prueba.Controllers
             {
                 int pageSize = 31; // Número de elementos por página
                 var salidas = await _cajaModel.ListarCajasDiarias(page, pageSize);
+                CajaEnt datosCajas = _cajaModel.ObtenerDatosCaja();
+
+                ViewBag.datosCajas = datosCajas;
+
 
                 return View(salidas);
             }
@@ -53,9 +57,9 @@ namespace CrediV1_Prueba.Controllers
                 int page = 1;
                 int pageSize = 31; // Número de elementos por página
                 var gastos = await _cajaModel.ListarGastos(page, pageSize, fecha);
-                ViewBag.fecha =  fecha.ToString("yyyy-MM-dd");
+                ViewBag.fecha = fecha.ToString("yyyy-MM-dd");
 
-             
+               
 
 
                 return View(gastos);
@@ -83,7 +87,42 @@ namespace CrediV1_Prueba.Controllers
                     if (registroGasto != -1)
                     {
 
-                        return Ok(new { success = true, message = "Registro de salida exitoso" });
+                        return Ok(new { success = true, message = "Registro exitoso" });
+                    }
+                    else
+                    {
+                        return BadRequest(ModelState);
+                    }
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Ocurrió un error inesperado." });
+            }
+        }
+
+        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
+        [HttpPost]
+
+        public IActionResult EliminarGasto([FromBody] CajaEnt datos)
+        {
+            if (datos == null)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                if (datos != null)
+                {
+                    var registroGasto = _cajaModel.EliminarGasto(datos);
+                    if (registroGasto != -1)
+                    {
+
+                        return Ok(new { success = true, message = "Anulación exitosa" });
                     }
                     else
                     {

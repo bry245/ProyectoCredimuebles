@@ -55,7 +55,7 @@
                                 <tr>
                                     <td>@item.descripcion</td>
                                     <td>₡ @item.montoGastos</td>
-                                    <td><i class="fa fa-trash"></i></td>
+                                    <td><button class="" value="@item.idGasto" onclick="EliminarGasto(@item.idGasto)"><i class="fa fa-trash"></i> </button></td>
                                 </tr>
                             }
                         </tbody>
@@ -121,4 +121,71 @@
             }
         });
     }
+
+
+
+    function EliminarGasto(idGasto) {
+
+        var fecha = $('#fecha').val();
+        var datos = {
+            idGasto: idGasto
+        };
+        $.ajax({
+            url: '@Url.Action("EliminarGasto", "Caja")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(datos),
+            success: function (response) {
+                console.log('Gasto eliminado:', response);
+                localStorage.setItem('successMessage', 'Gasto eliminado con éxito');
+                window.location.href = '@Url.Action("Gastos", "Caja")' + '?fecha=' + encodeURIComponent(fecha);
+            },
+            error: function (error) {
+                console.error('Error al eliminar el gasto:', error);
+                toastr.error('Ocurrió un error, por favor valide los datos');
+            }
+        });
+    
+    };
+
+    
+
+        
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-center-custom",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "3000",
+        "hideDuration": "1000",
+        "timeOut": "2500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener el mensaje almacenado en localStorage
+        var successMessage = localStorage.getItem('successMessage');
+
+        if (successMessage) {
+            // Mostrar el mensaje usando Toastr
+            toastr.success(successMessage);
+
+            // Eliminar el mensaje de localStorage
+            localStorage.removeItem('successMessage');
+        }
+    });
 </script>
+
+<style>
+    .toast - top - center - custom {
+        top: 60px; /* Ajusta este valor según lo necesites */
+        left: 50 %;
+        transform: translateX(-50 %);
+    }
+</style>
