@@ -58,7 +58,6 @@ namespace CrediV1_Prueba.Models
             try
             {
                 hashContraseña = BCrypt.Net.BCrypt.HashPassword(hashContraseña);
-
                 bool validatepassword = BCrypt.Net.BCrypt.Verify(contraseña, hashContraseña);
 
                 Console.WriteLine("Resultado de la verificación: " + validatepassword);

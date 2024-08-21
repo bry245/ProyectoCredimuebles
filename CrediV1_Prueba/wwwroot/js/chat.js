@@ -1,13 +1,10 @@
 
 
-
-parent of a9db5e0 (Check)
-
 let chatHistory = [];
 
 async function GPTChat(mensaje) {
     chatHistory.push({ role: "user", content: mensaje });
-
+    
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {

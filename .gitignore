@@ -16,3 +16,6 @@
 
 
 
+*.dll
+*.vsidx
+*.vsidx
