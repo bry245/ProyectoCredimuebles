@@ -82,6 +82,8 @@
                         <li><a class="nav-link" href="@Url.Action("IndexCaja","Caja")">Caja</a></li>
                     }
                     <li><a class="nav-link" href="@Url.Action("Index","Reporte")">Reportes</a></li>
+                    <li><a class="nav-link" href="@Url.Action("Chat","Chat")">Chat</a></li>
+
                 </ul>
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5 d-flexjustify-content-center">
                     <li class="nav-item d-flex align-items-center me-3">
@@ -109,7 +111,7 @@
     <div class="content">
         @RenderBody()
     </div>
-  @RenderBody()
+
 
    
     @RenderSection("Scripts", required: false)
@@ -128,12 +130,6 @@
                         </p>
                     </div>
 
-                    <div class="col-lg-6 text-center text-lg-end">
-                        <ul class="list-unstyled d-inline-flex ms-auto">
-                            <li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                        </ul>
-                    </div>
 
                 </div>
             </div>

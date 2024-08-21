@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Net.Http;
 using X.PagedList;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CrediV1_Prueba.Models
 {
@@ -73,6 +74,41 @@ namespace CrediV1_Prueba.Models
             }
         }
 
+        public int EliminarGasto (CajaEnt datos)
+        {
+            try
+            {
+                using (var con = new SqlConnection(_connection))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@idGasto", datos.idGasto);
 
+                    con.Execute("EliminarGasto", parameters, commandType: CommandType.StoredProcedure);
+
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+        public CajaEnt ObtenerDatosCaja()
+        {
+            try
+            {
+                using (var con = new SqlConnection(_connection))
+                {
+
+                    var gastos = con.Query<CajaEnt>("ObtenerDatosCaja", new { }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                    return gastos;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+}
     }
 }

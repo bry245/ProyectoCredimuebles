@@ -40,6 +40,8 @@ namespace CrediV1_Prueba.Models
               var result = await connection.ExecuteAsync("AgregarProducto",
                     new { producto.nombre, producto.idCategoria, producto.idProveedor, producto.cantidadStock, producto.costo,producto.CostoProveedor },
                     commandType: System.Data.CommandType.StoredProcedure);
+
+
                 if (result > 0)
                 {
                     

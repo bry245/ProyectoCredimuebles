@@ -13,5 +13,10 @@
         public decimal montoGastos { get; set; }
         public DateTime fechaGasto { get; set; }
         public string descripcion { get; set; }
+
+        public decimal totalVentasMes { get; set; }
+        public decimal totalEnCaja { get; set; }
+
+
     }
 }
