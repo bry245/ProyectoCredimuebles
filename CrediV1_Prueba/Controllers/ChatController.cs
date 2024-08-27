@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CrediV1_Prueba.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CrediV1_Prueba.Controllers
 {
-    public class ChatController : Controller
+    public class ChatController(IChatModel ChatModel) : Controller
     {
         public IActionResult Index()
         {
@@ -16,6 +17,26 @@ namespace CrediV1_Prueba.Controllers
 
         }
 
+
+		
+
+		[HttpGet]
+		public async Task<IActionResult> TraerDatosDB()
+		{
+			try
+			{
+				var datos = await ChatModel.TraerDatosDB();
+
+				return Json(datos);
+			}
+			catch (Exception ex)
+			{
+				// Log the exception (you can use any logging framework)
+				Console.WriteLine($"Error: {ex.Message}");
+				// Return a proper error response
+				return StatusCode(500, new { message = "Internal server error" });
+			}
+		}
 
 
 	}

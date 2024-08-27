@@ -8,21 +8,22 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CrediV1_Prueba.Models
 {
-	public class ChatModel(HttpClient httpClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+	public class ChatModel(HttpClient _httpClient, IConfiguration _configuration, IHttpContextAccessor httpContextAccessor): IChatModel
 	{
 
-		private readonly HttpClient _httpClient;
-		private readonly IConfiguration _configuration;
 		private string _connection;
-		private readonly IOtherServices _otherServices;
 
-		public async Task<List<ReporteEnt>>? TraerDatosDB()
+		
+
+		public async Task<List<ProductoDB>>? TraerDatosDB()
 		{
+			_connection = _configuration.GetConnectionString("Connection");
+
 			try
 			{
 				using (var con = new SqlConnection(_connection))
 				{
-					var dato = con.Query<ReporteEnt>("ConsultarProductos",
+					var dato = con.Query<ProductoDB>("ConsultarProductos",
 					   new { },
 					   commandType: CommandType.StoredProcedure).ToList();
 
@@ -42,6 +43,7 @@ namespace CrediV1_Prueba.Models
 				throw new Exception("Error: " + ex.Message, ex);
 			}
 		}
+
 
 
 	}

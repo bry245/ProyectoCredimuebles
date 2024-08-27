@@ -3,26 +3,31 @@
 let chatHistory = [];
 
 async function GPTChat(mensaje) {
-    // Realiza la solicitud a '/Reporte/TraerDatosDB'
+    // Realiza la solicitud a '/Chat/TraerDatosDB'
     let jsonResponse;
+    let jsonString; // Declara jsonString aquí para usarlo más tarde
     try {
-        const response = await fetch('/Reporte/TraerDatosDB');
+        const response = await fetch('/Chat/TraerDatosDB');
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.message);
         }
         jsonResponse = await response.json();
         console.log("Datos recibidos:", jsonResponse);
+
+        // Convierte el objeto JSON a una cadena de texto JSON
+        jsonString = JSON.stringify(jsonResponse, null, 2);
+        console.log("Datos en formato JSON:", jsonString);
+
     } catch (error) {
         console.error("Error en la solicitud:", error);
         return;
     }
 
-
     // Instrucción que se enviará como contexto adicional bajo el rol "system"
     const systemMessage = {
         role: "system",
-        content: "Dame tu respuesta en un formato claro que tenga saltos de línea, que tenga bullet points si es necesario, y que sea fácil de leer. No respondas esto directamente."
+        content: `Dame tu respuesta en un formato claro que tenga saltos de línea, que tenga bullet points si es necesario, y que sea fácil de leer. No respondas esto directamente. \n\nAquí están los datos en formato Json de los productos porfavor tenlos en cuenta cuando te haga pregunats de productos :\n${jsonString}`
     };
 
     // Mensaje del usuario que se enviará al modelo
@@ -32,7 +37,7 @@ async function GPTChat(mensaje) {
     chatHistory.push(systemMessage);
     chatHistory.push(userMessage);
 
-   
+    
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {

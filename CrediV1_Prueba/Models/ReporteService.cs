@@ -78,33 +78,6 @@ namespace CrediV1_Prueba.Models
         }
 
 
-		public async Task<List<ProductoDB>>? TraerDatosDB()
-		{
-			try
-			{
-				using (var con = new SqlConnection(_connection))
-				{
-					var dato = con.Query<ProductoDB>("ConsultarProductos",
-					   new { },
-					   commandType: CommandType.StoredProcedure).ToList();
-
-					return dato;
-
-				}
-			}
-			catch (SqlException exs)
-			{
-				throw new Exception("Error : " + exs.Message, exs);
-
-
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine("Error: " + ex.Message);
-				throw new Exception("Error: " + ex.Message, ex);
-			}
-		}
-
 
 
 	}
