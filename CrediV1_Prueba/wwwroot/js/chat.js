@@ -3,8 +3,36 @@
 let chatHistory = [];
 
 async function GPTChat(mensaje) {
-    chatHistory.push({ role: "user", content: mensaje });
-    
+    // Realiza la solicitud a '/Reporte/TraerDatosDB'
+    let jsonResponse;
+    try {
+        const response = await fetch('/Reporte/TraerDatosDB');
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        jsonResponse = await response.json();
+        console.log("Datos recibidos:", jsonResponse);
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+        return;
+    }
+
+
+    // Instrucción que se enviará como contexto adicional bajo el rol "system"
+    const systemMessage = {
+        role: "system",
+        content: "Dame tu respuesta en un formato claro que tenga saltos de línea, que tenga bullet points si es necesario, y que sea fácil de leer. No respondas esto directamente."
+    };
+
+    // Mensaje del usuario que se enviará al modelo
+    const userMessage = { role: "user", content: mensaje };
+
+    // Asegúrate de que el mensaje del sistema esté al inicio del historial
+    chatHistory.push(systemMessage);
+    chatHistory.push(userMessage);
+
+   
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -12,7 +40,7 @@ async function GPTChat(mensaje) {
             'Authorization': 'Bearer ' + API_KEY
         },
         body: JSON.stringify({
-            model: "gpt-4",
+            model: "gpt-3.5-turbo",
             messages: chatHistory,
             max_tokens: 500,
             temperature: 0.7,
@@ -32,7 +60,7 @@ async function GPTChat(mensaje) {
     return botMessage;
 }
 
-const prompt = document.querySelector('#prompt');
+let promptElement = document.querySelector('#prompt');
 const enviar = document.querySelector('#generate');
 
 enviar.addEventListener('click', async () => {
@@ -44,12 +72,14 @@ enviar.addEventListener('click', async () => {
 
     try {
         const respuesta = await GPTChat(pregunta);
-        displayMessage(respuesta, 'admin');
+        const formattedResponse = respuesta.replace(/\n/g, '<br>'); // Reemplaza los \n por <br>
+        displayMessage(formattedResponse, 'admin');
     } catch (error) {
         console.error("Error:", error.message);
         displayMessage("Error al obtener la respuesta: " + error.message, 'admin');
     }
 });
+
 
 
 function displayMessage(message, sender) {

@@ -45,7 +45,7 @@ namespace CrediV1_Prueba.Controllers
             try
             {
                 var ventasPago = await _reportService.VentasPorMetodoPagoCantidad();
-              
+
                 return Json(ventasPago);
             }
             catch (Exception ex)
@@ -57,6 +57,26 @@ namespace CrediV1_Prueba.Controllers
             }
         }
 
+			[HttpGet]
+			public async Task<IActionResult> TraerDatosDB()
+			{
+				try
+				{
+					var datos = await _reportService.TraerDatosDB();
 
-    }
+					return Json(datos);
+				}
+				catch (Exception ex)
+				{
+					// Log the exception (you can use any logging framework)
+					Console.WriteLine($"Error: {ex.Message}");
+					// Return a proper error response
+					return StatusCode(500, new { message = "Internal server error" });
+				}
+			}
+
+
+
+
+		}
 }
