@@ -27,7 +27,7 @@ async function GPTChat(mensaje) {
     // Instrucción que se enviará como contexto adicional bajo el rol "system"
     const systemMessage = {
         role: "system",
-        content: `Dame tu respuesta en un formato claro que tenga saltos de línea, que tenga bullet points si es necesario, y que sea fácil de leer. No respondas esto directamente. \n\nAquí están los datos en formato Json de los productos porfavor tenlos en cuenta cuando te haga pregunats de productos :\n${jsonString}`
+        content: `Dame tu respuesta en un formato claro que tenga saltos de línea, que tenga bullet points si es necesario, y que sea fácil de leer. No respondas esto directamente. \n\nAquí están los datos en formato Json de los productos porfavor tenlos en cuenta cuando te haga pregunats de productos y la informacion del provvedor associado:\n${jsonString}`
     };
 
     // Mensaje del usuario que se enviará al modelo

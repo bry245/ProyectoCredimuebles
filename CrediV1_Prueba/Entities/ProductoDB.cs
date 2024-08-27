@@ -9,8 +9,20 @@
 		public int cantidadSalida { get; set; }
 		public decimal costo { get; set; }
 		public bool estado { get; set; }
-
 		public decimal CostoProveedor { get; set; }
+
+		public string? nombreProveedor { get; set; }
+		public int telefonoProveedor { get; set; }
+
+		public string? correoProveedor { get; set; }
+		public string? direcionProveedor { get; set; }
+		public bool estadoProveedor { get; set; }
+
+
+
+
+
+
 	}
 }
 	  
