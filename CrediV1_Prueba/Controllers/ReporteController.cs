@@ -1,4 +1,5 @@
-﻿using CrediV1_Prueba.Interfaces;
+﻿using CrediV1_Prueba.Entities;
+using CrediV1_Prueba.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 
@@ -9,8 +10,12 @@ namespace CrediV1_Prueba.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.VentasMensuales = await _reportService.VentasMensuales();
+ 
+
             ViewBag.VentasDelDia = await _reportService.VentasDia();
-            ViewBag.AbonoSemanal = await _reportService.ObtenerAbonosSemanales();// Asegúrate de usar await aquí
+
+            ViewBag.AbonoSemanal = await _reportService.ObtenerAbonosSemanales();
+            // Asegúrate de usar await aquí
             ViewBag.VentasPorMetodoPagoCantidad = await _reportService.VentasPorMetodoPagoCantidad();
             ViewBag.VentasPorMetodoPago = await _reportService.VentasPorMetodoPago();
 
@@ -28,6 +33,27 @@ namespace CrediV1_Prueba.Controllers
                     Console.WriteLine(ventas.TotalVentas);
                 }
                 return Json(ventasMensuales);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (you can use any logging framework)
+                Console.WriteLine($"Error: {ex.Message}");
+                // Return a proper error response
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ObtenerAbonosMensuales()
+        {
+            try
+            {
+                var abonosMensuales = await _reportService.ObtenerAbonosMensuales();
+                foreach (var ventas in abonosMensuales)
+                {
+                    Console.WriteLine(ventas.TotalVentas);
+                }
+                return Json(abonosMensuales);
             }
             catch (Exception ex)
             {

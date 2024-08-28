@@ -33,14 +33,21 @@ namespace CrediV1_Prueba.Controllers
 
             try
             {
+
                 int pageSize = 31; // Número de elementos por página
-                var salidas = await _cajaModel.ListarCajasDiarias(page, pageSize);
-                CajaEnt datosCajas = _cajaModel.ObtenerDatosCaja();
+                var cajasDiarias = await _cajaModel.ListarCajasDiarias(page, pageSize);
+                var datosCajas = _cajaModel.ObtenerDatosCaja();
+
+                foreach(var dat in cajasDiarias)
+                {
+                    Console.WriteLine("DATPS CAJA", dat.ganancia);
+             
+                }
 
                 ViewBag.datosCajas = datosCajas;
 
 
-                return View(salidas);
+                return View(cajasDiarias);
             }
             catch (Exception ex)
             {
@@ -107,7 +114,6 @@ namespace CrediV1_Prueba.Controllers
 
         [Authorize(Roles = "Administrador,Gerente,Vendedor")]
         [HttpPost]
-
         public IActionResult EliminarGasto([FromBody] CajaEnt datos)
         {
             if (datos == null)

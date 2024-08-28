@@ -47,10 +47,8 @@
 }
 
 <div class="container">
-    <div class="container mt-4">
+    <div class="mt-4">
         <div class="d-flex justify-content-between">
-
-
             <ul class="nav nav-pills mb-3" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active"
@@ -63,6 +61,15 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link"
+                       id="ex1-tab-4"
+                       href="#ex1-pills-4"
+                       role="tab"
+                       aria-controls="ex1-pills-4"
+                       aria-selected="false"
+                       data-mdb-toggle="pill">Pedidos Recibidos</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link"
                        id="ex1-tab-2"
                        href="#ex1-pills-2"
                        role="tab"
@@ -70,25 +77,231 @@
                        aria-selected="false"
                        data-mdb-toggle="pill">Realizar Pedido</a>
                 </li>
-         
             </ul>
-            <!-- Pills navs -->
-      
-
-
-
-            </div>
+        </div>
     </div>
 
-
-
     <div class="tab-content" id="ex1-content">
+        <!-- Tab 1: Pedidos en Curso -->
         <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-            <div class="container mt-4">
-                <table id="productosTable" class="table  table-bordered" style="width:100%">
+            <div class="mt-4">
+                <table id="productosTable" class="table table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>Fecha de encargo</th>
+                            <th>Estado</th>
+                            <th>Precio Total</th>
+                            <th>Detalles</th>
+                            <th>Recibir Pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @foreach (var pedido in ViewBag.Pedidos)
+                        {
+
+
+                            @if (pedido.estado == "En Curso" )
+                            {
+                                <tr>
+                                    <td>@pedido.fechaEncargo</td>
+                                    <td>@pedido.estado</td>
+                                    <td>@pedido.montoTotalPedido</td>
+                                    <input type="hidden" class="idDetallePedido" name="idDetallePedido" value="@pedido.idPedido" />
+                                    <td>
+                                        <!-- Botón para desplegar el acordeón -->
+                                        <button type="button" class="btn btn-primary" data-mdb-toggle="collapse" data-mdb-target="#collapse_@pedido.idPedido" aria-expanded="false" aria-controls="collapse_@pedido.idPedido">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <a href="@Url.Action("EditarPedido", "Inventario", new { id = pedido.idPedido })" class="btn btn-danger">Ver más <i class="fa fa-list"></i></a>
+                                    </td>
+                                    <td>
+                                        <button onclick="enviarIdDetallePedido(@pedido.idPedido)" class="btn btn-success">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+
+                                    </td>
+                                </tr>
+                                <!-- Fila con la tabla anidada, ignorada por DataTables -->
+                                <tr id="collapse_@pedido.idPedido" class="collapse">
+                                    <td colspan="4">
+                                        <!-- Tabla de detalles del pedido dentro del acordeón -->
+                                        <table class="table table-striped mt-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha encargado</th>
+                                                    <th>Fecha recibido</th>
+                                                    <th>Producto</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Monto Unitario</th>
+                                                    <th>Monto Total</th>
+                                                    <th>Proveedor</th>
+                                                    <th>Confirmar Pedido</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var detalle in ViewBag.PedidosDetalles)
+                                                {
+                                                   
+
+                                              
+                                                    @if (detalle.idPedido == pedido.idPedido)
+                                                    {
+
+                                                    
+                                                        <tr>
+
+
+                                                            <td>@detalle.fechaEncargo</td>
+                                                            @if (@detalle.fechaRecibido == null)
+                                                            {
+                                                                <td>Aún no recibido</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@detalle.fechaRecibido</td>
+                                                            }
+                                                            <td>@detalle.nombreProducto</td>
+                                                            <td>@detalle.cantidad</td>
+                                                            <td>@detalle.montoUnitario</td>
+                                                            <td>@detalle.montoTotalProducto</td>
+                                                            <td>@detalle.nombreProveedor</td>
+                                                            @if (detalle.fechaRecibido == null)
+                                                            {
+                                                                <td style="text-align:center">
+
+                                                                    <button onclick="enviarNotificacion('@detalle.nombreProveedor', '@detalle.correoProveedor')" class="btn btn-success">
+                                                                        <i class="fas fa-envelope"></i>
+                                                                    </button>
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="text-align:center">
+                                                                    <button disabled class="btn btn-success">
+                                                                        <i class="fas fa-check"></i>
+                                                                    </button>
+                                                                    <button onclick="enviarNotificacion('@detalle.nombreProveedor', '@detalle.correoProveedor')" class="btn btn-success">
+                                                                        <i class="fas fa-envelope"></i>
+                                                                    </button>
+                                                                </td>
+                                                            }
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                            
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab 2: Realizar Pedido -->
+        <div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-lg-8 col-xl-7">
+                        <div class="card shadow-2-strong mb-5" style="border-radius: 16px;">
+                            <div class="card-body p-4">
+                                <div class="form-outline mb-5 text-center">
+                                    <h2>Crear pedido</h2>
+                                </div>
+                                <h4>Datos del pedido</h4>
+                                <div class="form-outline mb-5">
+                                    <label for="cedulaCliente">Empleado</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                        </div>
+                                        <input type="text" id="idEmpleado" name="idEmpleado" onkeyup="ConsultarNombre()" class="form-control form-control-lg" readonly value="@Context.Session.GetString("Nombre")" />
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-3">
+                                    <label for="costoTotal">Costo Total</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                        </div>
+                                        <input readonly type="text" class="form-control form-control-lg" id="costoTotal" placeholder="Costo Total" />
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-5">
+                                    <label for="nombreCliente">Nombre Proveedor</label>
+                                </div>
+                                <div id="proveedorInputs" class="form-outline mb-5">
+                                    <!-- Aquí se agregarán los inputs de proveedores -->
+                                </div>
+                                <h4>Artículos</h4>
+                                <div class="input-group col-lg-4 mb-3">
+                                    <label for="buscarProducto">Buscar Producto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto">
+                                    </div>
+                                </div>
+                                <div id="resultadosProductos"></div>
+                                <div class="row">
+                                    <div class="col">
+                                        <table id="tablaProductos" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Producto</th>
+                                                    <th>Cantidad</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="productosSeleccionados">
+                                                <!-- Aquí se agregarán los productos seleccionados -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="@Url.Action("Index","Salidas")" class="btn btn-primary">Volver</a>
+                                        <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Salida</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag.StockRecomendaciones != null && ((IEnumerable<object>)ViewBag.StockRecomendaciones).Any())
+                    {
+                        <div class="col-lg-4 col-xl-3">
+                            <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px; background-color: #f8d7da;">
+                                <div class="card-body p-4">
+                                    <div class="form-outline mb-5 mb-xl-4 text-center">
+                                        <h4 style="color: #721c24;">Recomendacion de Stock</h4>
+                                    </div>
+                                    <p style="color: #721c24;">Los siguientes productos tienen bajo stock:</p>
+                                    <ul style="color: #721c24;">
+                                        @foreach (var producto in ViewBag.StockRecomendaciones)
+                                        {
+                                            <li>@producto.NombreProducto - Recomendación en base al mes pasado: @producto.cantidadStock</li>
+                                        }
+                                    </ul>
+                                    <p style="color: #721c24;">Se recomienda pedir más unidades para evitar quedarse sin stock.</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Pedidos Recibidos -->
+        <div class="tab-pane fade" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+            <div class="mt-4">
+                <table id="productosRecibidosTable" class="table table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Fecha de encargo</th>
+                             <th>Encargado por  </th>
                             <th>Estado</th>
                             <th>Precio Total</th>
                             <th>Detalles</th>
@@ -97,250 +310,80 @@
                     <tbody>
                         @foreach (var pedido in ViewBag.Pedidos)
                         {
-                            <tr>
-                                <td>@pedido.fechaEncargo</td>
-                                <td>@pedido.estado</td>
-                                <td>@pedido.montoTotalPedido</td>
-                                <td>
-                                    <!-- Botón para desplegar el acordeón -->
-                                    <button type="button" class="btn " data-mdb-toggle="collapse" data-mdb-target="#collapse_@pedido.idPedido" aria-expanded="false" aria-controls="collapse_@pedido.idPedido">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <a href="@Url.Action("EditarPedido", "Inventario", new { id = pedido.idPedido })" class="btn btn-danger">Ver más  <i class="fa fa-list"></i></a>
-                                </td>
-                            </tr>
-                            <!-- Fila con la tabla anidada, ignorada por DataTables -->
-                            <tr id="collapse_@pedido.idPedido" class="collapse">
-                                <td colspan="4" class="dtr-hidden">
-                                    <!-- Clase para ocultar a DataTables -->
-                                    <!-- Tabla de detalles del pedido dentro del acordeón -->
-                                    <table class="table table-striped mt-3">
-                                        <thead>
-                                            <tr>
-                                                <th>Fecha encargado</th>
-                                                <th>Fecha recibido</th>
-                                                <th>Producto</th>
-                                                <th>Cantidad</th>
-                                                <th>Monto Unitario</th>
-                                                <th>Monto Total</th>
-                                                <th>Proveedor</th>
-                                                <th>Confirmar Pedido</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var detalle in ViewBag.PedidosDetalles)
-                                            {
-                                                @if (detalle.idPedido == pedido.idPedido)
+                            if (pedido.estado == "Recibido")
+                            {
+                                <tr>
+                                    <td>@pedido.fechaEncargo</td>
+                                     <td>@pedido.nombreEmpleado</td>
+                                    <td>@pedido.estado</td>
+                                    <td>@pedido.montoTotalPedido</td>
+                                    <td>
+                                        <button  type="button" class="btn btn-primary" data-mdb-toggle="collapse" data-mdb-target="#collapse_@pedido.idPedido" aria-expanded="false" aria-controls="collapse_@pedido.idPedido">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button disabled class="btn btn-success">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Fila colapsable con los detalles del pedido -->
+                                <tr id="collapse_@pedido.idPedido" class="collapse">
+                                    <td colspan="5">
+                                        <!-- Cambié a 5 columnas -->
+                                        <table class="table table-striped mt-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha encargado</th>
+                                                    <th>Fecha recibido</th>
+                                                    <th>Recibido Por</th>
+                                                    <th>Producto</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Monto Unitario</th>
+                                                    <th>Monto Total</th>
+                                                    <th>Proveedor</th>
+                                                    <th>Confirmar Pedido</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var detalle in ViewBag.PedidosDetalles)
                                                 {
-                                                    <tr>
-                                                        <input type="hidden" class="idDetallePedido" name="idDetallePedido" value="@detalle.idDetalle" />
-
-                                                        <td>@detalle.fechaEncargo</td>
-                                                        @if (@detalle.fechaRecibido == null)
-                                                        {
-                                                            <td>Aún no recibido</td>
-                                                        }
-                                                        else
-                                                        {
+                                                    if (detalle.idPedido == pedido.idPedido)
+                                                    {
+                                                        <tr>
+                                                            <td>@detalle.fechaEncargo</td>
                                                             <td>@detalle.fechaRecibido</td>
-                                                        }
-                                                        <td>@detalle.nombreProducto</td>
-                                                        <td>@detalle.cantidad</td>
-                                                        <td>@detalle.montoUnitario</td>
-                                                        <td>@detalle.montoTotalProducto</td>
-                                                        <td>@detalle.nombreProveedor</td>
-                                                        @if (detalle.fechaRecibido == null)
-                                                        {
-                                                            <td style="text-align:center">
-                                                                <!-- Pasar el botón a la función -->
-                                                                <button onclick="enviarIdDetallePedido(this)" class="btn btn-success">
-                                                                    <i class="fas fa-check"></i>
-                                                                </button>
-
-                                                                <button onclick="enviarNotificacion('@detalle.nombreProveedor', '@detalle.correoProveedor')" class="btn btn-success">
-                                                                    <i class="fas fa-envelope"></i>
-                                                                </button>
-                                                            </td>
-                                                        }
-                                                        else
-                                                        {
+                                                            <td>@detalle.nombreEmpleado</td>
+                                                            <td>@detalle.nombreProducto</td>
+                                                            <td>@detalle.cantidad</td>
+                                                            <td>@detalle.montoUnitario</td>
+                                                            <td>@detalle.montoTotalProducto</td>
+                                                            <td>@detalle.nombreProveedor</td>
                                                             <td style="text-align:center">
                                                                 <button disabled class="btn btn-success">
                                                                     <i class="fas fa-check"></i>
                                                                 </button>
-
                                                                 <button onclick="enviarNotificacion('@detalle.nombreProveedor', '@detalle.correoProveedor')" class="btn btn-success">
                                                                     <i class="fas fa-envelope"></i>
                                                                 </button>
                                                             </td>
-                                                        }
-                                                    </tr>
+                                                        </tr>
+                                                    }
                                                 }
-                                            }
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
                         }
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
-
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                        
-                </h2>
-               
-            </div>
-         
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-           
-        </div>
-        <div class="tab-pane fade"
-             id="ex1-pills-2"
-             role="tabpanel"
-             aria-labelledby="ex1-tab-2">
-
-
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-xl-7">
-                    <!-- Aumenté el tamaño de la columna -->
-                    <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-                        <div class="card-body p-4">
-                            <div class="form-outline mb-5 mb-xl-4 text-center">
-                                <h2>Crear pedido</h2>
-                            </div>
-                            <h4>Datos del pedido</h4>
-                            <div class="form-outline mb-5 mb-xl-4">
-                                <label for="cedulaCliente">Empleado</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                                    </div>
-                                    <input type="text" id="idEmpleado" name="idEmpleado" onkeyup="ConsultarNombre()" class="form-control form-control-lg" readonly value="@Context.Session.GetString("Nombre")" />
-                                </div>
-                            </div>
-                            <div class="form-outline mb-3 mb-xl-4">
-                                <label for="costoTotal">Costo Total</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                                    </div>
-                                    <input readonly type="text" class="form-control form-control-lg" id="costoTotal" placeholder="Costo Total" />
-                                </div>
-                            </div>
-                            <div class="form-outline mb-5 mb-xl-4">
-                                <label for="nombreCliente">Nombre Proveedor</label>
-                                <div class="input-group">
-                                </div>
-                            </div>
-                            <div id="proveedorInputs" class="form-outline mb-5 mb-xl-4">
-                                <!-- Aquí se agregarán los inputs de proveedores -->
-                            </div>
-                            <h4>Artículos</h4>
-                            <div class="input-group col-lg-4 mb-3">
-                                <label for="buscarProducto">Buscar Producto</label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                    <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" aria-label="Buscar Producto" aria-describedby="buscarButton">
-                                </div>
-                            </div>
-                            <div id="resultadosProductos"></div>
-                            <div class="row">
-                                <div class="col">
-                                    <table id="tablaProductos" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Producto</th>
-                                                <th>Cantidad</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="productosSeleccionados">
-                                            <!-- Aquí se agregarán los productos seleccionados -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <a href="@Url.Action("Index","Salidas")" class="btn btn-primary">Volver</a> <!-- Agregué la clase btn-primary -->
-                                    <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Salida</button> <!-- Agregué la clase btn-success -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @if (ViewBag.StockRecomendaciones != null && ((IEnumerable<object>)ViewBag.StockRecomendaciones).Any())
-                {
-                    <div class="col-lg-4 col-xl-3">
-                        <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px; background-color: #f8d7da;">
-                            <div class="card-body p-4">
-                                <div class="form-outline mb-5 mb-xl-4 text-center">
-                                    <h4 style="color: #721c24;">Recomendacion de Stock</h4>
-                                </div>
-                                <p style="color: #721c24;">Los siguientes productos tienen bajo stock:</p>
-                                <ul style="color: #721c24;">
-                                    @foreach (var producto in ViewBag.StockRecomendaciones)
-                                    {
-                                        <li>@producto.NombreProducto - Recomendación en base al mes pasado: @producto.cantidadStock</li>
-                                    }
-                                </ul>
-                                <p style="color: #721c24;">Se recomienda pedir más unidades para evitar quedarse sin stock.</p>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-
-
-            </div>
-        </div>
-
- 
-    </div>
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-        </div>
-        <div class="tab-pane fade"
-             id="ex1-pills-3"
-             role="tabpanel"
-             aria-labelledby="ex1-tab-3">
-            Tab 3 content
-        </div>
-    </div>
-
 </div>
+
 
 <!-- Pills content -->
 @section Scripts {
@@ -422,63 +465,80 @@
         }
     </script>
 
-
     <script>
-        function enviarIdDetallePedido(button) {
-            // Encuentra la fila más cercana al botón clicado
-            const row = button.closest('tr');
-            // Busca el input de tipo hidden dentro de esa fila
-            const idDetalle = row.querySelector('.idDetallePedido').value;
+        function enviarIdDetallePedido(idPedido,email) {
+            // Filtrar los detalles del pedido correspondiente
+            var detallesPedido = @Html.Raw(Json.Serialize(ViewBag.PedidosDetalles));
 
-            console.log(idDetalle);  // Para verificar si estás obteniendo la ID correcta
+            var detallesFiltrados = detallesPedido.filter(detalle => detalle.idPedido === idPedido);
 
-            // Crear el objeto RegistrarPedidoDTO correctamente
-            const ent = {
-                idDetalle: idDetalle
-            };
+            let productosHtml = '';
+            detallesFiltrados.forEach(producto => {
+                productosHtml += `
+                    <div style="margin-bottom: 10px;">
+                        <input type="checkbox" id="producto_${producto.idDetalle}" name="producto_${producto.idDetalle}" value="${producto.idDetalle}">
+                        <label for="producto_${producto.idDetalle}">${producto.nombreProducto}</label>
+                        <input type="text" id="observacion_${producto.idDetalle}" name="observacion_${producto.idDetalle}" placeholder="Observaciones" style="margin-left: 10px;">
+                    </div>
+                `;
+            });
 
-            fetch('/Inventario/RecibirProductoPedido', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ent)
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Respuesta del servidor:', data);
-
-                    Swal.fire({
-                        title: 'Éxito',
-                        text: 'ID enviada correctamente',
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar'
+            Swal.fire({
+                title: 'Confirmar productos recibidos',
+                html: productosHtml,
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'Cancelar',
+                preConfirm: () => {
+                    let confirmaciones = [];
+                    detallesFiltrados.forEach(producto => {
+                        const idProducto = producto.idDetalle;
+                        const recibido = document.getElementById(`producto_${idProducto}`).checked;
+                        const estado = recibido ? 'Recibido' : 'NoRecibido'; // Determinar el estado basado en el checkbox
+                        const observaciones = document.getElementById(`observacion_${idProducto}`).value || null;
+                        confirmaciones.push({ idPedido, idDetalle: idProducto, observaciones, Estado: estado });
                     });
-                    location.reload();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        title: 'Error',
-                        text: error.message,
-                        icon: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                });
+                    return confirmaciones;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Enviar la solicitud al backend
+                    fetch('/Inventario/RecibirProductoPedido', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(result.value)
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Error en la solicitud');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            Swal.fire({
+                                title: 'Éxito',
+                                text: 'Pedido actualizado correctamente',
+                                icon: 'success',
+                                confirmButtonText: 'Aceptar'
+                            }).then(() => {
+                                location.reload(); // Recargar la página después de confirmar
+                            });
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: 'Error',
+                                text: error.message,
+                                icon: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        });
+                }
+            });
         }
 
-
-
-    
     </script>
-
-
-
 
     <script>
 

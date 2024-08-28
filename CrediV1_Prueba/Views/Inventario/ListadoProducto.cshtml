@@ -88,10 +88,12 @@
             <a href="@Url.Action("AgregarProducto", "Inventario")" class="btn btn-danger" type="submit" id="button-addon2">
                 <i class="fa fa-plus"></i> Agregar Producto
             </a>
-
-            <a class="btn btn-warning" type="button" href="@Url.Action("Pedidos","Inventario")" id="alertaBajoStockBtn">
-                <i class="fa" style="margin-right: 5px;"></i> Gestion pedidos
-            </a>
+            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Gerente"){
+                <a class="btn btn-warning" type="button" href="@Url.Action("Pedidos","Inventario")" id="alertaBajoStockBtn">
+                    <i class="fa" style="margin-right: 5px;"></i> Gestion pedidos
+                </a>
+            }
+            
 
 
 

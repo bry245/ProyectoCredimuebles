@@ -21,7 +21,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                             </div>
-                            <input type="text" id="idPedido" name="idEmpleado" class="form-control form-control-lg" readonly value="@ViewBag.idPedido" />
+                            <input type="hidden" id="idPedido" name="idEmpleado" class="form-control form-control-lg" readonly value="@ViewBag.idPedido" />
                             <input type="hidden" id="idEmpleado" name="idEmpleado" class="form-control form-control-lg" readonly value="@ViewBag.idEmpleado" />
                             <input type="text" id="nombreEmpleado" name="idEmpleado" class="form-control form-control-lg" readonly value="@ViewBag.NombreEmpleadoPedido" />
                         </div>
@@ -224,7 +224,13 @@
                 var idProveedor = $(this).data('proveedor-id');
                 var idDetalle = $(this).data('detalle-id'); // Obtener idDetalle
                 var empleadoRecibido = $(this).data('empleado-id'); // Obtener empleadoRecibido
-                var fechaRecibido = $(this).data('fecha-recibido'); // Obtener fechaRecibido
+                var fechaRecibido = $(this).data('fecha-recibido');
+                
+                if (fechaRecibido == null) {
+                    fechaRecibido = 'INVALID_DATE';
+                }
+
+                // Obtener fechaRecibido
 
                 var producto = {
                     idPedido: idPedido, // Agregar idPedido
@@ -235,7 +241,7 @@
                     montoUnitario: parseFloat(precio),
                     montoTotalProducto: parseFloat(total),
                     montoTotalPedido: parseFloat($('#costoTotal').val()),
-                    fechaRecibido: fechaRecibido, // Agregar fechaRecibido
+                    
                     empleadoRecibido: empleadoRecibido // Agregar empleadoRecibido
                 };
                 productosSeleccionados.push(producto);

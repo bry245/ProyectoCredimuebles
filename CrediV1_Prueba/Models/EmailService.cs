@@ -1,18 +1,157 @@
-﻿using CrediV1_Prueba.Interfaces;
+﻿using CrediV1_Prueba.Entities;
+using CrediV1_Prueba.Interfaces;
 using Microsoft.Extensions.Configuration;
+using System.Configuration;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.IO.Image;
+using iText.Kernel.Colors;
 
 namespace CrediV1_Prueba.Models
 {
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _configuration;
+        private readonly IHostEnvironment _host;
 
-        public EmailService(IConfiguration configuration)
+        public EmailService(IConfiguration configuration, IHostEnvironment host)
         {
             _configuration = configuration;
+            _host = host;
+        }
+
+        public byte[] GenerarPDFPedido(IEnumerable<PedidoEnt> productos, string nombreproveedor)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                var writer = new PdfWriter(memoryStream);
+                var pdf = new PdfDocument(writer);
+                var document = new Document(pdf);
+
+                // Agregar el logo de la empresa
+                string logoPath = Path.Combine(_host.ContentRootPath, "wwwroot", "images", "logoc2.PNG");
+                if (File.Exists(logoPath))
+                {
+                    var imageData = ImageDataFactory.Create(logoPath);
+                    var image = new Image(imageData).SetFixedPosition(500, 750).ScaleToFit(100, 100);
+                    document.Add(image);
+                }
+                else
+                {
+                    // Optional: log or handle the case where the logo is not found
+                    Console.WriteLine($"Logo not found at: {logoPath}");
+                }
+
+                // Encabezado de la factura
+                document.Add(new Paragraph("PEDIDO")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(20)
+                    .SetBold());
+
+                // Información del proveedor
+                var primerProducto = productos.First();
+                document.Add(new Paragraph($"Proveedor: {primerProducto.nombreProveedor}")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(12)
+                    .SetBold());
+                document.Add(new Paragraph($"Teléfono: {primerProducto.Telefono}")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(12));
+                document.Add(new Paragraph($"Dirección: {primerProducto.direccionProveedor}")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(12));
+
+                // Información del empleado
+                document.Add(new Paragraph($"Empleado: {primerProducto.nombreEmpleado}")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(12)
+                    .SetBold());
+                document.Add(new Paragraph($"Cédula: {primerProducto.Cedula}")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(12));
+
+                // Espacio entre secciones
+                document.Add(new Paragraph("\n"));
+
+                // Información del pedido
+                var infoPedido = new Table(UnitValue.CreatePercentArray(new float[] { 1, 1 })).UseAllAvailableWidth();
+                infoPedido.AddCell(new Paragraph($"Nº DE FACTURA\nES-001").SetFontSize(10));
+                infoPedido.AddCell(new Paragraph($"FECHA\n{DateTime.Now:dd.MM.yyyy}").SetFontSize(10));
+                document.Add(infoPedido);
+
+                document.Add(new Paragraph("\n"));
+
+                // Tabla de productos
+                var table = new Table(UnitValue.CreatePercentArray(new float[] { 1, 4, 2, 2 })).UseAllAvailableWidth();
+                table.SetBackgroundColor(new DeviceRgb(240, 240, 240));
+
+                table.AddHeaderCell(new Cell().Add(new Paragraph("CANT.")).SetBackgroundColor(new DeviceRgb(200, 200, 200)).SetBold());
+                table.AddHeaderCell(new Cell().Add(new Paragraph("DESCRIPCIÓN")).SetBackgroundColor(new DeviceRgb(200, 200, 200)).SetBold());
+                table.AddHeaderCell(new Cell().Add(new Paragraph("PRECIO UNITARIO")).SetBackgroundColor(new DeviceRgb(200, 200, 200)).SetBold());
+                table.AddHeaderCell(new Cell().Add(new Paragraph("IMPORTE")).SetBackgroundColor(new DeviceRgb(200, 200, 200)).SetBold());
+
+                foreach (var producto in productos)
+                {
+                    table.AddCell(new Cell().Add(new Paragraph(producto.cantidad.ToString())));
+                    table.AddCell(new Cell().Add(new Paragraph(producto.nombreProducto ?? "N/A")));
+                    table.AddCell(new Cell().Add(new Paragraph(producto.montoUnitario.ToString("C"))));
+                    table.AddCell(new Cell().Add(new Paragraph(producto.montoTotalProducto.ToString("C"))));
+                }
+
+                document.Add(table);
+                document.Add(new Paragraph("\n"));
+
+                // Total del pedido
+                float totalPedido = (float)(productos.FirstOrDefault()?.montoTotalPedido);
+                document.Add(new Paragraph($"TOTAL: {totalPedido.ToString("C")}")
+                    .SetTextAlignment(TextAlignment.RIGHT)
+                    .SetFontSize(16)
+                    .SetBold());
+
+                // Condiciones de pago
+                document.Add(new Paragraph("\nCONDICIONES Y FORMA DE PAGO\nEl pago se realizará en un plazo de 15 días.")
+                    .SetFontSize(10)
+                    .SetBold()
+                    .SetFontColor(DeviceRgb.RED));
+
+                document.Close();
+                return memoryStream.ToArray();
+            }
+        }
+
+
+
+
+
+
+
+        public void SendNotificationAdministradoresAsync(string toEmail, string message, string nombreCompletoProveedor, byte[] pdfContent)
+        {
+            string cuenta = _configuration.GetSection("Smtp:User").Value!;
+            string contrasenna = _configuration.GetSection("Smtp:Password").Value!;
+
+            MailMessage messages = new MailMessage();
+            messages.From = new MailAddress(cuenta);
+            messages.To.Add(new MailAddress(toEmail));
+            messages.Subject = "Pedido Recibido";
+            messages.Body = message;
+            messages.Priority = MailPriority.Normal;
+            messages.IsBodyHtml = true;
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.Credentials = new System.Net.NetworkCredential(cuenta, contrasenna);
+            client.EnableSsl = true;
+            using (var stream = new MemoryStream(pdfContent))
+            {
+                Attachment pdfAttachment = new Attachment(stream, "DetallesPedido.pdf", "application/pdf");
+                messages.Attachments.Add(pdfAttachment);
+                client.Send(messages);
+            }
         }
 
         public async Task SendNotificationEmailAsync(string toEmail, string message, string nombreCompletoUsuario)

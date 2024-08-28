@@ -5,6 +5,8 @@ using CrediV1_Prueba.Interfaces;
 using EllipticCurve.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using System.Text;
 
 namespace CrediV1_Prueba.Controllers;
 
@@ -21,14 +23,15 @@ public class InventarioController : Controller
         private readonly IInventarioModel _inventarioModel;
         private readonly ISalidasModel _salidasModel;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IEmailService _emailService;   
+        private readonly IEmailService _emailService;
+        private readonly IHostEnvironment _host;
 
 
     public InventarioController(IHttpClientFactory clientFactory, 
         ICategoria categoriaModel, IConfiguration configuration, 
         IProducto productoModel, IProveedoresModel proveedoresModel,
         IInventarioModel inventarioModel, ISalidasModel salidsaModel,
-        IHttpContextAccessor httpContextAccessor, IEmailService emailService)
+        IHttpContextAccessor httpContextAccessor, IEmailService emailService, IHostEnvironment host)
 		{
 			_configuration = configuration;
 			_clientFactory = clientFactory;
@@ -38,8 +41,10 @@ public class InventarioController : Controller
            _proveedoresModel = proveedoresModel;
             _inventarioModel = inventarioModel;
             _salidasModel = salidsaModel;
-             _httpContextAccessor =  httpContextAccessor;
-         _emailService = emailService;
+         _httpContextAccessor =  httpContextAccessor;
+         _emailService = emailService; 
+         _host = host;
+
     }
 
 
@@ -55,7 +60,7 @@ public class InventarioController : Controller
     }
 
 
-
+    [Authorize(Roles = "Administrador,Gerente")]
     [HttpGet]
     public async Task<IActionResult> Pedidos()
     {
@@ -66,6 +71,22 @@ public class InventarioController : Controller
 
             var pedidos = await _inventarioModel.ConsultarPedidos();
             var pedidosDetalles = await _inventarioModel.ConsultarPedidosDetalles();
+            var pedidosDetallesEnCurso = await _inventarioModel.ConsultarPedidosDetallesEnCurso();
+
+
+            foreach (var loc in pedidos)
+            {
+      
+
+                foreach (var asd in pedidosDetalles)
+                {
+             
+                }
+            }
+
+
+
+         
 
             ViewBag.StockRecomendaciones = await _inventarioModel.ConsultarRecomendacionestock();
             ViewBag.Vendedores = _salidasModel.ConsultarVendedores();
@@ -73,6 +94,7 @@ public class InventarioController : Controller
             ViewBag.Productos = productos;
             ViewBag.Pedidos = pedidos;
             ViewBag.PedidosDetalles = pedidosDetalles;
+            ViewBag.pedidosDetallesEnCurso = pedidosDetallesEnCurso;
 
             return View();
         }
@@ -104,7 +126,7 @@ public class InventarioController : Controller
         }
     }
 
-
+    [Authorize(Roles = "Administrador,Gerente")]
     [HttpPost]
     public async Task<IActionResult> RegistrarPedido([FromBody] List<RegistrarPedidoDTO> productos)
     {
@@ -128,14 +150,10 @@ public class InventarioController : Controller
             };
 
             int idPedidoRegistrado = _inventarioModel.RegistrarPedido(pedido);
-       
 
 
             foreach (var producto in productos)
             {
-
-          
-
                 RegistrarPedidoDTO pedidoDetalle = new RegistrarPedidoDTO
                 {
                     idPedido = idPedidoRegistrado,
@@ -145,6 +163,9 @@ public class InventarioController : Controller
                     montoUnitario = producto.montoUnitario,
                     montoTotalProducto = producto.montoTotalProducto
                 };
+
+                // Log de los datos que se están enviando
+                Console.WriteLine($"idPedido: {pedidoDetalle.idPedido}, idProducto: {pedidoDetalle.idProducto}, idProveedor: {pedidoDetalle.idProveedor}, cantidad: {pedidoDetalle.cantidad}, montoUnitario: {pedidoDetalle.montoUnitario}, montoTotalProducto: {pedidoDetalle.montoTotalProducto}");
 
                 _inventarioModel.RegistrarPedidoDetalle(pedidoDetalle);
             }
@@ -158,34 +179,76 @@ public class InventarioController : Controller
         }
     }
 
+
+
+    [Authorize(Roles = "Administrador,Gerente")]
     [HttpPost]
-    public async Task<IActionResult> RecibirProductoPedido([FromBody] ConfirmarPedidoDTO pedido)
+    public async Task<IActionResult> RecibirProductoPedido([FromBody] List<ConfirmarPedidoDTO> pedidos)
     {
-        Console.WriteLine("IDDETALLEEEE"+pedido.idDetalle);
+        int idUsuario = (int?)HttpContext.Session.GetInt32("idUsuario") ?? 0;
 
-        int idUsuario = (int)HttpContext.Session.GetInt32("idUsuario");
-
-        if (idUsuario == null)
+        if (idUsuario == 0)
         {
-    
             return BadRequest(new { mensaje = "Usuario no autenticado" });
         }
-        Console.WriteLine("ASDASDAS"+pedido.idDetalle);
 
-
-        RegistrarPedidoDTO confirmar = new RegistrarPedidoDTO
+        foreach (var pedido in pedidos)
         {
-            idDetalle = pedido.idDetalle,
-            fechaRecibido = DateTime.UtcNow,
-            EmpleadoRecibido = idUsuario  
-        };
+            var confirmar = new RegistrarPedidoDTO
+            {
+                idDetalle = pedido.idDetalle,
+                idPedido = pedido.idPedido,
+                observaciones = pedido.observaciones,
+                EmpleadoRecibido = idUsuario,
+                fechaRecibido = DateTime.Now,
+                Estado = pedido.estadoProducto
+            };
+            string result = await _inventarioModel.ConfirmarPedido(confirmar);
+        }
 
-           string result = await _inventarioModel.ConfirmarPedido(confirmar);
+        int idPedido = (int)(pedidos.FirstOrDefault()?.idPedido);
 
-        return Ok(new { mensaje = "Pedido registrado con éxito" });
+        // Esperar la tarea para obtener la lista de productos
+        var productos = await _inventarioModel.ConsultarPedidoDetallesPorID(idPedido);
+
+        var correosAdmins = _inventarioModel.ConsultarCorreosAdministradores();
+
+        // Generar la lista de productos en formato HTML
+        var listaProductosHtml = new StringBuilder();
+        listaProductosHtml.Append("<ul>");
+        foreach (var producto in productos)
+        {
+            listaProductosHtml.Append($"<li>Producto: {producto.nombreProducto}, Observaciones: {producto.observaciones}</li>");
+        }
+        listaProductosHtml.Append("</ul>");
+
+        // Leer la plantilla HTML
+        string ruta = Path.Combine(_host.ContentRootPath, "FormatoCorreo.html");
+        var html = System.IO.File.ReadAllText(ruta);
+        var empleado = productos.FirstOrDefault()?.nombreEmpleado;
+
+        // Reemplazar los marcadores de posición en la plantilla HTML
+        html = html.Replace("@@Nombre", productos.FirstOrDefault()?.nombreProveedor);
+        html = html.Replace("@@Empleado", empleado);
+        html = html.Replace("@@productos", listaProductosHtml.ToString());
+        html = html.Replace("@@Contrasenna", "CONTRASEÑA_TEMPORAL");  // Cambia este valor si es necesario
+        html = html.Replace("@@Vencimiento", DateTime.Now.AddHours(24).ToString("dd/MM/yyyy HH:mm"));
+
+        // Enviar el correo a los administradores
+        var pdfContent = _emailService.GenerarPDFPedido(productos, productos.FirstOrDefault()?.nombreProveedor);
+
+        foreach (var correo in await correosAdmins)
+        {
+            _emailService.SendNotificationAdministradoresAsync(correo.correo, html, productos.FirstOrDefault()?.nombreProveedor, pdfContent);
+        }
+
+        return Ok(new { mensaje = "Pedidos actualizados correctamente" });
     }
 
 
+
+
+    [Authorize(Roles = "Administrador,Gerente")]
     [HttpGet]
     public async Task<IActionResult> EditarPedido(long id)
     {
@@ -240,7 +303,7 @@ public class InventarioController : Controller
 
 
 
-
+    [Authorize(Roles = "Administrador,Gerente")]
     [HttpPost]
     public async Task<IActionResult> ActualizarPedido([FromBody] List<RegistrarPedidoDTO> productos)
     {
@@ -261,8 +324,11 @@ public class InventarioController : Controller
             foreach (var producto in productos)
             {
 
+                Console.WriteLine($"ID Detalle: {producto.idDetalle}, ID PEDIDO: {producto.idPedido}, FECHA RECIB: {producto.fechaRecibido}," +
+                  $" monto total: {producto.montoTotalPedido}, EMPLEADO: {producto.EmpleadoRecibido}, Cantidad: {producto.cantidad}, Monto Unitario:" +
+                  $" {producto.montoUnitario}, Monto Total Producto: {producto.montoTotalProducto}");
 
-         
+
                 if (producto.idDetalle != 0)
                 {
                     _inventarioModel.ActualizarPedido(producto);
@@ -271,9 +337,9 @@ public class InventarioController : Controller
                 {
                     _inventarioModel.RegistrarPedidoDetalle(producto);
                 }
-                Console.WriteLine($"ID Detalle: {producto.idDetalle}, ID PEDIDO: {producto.idPedido}, FECHA RECIB: {producto.fechaRecibido}," +
-                    $" monto total: {producto.montoTotalPedido}, EMPLEADO: {producto.EmpleadoRecibido}, Cantidad: {producto.cantidad}, Monto Unitario:" +
-                    $" {producto.montoUnitario}, Monto Total Producto: {producto.montoTotalProducto}");
+
+
+
             }
 
       
@@ -451,7 +517,26 @@ public class InventarioController : Controller
         }
     }
 
+    [Authorize(Roles = "Administrador,Gerente")]
+    [HttpPost]
+    public IActionResult CancelarProducto([FromBody] RegistrarPedidoDTO ent)
+    {
+        try
+        {
 
+            Console.WriteLine($"{ent.idDetalle}");
+            _inventarioModel.CancelarPedido(ent);
+            // Lógica para cancelar el producto en el pedido
+            // Aquí puedes actualizar el estado del detalle del pedido o eliminarlo
+
+            return Ok(new { success = true });
+        }
+        catch (Exception ex)
+        {
+            // Manejar errores
+            return BadRequest(new { success = false, message = ex.Message });
+        }
+    }
 
 
     [Authorize(Roles = "Administrador,Gerente")]

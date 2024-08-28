@@ -19,6 +19,14 @@
             height: 300px;
             justify-content: center;
         }
+
+        .download-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        
     </style>
 }
 
@@ -26,7 +34,7 @@
     <div class="container mt-4">
         <div class="text-center">
             <div class="">
-                <h1>Inventario <span clsas="d-block">- Salidas</span></h1>
+                <h1> <span class="d-block">Reportes </span></h1>
             </div>
         </div>
         <div class="container">
@@ -79,7 +87,6 @@
                                                 </h2>
                                             }
                                         </h2>
-                                        </h2>
                                     </div>
                                     <div class="col-4 text-right">
                                         <span>Semanal<i class="fa fa-arrow-up"></i></span>
@@ -93,27 +100,38 @@
                         </div>
                     </div>
                 </div>
-         
-               
-                <div>
-                    <canvas id="GraficoBarras" style="height:600px;"></canvas>
-         
-                    <button class="btn-m" id="btnExportarPDF"><i class="fas fa-file-pdf"></i>  </button>
 
-                </div>
-           
+                <div class="container mt-4">
+                    <div class="row">
+                        <!-- Gráfico de Barras -->
+                        <div class="col-xl-12 col-lg-12 text-center mb-5">
+                            <h3>Ventas Mensuales</h3>
+                            <canvas id="GraficoBarras" style="height:600px;"></canvas>
+                            <div class="download-button mt-3">
+                                <button class="btn-lg btn-primary p-3" id="btnExportarPDF"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+                            </div>
+                        </div>
 
-                 
-                <div class="col-xl-12 col-lg-12">
-                
+                        <!-- Gráfico de Pie -->
+                        <div class="col-xl-12 col-lg-12 text-center mb-5">
+                            <h3>Metodos de pago Usados</h3>
                             <div class="card-statistic-5 p-5 d-flex justify-content-center bg-white">
                                 <canvas id="GraficoPie"></canvas>
                             </div>
-                    <button class="btn-m" id="btnExportarPiePDF"><i class="fas fa-file-pdf"></i>  </button>
-                         
-                       
-                  
-                </div>
+                            <div class="download-button mt-3">
+                                <button class="btn-lg btn-primary p-3" id="btnExportarPiePDF"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico de Abonos Mensuales -->
+                        <div class="col-xl-12 col-lg-12 text-center mb-5">
+                            <h3>Gráfico de Abonos Mensuales</h3>
+                            <canvas id="GraficoAbonosMensuales" style="height:600px;"></canvas>
+                            <div class="download-button mt-3">
+                                <button class="btn-lg btn-primary p-3" id="btnExportarPDFAbonos"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -223,6 +241,201 @@
                 .catch((error) => console.error("Error al cargar los datos:", error));
         });
 
+        let dataJson = []; // Variable global para almacenar los datos
+
+        // Función para obtener y procesar datos
+        fetch('ObtenerAbonosMensuales')
+            .then(response => response.json())
+            .then(fetchedData => { // Renombrado a 'fetchedData' para evitar conflicto
+                dataJson = fetchedData; // Asigna los datos a la variable global
+                console.log('Datos recibidos:', dataJson);
+
+                // Mapea los meses numerados a sus nombres correspondientes
+                const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+                // Filtrar los datos nulos
+                const datosValidos = dataJson.filter(item => item.mes !== null && item.anio !== null);
+
+                // Asigna los labels con el formato "Mes - NombreCuenta" (o "NombreCliente" si prefieres)
+                const labels = datosValidos.map(item => `${meses[item.mes - 1]} - ${item.nombreCuenta || 'Desconocido'}`);
+
+                // Asegúrate de que los valores de abonos son correctos
+                const TotalPagado = datosValidos.map(item => item.totalPagado);
+                const CantidadPagos = datosValidos.map(item => item.cantidadPagos);
+
+                const chartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Abonos',
+                            data: TotalPagado,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 205, 86, 0.7)',
+                                'rgba(1, 175, 64, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 159, 64, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 205, 86, 1)',
+                                'rgba(1, 175, 64, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Cantidad de Abonos',
+                            data: CantidadPagos,
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            type: 'line'
+                        }
+                    ]
+                };
+
+                const config = {
+                    type: 'bar', // Usa 'bar' o 'line' dependiendo del tipo de gráfico que prefieras
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    // Puedes agregar callbacks si es necesario
+                                }
+                            },
+                            legend: {
+                                onClick: (e, legendItem, legend) => {
+                                    const index = legendItem.datasetIndex;
+                                    const ci = legend.chart;
+                                    const meta = ci.getDatasetMeta(index);
+
+                                    // Toggle the visibility of the dataset
+                                    meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+                                    ci.update();
+                                }
+                            }
+                        },
+                        onClick: (e, elements) => {
+                            if (elements.length > 0) {
+                                const chart = elements[0].chart;
+                                const datasetIndex = elements[0].datasetIndex;
+                                const dataIndex = elements[0].index;
+                                const abonos = chart.data.datasets[datasetIndex].data[dataIndex];
+                                const mesCliente = chart.data.labels[dataIndex];
+                                alert(`Abonos en ${mesCliente}: ${abonos.toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}`);
+                            }
+                        },
+                        animation: {
+                            duration: 1500, // Duración de la animación
+                            easing: 'easeInOutBounce' // Tipo de animación
+                        }
+                    }
+                };
+
+                const canvasAbonos = document.getElementById("GraficoAbonosMensuales").getContext("2d");
+                const graficoAbonosMensuales = new Chart(canvasAbonos, config);
+            })
+            .catch(error => {
+                console.error("Error al cargar los datos:", error);
+            });
+
+        // Función para exportar los datos a PDF
+        function exportarPDFAbonos(datos) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Añadir el logo
+            const logoImg = new Image();
+            logoImg.src = '/images/logoc2.PNG'; // Ruta al logo
+
+            logoImg.onload = function () {
+                doc.addImage(logoImg, 'PNG', 150, 10, 50, 20);
+
+                // Título y encabezados
+                doc.setFontSize(22);
+                doc.setTextColor(40);
+                doc.text("Reporte de Abonos Mensuales", 10, 20);
+                doc.setLineWidth(0.5);
+                doc.line(10, 25, 200, 25);
+
+                doc.setFontSize(12);
+                doc.setTextColor(100);
+                doc.text("Informe detallado del desempeño financiero de los abonos mensuales", 10, 35);
+                doc.text("Fecha de generación: " + new Date().toLocaleDateString(), 10, 45);
+
+                // Crear la tabla
+                const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                const datosParaPDF = datos.map(item => ({
+                    dia: item.dia,
+                    mes: meses[item.mes - 1],
+                    anio: item.anio,
+                    nombreCliente: item.nombreCuenta || 'Desconocido',
+                    totalAbonado: item.totalPagado.toLocaleString('es-ES', { style: 'currency', currency: 'USD' }),
+                    cantidadAbonos: item.cantidadPagos
+                }));
+
+                doc.autoTable({
+                    startY: 60,
+                    head: [['Dia','Mes', 'Año', 'Cliente', 'Total Abonado', 'Cantidad de Abonos']],
+                    body: datosParaPDF.map(item => [
+                        item.dia,
+                        item.mes,
+                        item.anio,
+                        item.nombreCliente,
+                        item.totalAbonado,
+                        item.cantidadAbonos
+                    ]),
+                    styles: {
+                        fontSize: 10,
+                        cellPadding: 3,
+                        halign: 'center',
+                        valign: 'middle',
+                        fillColor: [240, 240, 240],
+                    },
+                    headStyles: {
+                        fillColor: [41, 128, 185],
+                        textColor: [255, 255, 255],
+                    },
+                    alternateRowStyles: {
+                        fillColor: [255, 255, 255],
+                    },
+                });
+
+                // Añadir pie de página
+                doc.setFontSize(10);
+                doc.text("Este informe es generado automáticamente por el sistema.", 10, doc.internal.pageSize.height - 20);
+                doc.text("Página " + doc.internal.getCurrentPageInfo().pageNumber, 180, doc.internal.pageSize.height - 20);
+
+                // Guardar el PDF
+                doc.save('reporte_abonos.pdf');
+            };
+
+            logoImg.onerror = function () {
+                console.error("Error al cargar la imagen del logo.");
+            };
+        }
+
+        // Asigna la función al botón de exportación
+        document.getElementById('btnExportarPDFAbonos').addEventListener('click', () => {
+            if (dataJson.length > 0) {
+                exportarPDFAbonos(dataJson);
+            } else {
+                alert("No hay datos disponibles para exportar.");
+            }
+        });
+
+
 
 
 
@@ -232,109 +445,6 @@
 
 
 
-
-        const data = {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-            datasets: [{
-                label: 'Ventas por Mes',
-                data: [300, 50, 100, 40, 120, 60], // Datos de ventas para cada mes
-                backgroundColor: [
-                    'rgb(255, 99, 132)',   // Rojo
-                    'rgb(54, 162, 235)',   // Azul
-                    'rgb(255, 205, 86)',   // Amarillo
-                    'rgb(75, 192, 192)',   // Verde
-                    'rgb(153, 102, 255)',  // Púrpura
-                    'rgb(255, 159, 64)'    // Naranja
-                ],
-                hoverOffset: 4
-            }]
-        };
-
-        const dataDaily = {
-            labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            datasets: [{
-                label: 'Ventas de la semana',
-                data: data, // Datos de ventas para cada mes
-                backgroundColor: [
-                    'rgb(255, 99, 132)',   // Rojo
-                    'rgb(54, 162, 235)',   // Azul
-                    'rgb(255, 205, 86)',   // Amarillo
-                    'rgb(75, 192, 192)',   // Verde
-                    'rgb(153, 102, 255)',  // Púrpura
-                    'rgb(255, 159, 64)'    // Naranja
-                ],
-                hoverOffset: 4
-            }]
-        };
-
-        const config = {
-            type: 'doughnut',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Cuentas de Crédito'
-                    }
-                }
-            }
-        };
-
-        const configRadar = {
-            type: 'line',
-            data: data,
-            options: {
-                plugins: {
-                    filler: {
-                        propagate: false
-                    },
-                    'samples-filler-analyser': {
-                        target: 'chart-analyser'
-                    }
-                },
-                interaction: {
-                    intersect: false
-                }
-            }
-        };
-
-        const configBar = {
-            type: 'bar',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Bar Chart'
-                    }
-                }
-            }
-        };
-
-        const configLine = {
-            type: 'line',
-            data: dataDaily,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Line Chart'
-                    }
-                }
-            }
-        };
 
 
 
@@ -619,7 +729,7 @@
         });
 
        
-        var myChart = new Chart(LineChart, configLine);
-        var myChart = new Chart(RadarChart, configRadar);
+ 
+
     </script>
 }

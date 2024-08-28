@@ -1,13 +1,10 @@
-
-
-
-parent of a9db5e0 (Check)
+var API_KEY = "sk-YfMvKiClRugUGjFZOAdfqS9zk255pLjQndYvTtlX0HT3BlbkFJijdjk45Nn-9SJ9-0g2aph0PtHTow6vM_pEfzrnNowA"
 
 let chatHistory = [];
 
 async function GPTChat(mensaje) {
     chatHistory.push({ role: "user", content: mensaje });
-
+    
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {

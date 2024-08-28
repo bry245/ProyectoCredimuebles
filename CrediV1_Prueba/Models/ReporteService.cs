@@ -29,6 +29,16 @@ namespace CrediV1_Prueba.Models
                 return productos.ToList();
             }
         }
+     
+        public async Task<IEnumerable<ReporteEnt>> ObtenerAbonosMensuales()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var abonos = await connection.QueryAsync<ReporteEnt>("ConsultarSaldosPagadosMes", commandType: CommandType.StoredProcedure);
+                return abonos.ToList();
+
+            }
+        }
 
         public async Task<ReporteEnt> ObtenerAbonosSemanales()
         {

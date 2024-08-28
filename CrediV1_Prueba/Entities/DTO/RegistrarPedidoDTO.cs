@@ -16,8 +16,9 @@
 
 
         public DateTime fechaEncargo { get; set; }
-        public DateTime @fechaRecibido { get; set; }
+        public DateTime fechaRecibido { get; set; }
         public string? Estado { get; set; }
-
+        public string? EstadoProducto { get; set; }
+        public string? observaciones { get; set; }
     }
 }

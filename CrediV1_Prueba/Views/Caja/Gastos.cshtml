@@ -50,14 +50,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+
+                            @if (@Model != null)
                             {
-                                <tr>
-                                    <td>@item.descripcion</td>
-                                    <td>₡ @item.montoGastos</td>
-                                    <td><button class="" value="@item.idGasto" onclick="EliminarGasto(@item.idGasto)"><i class="fa fa-trash"></i> </button></td>
-                                </tr>
+                                
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.descripcion</td>
+                                        <td>₡ @item.montoGastos</td>
+                                        <td><button class="" value="@item.idGasto" onclick="EliminarGasto(@item.idGasto)"><i class="fa fa-trash"></i> </button></td>
+                                    </tr>
+                                }
+                            
                             }
+
+
+                            
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example" style="background-color:white">

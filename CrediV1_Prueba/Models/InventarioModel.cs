@@ -36,11 +36,31 @@ namespace CrediV1_Prueba.Models
                     ent.montoUnitario,
                     ent.montoTotalProducto,
                     ent.montoTotalPedido,
-                    ent.fechaRecibido,
                     ent.EmpleadoRecibido
                 }, commandType: System.Data.CommandType.StoredProcedure);
 
 
+            }
+        }
+
+        public void CancelarPedido(RegistrarPedidoDTO ent)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                try
+                {
+                    var result =  connection.Execute("sp_CancelarDetallePedido", new
+                    {
+                        ent.idDetalle
+                    }, commandType: CommandType.StoredProcedure);
+                    Console.WriteLine($"Rows Affected: {result}");
+                  
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                    throw;
+                }
             }
         }
 
@@ -52,10 +72,14 @@ namespace CrediV1_Prueba.Models
                 {
                     var result = await connection.QuerySingleAsync<string>("ConfirmarRecibimientoPedido", new
                     {
-                        ent.idDetalle,
-                        ent.EmpleadoRecibido,
-                        ent.fechaRecibido,
+                        idPedido = ent.idPedido,
+                        idDetalle = ent.idDetalle, // Asegúrate de incluir idDetalle
+                        EmpleadoRecibido = ent.EmpleadoRecibido,
+                        fechaRecibido = ent.fechaRecibido,
+                        observaciones = ent.observaciones,
+                        estadoProducto = ent.Estado
                     }, commandType: CommandType.StoredProcedure);
+
                     Console.WriteLine($"Rows Affected: {result}");
                     return result;
                 }
@@ -64,6 +88,15 @@ namespace CrediV1_Prueba.Models
                     Console.WriteLine($"Error: {ex.Message}");
                     throw;
                 }
+            }
+        }
+
+        public async  Task<IEnumerable<UsuarioEnt>> ConsultarCorreosAdministradores()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var productos = await connection.QueryAsync<UsuarioEnt>("ConsultarEmailsAdministradores", commandType: CommandType.StoredProcedure);
+                return productos.ToList();
             }
         }
 
@@ -97,6 +130,16 @@ namespace CrediV1_Prueba.Models
             using (var connection = new SqlConnection(_connection))
             {
                 var productos = await connection.QueryAsync<PedidoEnt>("ConsultarPedidosDetalles", commandType: CommandType.StoredProcedure);
+                return productos.ToList();
+            }
+        }
+
+
+        public async Task<IEnumerable<PedidoEnt>> ConsultarPedidosDetallesEnCurso()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var productos = await connection.QueryAsync<PedidoEnt>("ConsultarPedidosDetallesEnCurso", commandType: CommandType.StoredProcedure);
                 return productos.ToList();
             }
         }
