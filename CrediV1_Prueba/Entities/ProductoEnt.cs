@@ -13,11 +13,7 @@
         public long idSalida { get; set; }
 
         public decimal CostoProveedor { get; set; }
-        
-
-
-      
-
+       
         public long idProveedor { get; set; }
 
     

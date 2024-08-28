@@ -86,5 +86,9 @@ namespace CrediV1_Prueba.Models
                 return productos.ToList();
             }
         }
-    }
+
+
+
+
+	}
 }

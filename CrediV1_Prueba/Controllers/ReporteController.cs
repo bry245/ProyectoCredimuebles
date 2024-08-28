@@ -71,7 +71,7 @@ namespace CrediV1_Prueba.Controllers
             try
             {
                 var ventasPago = await _reportService.VentasPorMetodoPagoCantidad();
-              
+
                 return Json(ventasPago);
             }
             catch (Exception ex)
@@ -83,6 +83,10 @@ namespace CrediV1_Prueba.Controllers
             }
         }
 
+		
 
-    }
+
+
+
+		}
 }
