@@ -30,12 +30,12 @@ namespace CrediV1_Prueba.Controllers
         }
         [Authorize(Roles = "Administrador,Gerente,Vendedor")]
         [HttpGet]
-        public async Task<IActionResult> ListadoSalidas(int page = 1)
+        public async Task<IActionResult> ListadoSalidas()
         {
             try
             {
                 int pageSize = 4; // Número de elementos por página
-                var salidas = await _salidasModel.ListarSalidas(page, pageSize);
+                var salidas = await _salidasModel.ListarSalidas();
 
                 return View(salidas);
             }
@@ -46,23 +46,7 @@ namespace CrediV1_Prueba.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador,Gerente,Vendedor")]
-        [HttpGet]
-        public async Task<IActionResult> ListadoSalidasMes(int page = 1)
-        {
-            try
-            {
-                int pageSize = 4; // Número de elementos por página
-                var salidas = await _salidasModel.ConsultarSalidasOrdenadas(page, pageSize);
-
-                return View("ListadoSalidas", salidas);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.MensajeSalidas = "Error al listar las salidas";
-                return View();
-            }
-        }
+      
 
 
         [Authorize(Roles = "Administrador,Gerente")]

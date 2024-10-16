@@ -11,8 +11,12 @@ namespace CrediV1_Prueba.Interfaces
         public Task<ReporteEnt> VentasDia();
         public Task<ReporteEnt> ObtenerAbonosSemanales();
 
+        public  Task<IEnumerable<ReporteEnt>> ObtenerRegistroFinancieroTotal();
+
 
         public Task<IEnumerable<ReporteEnt>> ObtenerAbonosMensuales();
 
     }
+
+}
 

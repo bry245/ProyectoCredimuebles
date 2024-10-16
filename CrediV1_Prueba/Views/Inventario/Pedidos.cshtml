@@ -30,6 +30,21 @@
         }
 
 
+        .swal-height {
+           
+            width: 1000px;
+        }
+
+      
+
+       
+
+        .custom-swal-confirm-btn,
+        .custom-swal-cancel-btn {
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+
       
 
         /* Cambiar el color de fondo y el texto de las pestañas inactivas */
@@ -264,7 +279,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <a href="@Url.Action("Index","Salidas")" class="btn btn-primary">Volver</a>
-                                        <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Salida</button>
+                                        <button type="button" class="btn btn-success" onclick="RegistrarPedido()">Registrar Pedido</button>
                                     </div>
                                 </div>
                             </div>
@@ -300,7 +315,7 @@
                 <table id="productosRecibidosTable" class="table table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Fecha de encargo</th>
+                            <th>Fecha Recibida</th>
                              <th>Encargado por  </th>
                             <th>Estado</th>
                             <th>Precio Total</th>
@@ -313,7 +328,7 @@
                             if (pedido.estado == "Recibido")
                             {
                                 <tr>
-                                    <td>@pedido.fechaEncargo</td>
+                                    <td>@pedido.fechaRecibido</td>
                                      <td>@pedido.nombreEmpleado</td>
                                     <td>@pedido.estado</td>
                                     <td>@pedido.montoTotalPedido</td>
@@ -351,7 +366,7 @@
                                                     if (detalle.idPedido == pedido.idPedido)
                                                     {
                                                         <tr>
-                                                            <td>@detalle.fechaEncargo</td>
+                                                            <td>@pedido.fechaEncargo</td>
                                                             <td>@detalle.fechaRecibido</td>
                                                             <td>@detalle.nombreEmpleado</td>
                                                             <td>@detalle.nombreProducto</td>
@@ -398,7 +413,6 @@
 
 
     <script>
-
         function enviarNotificacion(usuario, correo) {
             Swal.fire({
                 title: 'Enviar Notificación',
@@ -415,13 +429,25 @@
                         <label class="form-label">Mensaje:</label>
                         <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Cantidad Recibida:</label>
+                        <input type="number" class="form-control" id="cantidadRecibida" placeholder="Cantidad recibida">
+                    </div>
                 `,
                 showCancelButton: true,
                 confirmButtonText: 'Enviar',
                 cancelButtonText: 'Cancelar',
                 focusConfirm: false,
+                customClass: {
+                    container: 'custom-swal-container',
+                    title: 'custom-swal-title',
+                    htmlContainer: 'custom-swal-html-container',
+                    confirmButton: 'custom-swal-confirm-btn',
+                    cancelButton: 'custom-swal-cancel-btn'
+                },
                 preConfirm: () => {
                     const mensaje = document.getElementById('mensaje').value;
+                    const cantidadRecibida = document.getElementById('cantidadRecibida').value || 0;
 
                     if (!mensaje) {
                         Swal.showValidationMessage('El mensaje no puede estar vacío');
@@ -431,7 +457,8 @@
                     const data = {
                         usuario: usuario,
                         correo: correo,
-                        mensaje: mensaje
+                        mensaje: mensaje,
+                        cantidadRecibida: cantidadRecibida
                     };
 
                     return fetch('/Inventario/EnviarNotificacion', {
@@ -463,82 +490,94 @@
                 }
             });
         }
+
     </script>
 
-    <script>
-        function enviarIdDetallePedido(idPedido,email) {
-            // Filtrar los detalles del pedido correspondiente
-            var detallesPedido = @Html.Raw(Json.Serialize(ViewBag.PedidosDetalles));
+  <script>
+    function enviarIdDetallePedido(idPedido, email) {
+        var detallesPedido = @Html.Raw(Json.Serialize(ViewBag.PedidosDetalles));
+        var detallesFiltrados = detallesPedido.filter(detalle => detalle.idPedido === idPedido);
 
-            var detallesFiltrados = detallesPedido.filter(detalle => detalle.idPedido === idPedido);
+        let productosHtml = '';
+        detallesFiltrados.forEach(producto => {
+            productosHtml += `
+                <div style="display: flex; align-items: center; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; font-size: 16px;">
+                    <label for="producto_${producto.idDetalle}" style="flex-grow: 1; font-weight: bold; color: #333; margin-right: 15px;">${producto.nombreProducto}</label>
+                    <span style="margin-right: 15px; color: #555;">Cantidad Esperada: ${producto.cantidad}</span>
+                    <input type="radio" id="producto_${producto.idDetalle}_incorrecto" name="producto_${producto.idDetalle}_estado" value="Incorrecto" style="margin-left: 10px; accent-color: #d33;">
+                    <label for="producto_${producto.idDetalle}_incorrecto" style="margin-left: 5px; color: #d33; font-weight: bold;">❌</label>
+                    <input type="radio" id="producto_${producto.idDetalle}_correcto" name="producto_${producto.idDetalle}_estado" value="Correcto" style="margin-left: 10px; accent-color: #3085d6;">
+                    <label for="producto_${producto.idDetalle}_correcto" style="margin-left: 5px; color: #3085d6; font-weight: bold;">✔️</label>
+                    <input type="number" id="cantidad_${producto.idDetalle}" name="cantidad_${producto.idDetalle}" placeholder="Cantidad recibida" style="width: 100px; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 16px; margin-left: 15px;">
+                    <input type="text" id="observacion_${producto.idDetalle}" name="observacion_${producto.idDetalle}" placeholder="Observaciones" style="flex-grow: 1; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 16px; margin-left: 15px;">
+                </div>
+            `;
+        });
 
-            let productosHtml = '';
-            detallesFiltrados.forEach(producto => {
-                productosHtml += `
-                    <div style="margin-bottom: 10px;">
-                        <input type="checkbox" id="producto_${producto.idDetalle}" name="producto_${producto.idDetalle}" value="${producto.idDetalle}">
-                        <label for="producto_${producto.idDetalle}">${producto.nombreProducto}</label>
-                        <input type="text" id="observacion_${producto.idDetalle}" name="observacion_${producto.idDetalle}" placeholder="Observaciones" style="margin-left: 10px;">
-                    </div>
-                `;
-            });
-
-            Swal.fire({
-                title: 'Confirmar productos recibidos',
-                html: productosHtml,
-                showCancelButton: true,
-                confirmButtonText: 'Confirmar',
-                cancelButtonText: 'Cancelar',
-                preConfirm: () => {
-                    let confirmaciones = [];
-                    detallesFiltrados.forEach(producto => {
-                        const idProducto = producto.idDetalle;
-                        const recibido = document.getElementById(`producto_${idProducto}`).checked;
-                        const estado = recibido ? 'Recibido' : 'NoRecibido'; // Determinar el estado basado en el checkbox
-                        const observaciones = document.getElementById(`observacion_${idProducto}`).value || null;
-                        confirmaciones.push({ idPedido, idDetalle: idProducto, observaciones, Estado: estado });
-                    });
-                    return confirmaciones;
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Enviar la solicitud al backend
-                    fetch('/Inventario/RecibirProductoPedido', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(result.value)
+        Swal.fire({
+            title: 'Confirmar productos recibidos',
+            html: productosHtml,
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            icon: 'info',
+            customClass: 'swal-height',
+            preConfirm: () => {
+                let confirmaciones = [];
+                detallesFiltrados.forEach(producto => {
+                    const idProducto = producto.idDetalle;
+                    const estadoElemento = document.querySelector(`input[name="producto_${idProducto}_estado"]:checked`);
+                    const estadoProducto = estadoElemento ? estadoElemento.value : 'NoRecibido'; // Asegúrate de que este valor sea uno de los esperados por el backend
+                    const cantidadRecibida = parseInt(document.getElementById(`cantidad_${idProducto}`).value, 10) || 0;
+                    const observaciones = document.getElementById(`observacion_${idProducto}`).value || null;
+                    confirmaciones.push({ idPedido, idDetalle: idProducto, observaciones, estadoProducto, cantidadRecibida });
+                });
+                return confirmaciones;
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/Inventario/RecibirProductoPedido', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(result.value)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la solicitud');
+                        }
+                        return response.json();
                     })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Error en la solicitud');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            Swal.fire({
-                                title: 'Éxito',
-                                text: 'Pedido actualizado correctamente',
-                                icon: 'success',
-                                confirmButtonText: 'Aceptar'
-                            }).then(() => {
-                                location.reload(); // Recargar la página después de confirmar
-                            });
-                        })
-                        .catch(error => {
-                            Swal.fire({
-                                title: 'Error',
-                                text: error.message,
-                                icon: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
+                    .then(data => {
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: 'Pedido actualizado correctamente',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar',
+                            confirmButtonColor: '#3085d6'
+                        }).then(() => {
+                            location.reload(); // Recargar la página después de confirmar
                         });
-                }
-            });
-        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: 'Pedido Recibido con Exito',
+                            icon: 'Éxito',
+                            confirmButtonText: 'Aceptar',
+                            confirmButtonColor: '#d33'
+                        }).then(() => {
+                            location.reload(); // Recargar la página después de confirmar
+                        });
+                    });
+            }
+        });
+    }
+</script>
 
-    </script>
 
     <script>
 

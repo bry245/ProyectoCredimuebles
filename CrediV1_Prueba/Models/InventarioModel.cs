@@ -77,7 +77,8 @@ namespace CrediV1_Prueba.Models
                         EmpleadoRecibido = ent.EmpleadoRecibido,
                         fechaRecibido = ent.fechaRecibido,
                         observaciones = ent.observaciones,
-                        estadoProducto = ent.Estado
+                        estadoProducto = ent.Estado,
+                        cantidadRecibida = ent.cantidadRecibida
                     }, commandType: CommandType.StoredProcedure);
 
                     Console.WriteLine($"Rows Affected: {result}");
@@ -135,6 +136,27 @@ namespace CrediV1_Prueba.Models
         }
 
 
+        public async Task<IEnumerable<BitacoraProducto>> ConsultarBitacoraProductos()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var productos = await connection.QueryAsync<BitacoraProducto>("ConsultarBitacoraProductos", commandType: CommandType.StoredProcedure);
+                return productos.ToList();
+            }
+        }
+
+
+        public async Task<IEnumerable<BitacoraProveedor>> ConsultarBitacoraProveedores()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var productos = await connection.QueryAsync<BitacoraProveedor>("ConsultarBitacoraProveedores", commandType: CommandType.StoredProcedure);
+                return productos.ToList();
+            }
+        }
+
+
+
         public async Task<IEnumerable<PedidoEnt>> ConsultarPedidosDetallesEnCurso()
         {
             using (var connection = new SqlConnection(_connection))
@@ -161,6 +183,40 @@ namespace CrediV1_Prueba.Models
                 return productos.ToList();
             }
         }
+
+        public void RegistrarBitacoraProducto(BitacoraProducto ent)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var idPedido = connection.Execute("InsertarBitacoraProducto", new
+                {
+                    ent.idProducto,
+                    ent.idUsuario,
+                    ent.accion,
+                    ent.fecha
+                }, commandType: System.Data.CommandType.StoredProcedure);
+
+               
+            }
+        }
+
+        public void RegistrarBitacoraProveedor(BitacoraProveedor ent)
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var idPedido = connection.Execute("InsertarBitacoraProveedores", new
+                {
+                    ent.idProveedor,
+                    ent.idUsuario,
+                    ent.accion,
+                    ent.fecha
+                }, commandType: System.Data.CommandType.StoredProcedure);
+
+
+            }
+        }
+
+
         public int RegistrarPedido(RegistrarPedidoDTO ent)
         {
             using (var connection = new SqlConnection(_connection))

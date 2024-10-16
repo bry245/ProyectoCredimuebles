@@ -9,6 +9,7 @@
         public int idProveedor { get; set; }
         public int cantidad {  get; set; }
         public int EmpleadoRecibido { get; set; }
+        public int cantidadRecibida { get; set; }
 
         public float montoUnitario { get; set; }
         public float montoTotalProducto { get; set; }

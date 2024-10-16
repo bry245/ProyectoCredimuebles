@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <link href="~/css/UsuarioCards.css" rel="stylesheet" />
 }
-<div class="text-center ">
-    <div class="hero-subMenu">
-        <h1>Clientes <span clsas="d-block">- Usuarios</span></h1>
-    </div>
-</div>
+
 
 
 <div class="container">
@@ -30,30 +26,33 @@
     <div class="row ">
 
 
+        @if (Context.Session.GetString("Rol") == "Administrador")
+        {
+            <div class="col-xl-6 col-lg-6">
+                <a href="@Url.Action("ListaEmpleados","Usuario")" class="text-decoration-none">
+                    <div class="card l-bg-blue-dark">
+                        <div class="card-statistic-3 p-4">
 
-        <div class="col-xl-6 col-lg-6">
-            <a href="@Url.Action("ListaEmpleados","Usuario")" class="text-decoration-none">
-                <div class="card l-bg-blue-dark">
-                    <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
 
-                        <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Administrar</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0">
+                                        Empleados
+                                    </h2>
+                                </div>
 
-                        <div class="mb-4">
-                            <h5 class="card-title mb-0">Administrar</h5>
-                        </div>
-                        <div class="row align-items-center mb-2 d-flex">
-                            <div class="col-8">
-                                <h2 class="d-flex align-items-center mb-0">
-                                    Empleados
-                                </h2>
                             </div>
 
                         </div>
-
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
+        }
+    
 
         <div class="col-xl-6 col-lg-6">
             <a href="@Url.Action("ListaClientes","Usuario")" class="text-decoration-none">

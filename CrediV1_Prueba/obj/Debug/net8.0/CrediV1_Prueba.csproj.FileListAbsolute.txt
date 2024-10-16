@@ -21,6 +21,9 @@ C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\i
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\itext.sign.dll
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\itext.styledxmlparser.dll
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\itext.svg.dll
+C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\bc-fips-1.0.2.dll
+C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\bcpkix-fips-1.0.2.dll
+C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\itext.bouncy-castle-fips-adapter.dll
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\itext.commons.dll
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\System.Net.Http.Formatting.dll
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
@@ -264,6 +267,4 @@ C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\r
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.pdb
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\CrediV1_Prueba.genruntimeconfig.cache
 C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\obj\Debug\net8.0\ref\CrediV1_Prueba.dll
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\bc-fips-1.0.2.dll
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\bcpkix-fips-1.0.2.dll
-C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\itext.bouncy-castle-fips-adapter.dll
+C:\Users\jason\Videos\FPS\ProyectoCredimuebles\CrediV1_Prueba\bin\Debug\net8.0\FormatoCorreo.html

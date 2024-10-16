@@ -22,14 +22,14 @@ namespace CrediV1_Prueba.Models
             _connection = _configuration.GetConnectionString("Connection");
         }
 
-        public async Task<IPagedList<SalidasEnt>> ListarSalidas(int paginas, int tamaño)
+        public async Task<IEnumerable<SalidasEnt>> ListarSalidas()
         {
             using (var connection = new SqlConnection(_connection))
             {
                 var salidas = await connection.QueryAsync<SalidasEnt>("ConsultarSalidas", commandType: CommandType.StoredProcedure);
-                var pagedSalidas = salidas.ToPagedList(paginas, tamaño);
+              //  var pagedSalidas = salidas.ToPagedList(paginas, tamaño);
 
-                return pagedSalidas;
+                return salidas;
             }
         }
         public async Task<IPagedList<SalidasEnt>> ConsultarSalidasOrdenadas(int paginas, int tamaño)

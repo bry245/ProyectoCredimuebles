@@ -1,21 +1,20 @@
 ﻿.table-responsive {
     overflow-y: auto;
-    max-height: 1000px; /* Ajusta la altura máxima de la tabla según tus necesidades */
+    max-height: 1200px; /* Ajusta la altura máxima de la tabla según tus necesidades */
 }
 
 /* Aplica transparencia a toda la envoltura de DataTables */
 .dataTables_wrapper {
 
  /* Fondo transparente */
-    padding: 10px; /* Un poco de espacio alrededor */
+  /* Un poco de espacio alrededor */
 }
 
 
 .dataTables_info {
     float: left;
     background: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
-    padding: 5px;
-    border-radius: 5px; /* Bordes redondeados */
+   /* Bordes redondeados */
 }
 
 /* Ajusta la transparencia de los encabezados de la tabla */
