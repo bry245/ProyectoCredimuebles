@@ -6,7 +6,7 @@ namespace CrediV1_Prueba.Interfaces
 {
     public interface ISalidasModel
     {
-        public Task<IPagedList<SalidasEnt>> ListarSalidas(int pageNumber, int pageSize);
+        public  Task<IEnumerable<SalidasEnt>> ListarSalidas();
 
         public List<SelectListItem>? ConsultarVendedores();
         public List<SelectListItem>? ConsultarMetodosPago();

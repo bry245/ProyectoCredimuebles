@@ -1,9 +1,15 @@
 ﻿@using X.PagedList
-@model IPagedList<CrediV1_Prueba.Entities.SalidasEnt>
+@model IEnumerable<CrediV1_Prueba.Entities.SalidasEnt>
 @{
     ViewData["Title"] = "ListadoSalidas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Estilos {
+    <link href="~/css/tablas.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+}
+
 @{
     var errorMessage = ViewBag.MensajeSalidas as string;
     if (!string.IsNullOrEmpty(errorMessage))
@@ -11,120 +17,110 @@
         <div class="alert alert-danger">
             @errorMessage
         </div>
-     }else{
     }
+}
 
+<div class="container mt-4">
+    <a href="@Url.Action("CrearVenta", "Salidas")" class="btn mb-2">
+        <i class="fas fa-plus"></i> Agregar Salida
+    </a>
 
-        <div class="container mt-4">
-            <a href="@Url.Action("CrearVenta", "Salidas")" class="btn mb-2">
-                <i class="fas fa-plus"></i> Agregar Salida
-            </a>
-        <a href="@Url.Action("ListadoSalidas", "Salidas")" class="btn mb-2">
-            <i class="fas fa-clipboard-list"></i> Todos los registros
-        </a>
-            </div>
- 
-    <div class="container mt-4">
-        <table class="table table-hover" style="text-align:center">
-            <thead>
+</div>
+
+<div class="container mt-4">
+    <!-- Convertir esta tabla a DataTable -->
+    <table id="salidasTable" class="table table-hover" style="text-align:center">
+        <thead>
+            <tr>
+                <th> Salida N°</th>
+                <th>Fecha de Salida</th>
+                <th>Cliente</th>
+                <th>Productos</th>
+                <th>Monto Venta</th>
+                <th>Costo Venta</th>
+                <th>Vendedor</th>
+                <th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th> Salida N°</th>
-                    <th>Fecha de Salida</th>
-                    <th>Cliente</th>
-                    <th>Productos</th>
-                    <th>Monto Venta</th>
-                    <th>Costo Venta</th>
-                    <th>Vendedor</th>
-                    <th>Detalles</th>
+                    <td>@item.idSalida</td>
+                    <td>@item.fecha.ToString("dd/MM/yyyy")</td>
+                    <td>@item.nombreCliente</td>
+                    <td>@item.cantidad</td>
+                    <td>@item.MontoDeVenta</td>
+                    <td>@item.costoVenta</td>
+                    <td>@item.vendedor</td>
+                    <td style="text-align:center">
+                        <a href="@Url.Action("EditarVenta", "Salidas", new { id = item.idSalida })" class="btn btn-danger">Ver más  <i class="fa fa-list"></i></a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.idSalida</td>
-                        <td>@item.fecha.ToString("dd/MM/yyyy")</td>
-                        <td>@item.nombreCliente</td>
-                        <td>@item.cantidad</td>
-                        <td>@item.MontoDeVenta</td>
-                        <td>@item.costoVenta</td>
-                        <td>@item.vendedor</td>
-                        <td style="text-align:center">
-                            <a href="@Url.Action("EditarVenta", "Salidas", new { id = item.idSalida })" class="btn btn-danger">Ver más  <i class="fa fa-list"></i></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>
 
-    
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                @if (Model.HasPreviousPage)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ListadoSalidas", new { page = Model.PageNumber - 1 })" aria-label="Previous">
-                            <span aria-hidden="true">&laquo; Anterior</span>
-                        </a>
-                    </li>
+<!-- Agregar DataTables JS -->
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#salidasTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "ordering": true,
+                "pageLength": 10,
+                "language": {
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente"
+                    },
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ filas por página",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ filas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 filas",
+                    "emptyTable": "No hay datos disponibles en la tabla",
+                    "infoFiltered": "(filtrado de _MAX_ filas en total)",
+                    "zeroRecords": "No se encontraron coincidencias"
                 }
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("ListadoSalidas", new { page = i })">@i</a>
-                    </li>
-                }
-                @if (Model.HasNextPage)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ListadoSalidas", new { page = Model.PageNumber + 1 })" aria-label="Next">
-                            <span aria-hidden="true">Siguiente &raquo;</span>
-                        </a>
-                    </li>
-                }
-            </ul>
-        </nav>
-        }
-        
-  
-  
-<style>
-    .toast-top-center-custom {
-        top: 60px; /* Ajusta este valor según lo necesites */
-        left: 50%;
-        transform: translateX(-50%);
-    }
-</style>
+            });
+        });
+    </script>
 
-<script>
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": true,
-        "positionClass": "toast-top-center-custom",
-        "preventDuplicates": true,
-        "onclick": null,
-        "showDuration": "3000",
-        "hideDuration": "1000",
-        "timeOut": "2500",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        // Obtener el mensaje almacenado en localStorage
-        var successMessage = localStorage.getItem('successMessage');
+    <!-- Toastr para mostrar mensajes -->
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center-custom",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "2500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtener el mensaje almacenado en localStorage
+            var successMessage = localStorage.getItem('successMessage');
 
-        if (successMessage) {
-            // Mostrar el mensaje usando Toastr
-            toastr.success(successMessage);
+            if (successMessage) {
+                // Mostrar el mensaje usando Toastr
+                toastr.success(successMessage);
 
-            // Eliminar el mensaje de localStorage
-            localStorage.removeItem('successMessage');
-        }
-    });
-</script>
+                // Eliminar el mensaje de localStorage
+                localStorage.removeItem('successMessage');
+            }
+        });
+    </script>
+}

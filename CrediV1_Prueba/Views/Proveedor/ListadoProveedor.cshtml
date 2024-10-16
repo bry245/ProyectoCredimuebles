@@ -9,10 +9,23 @@
 
 
 <div class="container">
+    <div class="d-flex align-items-start mt-4">
+        <!-- Mueve el margen superior al contenedor principal -->
+        <a href="@Url.Action("AgregarProveedor", "Proveedor")" class="btn btn-danger me-2" type="submit" id="button-addon2">
+            <i class="fa fa-plus"></i> Agregar Proveedor
+        </a>
 
-    <div class="container mt-4">
-        <a href="@Url.Action("AgregarProveedor","Proveedor")" class="btn" type="submit" id="button-addon2"> <i class="">Agregar Proveedor</i>  </a>
+
+        @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Gerente")
+        {
+            <a class="btn btn-warning" type="button" href="@Url.Action("HistorialProveedor", "Inventario")" id="historialProductoBtn">
+                <i class="fa" style="margin-right: 5px;"></i> Historial Proveedores
+            </a>
+        }
+
+     
     </div>
+  
 
     <div class="container mt-4">
         <table class="table table-striped table-bordered" style="width:100%">

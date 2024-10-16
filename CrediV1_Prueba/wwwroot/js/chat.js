@@ -1,43 +1,41 @@
 
-
 let chatHistory = [];
 
 async function GPTChat(mensaje) {
-    // Realiza la solicitud a '/Chat/TraerDatosDB'
-    let jsonResponse;
-    let jsonString; // Declara jsonString aquí para usarlo más tarde
-    try {
-        const response = await fetch('/Chat/TraerDatosDB');
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message);
-        }
-        jsonResponse = await response.json();
-        console.log("Datos recibidos:", jsonResponse);
+    let productosResponse, ventasResponse;
+    let productosString = "", ventasString = "";
 
-        // Convierte el objeto JSON a una cadena de texto JSON
-        jsonString = JSON.stringify(jsonResponse, null, 2);
-        console.log("Datos en formato JSON:", jsonString);
+    try {
+        // Solicita los datos de productos
+        const productosRes = await fetch('/Chat/TraerDatosDB');
+        if (!productosRes.ok) throw new Error((await productosRes.json()).message);
+        productosResponse = await productosRes.json();
+        productosString = JSON.stringify(productosResponse, null, 2);
+
+        // Solicita los datos de ventas
+        const ventasRes = await fetch('/Chat/ObtenerVentasTotales');
+        if (!ventasRes.ok) throw new Error((await ventasRes.json()).message);
+        ventasResponse = await ventasRes.json();
+        ventasString = JSON.stringify(ventasResponse, null, 2);
+
+        console.log("Datos de productos:", productosString);
+        console.log("Datos de ventas:", ventasString);
 
     } catch (error) {
         console.error("Error en la solicitud:", error);
         return;
     }
 
-    // Instrucción que se enviará como contexto adicional bajo el rol "system"
     const systemMessage = {
         role: "system",
-        content: `Dame tu respuesta en un formato claro que tenga saltos de línea, que tenga bullet points si es necesario, y que sea fácil de leer. No respondas esto directamente. \n\nAquí están los datos en formato Json de los productos porfavor tenlos en cuenta cuando te haga pregunats de productos y la informacion del provvedor associado:\n${jsonString}`
+        content: `Dame tu respuesta enfocada en los datos productos ventas y en un formato claro que tenga saltos de lï¿½nea, que tenga bullet points si es necesario, y que sea fï¿½cil de leer, basï¿½ndote siempre en la suma de los datos de cada venta o producto. Aquï¿½ estï¿½n los datos en formato JSON de los productos:\n${productosString}\n\nY aquï¿½ estï¿½n los datos en formato JSON de las ventas totales:\n${ventasString}. No respondas esto directamente`
     };
 
-    // Mensaje del usuario que se enviará al modelo
     const userMessage = { role: "user", content: mensaje };
 
-    // Asegúrate de que el mensaje del sistema esté al inicio del historial
     chatHistory.push(systemMessage);
     chatHistory.push(userMessage);
 
-    
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -65,7 +63,39 @@ async function GPTChat(mensaje) {
     return botMessage;
 }
 
-let promptElement = document.querySelector('#prompt');
+async function generarPDF() {
+    try {
+        const res = await fetch('/Chat/GenerarPDF', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productosJson: productosString,  // Usa la variable que contiene los datos de productos
+                ventasJson: ventasString         // Usa la variable que contiene los datos de ventas
+            })
+        });
+
+        if (!res.ok) {
+            const error = await res.json();
+            throw new Error(error.message);
+        }
+
+        // Convertir la respuesta a un Blob para descargar el PDF
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'InformeAnual.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    } catch (error) {
+        console.error("Error al generar el PDF:", error.message);
+        displayMessage("Error al generar el PDF: " + error.message, 'admin');
+    }
+}
+
 const enviar = document.querySelector('#generate');
 
 enviar.addEventListener('click', async () => {
@@ -77,15 +107,19 @@ enviar.addEventListener('click', async () => {
 
     try {
         const respuesta = await GPTChat(pregunta);
-        const formattedResponse = respuesta.replace(/\n/g, '<br>'); // Reemplaza los \n por <br>
+        const formattedResponse = respuesta.replace(/\n/g, '<br>');
         displayMessage(formattedResponse, 'admin');
+
+        // Llamar a la funciï¿½n para generar el PDF
+        if (pregunta.toLowerCase().includes('generar pdf')) {
+            await generarPDF();
+        }
+
     } catch (error) {
         console.error("Error:", error.message);
         displayMessage("Error al obtener la respuesta: " + error.message, 'admin');
     }
 });
-
-
 
 function displayMessage(message, sender) {
     const now = new Date(Date.now()).toLocaleString();

@@ -24,5 +24,18 @@ namespace CrediV1_Prueba.Interfaces
         public Task<string> ConfirmarPedido(RegistrarPedidoDTO ent);
         public  void CancelarPedido(RegistrarPedidoDTO ent);
 
+
+        public void RegistrarBitacoraProducto(BitacoraProducto ent);
+         public void RegistrarBitacoraProveedor(BitacoraProveedor ent);
+
+
+
+        public Task<IEnumerable<BitacoraProducto>> ConsultarBitacoraProductos();
+
+        public Task<IEnumerable<BitacoraProveedor>> ConsultarBitacoraProveedores();
+
+
+
+
     }
 }

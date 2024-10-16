@@ -130,12 +130,6 @@ namespace CrediV1_Prueba.Controllers
                     return BadRequest(string.Empty);
                 }
 
-                Console.WriteLine("ASDSA" + user.cedula);
-                Console.WriteLine("ASDSA" + user.apellidos);
-                Console.WriteLine("ASDSA" + user.telefono);
-                Console.WriteLine("CONTRASENA" + user.contrasenna);
-                Console.WriteLine("ASDSA" + user.direccion);
-                Console.WriteLine("ASDSA" + user.nombre);
                 user.estado = true;
 
         
@@ -221,12 +215,7 @@ namespace CrediV1_Prueba.Controllers
                     return BadRequest(string.Empty);
                 }
 
-                Console.WriteLine("ASDSA" + user.cedula);
-                Console.WriteLine("ASDSA" + user.apellidos);
-                Console.WriteLine("ASDSA" + user.telefono);
-                Console.WriteLine("ASDSA" + user.contrasenna);
-                Console.WriteLine("ASDSA" + user.direccion);
-                Console.WriteLine("ASDSA" + user.nombre);
+
                 await _usuarioModel.ActualizarUsuario(user);
 
                 return Ok();

@@ -16,13 +16,15 @@ namespace CrediV1_Prueba.Controllers
         private readonly IConfiguration _configuration;
         private string _connection;
         private readonly IProveedoresModel _proveedorModel;
+        private readonly IInventarioModel _inventarioModel;
 
-        public ProveedorController(IHttpClientFactory clientFactory, IConfiguration configuration, IProveedoresModel proveedorModel)
+        public ProveedorController(IHttpClientFactory clientFactory, IConfiguration configuration, IProveedoresModel proveedorModel, IInventarioModel inventarioModel)
         {
             _configuration = configuration;
             _clientFactory = clientFactory;
             _connection = _configuration.GetConnectionString("Connection");
             _proveedorModel = proveedorModel;
+            _inventarioModel = inventarioModel;
         }
 
 
@@ -50,7 +52,10 @@ namespace CrediV1_Prueba.Controllers
         [HttpPost]
 		public async Task<IActionResult> GuardarProveedor([FromBody] ProveedorEnt proveedor)
 		{
-			try
+
+         
+
+            try
 			{
 				await _proveedorModel.AddProveedor(proveedor);
 				return RedirectToAction("ListadoProveedor", "Proveedor");
@@ -67,8 +72,11 @@ namespace CrediV1_Prueba.Controllers
         [HttpGet]
 		public async Task<IActionResult> EditarProveedor(int Proveedor)
 		{
-			
-			var proveedorEditar = await _proveedorModel.GetProveedoresID(Proveedor);
+
+           
+
+
+            var proveedorEditar = await _proveedorModel.GetProveedoresID(Proveedor);
 
 			return View(proveedorEditar); // Pasa el proveedor a la vista
 		}
@@ -80,8 +88,21 @@ namespace CrediV1_Prueba.Controllers
 			{
 				return BadRequest("Datos inválidos.");
 			}
-		
-			try
+
+            int idUsuario = (int?)HttpContext.Session.GetInt32("idUsuario") ?? 0;
+            BitacoraProveedor bit = new BitacoraProveedor
+            {
+                idProveedor = proveedor.idProveedor,
+                idUsuario = idUsuario,
+                accion = "El usuario Editó un  proveedor",
+                fecha = DateTime.Now
+
+            };
+            _inventarioModel.RegistrarBitacoraProveedor(bit);
+
+
+
+            try
 			{
 				proveedor.estado = true;
 				await _proveedorModel.UpdateProveedor(proveedor);
@@ -102,8 +123,20 @@ namespace CrediV1_Prueba.Controllers
 			try
 			{
 
-				
-				await _proveedorModel.DesactivarProveedor(idProveedor);
+                int idUsuario = (int?)HttpContext.Session.GetInt32("idUsuario") ?? 0;
+                BitacoraProveedor bit = new BitacoraProveedor
+                {
+                    idProveedor = idProveedor.idProveedor,
+                    idUsuario = idUsuario,
+                    accion = "El usuario Desactivó el  proveedor",
+                    fecha = DateTime.Now
+
+                };
+                _inventarioModel.RegistrarBitacoraProveedor(bit);
+
+
+
+                await _proveedorModel.DesactivarProveedor(idProveedor);
 				return Ok();
 			}
 			catch (Exception ex)

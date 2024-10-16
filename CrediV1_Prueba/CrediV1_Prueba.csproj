@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -21,13 +21,18 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\Inventario.scss" />
   </ItemGroup>
-  <ItemGroup>
+	<ItemGroup>
     <Content Include="Others\LogoC2.PNG">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
+	<ItemGroup>
+		<None Update="FormatoCorreo.html">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
     <None Include="wwwroot\css\Inventario.scss" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
@@ -95,4 +100,9 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+	
+	
+	
+	
+	
 </Project>

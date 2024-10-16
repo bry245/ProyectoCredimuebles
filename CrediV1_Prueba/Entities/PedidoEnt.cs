@@ -25,6 +25,7 @@
         public string? Telefono { get; set; }
         public string? Cedula {  get; set; }
         public bool? cancelado { get; set; }
+        public int cantidadRecibida { get; set; }
 
         // Nueva propiedad para almacenar detalles
         public List<PedidoEnt> Detalles { get; set; } = new List<PedidoEnt>();

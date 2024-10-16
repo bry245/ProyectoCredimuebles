@@ -50,7 +50,16 @@ namespace CrediV1_Prueba.Models
             }
         }
 
-            public async Task<ReporteEnt> VentasDia()
+        public async Task<IEnumerable<ReporteEnt>> ObtenerRegistroFinancieroTotal()
+        {
+            using (var connection = new SqlConnection(_connection))
+            {
+                var productos = await connection.QueryAsync<ReporteEnt>("sp_ObtenerTodasLasVentas", commandType: CommandType.StoredProcedure);
+                return productos.ToList();
+            }
+        }
+
+        public async Task<ReporteEnt> VentasDia()
         {
             using (var connection = new SqlConnection(_connection))
             {

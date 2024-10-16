@@ -97,7 +97,7 @@ namespace CrediV1_Prueba.Models
 
                 foreach (var producto in productos)
                 {
-                    table.AddCell(new Cell().Add(new Paragraph(producto.cantidad.ToString())));
+                    table.AddCell(new Cell().Add(new Paragraph(producto.cantidadRecibida.ToString())));
                     table.AddCell(new Cell().Add(new Paragraph(producto.nombreProducto ?? "N/A")));
                     table.AddCell(new Cell().Add(new Paragraph(producto.montoUnitario.ToString("C"))));
                     table.AddCell(new Cell().Add(new Paragraph(producto.montoTotalProducto.ToString("C"))));
